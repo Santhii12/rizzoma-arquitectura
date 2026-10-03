@@ -1,10 +1,11 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
-import { projects } from '@/data/projects';
-import { withBase } from '@/utils/paths';
+import { projects, availableProjects } from '@/data/projects';
+
+const archiveProjects = projects.filter((project) => !project.available);
 ---
-<BaseLayout title="Proyectos | Rizzoma Arquitectura" description="Selección de proyectos de arquitectura, interiorismo, visualización y exploración desarrollados por Juan José Quintero Tobón a través de Rizzoma.">
+<BaseLayout title="Proyectos | Rizzoma Arquitectura" description="Selección de proyectos de arquitectura, interiorismo y visualización desarrollados por Juan José Quintero Tobón a través de Rizzoma.">
   <section class="page-hero section-pad archive-hero">
     <p class="eyebrow reveal">Archivo / {String(projects.length).padStart(2, '0')}</p>
     <h1 class="page-title reveal">Proyectos</h1>
@@ -12,12 +13,32 @@ import { withBase } from '@/utils/paths';
   </section>
 
   <section class="archive-intro section-pad no-top reveal">
-    <p>Rizzoma reúne proyectos de distintas escalas y etapas. Cada trabajo se presenta desde su intención arquitectónica, su relación con el lugar y la manera en que fue pensado y comunicado.</p>
+    <p>Rizzoma reúne trabajos de distintas escalas y etapas. La selección se organiza con una lectura editorial: primero los proyectos con documentación disponible y, después, el archivo completo del estudio.</p>
   </section>
 
-  <section class="projects-section section-pad no-top">
-    <div class="project-list">
-      {projects.map((project, i) => <ProjectCard project={project} index={i} />)}
-    </div>
-  </section>
+  {availableProjects.length > 0 && (
+    <section class="projects-section section-pad no-top">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Selección</p>
+          <h2 class="section-title">Trabajo documentado</h2>
+        </div>
+      </div>
+      <div class="project-list project-list--documented">
+        {availableProjects.map((project, i) => <ProjectCard project={project} index={i} />)}
+      </div>
+    </section>
+  )}
+
+  {archiveProjects.length > 0 && (
+    <section class="project-archive-index section-pad no-top">
+      <div class="archive-index-heading reveal">
+        <p class="eyebrow">Archivo Rizzoma</p>
+        <p>{String(archiveProjects.length).padStart(2, '0')} proyectos adicionales</p>
+      </div>
+      <div class="archive-index-list">
+        {archiveProjects.map((project, i) => <ProjectCard project={project} index={i + availableProjects.length} />)}
+      </div>
+    </section>
+  )}
 </BaseLayout>
