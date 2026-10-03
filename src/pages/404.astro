@@ -1,0 +1,11 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase } from '@/utils/paths';
+---
+<BaseLayout title="Página no encontrada | Rizzoma" description="La página que buscas no existe." noindex={true}>
+  <section class="not-found section-pad">
+    <p class="eyebrow">404</p>
+    <h1 class="page-title">Este espacio<br />no existe.</h1>
+    <a class="primary-link" href={withBase('/')}>Volver al inicio ↗</a>
+  </section>
+</BaseLayout>
