@@ -26,7 +26,6 @@ const {
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? site.domain);
 const socialImage = image.startsWith('http') ? image : new URL(withBase(image), Astro.site ?? site.domain).toString();
-const founderImage = new URL(withBase(site.founder.portrait), Astro.site ?? site.domain).toString();
 const deployedSite = (Astro.site ?? new URL(site.domain)).toString().replace(/\/$/, '');
 
 const structuredData = {
@@ -44,7 +43,6 @@ const structuredData = {
       '@id': `${deployedSite}/#juan-jose-quintero`,
       name: site.founder.name,
       jobTitle: 'Arquitecto',
-      image: founderImage,
       worksFor: { '@id': `${deployedSite}/#business` }
     },
     {
@@ -71,8 +69,8 @@ const structuredData = {
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/png" href={withBase('/brand/rizzoma-monogram.png')} />
-    <link rel="apple-touch-icon" href={withBase('/brand/rizzoma-monogram.png')} />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    
     <link rel="preconnect" href="https://framerusercontent.com" crossorigin />
 
     <meta property="og:type" content={type} />
