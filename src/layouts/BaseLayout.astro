@@ -27,6 +27,7 @@ const {
 const canonical = new URL(Astro.url.pathname, Astro.site ?? site.domain);
 const socialImage = image.startsWith('http') ? image : new URL(withBase(image), Astro.site ?? site.domain).toString();
 const deployedSite = (Astro.site ?? new URL(site.domain)).toString().replace(/\/$/, '');
+const founderImage = new URL(withBase(site.founder.portrait), Astro.site ?? site.domain).toString();
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -43,6 +44,7 @@ const structuredData = {
       '@id': `${deployedSite}/#juan-jose-quintero`,
       name: site.founder.name,
       jobTitle: 'Arquitecto',
+      image: founderImage,
       worksFor: { '@id': `${deployedSite}/#business` }
     },
     {
@@ -65,7 +67,7 @@ const structuredData = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#62614f" />
+    <meta name="theme-color" content="#61604e" />
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
@@ -88,7 +90,7 @@ const structuredData = {
     <script type="application/ld+json" is:inline set:html={JSON.stringify(structuredData)}></script>
     <title>{title}</title>
   </head>
-  <body style={`--rizzoma-wordmark-mask: url("${withBase('/brand/rizzoma-wordmark-mask.png')}")`}>
+  <body>
     <a class="skip-link" href="#contenido">Ir al contenido</a>
     <Header />
     <main id="contenido"><slot /></main>
