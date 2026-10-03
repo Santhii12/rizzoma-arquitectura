@@ -1,0 +1,119 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import { projects, featuredProject } from '@/data/projects';
+import { site } from '@/config/site';
+import { withBase } from '@/utils/paths';
+---
+<BaseLayout>
+  <section class="hero hero-home">
+    <div class="hero-topline reveal">
+      <span>Estudio independiente</span><span>{site.location}</span><span>Arquitectura + visualización</span>
+    </div>
+
+    <div class="hero-title-wrap brand-hero-title">
+      <h1 class="sr-only">Rizzoma Arquitectura</h1>
+      <span class="hero-wordmark hero-title" data-hero-title aria-hidden="true"></span>
+      <div class="hero-deck-wrap reveal">
+        <p class="hero-deck">Estudio emergente de arquitectura y visualización dirigido por {site.founder.name}.</p>
+        <a class="hero-inline-link" href={withBase('/contacto/')}>Cuéntanos tu proyecto ↗</a>
+      </div>
+    </div>
+
+    {featuredProject?.cover && (
+      <a href={withBase(`/proyectos/${featuredProject.slug}/`)} class="hero-media reveal parallax-media" aria-label={`Ver ${featuredProject.title}`}>
+        <img src={featuredProject.cover} alt={`${featuredProject.title}, proyecto de Rizzoma`} fetchpriority="high" decoding="async" />
+        <div class="hero-media-caption">
+          <span>{featuredProject.title}</span>
+          <span>{featuredProject.location} · {featuredProject.year}</span>
+        </div>
+      </a>
+    )}
+
+    <div class="identity-strip reveal" aria-label="Enfoque de Rizzoma">
+      <span>Contexto</span><span>Habitar</span><span>Materia</span><span>Paisaje</span><span>Representación</span>
+    </div>
+  </section>
+
+  <section class="manifesto section-pad">
+    <p class="eyebrow reveal">Una práctica de autor</p>
+    <h2 class="statement reveal">Espacio, luz, materia y paisaje trabajan como un <em>solo sistema</em>.</h2>
+    <div class="manifesto-foot reveal">
+      <a class="text-link" href={withBase('/estudio/')}>Conocer el estudio ↗</a>
+      <p>Rizzoma parte del contexto y la forma de habitar para construir una arquitectura clara, sensible y con identidad. La visualización forma parte del proceso: permite pensar, evaluar y comunicar el proyecto.</p>
+    </div>
+  </section>
+
+  <section class="principles-band dark-block">
+    <div class="principles-inner section-pad">
+      <article class="principle reveal">
+        <span>01</span><h3>Impulsar</h3>
+        <p>Llevar una idea desde sus primeras exploraciones hacia una propuesta arquitectónica coherente.</p>
+      </article>
+      <article class="principle reveal">
+        <span>02</span><h3>Construir identidad</h3>
+        <p>Usar materialidad, atmósfera, luz y detalle para que cada proyecto responda a su lugar y a quienes lo habitan.</p>
+      </article>
+      <article class="principle reveal">
+        <span>03</span><h3>Comunicar</h3>
+        <p>Convertir decisiones espaciales en imágenes capaces de hacer comprensible la arquitectura antes de ser construida.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="founder-preview section-pad">
+    <figure class="founder-preview-image reveal">
+      <img src={withBase(site.founder.portrait)} alt={`${site.founder.name}, arquitecto y director de Rizzoma`} width="1000" height="1250" loading="lazy" decoding="async" />
+    </figure>
+    <div class="founder-preview-copy reveal">
+      <img class="founder-monogram" src={withBase(site.brand.monogram)} alt="" aria-hidden="true" width="120" height="120" loading="lazy" />
+      <p class="eyebrow">Dirección / Juan José Quintero Tobón</p>
+      <p class="founder-name">{site.founder.name}</p>
+      <h2>Una práctica independiente, cercana a cada proyecto.</h2>
+      <p>Rizzoma está dirigido de manera directa por Juan José. El estudio combina diseño arquitectónico y visualización con una mirada enfocada en paisaje, luz, materialidad y experiencia de habitar.</p>
+      <p>Ser un estudio emergente permite mantener una relación cercana con cada encargo y cuidar con atención las decisiones que construyen su identidad.</p>
+      <a class="text-link" href={withBase('/estudio/')}>Conocer a Juan José y Rizzoma ↗</a>
+    </div>
+  </section>
+
+  <section id="proyectos" class="projects-section section-pad">
+    <div class="section-head reveal">
+      <div><p class="eyebrow">Trabajo seleccionado</p><h2 class="section-title">Proyectos</h2></div>
+      <a class="text-link" href={withBase('/proyectos/')}>Ver archivo ↗</a>
+    </div>
+    <div class="project-list">
+      {projects.map((project, i) => <ProjectCard project={project} index={i} />)}
+    </div>
+  </section>
+
+  <section class="services-teaser dark-block">
+    <div class="section-pad">
+      <div class="section-head reveal">
+        <div><p class="eyebrow">Servicios</p><h2 class="section-title">Del espacio a la imagen.</h2></div>
+        <span class="section-count">01—03</span>
+      </div>
+
+      <a class="service-row reveal" href={withBase('/servicios/#arquitectura')}><span>01</span><h3>Arquitectura</h3><p>Vivienda, remodelación y conceptualización con atención al contexto y la forma de habitar.</p><b aria-hidden="true">↗</b></a>
+      <a class="service-row reveal" href={withBase('/servicios/#diseno-visualizacion')}><span>02</span><h3>Diseño + visualización</h3><p>Diseño y representación trabajando juntos para tomar decisiones y comunicar el proyecto con claridad.</p><b aria-hidden="true">↗</b></a>
+      <a class="service-row reveal" href={withBase('/servicios/#visualizacion')}><span>03</span><h3>Visualización</h3><p>Imágenes arquitectónicas orientadas a comunicar atmósfera, materialidad, escala e intención.</p><b aria-hidden="true">↗</b></a>
+    </div>
+  </section>
+
+  <section class="process section-pad">
+    <div class="section-head reveal">
+      <div><p class="eyebrow">Proceso</p><h2 class="section-title">Una conversación clara desde el inicio.</h2></div>
+    </div>
+    <ol class="process-list">
+      <li class="reveal"><span>01</span><strong>Entender</strong><p>Lugar, necesidades, alcance y estado actual del proyecto.</p></li>
+      <li class="reveal"><span>02</span><strong>Explorar</strong><p>Referencias, relaciones espaciales, materialidad y alternativas.</p></li>
+      <li class="reveal"><span>03</span><strong>Desarrollar</strong><p>Las decisiones se convierten en arquitectura, modelado y documentación según el alcance.</p></li>
+      <li class="reveal"><span>04</span><strong>Comunicar</strong><p>Imágenes y entregables claros para comprender, presentar y valorar el proyecto.</p></li>
+    </ol>
+  </section>
+
+  <section class="closing-statement section-pad">
+    <p class="eyebrow reveal">Rizzoma Arquitectura</p>
+    <p class="closing-copy reveal">Una buena imagen puede atraer una mirada.<br />Una buena arquitectura debe sostenerla.</p>
+    <a class="primary-link reveal" href={withBase('/contacto/')}>Habla directamente con Juan José <span aria-hidden="true">↗</span></a>
+  </section>
+</BaseLayout>
