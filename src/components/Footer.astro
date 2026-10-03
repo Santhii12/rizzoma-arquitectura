@@ -5,8 +5,8 @@ import { withBase } from '@/utils/paths';
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-signature" aria-label="Rizzoma Arquitectura">
-      <span class="footer-wordmark-text">RIZZOMA</span>
-      <span class="footer-monogram-fallback" aria-hidden="true">RZM</span>
+      <img class="footer-wordmark-image" src={withBase(site.brand.wordmark)} alt="Rizzoma" width="1000" height="220" loading="lazy" />
+      <img class="footer-monogram-image" src={withBase(site.brand.monogram)} alt="" aria-hidden="true" width="280" height="280" loading="lazy" />
     </div>
 
     <p class="footer-kicker">¿Tienes un proyecto en mente?</p>
