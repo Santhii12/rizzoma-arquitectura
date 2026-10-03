@@ -2,26 +2,29 @@
 
 ## Identidad confirmada
 - Wordmark: RIZZOMA
-- Monograma: RZM
+- Monograma / isotipo: RZM
 - Director: Juan José Quintero Tobón
 - Posicionamiento: estudio independiente de arquitectura y visualización
 - Base: Medellín, Colombia
 
-## Paleta web
-- Verde oliva Rizzoma: `#62614F`
-- Crema Rizzoma: `#F8EEDA`
-- Verde profundo: `#4F5040`
+## Paleta digital aplicada
+La combinación visual se tomó de las piezas compartidas de Rizzoma y se normalizó para web:
+
+- Verde oliva principal: `#61604E`
+- Verde oliva profundo: `#4D4C3F`
+- Dorado Rizzoma: `#D5BE8B`
+- Champagne claro: `#F2E9D5`
 - Tinta: `#171813`
-- Papel: `#F4EEE2`
-- Piedra: `#B2AD99`
+- Papel cálido: `#F4EEE2`
 
-## Uso
-El verde oliva y el crema son los colores de reconocimiento de marca. Se usan en hero, footer, identidad gráfica, CTA y piezas sociales. Los fondos neutros permiten que renders y fotografías sean protagonistas.
+## Regla clave
+El logo RIZZOMA y el isotipo RZM se presentan en **dorado**, no en blanco. El blanco puro no forma parte del tratamiento principal de marca.
 
-## Logos
-Los archivos actuales de `/public/brand/` se reconstruyeron a partir de las capturas entregadas:
-- `rizzoma-monogram.png`
-- `rizzoma-wordmark.png`
-- `rizzoma-wordmark-mask.png`
+El verde oliva actúa como campo corporativo; el dorado identifica la firma y los detalles de alto valor. Los tonos claros se reservan para lectura y fondos, de modo que renders y fotografías sigan siendo protagonistas.
 
-Antes de publicar definitivamente, reemplazarlos por el SVG/PNG original si Juan José lo entrega.
+## Archivos activos
+- `/public/brand/rizzoma-wordmark-gold.webp`
+- `/public/brand/rizzoma-monogram-gold.webp`
+- `/public/images/studio/juan-jose-quintero.webp`
+
+Cuando Juan José entregue los archivos vectoriales originales, se sustituyen sin cambiar el sistema visual ni la maquetación.
