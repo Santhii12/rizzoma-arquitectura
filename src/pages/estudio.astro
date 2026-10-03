@@ -15,8 +15,10 @@ import { withBase } from '@/utils/paths';
   </section>
 
   <section class="studio-profile section-pad no-top">
-    <figure class="studio-portrait reveal">
-      <img src={withBase(site.founder.portrait)} alt={`${site.founder.name}, arquitecto y director de Rizzoma`} width="1000" height="1250" fetchpriority="high" decoding="async" />
+    <figure class="studio-portrait studio-portrait-fallback reveal" aria-label={`${site.founder.name}, arquitecto y director de Rizzoma`}>
+      <div class="studio-portrait-card">
+        <span class="studio-portrait-initials">JJ</span>
+      </div>
       <figcaption><span>{site.founder.name}</span><span>{site.founder.role}</span></figcaption>
     </figure>
 
