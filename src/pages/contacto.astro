@@ -1,0 +1,45 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { site } from '@/config/site';
+import { withBase } from '@/utils/paths';
+---
+<BaseLayout title="Contacto | Rizzoma Arquitectura" description="Cuéntanos sobre tu proyecto de arquitectura, remodelación o visualización. Contacta a Rizzoma por WhatsApp, correo o Instagram.">
+  <section class="contact-page section-pad">
+    <div class="contact-intro">
+      <p class="eyebrow reveal">Contacto</p>
+      <h1 class="page-title reveal">Cuéntanos<br />qué quieres crear.</h1>
+      <p class="page-intro reveal">Una idea, un lote, una remodelación o un proyecto que necesita hacerse visible. La primera conversación es directamente con Juan José para entender qué necesitas y en qué etapa estás.</p>
+      <p class="contact-founder-note reveal">Rizzoma es un estudio independiente: hablarás directamente con quien desarrolla el proyecto.</p>
+      <div class="contact-direct reveal">
+        <a href={site.whatsappUrl} target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>+57 315 741 4871 ↗</strong></a>
+        <a href={`mailto:${site.email}`}><span>Correo</span><strong>{site.email} ↗</strong></a>
+        <a href={site.instagramUrl} target="_blank" rel="noreferrer"><span>Instagram</span><strong>{site.instagramHandle} ↗</strong></a>
+      </div>
+    </div>
+
+    <form class="contact-form reveal" data-contact-form data-whatsapp={site.whatsappNumber}>
+      <label><span>Nombre *</span><input name="nombre" type="text" autocomplete="name" required placeholder="Tu nombre" /></label>
+      <label><span>Correo *</span><input name="email" type="email" autocomplete="email" required placeholder="tu@correo.com" /></label>
+      <label><span>WhatsApp</span><input name="telefono" type="tel" autocomplete="tel" placeholder="+57 ..." /></label>
+      <label><span>¿Qué necesitas? *</span><select name="servicio" required><option value="">Selecciona una opción</option><option>Diseño arquitectónico</option><option>Remodelación</option><option>Diseño + visualización</option><option>Visualización</option><option>Otro</option></select></label>
+      <label class="full"><span>Ubicación del proyecto</span><input name="ubicacion" type="text" placeholder="Ciudad / municipio" /></label>
+      <label class="full"><span>Cuéntanos brevemente sobre el proyecto *</span><textarea name="mensaje" rows="6" required placeholder="¿Qué quieres hacer, en qué etapa estás y qué necesitas de Rizzoma?"></textarea></label>
+      <label class="consent full"><input name="privacidad" type="checkbox" required /><span>Acepto que Rizzoma use estos datos únicamente para responder mi solicitud. <a href={withBase('/privacidad/')}>Ver privacidad.</a></span></label>
+      <button class="submit-button" type="submit">Continuar por WhatsApp <span aria-hidden="true">↗</span></button>
+      <p class="form-note" data-form-note>Al enviar, se abrirá WhatsApp con el mensaje preparado. Tú decides si lo envías.</p>
+    </form>
+    <noscript><p class="form-note">Si tienes JavaScript desactivado, puedes escribir directamente a <a href={`mailto:${site.email}`}>{site.email}</a> o abrir <a href={site.whatsappUrl}>WhatsApp</a>.</p></noscript>
+  </section>
+
+  <section class="faq-section dark-block">
+    <div class="section-pad">
+      <div class="section-head reveal"><div><p class="eyebrow">Preguntas frecuentes</p><h2 class="section-title">Antes de empezar.</h2></div></div>
+      <div class="faq-list">
+        <details class="reveal"><summary>¿Qué tipo de proyectos desarrolla Rizzoma?<span>+</span></summary><p>La oferta actual se concentra en arquitectura de vivienda, remodelación, conceptualización, diseño + visualización y visualización arquitectónica.</p></details>
+        <details class="reveal"><summary>¿Puedo contratar únicamente visualización?<span>+</span></summary><p>Sí. La visualización se plantea como un servicio independiente y el alcance se ajusta al material que ya tengas: planos, modelo, referencias o un proyecto en desarrollo.</p></details>
+        <details class="reveal"><summary>¿Puedo llegar solo con una idea?<span>+</span></summary><p>Sí. Para una primera conversación basta con explicar qué quieres resolver, dónde está el proyecto y en qué etapa se encuentra.</p></details>
+        <details class="reveal"><summary>¿Qué información ayuda para cotizar?<span>+</span></summary><p>Ubicación, alcance, programa aproximado, material disponible y objetivo del encargo. Si aún no tienes todo, Rizzoma puede empezar por entender la necesidad.</p></details>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
