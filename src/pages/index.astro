@@ -13,7 +13,7 @@ import { withBase } from '@/utils/paths';
 
     <div class="hero-title-wrap brand-hero-title">
       <h1 class="sr-only">Rizzoma Arquitectura</h1>
-      <span class="hero-wordmark hero-title" data-hero-title aria-hidden="true"></span>
+      <span class="hero-wordmark-text hero-title" data-hero-title aria-hidden="true">RIZZOMA</span>
       <div class="hero-deck-wrap reveal">
         <p class="hero-deck">Estudio emergente de arquitectura y visualización dirigido por {site.founder.name}.</p>
         <a class="hero-inline-link" href={withBase('/contacto/')}>Cuéntanos tu proyecto ↗</a>
@@ -62,11 +62,12 @@ import { withBase } from '@/utils/paths';
   </section>
 
   <section class="founder-preview section-pad">
-    <figure class="founder-preview-image reveal">
-      <img src={withBase(site.founder.portrait)} alt={`${site.founder.name}, arquitecto y director de Rizzoma`} width="1000" height="1250" loading="lazy" decoding="async" />
+    <figure class="founder-preview-image founder-preview-fallback reveal" aria-label={`${site.founder.name}, arquitecto y director de Rizzoma`}>
+      <span class="founder-initials">JJ</span>
+      <figcaption>{site.founder.name}</figcaption>
     </figure>
     <div class="founder-preview-copy reveal">
-      <img class="founder-monogram" src={withBase(site.brand.monogram)} alt="" aria-hidden="true" width="120" height="120" loading="lazy" />
+      <span class="founder-monogram-fallback" aria-hidden="true">RZM</span>
       <p class="eyebrow">Dirección / Juan José Quintero Tobón</p>
       <p class="founder-name">{site.founder.name}</p>
       <h2>Una práctica independiente, cercana a cada proyecto.</h2>
