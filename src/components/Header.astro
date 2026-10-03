@@ -1,0 +1,28 @@
+---
+import { withBase } from '@/utils/paths';
+const pathname = Astro.url.pathname;
+const nav = [
+  { href: withBase('/proyectos/'), label: 'Proyectos' },
+  { href: withBase('/servicios/'), label: 'Servicios' },
+  { href: withBase('/estudio/'), label: 'Estudio' }
+];
+const isActive = (href: string) => pathname.startsWith(href);
+---
+<header class="site-header" data-header>
+  <a class="brand" href={withBase('/')} aria-label="Rizzoma, inicio">
+    <span class="brand-wordmark" aria-hidden="true"></span>
+    <span class="sr-only">Rizzoma</span>
+  </a>
+
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" data-menu-toggle>
+    <span class="menu-label">Menú</span>
+    <span class="menu-icon" aria-hidden="true"><i></i><i></i></span>
+  </button>
+
+  <nav id="main-nav" class="main-nav" aria-label="Navegación principal" data-menu>
+    {nav.map((item) => (
+      <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>
+    ))}
+    <a href={withBase('/contacto/')} class="nav-cta" aria-current={pathname.startsWith(withBase('/contacto/')) ? 'page' : undefined}>Hablemos <span aria-hidden="true">↗</span></a>
+  </nav>
+</header>
