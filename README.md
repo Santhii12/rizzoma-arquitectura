@@ -28,3 +28,6 @@ npm run preview
 ## Despliegue
 
 El proyecto queda preparado para despliegue automático en GitHub Pages mediante GitHub Actions. Mientras Rizzoma se revisa públicamente, la URL de prueba será la de GitHub Pages. Más adelante puede conectarse el mismo repositorio a Cloudflare Pages y al dominio definitivo del estudio.
+
+
+> Despliegue de vista previa mediante GitHub Pages habilitado.
