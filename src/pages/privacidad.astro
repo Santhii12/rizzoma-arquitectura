@@ -1,0 +1,19 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { site } from '@/config/site';
+---
+<BaseLayout title="Privacidad | Rizzoma Arquitectura" description="Aviso de privacidad para solicitudes enviadas a Rizzoma Arquitectura.">
+  <section class="legal-page section-pad">
+    <p class="eyebrow">Privacidad</p>
+    <h1 class="legal-title">Tus datos se usan para responderte.</h1>
+    <div class="legal-copy">
+      <p>Cuando envías información desde el formulario de contacto, Rizzoma la utiliza para comprender tu solicitud y responder sobre servicios o proyectos relacionados con ella.</p>
+      <h2>Datos que puedes compartir</h2>
+      <p>Nombre, correo, teléfono, ubicación general del proyecto, servicio de interés y el mensaje que decidas escribir.</p>
+      <h2>Uso</h2>
+      <p>La información se usa para contacto comercial relacionado con tu solicitud. No se publica como parte del sitio.</p>
+      <h2>Contacto</h2>
+      <p>Si quieres consultar, actualizar o solicitar la eliminación de la información que hayas enviado, escribe a <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    </div>
+  </section>
+</BaseLayout>
