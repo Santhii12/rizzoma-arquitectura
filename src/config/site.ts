@@ -17,8 +17,8 @@ export const site = {
     deepOlive: '#4d4c3f',
     gold: '#d5be8b',
     cream: '#f2e9d5',
-    wordmark: '/brand/rizzoma-wordmark-gold.webp',
-    monogram: '/brand/rizzoma-monogram-gold.webp'
+    wordmark: '/brand/rizzoma-wordmark-gold.svg',
+    monogram: '/brand/rizzoma-monogram-gold.svg'
   },
   founder: {
     name: 'Juan José Quintero Tobón',
