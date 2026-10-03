@@ -22,14 +22,14 @@ const meta = [project.location, project.region].filter(Boolean).join(' · ');
   </a>
 ) : (
   <article class="project-card project-card--archive reveal" aria-label={`${project.title}, proyecto de Rizzoma`}>
-    <div class="project-archive-surface" aria-hidden="true">
-      <span class="project-index">{String(index + 1).padStart(2, '0')}</span>
-      <span class="archive-word">{project.title}</span>
-      <span class="archive-status">Proyecto Rizzoma</span>
-    </div>
-    <div class="project-info">
-      <div><h3>{project.title}</h3>{meta ? <p>{meta}</p> : <p>Proyecto Rizzoma</p>}</div>
-      <div class="project-meta"><span>{project.category}</span>{project.year && <span>{project.year}</span>}</div>
+    <div class="archive-project-row">
+      <span class="archive-project-number">{String(index + 1).padStart(2, '0')}</span>
+      <div class="archive-project-title">
+        <h3>{project.title}</h3>
+        <p>{meta || 'Rizzoma Arquitectura'}</p>
+      </div>
+      <span class="archive-project-category">{project.category}</span>
+      <span class="archive-project-year">{project.year ?? '—'}</span>
     </div>
   </article>
 )}
