@@ -11,7 +11,7 @@ export const site = {
   instagramUrl: 'https://www.instagram.com/rizzoma_arquitectura',
   instagramHandle: '@rizzoma_arquitectura',
   domain: 'https://rizzomaarquitectura.com',
-  ogImage: '/social/rizzoma-og.png',
+  ogImage: 'https://framerusercontent.com/images/cabZ2D5YdDKd1m0vI8cRQ0o4o8o.png?height=1054&width=1493',
   brand: {
     olive: '#62614f',
     cream: '#f8eeda',
