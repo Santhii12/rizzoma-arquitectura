@@ -1,0 +1,23 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import { projects } from '@/data/projects';
+import { withBase } from '@/utils/paths';
+---
+<BaseLayout title="Proyectos | Rizzoma Arquitectura" description="Selección de proyectos de arquitectura, interiorismo, visualización y exploración desarrollados por Juan José Quintero Tobón a través de Rizzoma.">
+  <section class="page-hero section-pad archive-hero">
+    <p class="eyebrow reveal">Archivo / {String(projects.length).padStart(2, '0')}</p>
+    <h1 class="page-title reveal">Proyectos</h1>
+    <p class="page-intro reveal">Arquitectura, interiorismo y visualización desarrollados por Juan José Quintero Tobón. Un archivo donde paisaje, materia y representación forman parte de una misma práctica.</p>
+  </section>
+
+  <section class="archive-intro section-pad no-top reveal">
+    <p>Rizzoma reúne proyectos de distintas escalas y etapas. Cada trabajo se presenta desde su intención arquitectónica, su relación con el lugar y la manera en que fue pensado y comunicado.</p>
+  </section>
+
+  <section class="projects-section section-pad no-top">
+    <div class="project-list">
+      {projects.map((project, i) => <ProjectCard project={project} index={i} />)}
+    </div>
+  </section>
+</BaseLayout>
