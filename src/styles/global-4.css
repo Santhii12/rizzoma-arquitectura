@@ -236,7 +236,7 @@
 .site-header {
   color: var(--brand-gold);
   mix-blend-mode: normal;
-  background: rgba(22, 23, 19, .82);
+  background: rgba(77, 76, 63, .96);
   border-bottom: 1px solid rgba(213, 190, 139, .16);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -452,7 +452,7 @@
 
 @media (max-width: 800px) {
   .site-header {
-    background: rgba(22, 23, 19, .9);
+    background: rgba(77, 76, 63, .98);
   }
 
   .main-nav {
