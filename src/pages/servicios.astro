@@ -1,0 +1,70 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { site } from '@/config/site';
+import { withBase } from '@/utils/paths';
+---
+<BaseLayout title="Servicios de arquitectura y visualización | Rizzoma" description="Arquitectura, diseño y visualización arquitectónica para vivienda, remodelación, conceptualización y comunicación de proyectos.">
+  <section class="page-hero section-pad">
+    <p class="eyebrow reveal">Servicios</p>
+    <h1 class="page-title reveal">Del espacio<br />a la imagen.</h1>
+    <p class="page-intro reveal">Rizzoma trabaja desde las primeras decisiones de un proyecto hasta la manera en que ese proyecto se hace visible y comprensible, con interlocución directa de {site.founder.name}.</p>
+  </section>
+
+  <section class="services-full section-pad no-top">
+    <article id="arquitectura" class="service-detail reveal">
+      <span>01</span>
+      <div>
+        <p class="service-kicker">Espacio · contexto · habitar</p>
+        <h2>Arquitectura</h2>
+        <p>Rizzoma desarrolla proyectos que responden al lugar, las necesidades de quienes lo habitan y las condiciones propias de cada encargo.</p>
+        <ul><li>Vivienda</li><li>Remodelación</li><li>Conceptualización</li><li>Diseño arquitectónico</li><li>Modelado 3D</li><li>Desarrollo gráfico</li></ul>
+      </div>
+    </article>
+
+    <article id="diseno-visualizacion" class="service-detail reveal">
+      <span>02</span>
+      <div>
+        <p class="service-kicker">Del concepto a la imagen</p>
+        <h2>Diseño + visualización</h2>
+        <p>Diseño y representación avanzan juntos para que las decisiones espaciales, materiales y atmosféricas puedan evaluarse, afinarse y comunicarse con claridad.</p>
+        <ul><li>Concepto</li><li>Modelado</li><li>Materialidad</li><li>Dirección visual</li><li>Renders</li><li>Presentación de proyecto</li></ul>
+      </div>
+    </article>
+
+    <article id="visualizacion" class="service-detail reveal">
+      <span>03</span>
+      <div>
+        <p class="service-kicker">Hacer visible lo que aún no existe</p>
+        <h2>Visualización</h2>
+        <p>Imágenes arquitectónicas orientadas a transmitir escala, atmósfera, materiales y la intención general de un proyecto, tanto propio como desarrollado por otros estudios.</p>
+        <ul><li>Interiores</li><li>Exteriores</li><li>Visualización comercial</li><li>Postproducción</li><li>Dirección de encuadres</li><li>Imágenes para presentación</li></ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="service-relationship section-pad no-top">
+    <div class="service-relationship-rule reveal"></div>
+    <p class="eyebrow reveal">Cómo se trabaja</p>
+    <div class="service-relationship-grid">
+      <h2 class="reveal">Un estudio pequeño significa una conversación directa.</h2>
+      <div class="reveal">
+        <p>El contacto, la lectura del encargo y el desarrollo del proyecto pasan por Juan José. No hay capas innecesarias entre la idea del cliente y las decisiones de diseño.</p>
+        <p>El alcance se define según la etapa real del proyecto: desde una idea inicial hasta un encargo específico de visualización.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="brief-section dark-block">
+    <div class="section-pad">
+      <p class="eyebrow reveal">Para empezar</p>
+      <div class="brief-grid">
+        <h2 class="statement reveal">No necesitas tenerlo todo resuelto para iniciar una conversación.</h2>
+        <div class="brief-list reveal">
+          <p>Según la etapa del proyecto, ayuda tener:</p>
+          <ul><li>Ubicación o información del lote</li><li>Necesidades y programa aproximado</li><li>Planos o modelo, si ya existen</li><li>Referencias visuales</li><li>Objetivo y alcance esperado</li></ul>
+        </div>
+      </div>
+      <a href={withBase('/contacto/')} class="pill-link reveal">Hablar con Juan José ↗</a>
+    </div>
+  </section>
+</BaseLayout>
