@@ -5,8 +5,24 @@ import { projects, featuredProject } from '@/data/projects';
 const archiveProjects = projects.filter((project) => !project.available);
 import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
+
+const baseSite = Astro.site ?? new URL(site.domain);
+const homeUrl = new URL(withBase('/'), baseSite).toString();
+const schema = {
+  '@type': 'WebPage',
+  '@id': `${homeUrl}#page`,
+  name: 'Rizzoma Arquitectura',
+  description: site.description,
+  url: homeUrl,
+  inLanguage: 'es-CO',
+  isPartOf: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#website` },
+  about: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#business` },
+  primaryImageOfPage: featuredProject?.cover
+    ? { '@type': 'ImageObject', contentUrl: featuredProject.cover }
+    : undefined
+};
 ---
-<BaseLayout>
+<BaseLayout schema={schema}>
   <section class="hero hero-home">
     <div class="hero-topline reveal">
       <span>Estudio independiente</span><span>{site.location}</span><span>Arquitectura + visualización</span>
@@ -73,7 +89,7 @@ import { withBase } from '@/utils/paths';
       <p class="founder-name">{site.founder.name}</p>
       <h2>Una práctica independiente, cercana a cada proyecto.</h2>
       <p>Rizzoma está dirigido de manera directa por Juan José. El estudio combina diseño arquitectónico y visualización con una mirada enfocada en paisaje, luz, materialidad y experiencia de habitar.</p>
-      <p>Ser un estudio emergente permite mantener una relación cercana con cada encargo y cuidar con atención las decisiones que construyen su identidad.</p>
+      <p>La escala independiente del estudio permite mantener una relación cercana con cada encargo y cuidar con atención las decisiones que construyen su identidad.</p>
       <a class="text-link" href={withBase('/estudio/')}>Conocer a Juan José y Rizzoma ↗</a>
     </div>
   </section>
