@@ -81,6 +81,14 @@ const coreGraph: JsonLd[] = [
       { '@type': 'Country', name: 'Colombia' }
     ],
     founder: { '@id': `${deployedSite}/#juan-jose-quintero` },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      telephone: '+57 315 741 4871',
+      email: site.email,
+      availableLanguage: ['es'],
+      areaServed: 'CO'
+    },
     sameAs: [site.instagramUrl],
     knowsAbout: [...site.services, 'Arquitectura', 'Paisaje', 'Materialidad', 'Representación arquitectónica'],
     hasOfferCatalog: {
@@ -156,7 +164,10 @@ const structuredData = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={socialImage} />
+    <meta property="og:image:secure_url" content={socialImage} />
     <meta property="og:image:alt" content={imageAlt} />
+    <meta property="og:image:width" content="1493" />
+    <meta property="og:image:height" content="1054" />
     <meta property="og:url" content={canonical} />
 
     <meta name="twitter:card" content="summary_large_image" />
