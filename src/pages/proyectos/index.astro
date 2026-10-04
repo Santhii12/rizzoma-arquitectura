@@ -2,10 +2,48 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import { projects, availableProjects } from '@/data/projects';
+import { site } from '@/config/site';
+import { withBase } from '@/utils/paths';
 
 const archiveProjects = projects.filter((project) => !project.available);
+const baseSite = Astro.site ?? new URL(site.domain);
+const pageUrl = new URL(withBase('/proyectos/'), baseSite).toString();
+const schema = [
+  {
+    '@type': 'CollectionPage',
+    '@id': `${pageUrl}#page`,
+    name: 'Proyectos — Rizzoma Arquitectura',
+    url: pageUrl,
+    description: 'Archivo de arquitectura, interiorismo y visualización de Rizzoma Arquitectura.',
+    isPartOf: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#website` },
+    about: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#business` }
+  },
+  {
+    '@type': 'ItemList',
+    name: 'Archivo de proyectos Rizzoma',
+    itemListElement: projects.map((project, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: project.title,
+      ...(project.available
+        ? { url: new URL(withBase(`/proyectos/${project.slug}/`), baseSite).toString() }
+        : {})
+    }))
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL(withBase('/'), baseSite).toString() },
+      { '@type': 'ListItem', position: 2, name: 'Proyectos', item: pageUrl }
+    ]
+  }
+];
 ---
-<BaseLayout title="Proyectos | Rizzoma Arquitectura" description="Selección de proyectos de arquitectura, interiorismo y visualización desarrollados por Juan José Quintero Tobón a través de Rizzoma.">
+<BaseLayout
+  title="Proyectos de arquitectura y visualización | Rizzoma"
+  description="Archivo de proyectos de arquitectura, vivienda, interiorismo y visualización desarrollados por Juan José Quintero Tobón a través de Rizzoma."
+  schema={schema}
+>
   <section class="page-hero section-pad archive-hero">
     <p class="eyebrow reveal">Archivo / {String(projects.length).padStart(2, '0')}</p>
     <h1 class="page-title reveal">Proyectos</h1>
