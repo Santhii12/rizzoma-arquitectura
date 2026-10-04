@@ -13,12 +13,56 @@ const nextProject = availableProjects.length > 1
   ? availableProjects[(availableProjects.findIndex((item) => item.slug === project.slug) + 1) % availableProjects.length]
   : undefined;
 import { withBase } from '@/utils/paths';
+
+const baseSite = Astro.site ?? new URL(site.domain);
+const projectUrl = new URL(withBase(`/proyectos/${project.slug}/`), baseSite).toString();
+const businessId = `${baseSite.toString().replace(/\/$/, '')}/#business`;
+const schema = [
+  {
+    '@type': 'CreativeWork',
+    '@id': `${projectUrl}#project`,
+    name: project.title,
+    headline: project.statement ?? project.title,
+    description: project.intro ?? project.statement ?? project.category,
+    url: projectUrl,
+    image: (project.gallery?.length ? project.gallery : [project.cover]).filter(Boolean),
+    dateCreated: project.year,
+    creator: { '@id': businessId },
+    author: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#juan-jose-quintero` },
+    about: ['Arquitectura', project.category],
+    inLanguage: 'es-CO',
+    ...(project.location
+      ? {
+          locationCreated: {
+            '@type': 'Place',
+            name: [project.location, project.region].filter(Boolean).join(', '),
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: project.location,
+              addressRegion: project.region,
+              addressCountry: 'CO'
+            }
+          }
+        }
+      : {})
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL(withBase('/'), baseSite).toString() },
+      { '@type': 'ListItem', position: 2, name: 'Proyectos', item: new URL(withBase('/proyectos/'), baseSite).toString() },
+      { '@type': 'ListItem', position: 3, name: project.title, item: projectUrl }
+    ]
+  }
+];
 ---
 <BaseLayout
   title={`${project.title} | Rizzoma Arquitectura`}
   description={project.intro ?? project.statement}
   image={project.cover}
+  imageAlt={`${project.title}, proyecto de Rizzoma Arquitectura`}
   type="article"
+  schema={schema}
 >
   <article class="project-detail">
     <header class="project-hero section-pad">
@@ -75,6 +119,25 @@ import { withBase } from '@/utils/paths';
         )}
       </section>
     ))}
+
+    <section class="project-distribution section-pad no-top">
+      <div class="project-distribution-inner reveal">
+        <div>
+          <p class="eyebrow">Compartir proyecto</p>
+          <p>Envía {project.title} a alguien que pueda interesarle.</p>
+        </div>
+        <button
+          class="share-project-button"
+          type="button"
+          data-share-project
+          data-share-title={`${project.title} | Rizzoma Arquitectura`}
+          data-share-text={project.statement ?? project.intro ?? 'Proyecto de Rizzoma Arquitectura'}
+        >
+          Compartir <span aria-hidden="true">↗</span>
+        </button>
+        <p class="share-project-status" data-share-status aria-live="polite"></p>
+      </div>
+    </section>
 
     <section class="project-end section-pad">
       <p class="eyebrow reveal">¿Tienes un proyecto?</p>
