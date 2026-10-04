@@ -179,3 +179,34 @@ if (!reduceMotion) {
 
   updateParallax();
 }
+
+
+const shareButtons = document.querySelectorAll<HTMLButtonElement>('[data-share-project]');
+shareButtons.forEach((button) => {
+  button.addEventListener('click', async () => {
+    const status = button.parentElement?.querySelector<HTMLElement>('[data-share-status]');
+    const title = button.dataset.shareTitle || document.title;
+    const text = button.dataset.shareText || '';
+    const url = window.location.href;
+
+    try {
+      if (navigator.share) {
+        await navigator.share({ title, text, url });
+        if (status) status.textContent = 'Proyecto compartido.';
+        return;
+      }
+
+      await navigator.clipboard.writeText(url);
+      if (status) status.textContent = 'Enlace copiado.';
+    } catch (error) {
+      if ((error as DOMException)?.name === 'AbortError') return;
+
+      try {
+        await navigator.clipboard.writeText(url);
+        if (status) status.textContent = 'Enlace copiado.';
+      } catch {
+        if (status) status.textContent = 'Copia la dirección del navegador para compartir el proyecto.';
+      }
+    }
+  });
+});
