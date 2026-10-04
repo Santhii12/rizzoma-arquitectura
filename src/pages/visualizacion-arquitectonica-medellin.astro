@@ -1,0 +1,137 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { site } from '@/config/site';
+import { featuredProject } from '@/data/projects';
+import { withBase } from '@/utils/paths';
+
+const baseSite = Astro.site ?? new URL(site.domain);
+const pageUrl = new URL(withBase('/visualizacion-arquitectonica-medellin/'), baseSite).toString();
+const faq = [
+  {
+    q: '¿Qué incluye un servicio de visualización arquitectónica?',
+    a: 'El alcance puede incluir modelado, definición visual de materiales y atmósfera, encuadres, imágenes interiores o exteriores, postproducción y preparación de piezas para presentar el proyecto.'
+  },
+  {
+    q: '¿Rizzoma puede hacer renders de un proyecto diseñado por otro arquitecto?',
+    a: 'Sí. La visualización puede contratarse como servicio independiente cuando ya existen planos, un modelo, referencias o una propuesta arquitectónica desarrollada por otro equipo.'
+  },
+  {
+    q: '¿Qué material ayuda a iniciar un render arquitectónico?',
+    a: 'Planos, modelos 3D, referencias de materiales, imágenes del lugar y una idea clara del objetivo de las imágenes ayudan a definir el alcance. Si el material todavía está incompleto, primero se puede revisar lo disponible.'
+  },
+  {
+    q: '¿Rizzoma trabaja visualización desde Medellín para proyectos fuera de la ciudad?',
+    a: 'Sí. Al ser un servicio digital, la visualización puede desarrollarse de forma remota para proyectos ubicados en otras zonas de Colombia, dependiendo del material y alcance disponible.'
+  }
+];
+
+const schema = [
+  {
+    '@type': 'Service',
+    '@id': `${pageUrl}#service`,
+    name: 'Renders y visualización arquitectónica',
+    alternateName: 'Visualización arquitectónica en Medellín',
+    serviceType: ['Visualización arquitectónica', 'Renders arquitectónicos', 'Modelado 3D', 'Visualización de interiores', 'Visualización de exteriores'],
+    description: 'Visualización arquitectónica y renders desde Medellín para comunicar arquitectura, materialidad, escala y atmósfera.',
+    provider: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#business` },
+    areaServed: [
+      { '@type': 'City', name: 'Medellín' },
+      { '@type': 'AdministrativeArea', name: 'Antioquia' },
+      { '@type': 'Country', name: 'Colombia' }
+    ],
+    url: pageUrl
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: faq.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a }
+    }))
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL(withBase('/'), baseSite).toString() },
+      { '@type': 'ListItem', position: 2, name: 'Servicios', item: new URL(withBase('/servicios/'), baseSite).toString() },
+      { '@type': 'ListItem', position: 3, name: 'Visualización arquitectónica en Medellín', item: pageUrl }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Renders y visualización arquitectónica en Medellín | Rizzoma"
+  description="Renders, modelado y visualización arquitectónica en Medellín para comunicar interiores, exteriores, materialidad, escala y atmósfera de un proyecto."
+  image={featuredProject?.cover}
+  imageAlt="Visualización arquitectónica de Casa Patio Horizonte por Rizzoma"
+  schema={schema}
+>
+  <section class="page-hero section-pad seo-service-hero">
+    <p class="eyebrow reveal">Visualización arquitectónica / Medellín</p>
+    <h1 class="page-title reveal">Hacer visible<br />lo que aún no existe.</h1>
+    <p class="page-intro reveal">Rizzoma desarrolla renders y visualización arquitectónica para estudiar y comunicar espacios antes de ser construidos: escala, luz, materialidad, atmósfera y relación con el entorno.</p>
+  </section>
+
+  <section class="seo-service-intro section-pad no-top">
+    <div class="seo-service-intro-grid reveal">
+      <p class="eyebrow">Visualización</p>
+      <div>
+        <h2 class="large-copy">La imagen no funciona como decoración: debe explicar la arquitectura.</h2>
+        <p>La visualización puede acompañar el diseño propio de Rizzoma o funcionar como un servicio independiente para proyectos desarrollados por otros equipos. El objetivo es construir imágenes claras, consistentes con el proyecto y útiles para su presentación.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-service-capabilities dark-block">
+    <div class="section-pad">
+      <p class="eyebrow reveal">Capacidades</p>
+      <div class="values-grid">
+        <div class="reveal"><span>01</span><h3>Exteriores</h3><p>Imágenes que ayudan a leer volumen, implantación, materialidad, paisaje y condiciones de luz.</p></div>
+        <div class="reveal"><span>02</span><h3>Interiores</h3><p>Representación de escala, atmósfera, acabados, mobiliario y relaciones espaciales.</p></div>
+        <div class="reveal"><span>03</span><h3>Modelado</h3><p>Construcción y ajuste del modelo 3D de acuerdo con el material entregado y el objetivo del encargo.</p></div>
+        <div class="reveal"><span>04</span><h3>Presentación</h3><p>Encuadres y postproducción pensados para comunicar el proyecto de manera coherente y profesional.</p></div>
+      </div>
+    </div>
+  </section>
+
+  {featuredProject?.cover && (
+    <section class="seo-project-proof section-pad">
+      <div class="section-head reveal">
+        <div><p class="eyebrow">Arquitectura + imagen</p><h2 class="section-title">{featuredProject.title}</h2></div>
+        <a class="text-link" href={withBase(`/proyectos/${featuredProject.slug}/`)}>Ver caso ↗</a>
+      </div>
+      <a class="seo-project-proof-image parallax-media reveal" href={withBase(`/proyectos/${featuredProject.slug}/`)}>
+        <img src={featuredProject.cover} alt={`Render y visualización arquitectónica de ${featuredProject.title}`} loading="lazy" decoding="async" />
+      </a>
+    </section>
+  )}
+
+  <section class="service-relationship section-pad">
+    <div class="service-relationship-rule reveal"></div>
+    <p class="eyebrow reveal">Antes de cotizar</p>
+    <div class="service-relationship-grid">
+      <h2 class="reveal">El material disponible define el punto de partida.</h2>
+      <div class="reveal">
+        <p>Planos, modelo 3D, referencias, acabados y objetivo de las imágenes permiten definir mejor el alcance. No es necesario tenerlo todo perfecto para iniciar la conversación.</p>
+        <p>Rizzoma revisa qué existe y plantea qué información hace falta para avanzar con claridad.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section dark-block">
+    <div class="section-pad">
+      <div class="section-head reveal"><div><p class="eyebrow">Preguntas frecuentes</p><h2 class="section-title">Visualización con criterio arquitectónico.</h2></div></div>
+      <div class="faq-list">
+        {faq.map((item) => (
+          <details class="reveal"><summary>{item.q}<span>+</span></summary><p>{item.a}</p></details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="closing-statement section-pad">
+    <p class="eyebrow reveal">Visualiza tu proyecto</p>
+    <p class="closing-copy reveal">Muéstranos qué tienes y qué necesitas comunicar.</p>
+    <a class="primary-link reveal" href={withBase('/contacto/')}>Solicitar una conversación <span aria-hidden="true">↗</span></a>
+  </section>
+</BaseLayout>
