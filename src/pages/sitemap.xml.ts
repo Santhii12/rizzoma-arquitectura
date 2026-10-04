@@ -9,8 +9,7 @@ const staticRoutes = [
   '/arquitectura-medellin/',
   '/visualizacion-arquitectonica-medellin/',
   '/estudio/',
-  '/contacto/',
-  '/privacidad/'
+  '/contacto/'
 ];
 
 const escapeXml = (value: string) =>
