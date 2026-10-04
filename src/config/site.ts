@@ -3,8 +3,10 @@ export const site = {
   shortName: 'Rizzoma',
   tagline: 'Arquitectura, diseño y visualización',
   description:
-    'Estudio emergente e independiente de arquitectura y visualización dirigido por Juan José Quintero Tobón, con una práctica centrada en contexto, paisaje, luz, materialidad y forma de habitar.',
+    'Estudio independiente de arquitectura y visualización dirigido por Juan José Quintero Tobón en Medellín. Diseño arquitectónico, vivienda, remodelación, renders y comunicación visual de proyectos.',
   location: 'Medellín, Colombia',
+  region: 'Antioquia',
+  country: 'CO',
   email: 'rizzomaarquitectura@gmail.com',
   whatsappNumber: '573157414871',
   whatsappUrl: 'https://wa.me/573157414871',
@@ -12,6 +14,17 @@ export const site = {
   instagramHandle: '@rizzoma_arquitectura',
   domain: 'https://rizzomaarquitectura.com',
   ogImage: 'https://framerusercontent.com/images/cabZ2D5YdDKd1m0vI8cRQ0o4o8o.png?height=1054&width=1493',
+  ogImageAlt: 'Casa Patio Horizonte, proyecto de Rizzoma Arquitectura',
+  services: [
+    'Diseño arquitectónico',
+    'Arquitectura residencial',
+    'Remodelación',
+    'Conceptualización',
+    'Diseño y visualización',
+    'Visualización arquitectónica',
+    'Renders arquitectónicos',
+    'Modelado 3D'
+  ],
   brand: {
     olive: '#61604e',
     deepOlive: '#4d4c3f',
