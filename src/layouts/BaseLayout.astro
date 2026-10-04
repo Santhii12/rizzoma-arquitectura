@@ -9,58 +9,117 @@ import '@/styles/global-4.css';
 import '@/styles/global-5.css';
 import { withBase } from '@/utils/paths';
 
+type JsonLd = Record<string, unknown>;
+
 interface Props {
   title?: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
   type?: 'website' | 'article';
   noindex?: boolean;
+  schema?: JsonLd | JsonLd[];
 }
 
 const {
   title = 'Rizzoma Arquitectura | Arquitectura y visualización en Medellín',
   description = site.description,
   image = site.ogImage,
+  imageAlt = site.ogImageAlt,
   type = 'website',
-  noindex = false
+  noindex = false,
+  schema
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site ?? site.domain);
-const socialImage = image.startsWith('http') ? image : new URL(withBase(image), Astro.site ?? site.domain).toString();
-const deployedSite = (Astro.site ?? new URL(site.domain)).toString().replace(/\/$/, '');
-const founderImage = new URL(withBase(site.founder.portrait), Astro.site ?? site.domain).toString();
+const baseSite = Astro.site ?? new URL(site.domain);
+const canonical = new URL(Astro.url.pathname, baseSite);
+const socialImage = image.startsWith('http') ? image : new URL(withBase(image), baseSite).toString();
+const deployedSite = baseSite.toString().replace(/\/$/, '');
+const founderImage = new URL(withBase(site.founder.portrait), baseSite).toString();
+const logo = new URL(withBase(site.brand.wordmark), baseSite).toString();
 
+const coreGraph: JsonLd[] = [
+  {
+    '@type': 'WebSite',
+    '@id': `${deployedSite}/#website`,
+    url: deployedSite,
+    name: site.name,
+    alternateName: site.shortName,
+    description: site.description,
+    inLanguage: 'es-CO',
+    publisher: { '@id': `${deployedSite}/#business` }
+  },
+  {
+    '@type': 'Person',
+    '@id': `${deployedSite}/#juan-jose-quintero`,
+    name: site.founder.name,
+    jobTitle: 'Arquitecto',
+    image: founderImage,
+    url: new URL(withBase('/estudio/'), baseSite).toString(),
+    worksFor: { '@id': `${deployedSite}/#business` }
+  },
+  {
+    '@type': 'ProfessionalService',
+    '@id': `${deployedSite}/#business`,
+    name: site.name,
+    alternateName: site.shortName,
+    url: deployedSite,
+    logo,
+    image: socialImage,
+    description: site.description,
+    email: site.email,
+    telephone: '+57 315 741 4871',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Medellín',
+      addressRegion: 'Antioquia',
+      addressCountry: 'CO'
+    },
+    areaServed: [
+      { '@type': 'City', name: 'Medellín' },
+      { '@type': 'AdministrativeArea', name: 'Antioquia' },
+      { '@type': 'Country', name: 'Colombia' }
+    ],
+    founder: { '@id': `${deployedSite}/#juan-jose-quintero` },
+    sameAs: [site.instagramUrl],
+    knowsAbout: [...site.services, 'Arquitectura', 'Paisaje', 'Materialidad', 'Representación arquitectónica'],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Servicios de Rizzoma Arquitectura',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Arquitectura',
+            url: new URL(withBase('/arquitectura-medellin/'), baseSite).toString()
+          }
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Diseño + visualización',
+            url: new URL(withBase('/servicios/'), baseSite).toString()
+          }
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Visualización arquitectónica y renders',
+            url: new URL(withBase('/visualizacion-arquitectonica-medellin/'), baseSite).toString()
+          }
+        }
+      ]
+    }
+  }
+];
+
+const extraGraph = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 const structuredData = {
   '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebSite',
-      '@id': `${deployedSite}/#website`,
-      url: deployedSite,
-      name: site.name,
-      inLanguage: 'es-CO'
-    },
-    {
-      '@type': 'Person',
-      '@id': `${deployedSite}/#juan-jose-quintero`,
-      name: site.founder.name,
-      jobTitle: 'Arquitecto',
-      image: founderImage,
-      worksFor: { '@id': `${deployedSite}/#business` }
-    },
-    {
-      '@type': 'ProfessionalService',
-      '@id': `${deployedSite}/#business`,
-      name: site.name,
-      url: deployedSite,
-      description: site.description,
-      email: site.email,
-      telephone: '+57 315 741 4871',
-      areaServed: { '@type': 'Country', name: 'Colombia' },
-      founder: { '@id': `${deployedSite}/#juan-jose-quintero` },
-      sameAs: [site.instagramUrl]
-    }
-  ]
+  '@graph': [...coreGraph, ...extraGraph]
 };
 ---
 <!doctype html>
@@ -69,14 +128,26 @@ const structuredData = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#61604e" />
+    <meta name="color-scheme" content="light" />
+    <meta name="application-name" content={site.name} />
+    <meta name="author" content={site.founder.name} />
     <meta name="description" content={description} />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      name="robots"
+      content={noindex
+        ? 'noindex, nofollow'
+        : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+    />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; img-src 'self' https://framerusercontent.com data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self'; form-action 'self'; upgrade-insecure-requests" />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="es-CO" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <link rel="apple-touch-icon" href={withBase(site.brand.monogram)} />
-    
+    <link rel="manifest" href={withBase('/site.webmanifest')} />
+    <link rel="me" href={site.instagramUrl} />
     <link rel="preconnect" href="https://framerusercontent.com" crossorigin />
 
     <meta property="og:type" content={type} />
@@ -85,11 +156,14 @@ const structuredData = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content={imageAlt} />
     <meta property="og:url" content={canonical} />
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={imageAlt} />
 
     <script type="application/ld+json" is:inline set:html={JSON.stringify(structuredData)}></script>
     <title>{title}</title>
