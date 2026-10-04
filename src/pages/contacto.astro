@@ -2,8 +2,47 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
+
+const baseSite = Astro.site ?? new URL(site.domain);
+const pageUrl = new URL(withBase('/contacto/'), baseSite).toString();
+const contactFaq = [
+  ['¿Qué tipo de proyectos desarrolla Rizzoma?', 'La oferta actual se concentra en arquitectura de vivienda, remodelación, conceptualización, diseño + visualización y visualización arquitectónica.'],
+  ['¿Puedo contratar únicamente visualización?', 'Sí. La visualización se plantea como un servicio independiente y el alcance se ajusta al material que ya tengas: planos, modelo, referencias o un proyecto en desarrollo.'],
+  ['¿Puedo llegar solo con una idea?', 'Sí. Para una primera conversación basta con explicar qué quieres resolver, dónde está el proyecto y en qué etapa se encuentra.'],
+  ['¿Qué información ayuda para cotizar?', 'Ubicación, alcance, programa aproximado, material disponible y objetivo del encargo. Si aún no tienes todo, Rizzoma puede empezar por entender la necesidad.']
+] as const;
+const schema = [
+  {
+    '@type': 'ContactPage',
+    '@id': `${pageUrl}#page`,
+    name: 'Contacto — Rizzoma Arquitectura',
+    url: pageUrl,
+    description: 'Contacto directo con Rizzoma Arquitectura para arquitectura, remodelación y visualización.',
+    isPartOf: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#website` },
+    about: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#business` }
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: contactFaq.map(([question, answer]) => ({
+      '@type': 'Question',
+      name: question,
+      acceptedAnswer: { '@type': 'Answer', text: answer }
+    }))
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL(withBase('/'), baseSite).toString() },
+      { '@type': 'ListItem', position: 2, name: 'Contacto', item: pageUrl }
+    ]
+  }
+];
 ---
-<BaseLayout title="Contacto | Rizzoma Arquitectura" description="Cuéntanos sobre tu proyecto de arquitectura, remodelación o visualización. Contacta a Rizzoma por WhatsApp, correo o Instagram.">
+<BaseLayout
+  title="Contacto | Arquitectura y visualización en Medellín | Rizzoma"
+  description="Habla directamente con Juan José Quintero Tobón sobre tu proyecto de arquitectura, remodelación, renders o visualización arquitectónica."
+  schema={schema}
+>
   <section class="contact-page section-pad">
     <div class="contact-intro">
       <p class="eyebrow reveal">Contacto</p>
