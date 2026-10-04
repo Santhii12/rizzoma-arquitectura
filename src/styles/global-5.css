@@ -698,3 +698,33 @@ textarea {
     transition: none !important;
   }
 }
+
+
+/* Security-oriented form hardening */
+.contact-form {
+  position: relative;
+}
+
+.form-honeypot {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+
+.contact-form input:invalid:not(:placeholder-shown),
+.contact-form textarea:invalid:not(:placeholder-shown),
+.contact-form select:invalid {
+  border-color: transparent;
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+  max-width: 100%;
+}
