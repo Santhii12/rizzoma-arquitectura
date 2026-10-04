@@ -728,3 +728,136 @@ textarea {
 .contact-form select {
   max-width: 100%;
 }
+
+
+/* SEO service landing pages */
+.seo-service-intro-grid {
+  display: grid;
+  grid-template-columns: .35fr 1.65fr;
+  gap: clamp(36px, 7vw, 120px);
+  align-items: start;
+}
+
+.seo-service-intro-grid > div {
+  max-width: 1080px;
+}
+
+.seo-service-intro-grid .large-copy {
+  margin-bottom: clamp(30px, 4vw, 54px);
+}
+
+.seo-service-intro-grid > div > p:last-child {
+  width: min(100%, 680px);
+  margin: 0 0 0 auto;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.seo-service-capabilities .section-pad {
+  padding-top: clamp(90px, 10vw, 150px);
+  padding-bottom: clamp(90px, 10vw, 150px);
+}
+
+.seo-project-proof-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--paper-soft);
+}
+
+.seo-project-proof-image img {
+  width: 100%;
+  height: 108%;
+  object-fit: cover;
+}
+
+.service-detail-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 36px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--brand-gold);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .11em;
+}
+
+.service-detail-link:hover {
+  color: var(--brand-olive);
+}
+
+/* Project distribution */
+.project-distribution-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px 50px;
+  align-items: end;
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.project-distribution-inner p {
+  margin: 0;
+}
+
+.project-distribution-inner > div > p:last-child {
+  margin-top: 10px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.share-project-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  min-width: 190px;
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--brand-olive);
+  background: transparent;
+  color: var(--brand-olive-deep);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: 10px;
+}
+
+.share-project-button:hover {
+  background: var(--brand-olive);
+  color: var(--brand-cream);
+}
+
+.share-project-status {
+  grid-column: 1 / -1;
+  min-height: 1em;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+@media (max-width: 800px) {
+  .seo-service-intro-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .seo-service-intro-grid > div > p:last-child {
+    margin-left: 0;
+  }
+
+  .seo-project-proof-image {
+    aspect-ratio: 4 / 5;
+  }
+
+  .project-distribution-inner {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .share-project-button {
+    width: 100%;
+  }
+}
