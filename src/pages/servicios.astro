@@ -2,8 +2,57 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
+
+const baseSite = Astro.site ?? new URL(site.domain);
+const servicesUrl = new URL(withBase('/servicios/'), baseSite).toString();
+const schema = [
+  {
+    '@type': 'CollectionPage',
+    '@id': `${servicesUrl}#page`,
+    name: 'Servicios de arquitectura y visualización de Rizzoma',
+    url: servicesUrl,
+    description: 'Arquitectura, diseño y visualización arquitectónica desde Medellín.',
+    isPartOf: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#website` },
+    about: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#business` }
+  },
+  {
+    '@type': 'ItemList',
+    name: 'Servicios de Rizzoma Arquitectura',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Arquitectura',
+        url: new URL(withBase('/arquitectura-medellin/'), baseSite).toString()
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Diseño + visualización',
+        url: servicesUrl + '#diseno-visualizacion'
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'Visualización arquitectónica',
+        url: new URL(withBase('/visualizacion-arquitectonica-medellin/'), baseSite).toString()
+      }
+    ]
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL(withBase('/'), baseSite).toString() },
+      { '@type': 'ListItem', position: 2, name: 'Servicios', item: servicesUrl }
+    ]
+  }
+];
 ---
-<BaseLayout title="Servicios de arquitectura y visualización | Rizzoma" description="Arquitectura, diseño y visualización arquitectónica para vivienda, remodelación, conceptualización y comunicación de proyectos.">
+<BaseLayout
+  title="Servicios de arquitectura y visualización en Medellín | Rizzoma"
+  description="Arquitectura, vivienda, remodelación, diseño, renders y visualización arquitectónica desde Medellín con interlocución directa de Juan José Quintero Tobón."
+  schema={schema}
+>
   <section class="page-hero section-pad">
     <p class="eyebrow reveal">Servicios</p>
     <h1 class="page-title reveal">Del espacio<br />a la imagen.</h1>
@@ -18,6 +67,7 @@ import { withBase } from '@/utils/paths';
         <h2>Arquitectura</h2>
         <p>Rizzoma desarrolla proyectos que responden al lugar, las necesidades de quienes lo habitan y las condiciones propias de cada encargo.</p>
         <ul><li>Vivienda</li><li>Remodelación</li><li>Conceptualización</li><li>Diseño arquitectónico</li><li>Modelado 3D</li><li>Desarrollo gráfico</li></ul>
+        <a class="service-detail-link" href={withBase('/arquitectura-medellin/')}>Ver arquitectura en Medellín y Antioquia ↗</a>
       </div>
     </article>
 
@@ -38,6 +88,7 @@ import { withBase } from '@/utils/paths';
         <h2>Visualización</h2>
         <p>Imágenes arquitectónicas orientadas a transmitir escala, atmósfera, materiales y la intención general de un proyecto, tanto propio como desarrollado por otros estudios.</p>
         <ul><li>Interiores</li><li>Exteriores</li><li>Visualización comercial</li><li>Postproducción</li><li>Dirección de encuadres</li><li>Imágenes para presentación</li></ul>
+        <a class="service-detail-link" href={withBase('/visualizacion-arquitectonica-medellin/')}>Ver renders y visualización arquitectónica ↗</a>
       </div>
     </article>
   </section>
