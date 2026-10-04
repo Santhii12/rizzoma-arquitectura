@@ -1,0 +1,138 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { site } from '@/config/site';
+import { featuredProject } from '@/data/projects';
+import { withBase } from '@/utils/paths';
+
+const baseSite = Astro.site ?? new URL(site.domain);
+const pageUrl = new URL(withBase('/arquitectura-medellin/'), baseSite).toString();
+const faq = [
+  {
+    q: '¿Qué tipo de proyectos de arquitectura desarrolla Rizzoma?',
+    a: 'La práctica actual se concentra en vivienda, remodelación, conceptualización y diseño arquitectónico, ajustando el alcance a la etapa real de cada proyecto.'
+  },
+  {
+    q: '¿Rizzoma trabaja únicamente en Medellín?',
+    a: 'Rizzoma tiene base en Medellín y puede estudiar proyectos en Antioquia y otras zonas de Colombia según ubicación, alcance y etapa del encargo.'
+  },
+  {
+    q: '¿Puedo contactar a Rizzoma si apenas tengo una idea?',
+    a: 'Sí. Una primera conversación puede comenzar con la ubicación, las necesidades, referencias y el estado actual del proyecto, incluso si todavía no existen planos definitivos.'
+  },
+  {
+    q: '¿La visualización forma parte del proceso de diseño?',
+    a: 'Puede formar parte del proceso. Rizzoma utiliza modelado y representación para evaluar relaciones espaciales, materialidad, luz y atmósfera, además de comunicar la propuesta.'
+  }
+];
+
+const schema = [
+  {
+    '@type': 'Service',
+    '@id': `${pageUrl}#service`,
+    name: 'Arquitectura residencial y diseño arquitectónico',
+    serviceType: ['Diseño arquitectónico', 'Arquitectura residencial', 'Remodelación', 'Conceptualización'],
+    description: 'Servicio de arquitectura de Rizzoma para vivienda, remodelación y conceptualización, con base en Medellín y atención según alcance en Antioquia y Colombia.',
+    provider: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#business` },
+    areaServed: [
+      { '@type': 'City', name: 'Medellín' },
+      { '@type': 'AdministrativeArea', name: 'Antioquia' },
+      { '@type': 'Country', name: 'Colombia' }
+    ],
+    url: pageUrl
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: faq.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a }
+    }))
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL(withBase('/'), baseSite).toString() },
+      { '@type': 'ListItem', position: 2, name: 'Servicios', item: new URL(withBase('/servicios/'), baseSite).toString() },
+      { '@type': 'ListItem', position: 3, name: 'Arquitectura en Medellín', item: pageUrl }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Arquitectura residencial en Medellín | Rizzoma Arquitectura"
+  description="Diseño arquitectónico, vivienda, remodelación y conceptualización desde Medellín. Una práctica independiente dirigida por Juan José Quintero Tobón."
+  image={featuredProject?.cover}
+  imageAlt="Casa Patio Horizonte, proyecto de arquitectura de Rizzoma"
+  schema={schema}
+>
+  <section class="page-hero section-pad seo-service-hero">
+    <p class="eyebrow reveal">Arquitectura / Medellín + Antioquia</p>
+    <h1 class="page-title reveal">Arquitectura pensada<br />desde el lugar.</h1>
+    <p class="page-intro reveal">Rizzoma desarrolla arquitectura desde una lectura cercana del contexto, la forma de habitar, la luz, el paisaje y la materialidad. La práctica está dirigida directamente por {site.founder.name} desde Medellín.</p>
+  </section>
+
+  <section class="seo-service-intro section-pad no-top">
+    <div class="seo-service-intro-grid reveal">
+      <p class="eyebrow">Qué hacemos</p>
+      <div>
+        <h2 class="large-copy">Vivienda, remodelación y conceptualización con una relación directa entre idea, espacio y representación.</h2>
+        <p>El alcance se define según el punto en el que se encuentre el proyecto. Puede comenzar con una idea inicial, una vivienda por desarrollar o un espacio existente que necesita transformarse. Rizzoma trabaja el diseño y su representación como partes de un mismo proceso.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-service-capabilities dark-block">
+    <div class="section-pad">
+      <p class="eyebrow reveal">Alcances</p>
+      <div class="values-grid">
+        <div class="reveal"><span>01</span><h3>Vivienda</h3><p>Propuestas residenciales que parten del lugar, el programa y las formas de habitar.</p></div>
+        <div class="reveal"><span>02</span><h3>Remodelación</h3><p>Lectura de espacios existentes para reorganizar relaciones, usos, materialidad y atmósfera.</p></div>
+        <div class="reveal"><span>03</span><h3>Concepto</h3><p>Exploración de criterios espaciales, referencias, implantación y dirección general del proyecto.</p></div>
+        <div class="reveal"><span>04</span><h3>Representación</h3><p>Modelado y visualización para estudiar decisiones y comunicar la arquitectura con claridad.</p></div>
+      </div>
+    </div>
+  </section>
+
+  {featuredProject && (
+    <section class="seo-project-proof section-pad">
+      <div class="section-head reveal">
+        <div><p class="eyebrow">Proyecto relacionado</p><h2 class="section-title">{featuredProject.title}</h2></div>
+        <a class="text-link" href={withBase(`/proyectos/${featuredProject.slug}/`)}>Ver proyecto ↗</a>
+      </div>
+      {featuredProject.cover && (
+        <a class="seo-project-proof-image parallax-media reveal" href={withBase(`/proyectos/${featuredProject.slug}/`)}>
+          <img src={featuredProject.cover} alt={`${featuredProject.title}, arquitectura de vivienda en Antioquia`} loading="lazy" decoding="async" />
+        </a>
+      )}
+    </section>
+  )}
+
+  <section class="service-relationship section-pad">
+    <div class="service-relationship-rule reveal"></div>
+    <p class="eyebrow reveal">Área de trabajo</p>
+    <div class="service-relationship-grid">
+      <h2 class="reveal">Base en Medellín.<br />Proyectos según contexto.</h2>
+      <div class="reveal">
+        <p>Rizzoma tiene base en Medellín y evalúa encargos en Antioquia y otras zonas de Colombia según la ubicación, las necesidades y el alcance requerido.</p>
+        <p>La conversación y el desarrollo pasan directamente por Juan José, manteniendo continuidad entre la intención inicial y las decisiones del proyecto.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section dark-block">
+    <div class="section-pad">
+      <div class="section-head reveal"><div><p class="eyebrow">Preguntas frecuentes</p><h2 class="section-title">Arquitectura con una escala cercana.</h2></div></div>
+      <div class="faq-list">
+        {faq.map((item) => (
+          <details class="reveal"><summary>{item.q}<span>+</span></summary><p>{item.a}</p></details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="closing-statement section-pad">
+    <p class="eyebrow reveal">Empezar un proyecto</p>
+    <p class="closing-copy reveal">Cuéntanos el lugar, la necesidad y en qué etapa estás.</p>
+    <a class="primary-link reveal" href={withBase('/contacto/')}>Hablar directamente con Juan José <span aria-hidden="true">↗</span></a>
+  </section>
+</BaseLayout>
