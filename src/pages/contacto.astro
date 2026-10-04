@@ -17,13 +17,16 @@ import { withBase } from '@/utils/paths';
       </div>
     </div>
 
-    <form class="contact-form reveal" data-contact-form data-whatsapp={site.whatsappNumber}>
-      <label><span>Nombre *</span><input name="nombre" type="text" autocomplete="name" required placeholder="Tu nombre" /></label>
-      <label><span>Correo *</span><input name="email" type="email" autocomplete="email" required placeholder="tu@correo.com" /></label>
-      <label><span>WhatsApp</span><input name="telefono" type="tel" autocomplete="tel" placeholder="+57 ..." /></label>
+    <form class="contact-form reveal" data-contact-form data-whatsapp={site.whatsappNumber} autocomplete="on">
+      <div class="form-honeypot" aria-hidden="true">
+        <label>Empresa<input name="empresa_web" type="text" tabindex="-1" autocomplete="off" /></label>
+      </div>
+      <label><span>Nombre *</span><input name="nombre" type="text" autocomplete="name" required minlength="2" maxlength="80" placeholder="Tu nombre" /></label>
+      <label><span>Correo *</span><input name="email" type="email" autocomplete="email" required maxlength="160" placeholder="tu@correo.com" /></label>
+      <label><span>WhatsApp</span><input name="telefono" type="tel" autocomplete="tel" inputmode="tel" maxlength="24" pattern="[0-9+() .-]{7,24}" placeholder="+57 ..." /></label>
       <label><span>¿Qué necesitas? *</span><select name="servicio" required><option value="">Selecciona una opción</option><option>Diseño arquitectónico</option><option>Remodelación</option><option>Diseño + visualización</option><option>Visualización</option><option>Otro</option></select></label>
-      <label class="full"><span>Ubicación del proyecto</span><input name="ubicacion" type="text" placeholder="Ciudad / municipio" /></label>
-      <label class="full"><span>Cuéntanos brevemente sobre el proyecto *</span><textarea name="mensaje" rows="6" required placeholder="¿Qué quieres hacer, en qué etapa estás y qué necesitas de Rizzoma?"></textarea></label>
+      <label class="full"><span>Ubicación del proyecto</span><input name="ubicacion" type="text" maxlength="120" placeholder="Ciudad / municipio" /></label>
+      <label class="full"><span>Cuéntanos brevemente sobre el proyecto *</span><textarea name="mensaje" rows="6" required minlength="10" maxlength="1800" placeholder="¿Qué quieres hacer, en qué etapa estás y qué necesitas de Rizzoma?"></textarea></label>
       <label class="consent full"><input name="privacidad" type="checkbox" required /><span>Acepto que Rizzoma use estos datos únicamente para responder mi solicitud. <a href={withBase('/privacidad/')}>Ver privacidad.</a></span></label>
       <button class="submit-button" type="submit">Continuar por WhatsApp <span aria-hidden="true">↗</span></button>
       <p class="form-note" data-form-note>Al enviar, se abrirá WhatsApp con el mensaje preparado. Tú decides si lo envías.</p>
