@@ -3,8 +3,35 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { site } from '@/config/site';
 import { featuredProject } from '@/data/projects';
 import { withBase } from '@/utils/paths';
+
+const baseSite = Astro.site ?? new URL(site.domain);
+const pageUrl = new URL(withBase('/estudio/'), baseSite).toString();
+const schema = [
+  {
+    '@type': 'AboutPage',
+    '@id': `${pageUrl}#page`,
+    name: 'Estudio — Rizzoma Arquitectura',
+    url: pageUrl,
+    description: `Rizzoma es una práctica independiente de arquitectura y visualización dirigida por ${site.founder.name} en Medellín.`,
+    isPartOf: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#website` },
+    mainEntity: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#juan-jose-quintero` }
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL(withBase('/'), baseSite).toString() },
+      { '@type': 'ListItem', position: 2, name: 'Estudio', item: pageUrl }
+    ]
+  }
+];
 ---
-<BaseLayout title="Estudio | Rizzoma Arquitectura" description={`Rizzoma es un estudio independiente de arquitectura y visualización dirigido por ${site.founder.name} en Medellín, Colombia.`}>
+<BaseLayout
+  title="Juan José Quintero Tobón | Rizzoma Arquitectura"
+  description={`Conoce Rizzoma, práctica independiente de arquitectura y visualización dirigida por ${site.founder.name} en Medellín, Colombia.`}
+  image={site.founder.portrait}
+  imageAlt={`${site.founder.name}, arquitecto y director de Rizzoma`}
+  schema={schema}
+>
   <section class="page-hero section-pad studio-hero">
     <p class="eyebrow reveal">Estudio</p>
     <h1 class="page-title reveal">Una práctica independiente.<br />Una mirada propia.</h1>
