@@ -22,30 +22,116 @@ window.addEventListener('keydown', (event) => {
 });
 
 const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+const formLoadedAt = Date.now();
+
+const cleanSingleLine = (value: FormDataEntryValue | null, maxLength: number) =>
+  String(value ?? '')
+    .normalize('NFKC')
+    .replace(/[\u0000-\u001F\u007F<>]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, maxLength);
+
+const cleanMultiline = (value: FormDataEntryValue | null, maxLength: number) =>
+  String(value ?? '')
+    .normalize('NFKC')
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F<>]/g, ' ')
+    .replace(/\r\n?/g, '\n')
+    .replace(/[ \t]+/g, ' ')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+    .slice(0, maxLength);
+
+const isValidEmail = (value: string) =>
+  /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(value) && value.length <= 160;
+
+const isValidPhone = (value: string) =>
+  value === '' || /^[0-9+() .-]{7,24}$/.test(value);
+
+const allowedServices = new Set([
+  'Diseño arquitectónico',
+  'Remodelación',
+  'Diseño + visualización',
+  'Visualización',
+  'Otro'
+]);
+
+const getRecentSubmissions = () => {
+  try {
+    const stored = sessionStorage.getItem('rizzoma-contact-attempts');
+    const values = stored ? JSON.parse(stored) : [];
+    if (!Array.isArray(values)) return [];
+    const now = Date.now();
+    return values.filter((time) => Number.isFinite(time) && now - Number(time) < 60_000);
+  } catch {
+    return [];
+  }
+};
+
+const recordSubmission = (attempts: number[]) => {
+  try {
+    sessionStorage.setItem('rizzoma-contact-attempts', JSON.stringify([...attempts, Date.now()]));
+  } catch {
+    // El formulario sigue funcionando aunque el navegador bloquee sessionStorage.
+  }
+};
+
 form?.addEventListener('submit', (event) => {
   event.preventDefault();
+
+  const note = form.querySelector<HTMLElement>('[data-form-note]');
+  const honeypot = form.elements.namedItem('empresa_web') as HTMLInputElement | null;
+
+  if (honeypot?.value.trim()) {
+    if (note) note.textContent = 'No fue posible procesar la solicitud.';
+    return;
+  }
+
+  if (Date.now() - formLoadedAt < 1500) {
+    if (note) note.textContent = 'Espera un momento antes de enviar el formulario.';
+    return;
+  }
+
+  const recentAttempts = getRecentSubmissions();
+  if (recentAttempts.length >= 3) {
+    if (note) note.textContent = 'Has intentado enviar varias veces. Espera un minuto y vuelve a intentarlo.';
+    return;
+  }
+
   if (!form.reportValidity()) return;
 
   const data = new FormData(form);
   const phone = form.dataset.whatsapp;
-  if (!phone) return;
+  if (!phone || !/^\d{10,15}$/.test(phone)) return;
 
-  const field = (name: string) => String(data.get(name) ?? '').trim();
+  const nombre = cleanSingleLine(data.get('nombre'), 80);
+  const email = cleanSingleLine(data.get('email'), 160);
+  const telefono = cleanSingleLine(data.get('telefono'), 24);
+  const servicio = cleanSingleLine(data.get('servicio'), 80);
+  const ubicacion = cleanSingleLine(data.get('ubicacion'), 120);
+  const mensaje = cleanMultiline(data.get('mensaje'), 1800);
+
+  if (nombre.length < 2 || mensaje.length < 10 || !isValidEmail(email) || !isValidPhone(telefono) || !allowedServices.has(servicio)) {
+    if (note) note.textContent = 'Revisa los datos del formulario antes de continuar.';
+    return;
+  }
+
   const message = [
     'Hola, Juan José. Quiero conversar con Rizzoma sobre un proyecto.',
     '',
-    `Nombre: ${field('nombre')}`,
-    `Correo: ${field('email')}`,
-    field('telefono') ? `Teléfono: ${field('telefono')}` : '',
-    `Servicio: ${field('servicio')}`,
-    field('ubicacion') ? `Ubicación: ${field('ubicacion')}` : '',
+    `Nombre: ${nombre}`,
+    `Correo: ${email}`,
+    telefono ? `Teléfono: ${telefono}` : '',
+    `Servicio: ${servicio}`,
+    ubicacion ? `Ubicación: ${ubicacion}` : '',
     '',
     'Proyecto:',
-    field('mensaje')
+    mensaje
   ].filter(Boolean).join('\n');
 
+  recordSubmission(recentAttempts);
+
   const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-  const note = form.querySelector<HTMLElement>('[data-form-note]');
   if (note) note.textContent = 'WhatsApp se abrirá con tu mensaje preparado.';
   window.open(url, '_blank', 'noopener,noreferrer');
 });
