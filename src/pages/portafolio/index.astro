@@ -1,0 +1,102 @@
+---
+import PortfolioLayout from '@/layouts/PortfolioLayout.astro';
+import { projects, featuredProject } from '@/data/projects';
+import { site } from '@/config/site';
+import { withBase } from '@/utils/paths';
+
+const otherProjects = projects.filter((project) => project.slug !== featuredProject?.slug);
+---
+<PortfolioLayout
+  title="Portafolio | Rizzoma Arquitectura"
+  description="Selección visual de proyectos de arquitectura, interiorismo y visualización de Rizzoma Arquitectura."
+>
+  <header class="portfolio-experience-header">
+    <a class="portfolio-experience-brand" href={withBase('/')} aria-label="Volver a Rizzoma">
+      <img src={withBase(site.brand.wordmark)} alt="Rizzoma" width="900" height="200" />
+    </a>
+    <div class="portfolio-experience-nav">
+      <span>Portafolio / {String(projects.length).padStart(2, '0')}</span>
+      <a href={withBase('/')} aria-label="Volver al sitio principal">Volver al sitio ↙</a>
+    </div>
+  </header>
+
+  <main id="portfolio-content" class="portfolio-experience">
+    <section class="portfolio-experience-intro">
+      <div class="portfolio-experience-intro-meta">
+        <span>Rizzoma Arquitectura</span>
+        <span>{site.location}</span>
+      </div>
+      <h1>Selected<br />works.</h1>
+      <div class="portfolio-experience-intro-copy">
+        <p>Arquitectura, interiorismo y visualización desarrollados desde una práctica independiente dirigida por {site.founder.name}.</p>
+        <span>2025—2026</span>
+      </div>
+    </section>
+
+    {featuredProject && (
+      <section class="portfolio-experience-featured">
+        <a class="portfolio-experience-featured-link" href={withBase(`/proyectos/${featuredProject.slug}/`)}>
+          {featuredProject.cover && (
+            <figure class="portfolio-experience-featured-image">
+              <img
+                src={featuredProject.cover}
+                alt={`${featuredProject.title}, proyecto de Rizzoma`}
+                fetchpriority="high"
+                decoding="async"
+              />
+            </figure>
+          )}
+          <div class="portfolio-experience-featured-info">
+            <div>
+              <span>01 / Proyecto destacado</span>
+              <h2>{featuredProject.title}</h2>
+            </div>
+            <div>
+              <span>{featuredProject.category}</span>
+              <span>{[featuredProject.location, featuredProject.region, featuredProject.year].filter(Boolean).join(' · ')}</span>
+            </div>
+          </div>
+        </a>
+      </section>
+    )}
+
+    <section class="portfolio-experience-grid" aria-label="Archivo de proyectos">
+      {otherProjects.map((project, i) => (
+        <article class="portfolio-experience-card">
+          <div class="portfolio-experience-card-top">
+            <span>{String(i + 2).padStart(2, '0')}</span>
+            <span>{project.year ?? '—'}</span>
+          </div>
+
+          {project.cover ? (
+            <a class="portfolio-experience-card-media" href={withBase(`/proyectos/${project.slug}/`)}>
+              <img src={project.cover} alt={project.title} loading="lazy" decoding="async" />
+            </a>
+          ) : (
+            <div class="portfolio-experience-card-placeholder" aria-hidden="true">
+              <img src={withBase(site.brand.monogram)} alt="" width="200" height="200" loading="lazy" />
+            </div>
+          )}
+
+          <div class="portfolio-experience-card-info">
+            <h2>{project.title}</h2>
+            <div>
+              <span>{project.category}</span>
+              {(project.location || project.region) && (
+                <span>{[project.location, project.region].filter(Boolean).join(' · ')}</span>
+              )}
+            </div>
+          </div>
+        </article>
+      ))}
+    </section>
+
+    <section class="portfolio-experience-outro">
+      <div>
+        <span>Rizzoma / Medellín</span>
+        <h2>¿Tienes un proyecto<br />en mente?</h2>
+      </div>
+      <a href={withBase('/contacto/')}>Conversemos ↗</a>
+    </section>
+  </main>
+</PortfolioLayout>
