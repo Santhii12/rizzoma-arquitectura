@@ -61,3 +61,21 @@ Trabajos identificados para clasificar más adelante: Humedales de Río y Terrac
 - El wordmark oficial es `RIZZOMA`.
 - La fotografía suministrada de Juan José puede utilizarse en la sección Estudio.
 - Los archivos de logo actuales son reconstrucciones desde capturas y deben sustituirse por originales cuando Juan José los entregue.
+
+## Dirección estratégica aplicada — v1.0
+
+La web principal se organiza alrededor de una idea rectora: Rizzoma entiende la arquitectura como un sistema de relaciones entre personas, espacio, materia y territorio.
+
+Jerarquía actual:
+1. Proyectos como demostración del pensamiento del estudio.
+2. Visualización arquitectónica como prioridad comercial inicial.
+3. Diseño arquitectónico.
+4. Diseño y remodelación de interiores.
+5. Proceso de trabajo.
+6. Presentación de Juan José y contacto directo.
+
+El acceso principal de navegación es `/proyectos/`. La experiencia experimental `/portafolio/` se conserva como “archivo visual” secundario y no sustituye los casos de estudio.
+
+No publicar Guatapé como caso completo hasta confirmar material, autoría original, alcance exacto de la participación de Rizzoma y permiso de publicación.
+
+No ampliar la narrativa de Patio Horizonte con atribuciones no confirmadas. La estructura del sitio está preparada para incorporar participación, encargo, decisiones y resultado cuando esos datos se validen.
