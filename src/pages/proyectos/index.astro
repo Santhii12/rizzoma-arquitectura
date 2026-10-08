@@ -8,20 +8,19 @@ import { withBase } from '@/utils/paths';
 const archiveProjects = projects.filter((project) => !project.available);
 const baseSite = Astro.site ?? new URL(site.domain);
 const pageUrl = new URL(withBase('/proyectos/'), baseSite).toString();
-
 const schema = [
   {
     '@type': 'CollectionPage',
     '@id': `${pageUrl}#page`,
     name: 'Proyectos — Rizzoma Arquitectura',
     url: pageUrl,
-    description: 'Casos de arquitectura y visualización de Rizzoma Arquitectura.',
+    description: 'Portafolio de arquitectura, interiorismo y visualización de Rizzoma Arquitectura.',
     isPartOf: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#website` },
     about: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#business` }
   },
   {
     '@type': 'ItemList',
-    name: 'Proyectos de Rizzoma',
+    name: 'Portafolio Rizzoma',
     itemListElement: projects.map((project, index) => ({
       '@type': 'ListItem',
       position: index + 1,
@@ -41,30 +40,26 @@ const schema = [
 ];
 ---
 <BaseLayout
-  title="Proyectos de arquitectura y visualización | Rizzoma"
-  description="Casos de arquitectura y visualización que muestran el pensamiento, las decisiones y las capacidades de Rizzoma."
+  title="Portafolio de arquitectura y visualización | Rizzoma"
+  description="Selección de proyectos de arquitectura, vivienda, interiorismo y visualización de Rizzoma Arquitectura."
   schema={schema}
 >
-  <section class="rizzoma-projects-hero section-pad">
-    <div class="rizzoma-projects-hero-grid reveal">
+  <section class="portfolio-page-hero section-pad">
+    <div class="portfolio-page-heading reveal">
       <div>
-        <p class="eyebrow">Proyectos</p>
-        <h1>El trabajo como argumento.</h1>
+        <p class="eyebrow">Portafolio / {String(projects.length).padStart(2, '0')}</p>
+        <h1>Proyectos</h1>
       </div>
-      <div>
-        <p>Rizzoma presenta los proyectos como casos de estudio: contexto, participación, decisiones y resultados que puedan demostrarse.</p>
-        <a class="text-link" href={withBase('/portafolio/')} target="_blank" rel="noopener noreferrer">Explorar archivo visual ↗</a>
-      </div>
+      <p>Una selección breve de arquitectura, interiorismo y visualización desarrollada desde Rizzoma.</p>
     </div>
   </section>
 
   {availableProjects.length > 0 && (
-    <section class="rizzoma-projects-cases section-pad no-top">
-      <div class="rizzoma-projects-label reveal">
-        <span>Casos documentados</span>
-        <span>{String(availableProjects.length).padStart(2, '0')}</span>
+    <section class="portfolio-page-featured section-pad no-top">
+      <div class="portfolio-page-label reveal">
+        <span>Proyecto destacado</span>
+        <span>01</span>
       </div>
-
       <div class="project-list project-list--documented">
         {availableProjects.map((project, i) => <ProjectCard project={project} index={i} />)}
       </div>
@@ -72,35 +67,40 @@ const schema = [
   )}
 
   {archiveProjects.length > 0 && (
-    <section class="rizzoma-projects-archive section-pad no-top">
-      <div class="rizzoma-projects-label reveal">
-        <span>Archivo en preparación</span>
+    <section class="portfolio-page-archive section-pad no-top">
+      <div class="portfolio-page-label reveal">
+        <span>Selección de archivo</span>
         <span>{String(archiveProjects.length).padStart(2, '0')}</span>
       </div>
 
-      <div class="rizzoma-projects-archive-list">
+      <div class="portfolio-project-grid">
         {archiveProjects.map((project, i) => (
-          <article class="rizzoma-projects-archive-row reveal">
-            <span>{String(i + availableProjects.length + 1).padStart(2, '0')}</span>
-            <h2>{project.title}</h2>
-            <p>{project.category}</p>
-            <small>{project.year ?? 'Información en revisión'}</small>
+          <article class="portfolio-project-tile reveal">
+            <div class="portfolio-project-tile-top">
+              <span>{String(i + availableProjects.length + 1).padStart(2, '0')}</span>
+              <span>{project.year ?? '—'}</span>
+            </div>
+            <div class="portfolio-project-tile-center" aria-hidden="true">
+              <img src={withBase(site.brand.monogram)} alt="" width="160" height="160" loading="lazy" />
+            </div>
+            <div class="portfolio-project-tile-bottom">
+              <h2>{project.title}</h2>
+              <p>{project.category}</p>
+              {(project.location || project.region) && (
+                <span>{[project.location, project.region].filter(Boolean).join(' · ')}</span>
+              )}
+            </div>
           </article>
         ))}
       </div>
-
-      <p class="rizzoma-projects-archive-note reveal">Los proyectos del archivo se convertirán en casos completos a medida que se confirme su información, autoría y material visual.</p>
     </section>
   )}
 
-  <section class="rizzoma-projects-close dark-block">
+  <section class="portfolio-page-cta dark-block">
     <div class="section-pad">
-      <p class="eyebrow reveal">Dos maneras de explorar</p>
-      <h2 class="reveal">Casos para entender el trabajo. Un archivo visual para descubrirlo.</h2>
-      <div class="rizzoma-projects-close-actions reveal">
-        <a class="primary-link" href={withBase('/portafolio/')} target="_blank" rel="noopener noreferrer">Explorar archivo visual <span aria-hidden="true">↗</span></a>
-        <a class="text-link" href={withBase('/contacto/')}>Conversar sobre un proyecto ↗</a>
-      </div>
+      <p class="eyebrow reveal">Rizzoma Arquitectura</p>
+      <p class="closing-copy reveal">¿Quieres desarrollar o visualizar un proyecto?</p>
+      <a class="primary-link reveal" href={withBase('/contacto/')}>Conversemos <span aria-hidden="true">↗</span></a>
     </div>
   </section>
 </BaseLayout>
