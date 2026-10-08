@@ -100,6 +100,7 @@ const schema = [
       <div><p class="rizzoma-case-intro">{project.intro ?? project.statement ?? 'Caso del archivo de Rizzoma Arquitectura.'}</p>
         <dl class="rizzoma-case-facts">
           <div><dt>Disciplina</dt><dd>{project.category}</dd></div>
+          {project.slug === 'casa-patio-horizonte' && <div><dt>Tipología</dt><dd>Vivienda</dd></div>}
           {project.location && <div><dt>Ubicación</dt><dd>{project.location}{project.region ? `, ${project.region}`:''}</dd></div>}
           {project.year && <div><dt>Año</dt><dd>{project.year}</dd></div>}
           <div><dt>Presentación</dt><dd>Rizzoma Arquitectura</dd></div>
