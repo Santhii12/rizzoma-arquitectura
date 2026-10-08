@@ -31,9 +31,9 @@ if (root && stage && world) {
   const centerX = worldWidth / 2;
   const centerY = worldHeight / 2;
 
-  const burstDelay = reduceMotion ? 0 : 650;
-  const burstDuration = reduceMotion ? 1 : 360;
-  const stagger = reduceMotion ? 0 : 16;
+  const burstDelay = reduceMotion ? 0 : 330;
+  const burstDuration = reduceMotion ? 1 : 370;
+  const stagger = reduceMotion ? 0 : 14;
 
   let fitScale = 1;
   let panX = 0;
