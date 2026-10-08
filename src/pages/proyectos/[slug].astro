@@ -64,85 +64,119 @@ const schema = [
   type="article"
   schema={schema}
 >
-  <article class="project-detail">
-    <header class="project-hero section-pad">
-      <div class="project-hero-meta reveal">
-        <span>{String(projectIndex + 1).padStart(2, '0')} / Proyecto</span>
-        <span>{project.category}{project.year ? ` · ${project.year}` : ''}</span>
+  <article class="project-detail rizzoma-case-study">
+    <header class="rizzoma-case-header section-pad">
+      <div class="rizzoma-case-top">
+        <a href={withBase('/portafolio/')}>← Volver al portafolio</a>
+        <span>{String(projectIndex + 1).padStart(2,'0')} / {String(availableProjects.length).padStart(2,'0')}</span>
       </div>
-      <h1 class="project-title reveal">{project.title}</h1>
-      <div class="project-title-foot reveal">
-        <p>{project.statement}</p>
-        {project.location && <span>{project.location}{project.region ? ` · ${project.region}` : ''}</span>}
+      <div class="rizzoma-case-heading">
+        <div><p class="eyebrow">Rizzoma / Proyecto seleccionado</p><h1>{project.title}</h1><p class="rizzoma-case-category">{project.category}</p></div>
+        {project.statement && <p class="rizzoma-case-statement">{project.statement}</p>}
+      </div>
+      <div class="rizzoma-case-strip">
+        {project.location && <span>{project.location}{project.region ? `, ${project.region}` : ''}</span>}
+        {project.year && <span>{project.year}</span>}
+        <span>Rizzoma Arquitectura</span>
       </div>
     </header>
-
     {project.cover && (
-      <div class="project-cover parallax-media">
-        <img src={project.cover} alt={`${project.title} — vista principal`} fetchpriority="high" decoding="async" />
-      </div>
+      <section class="rizzoma-case-gallery section-pad no-top" aria-label="Galería de imágenes del proyecto">
+        <div class="rizzoma-case-gallery-stage">
+          <img src={project.cover} alt={`${project.title}, imagen arquitectónica principal`} data-case-main-image fetchpriority="high" decoding="async"/>
+          {(project.gallery?.length ?? 0) > 1 && <div class="rizzoma-case-gallery-controls">
+            <span data-case-counter>01 / {String(project.gallery?.length ?? 1).padStart(2,'0')}</span>
+            <button type="button" data-case-prev aria-label="Imagen anterior">←</button>
+            <button type="button" data-case-next aria-label="Imagen siguiente">→</button>
+          </div>}
+        </div>
+        {(project.gallery?.length ?? 0) > 1 && <div class="rizzoma-case-thumbs" aria-label="Seleccionar imagen">
+          {project.gallery?.map((src,index)=><button type="button" class={index===0?'is-active':''} data-case-thumb data-image={src} data-alt={`${project.title}, imagen ${index+1}`} aria-label={`Ver imagen ${index+1}`} aria-pressed={index===0?'true':'false'}><img src={src} alt="" loading="lazy" decoding="async"/></button>)}
+        </div>}
+      </section>
     )}
-
-    <section class="project-summary section-pad">
-      <p class="eyebrow reveal">Proyecto</p>
-      <div>
-        {project.intro && <h2 class="statement statement--project reveal">{project.intro}</h2>}
-        <dl class="project-facts reveal">
-          {project.location && <div><dt>Ubicación</dt><dd>{project.location}{project.region ? `, ${project.region}` : ''}</dd></div>}
+    <section class="rizzoma-case-overview section-pad">
+      <div><p class="eyebrow">01 / Concepto</p><h2>El proyecto.</h2></div>
+      <div><p class="rizzoma-case-intro">{project.intro ?? project.statement ?? 'Caso del archivo de Rizzoma Arquitectura.'}</p>
+        <dl class="rizzoma-case-facts">
+          <div><dt>Disciplina</dt><dd>{project.category}</dd></div>
+          {project.location && <div><dt>Ubicación</dt><dd>{project.location}{project.region ? `, ${project.region}`:''}</dd></div>}
           {project.year && <div><dt>Año</dt><dd>{project.year}</dd></div>}
-          <div><dt>Tipología</dt><dd>Vivienda</dd></div>
-          <div><dt>Alcance</dt><dd>{project.category}</dd></div>
-          <div><dt>Estudio</dt><dd>Rizzoma Arquitectura</dd></div>
-          <div><dt>Dirección</dt><dd>{site.founder.name}</dd></div>
+          <div><dt>Presentación</dt><dd>Rizzoma Arquitectura</dd></div>
         </dl>
       </div>
     </section>
-
-    {project.gallery?.[1] && (
-      <section class="project-editorial section-pad no-top">
-        <figure class="editorial-tall reveal"><img src={project.gallery[1]} alt={`${project.title} — relación entre arquitectura y paisaje`} loading="lazy" decoding="async" /></figure>
-        <div class="editorial-copy reveal">
-          <p class="eyebrow">Idea central</p>
-          <p>La arquitectura se abre al territorio sin perder intimidad. La secuencia de patios, terrazas y aperturas construye una transición gradual entre interior y exterior.</p>
-        </div>
-      </section>
-    )}
-
-    {project.sections?.map((section, i) => (
-      <section class="project-chapter section-pad">
-        <div class="chapter-heading reveal"><span>{String(i + 1).padStart(2, '0')}</span><h2>{section.title}</h2></div>
-        <p class="large-copy reveal">{section.text}</p>
-        {project.gallery?.[i + 2] && (
-          <figure class={`chapter-image chapter-image--${(i % 2) + 1} reveal`}>
-            <img src={project.gallery[i + 2]} alt={`${project.title} — ${section.title.toLowerCase()}`} loading="lazy" decoding="async" />
-          </figure>
-        )}
-      </section>
-    ))}
-
-    <section class="project-distribution section-pad no-top">
-      <div class="project-distribution-inner reveal">
-        <div>
-          <p class="eyebrow">Compartir proyecto</p>
-          <p>Envía {project.title} a alguien que pueda interesarle.</p>
-        </div>
-        <button
-          class="share-project-button"
-          type="button"
-          data-share-project
-          data-share-title={`${project.title} | Rizzoma Arquitectura`}
-          data-share-text={project.statement ?? project.intro ?? 'Proyecto de Rizzoma Arquitectura'}
-        >
-          Compartir <span aria-hidden="true">↗</span>
-        </button>
-        <p class="share-project-status" data-share-status aria-live="polite"></p>
-      </div>
-    </section>
-
-    <section class="project-end section-pad">
-      <p class="eyebrow reveal">¿Tienes un proyecto?</p>
-      <a class="closing-copy project-end-link reveal" href={withBase('/contacto/')}>Conversemos sobre él. <span aria-hidden="true">↗</span></a>
-      {nextProject && <a class="text-link reveal" href={withBase(`/proyectos/${nextProject.slug}/`)}>Siguiente proyecto · {nextProject.title} ↗</a>}
+    {project.sections?.length > 0 && <section class="rizzoma-case-chapters section-pad no-top">
+      {project.sections.map((section,i)=><article class="rizzoma-case-chapter"><span>{String(i+2).padStart(2,'0')}</span><h2>{section.title}</h2><p>{section.text}</p></article>)}
+    </section>}
+    <section class="rizzoma-case-end section-pad">
+      <p class="eyebrow">Arquitectura + Visualización</p>
+      <h2>¿Tienes un proyecto en mente?</h2>
+      <div class="rizzoma-case-end-actions"><a href={withBase('/contacto/')}>Conversemos sobre él ↗</a><a href={withBase('/portafolio/')}>Volver al portafolio ↗</a>
+        {nextProject && <a href={withBase(`/proyectos/${nextProject.slug}/`)}>Siguiente proyecto: {nextProject.title} →</a>}</div>
     </section>
   </article>
+  <script>
+    const thumbs=Array.from(document.querySelectorAll<HTMLButtonElement>('[data-case-thumb]'));
+    const main=document.querySelector<HTMLImageElement>('[data-case-main-image]');
+    const counter=document.querySelector<HTMLElement>('[data-case-counter]');
+    let selected=0;
+    function show(n:number){
+      if(!main || !thumbs.length)return;
+      selected=(n+thumbs.length)%thumbs.length;
+      const button=thumbs[selected];
+      main.src=button.dataset.image??main.src;
+      main.alt=button.dataset.alt??main.alt;
+      thumbs.forEach((el,i)=>{el.classList.toggle('is-active',i===selected);el.setAttribute('aria-pressed',String(i===selected));});
+      if(counter)counter.textContent=`${String(selected+1).padStart(2,'0')} / ${String(thumbs.length).padStart(2,'0')}`;
+    }
+    thumbs.forEach((el,i)=>el.addEventListener('click',()=>show(i)));
+    document.querySelector('[data-case-prev]')?.addEventListener('click',()=>show(selected-1));
+    document.querySelector('[data-case-next]')?.addEventListener('click',()=>show(selected+1));
+  </script>
+  <style>
+    .rizzoma-case-study{background:#f4efe5;color:#24231d}
+    .rizzoma-case-header{padding-top:clamp(125px,14vw,205px);padding-bottom:26px}
+    .rizzoma-case-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:38px;color:#797466;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+    .rizzoma-case-top a{border-bottom:1px solid #bca36e;padding-bottom:6px}
+    .rizzoma-case-heading{display:grid;grid-template-columns:1.4fr .6fr;gap:40px;align-items:end}
+    .rizzoma-case-heading h1{font-family:var(--serif);font-weight:400;font-size:clamp(4rem,9vw,11rem);letter-spacing:-.06em;line-height:.83;margin:16px 0 20px}
+    .rizzoma-case-category{font-size:10px;text-transform:uppercase;letter-spacing:.18em;color:#8f835f}
+    .rizzoma-case-statement{font-family:var(--serif);font-size:clamp(1.3rem,2vw,2.25rem);line-height:1.15;color:#5d5a4b;max-width:30ch}
+    .rizzoma-case-strip{display:flex;flex-wrap:wrap;gap:18px;margin-top:28px;border-top:1px solid #d6cbbb;padding-top:17px;color:#777166;font-size:10px;letter-spacing:.09em;text-transform:uppercase}
+    .rizzoma-case-strip span+span:before{content:'|';color:#c3a66a;margin-right:18px}
+    .rizzoma-case-gallery-stage{position:relative;background:#e2dcd0;overflow:hidden}
+    .rizzoma-case-gallery-stage>img{width:100%;height:auto;aspect-ratio:16/9;display:block;object-fit:cover}
+    .rizzoma-case-gallery-controls{position:absolute;right:18px;bottom:18px;display:flex;gap:10px;align-items:center;color:#f4efe5;font-size:11px;text-shadow:0 1px 5px #222;background:#24251da8;padding:7px 9px}
+    .rizzoma-case-gallery-controls button{background:transparent;color:#f4efe5;border:1px solid #f4efe588;border-radius:50%;width:37px;height:37px;cursor:pointer}
+    .rizzoma-case-thumbs{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(110px,1fr);gap:8px;margin-top:8px;overflow-x:auto}
+    .rizzoma-case-thumbs button{border:2px solid transparent;padding:0;cursor:pointer;background:transparent;aspect-ratio:16/10;opacity:.68}
+    .rizzoma-case-thumbs button.is-active,.rizzoma-case-thumbs button:hover{border-color:#bd9a5b;opacity:1}
+    .rizzoma-case-thumbs img{width:100%;height:100%;object-fit:cover}
+    .rizzoma-case-overview{display:grid;grid-template-columns:.75fr 1.25fr;gap:7vw;align-items:start}
+    .rizzoma-case-overview h2,.rizzoma-case-end h2{font-family:var(--serif);font-weight:400;font-size:clamp(3.5rem,7vw,8rem);letter-spacing:-.055em;line-height:.85;margin:20px 0}
+    .rizzoma-case-intro{font-family:var(--serif);font-size:clamp(1.45rem,2.4vw,2.6rem);line-height:1.16;max-width:33ch}
+    .rizzoma-case-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:40px;border-top:1px solid #d1c7b6}
+    .rizzoma-case-facts>div{padding:20px 10px 20px 0;border-bottom:1px solid #d1c7b6}
+    .rizzoma-case-facts dt{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#95866a;margin-bottom:12px}
+    .rizzoma-case-facts dd{margin:0;font-size:13px}
+    .rizzoma-case-chapters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+    .rizzoma-case-chapter{padding-top:18px;border-top:1px solid #cbbfae}
+    .rizzoma-case-chapter>span{font-size:10px;color:#b39761}
+    .rizzoma-case-chapter h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,3vw,3rem);line-height:.98;letter-spacing:-.035em;margin:22px 0}
+    .rizzoma-case-chapter p{color:#676154;line-height:1.7;font-size:14px}
+    .rizzoma-case-end{background:#4d4c3f;color:#f4efe5}
+    .rizzoma-case-end h2{max-width:11ch}
+    .rizzoma-case-end-actions{display:flex;flex-wrap:wrap;gap:16px 40px;margin-top:40px}
+    .rizzoma-case-end-actions a{padding-bottom:10px;border-bottom:1px solid #cfb77f;color:#eadbb7;font-size:11px;text-transform:uppercase;letter-spacing:.1em}
+    @media(max-width:800px){
+      .rizzoma-case-heading,.rizzoma-case-overview{grid-template-columns:1fr;gap:24px}
+      .rizzoma-case-heading h1{font-size:clamp(3.4rem,13vw,6rem)}
+      .rizzoma-case-strip{gap:8px}
+      .rizzoma-case-strip span+span:before{margin-right:8px}
+      .rizzoma-case-gallery-stage>img{aspect-ratio:4/3}
+      .rizzoma-case-chapters{grid-template-columns:1fr}
+      .rizzoma-case-facts{grid-template-columns:1fr 1fr}
+    }
+  </style>
 </BaseLayout>
