@@ -596,3 +596,37 @@
     display: none;
   }
 }
+
+
+/* v1.2 — vortex ring + hover vibration */
+.portfolio-space.is-entry-complete .portfolio-space__item:hover .portfolio-space__thumb,
+.portfolio-space.is-entry-complete .portfolio-space__item:focus-visible .portfolio-space__thumb {
+  animation: rizzoma-card-shiver .34s ease-in-out infinite;
+  box-shadow: 0 26px 64px rgba(34,34,24,.18);
+}
+
+@keyframes rizzoma-card-shiver {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1.018);
+  }
+  20% {
+    transform: translate3d(-2px, 1px, 0) rotate(-.7deg) scale(1.024);
+  }
+  40% {
+    transform: translate3d(2px, -1px, 0) rotate(.55deg) scale(1.022);
+  }
+  60% {
+    transform: translate3d(-1px, -1px, 0) rotate(-.35deg) scale(1.026);
+  }
+  80% {
+    transform: translate3d(1px, 1px, 0) rotate(.45deg) scale(1.021);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-space.is-entry-complete .portfolio-space__item:hover .portfolio-space__thumb,
+  .portfolio-space.is-entry-complete .portfolio-space__item:focus-visible .portfolio-space__thumb {
+    animation: none;
+    transform: translateY(-4px) scale(1.02);
+  }
+}
