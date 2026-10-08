@@ -781,3 +781,64 @@
     transform: translateY(-3px);
   }
 }
+
+/* Rizzoma editorial art direction — reference composition */
+.portfolio-space { background: #f4efe5; }
+.portfolio-space::after { border-color: rgba(82,78,59,.09); }
+.portfolio-space__topbar { background: #353529; border-bottom: 1px solid rgba(213,190,139,.3); }
+.portfolio-space__mode { color: rgba(242,233,213,.72); }
+.portfolio-space__sound,.portfolio-space__back { color: #dfd2b5; }
+.portfolio-space__brand { width: clamp(132px,11vw,178px); }
+.portfolio-space__editorial {
+ position:fixed; z-index:5; left:clamp(24px,5vw,84px); top:clamp(140px,22vh,235px);
+ width:min(250px,23vw); pointer-events:none;
+}
+.portfolio-space__editorial > p:first-child {font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#605f50;margin:0 0 20px;}
+.portfolio-space__editorial h1 {font-family:var(--serif);font-size:clamp(3.4rem,5.9vw,7rem);font-weight:400;line-height:.79;letter-spacing:-.065em;margin:0;}
+.portfolio-space__editorial h1 span {color:#c5a76c;}
+.portfolio-space__gold-rule {width:40px;height:2px;background:#c5a76c;margin:28px 0;}
+.portfolio-space__editorial-copy {font-size:12px;color:#767263;line-height:1.7;max-width:23ch;}
+.portfolio-space__stage {padding-left:clamp(140px,18vw,280px);inset:78px 0 48px;}
+.portfolio-space__stage::before,.portfolio-space__stage::after {display:none;}
+.portfolio-space__center-mark {border:1px solid rgba(175,151,104,.19);width:178px;height:178px;opacity:1;}
+.portfolio-space__center-mark::before {inset:-64px;border-color:rgba(175,151,104,.12);}
+.portfolio-space__center-mark::after {inset:-133px;border-color:rgba(175,151,104,.08);}
+.portfolio-space__center-mark span {position:static;transform:none;letter-spacing:.23em;font-size:10px;line-height:1.65;color:#a89161;}
+.portfolio-space__center-mark small {display:none;}
+.portfolio-space__thumb {padding:7px 7px 0;background:#faf6ed;border-color:rgba(73,70,54,.12);box-shadow:0 16px 35px rgba(46,43,34,.14);}
+.portfolio-space__thumb::before,.portfolio-space__thumb::after {display:none;}
+.portfolio-space__thumb > img {height:100%;object-fit:cover;}
+.portfolio-space__placeholder {background:#575847;}
+.portfolio-space__caption {padding-top:4px;top:100%;gap:8px;}
+.portfolio-space__caption span:first-child {font-size:12px;color:#3d3c32;}
+.portfolio-space__caption span:last-child {font-size:8px;color:#a88d5a;}
+.portfolio-space__focus {background:#f4efe5;color:#26251d;}
+.portfolio-space__focus::before {border-color:rgba(82,78,59,.12);}
+.portfolio-space__focus-kicker {color:#a88d5a;}
+.portfolio-space__focus-meta h2 {color:#24231c;}
+.portfolio-space__focus-statement {color:#65624f;}
+.portfolio-space__focus-facts,.portfolio-space__focus-sections {border-color:rgba(82,78,59,.2);}
+.portfolio-space__focus-facts > div + div,.portfolio-space__focus-sections article {border-color:rgba(82,78,59,.2);}
+.portfolio-space__focus-facts dt {color:#797769;}
+.portfolio-space__focus-facts dd,.portfolio-space__focus-sections h3 {color:#29281f;}
+.portfolio-space__focus-description,.portfolio-space__focus-sections p {color:#59584c;}
+.portfolio-space__focus-link {color:#71603c;}
+.portfolio-space__focus-close {color:#29281f;border-color:rgba(82,78,59,.3);}
+@media(max-width:1000px) {
+.portfolio-space__editorial {left:24px;top:118px;width:210px;}
+.portfolio-space__editorial h1 {font-size:3.7rem;}
+.portfolio-space__stage {padding-left:160px;}
+}
+@media(max-width:800px) {
+.portfolio-space__topbar {background:#353529;}
+.portfolio-space__editorial {top:91px;left:22px;width:calc(100% - 44px);}
+.portfolio-space__editorial h1 {font-size:clamp(2.2rem,7vw,3.3rem);line-height:.9;}
+.portfolio-space__editorial h1 br {display:none;}
+.portfolio-space__editorial > p:first-child {margin-bottom:10px;font-size:8px;}
+.portfolio-space__gold-rule,.portfolio-space__editorial-copy {display:none;}
+.portfolio-space__stage {inset:166px 0 45px;padding-left:0;}
+.portfolio-space__center-mark {width:150px;height:150px;}
+.portfolio-space__center-mark::before {inset:-44px;}
+.portfolio-space__center-mark::after {inset:-85px;}
+}
+@media(prefers-reduced-motion:reduce) {.portfolio-space__center-mark {transition:none;}}
