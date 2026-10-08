@@ -10,10 +10,12 @@
     "check": "astro check"
   },
   "dependencies": {
-    "astro": "7.3.5"
+    "astro": "7.3.5",
+    "howler": "^2.2.4"
   },
   "devDependencies": {
     "@astrojs/check": "latest",
-    "typescript": "latest"
+    "typescript": "latest",
+    "@types/howler": "^2.2.12"
   }
 }
