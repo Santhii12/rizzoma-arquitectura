@@ -4,147 +4,84 @@ import { projects } from '@/data/projects';
 import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
 
-const finalSpecs = [
-  { x: 600, y: 145, w: 190, h: 230, r: -2, z: 30 },
-  { x: 830, y: 255, w: 215, h: 155, r: 3, z: 28 },
-  { x: 830, y: 465, w: 180, h: 225, r: 4, z: 26 },
-  { x: 600, y: 575, w: 215, h: 155, r: -2, z: 29 },
-  { x: 370, y: 465, w: 185, h: 225, r: -4, z: 27 },
-  { x: 370, y: 255, w: 210, h: 155, r: 3, z: 25 }
-];
-
-const visualItems = projects.map((project) => ({
-  image: project.cover ?? '',
-  title: project.title,
-  category: project.category,
-  location: project.location ?? '',
-  region: project.region ?? '',
-  year: project.year ?? '',
-  statement: project.statement ?? '',
-  text: project.intro ?? (
-    project.available
-      ? 'Proyecto de Rizzoma Arquitectura.'
-      : 'Proyecto perteneciente al archivo Rizzoma. La información y documentación visual completa se incorporará cuando esté confirmada.'
-  ),
-  sections: project.sections ?? [],
-  href: project.available ? withBase(`/proyectos/${project.slug}/`) : ''
-}));
+const cards = projects.filter((p) => p.slug !== 'el-refugio');
 ---
-<PortfolioLayout
-  title="Portafolio | Rizzoma Arquitectura"
-  description="Portafolio interactivo de proyectos de arquitectura y visualización de Rizzoma Arquitectura."
->
-  <main
-    id="portfolio-space"
-    class="portfolio-space is-entry-playing"
-    data-space-gallery
-    aria-label="Portafolio interactivo de Rizzoma Arquitectura"
-  >
-    <div class="portfolio-space__topbar">
-      <a class="portfolio-space__brand" href={withBase('/')} aria-label="Volver al sitio de Rizzoma">
+<PortfolioLayout title="Portafolio | Rizzoma Arquitectura" description="Obras seleccionadas de arquitectura, interiores y visualización de Rizzoma Arquitectura.">
+  <main class="rz-portfolio" id="portfolio-space">
+    <header class="rz-portfolio-header">
+      <a href={withBase('/')} class="rz-brand" aria-label="Rizzoma, volver al sitio">
         <img src={withBase(site.brand.wordmark)} alt="Rizzoma" width="900" height="200" />
       </a>
-      <span class="portfolio-space__mode">Portafolio · Estudio · Proyectos</span>
-      <div class="portfolio-space__top-actions">
-        <button class="portfolio-space__sound" type="button" data-space-sound aria-pressed="true" title="Repetir efecto con sonido">
-          Sonido <span aria-hidden="true">↻</span>
-        </button>
-        <a class="portfolio-space__back" href={withBase('/')}>Volver al sitio ↙</a>
-      </div>
-    </div>
+      <span class="rz-header-label">Arquitectura / Estudio independiente</span>
+      <a href={withBase('/')} class="rz-back">Volver al sitio <span aria-hidden="true">↗</span></a>
+    </header>
 
-    <aside class="portfolio-space__editorial" aria-label="Introducción al portafolio"><p>Portafolio / Rizzoma</p><h1>Obras<br />seleccionadas<span>.</span></h1><div class="portfolio-space__gold-rule"></div><p class="portfolio-space__editorial-copy">Arquitectura, visualización y relaciones entre espacio, materia y territorio.</p></aside>
+    <div class="rz-portfolio-shell">
+      <section class="rz-portfolio-editorial">
+        <p class="rz-overline">PORTAFOLIO / RIZZOMA</p>
+        <h1>Obras<br />seleccionadas<span>.</span></h1>
+        <div class="rz-rule"></div>
+        <p>Una mirada sobre arquitectura, visualización y la relación entre espacio, materia y territorio.</p>
+        <div class="rz-editorial-bottom"><strong>{String(cards.length).padStart(2, '0')}</strong><span>PROYECTOS EN EL ARCHIVO</span></div>
+      </section>
 
-    <div class="portfolio-space__stage" data-space-stage>
-      <div class="portfolio-space__world" data-space-world>
-        <div class="portfolio-space__center-mark" aria-hidden="true"><span>Arquitectura<br />·<br />Paisaje</span></div>
-        {visualItems.map((item, index) => {
-          const spec = finalSpecs[index];
-          return (
-            <button
-              class="portfolio-space__item"
-              type="button"
-              data-space-item
-              data-index={index}
-              data-final-x={spec.x}
-              data-final-y={spec.y}
-              data-final-rotate={spec.r}
-              data-final-z={spec.z}
-              data-image={item.image}
-              data-title={item.title}
-              data-category={item.category}
-              data-location={item.location}
-              data-region={item.region}
-              data-year={item.year}
-              data-statement={item.statement}
-              data-text={item.text}
-              data-sections={JSON.stringify(item.sections)}
-              data-href={item.href}
-              style={`--w:${spec.w}px;--h:${spec.h}px;`}
-              aria-label={`Abrir información de ${item.title}`}
-            >
-              <div class="portfolio-space__thumb">
-                {item.image ? (
-                  <img src={item.image} alt="" loading={index < 3 ? 'eager' : 'lazy'} decoding="async" />
-                ) : (
-                  <div class="portfolio-space__placeholder">
-                    <img src={withBase(site.brand.monogram)} alt="" aria-hidden="true" width="200" height="200" />
-                    <strong>{item.title}</strong>
+      <section class="rz-portfolio-gallery" aria-label="Proyectos de Rizzoma">
+        <div class="rz-rings" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="rz-ring-center" aria-hidden="true"><span>R I Z Z O M A</span><small>ARQUITECTURA · MEDELLÍN</small></div>
+        <div class="rz-card-grid">
+          {cards.map((project, index) => (
+            <article class={`rz-project-card rz-card-${index + 1}`}>
+              {project.available ? (
+                <a class="rz-project-link" href={withBase(`/proyectos/${project.slug}/`)} aria-label={`Abrir proyecto ${project.title}`}>
+                  <div class="rz-project-image">
+                    {project.cover ? <img src={project.cover} alt={`Portada de ${project.title}`} loading={index < 2 ? 'eager' : 'lazy'} decoding="async" /> : <div class="rz-cover-placeholder"><span>R / A</span></div>}
+                    <span class="rz-image-arrow" aria-hidden="true">↗</span>
                   </div>
-                )}
-              </div>
-              <div class="portfolio-space__caption" aria-hidden="true">
-                <span>{String(index + 1).padStart(2, '0')} · {item.title}</span>
-                <span>Explorar ↗</span>
-              </div>
-            </button>
-          );
-        })}
-      </div>
-    </div>
-
-    <div class="portfolio-space__index">
-      <span>{String(visualItems.length).padStart(2, '0')}</span>
-      <span>Proyectos seleccionados</span>
-    </div>
-
-    <div class="portfolio-space__hint" data-space-hint>
-      Explora · arrastra · selecciona
-    </div>
-
-    <section
-      class="portfolio-space__focus"
-      data-space-focus
-      data-monogram={withBase(site.brand.monogram)}
-      aria-hidden="true"
-      aria-label="Información del proyecto"
-    >
-      <button class="portfolio-space__focus-close" type="button" data-focus-close aria-label="Cerrar">×</button>
-
-      <div class="portfolio-space__focus-inner">
-        <div class="portfolio-space__focus-visual" data-focus-visual></div>
-
-        <div class="portfolio-space__focus-meta">
-          <span class="portfolio-space__focus-kicker" data-focus-category></span>
-          <h2 data-focus-title></h2>
-          <p class="portfolio-space__focus-statement" data-focus-statement></p>
-
-          <dl class="portfolio-space__focus-facts">
-            <div data-focus-location-row>
-              <dt>Ubicación</dt>
-              <dd data-focus-location></dd>
-            </div>
-            <div data-focus-year-row>
-              <dt>Año</dt>
-              <dd data-focus-year></dd>
-            </div>
-          </dl>
-
-          <p class="portfolio-space__focus-description" data-focus-text></p>
-          <div class="portfolio-space__focus-sections" data-focus-sections></div>
-          <a class="portfolio-space__focus-link" data-focus-link href="#">Ver proyecto completo ↗</a>
+                  <div class="rz-card-caption"><div><span class="rz-card-count">{String(index + 1).padStart(2, '0')} /</span><h2>{project.title}</h2><p>{project.category}</p></div><span aria-hidden="true">↗</span></div>
+                </a>
+              ) : (
+                <button type="button" class="rz-project-link rz-project-button" data-archive-open data-title={project.title} data-category={project.category} data-year={project.year ?? ''} data-location={[project.location, project.region].filter(Boolean).join(', ')} aria-label={`Ver datos disponibles de ${project.title}`}>
+                  <div class="rz-project-image rz-project-image--pending">
+                    {project.cover ? <img src={project.cover} alt={`Portada de ${project.title}`} loading="lazy" decoding="async" /> : <div class="rz-cover-placeholder"><span>R / A</span></div>}
+                    <span class="rz-image-arrow" aria-hidden="true">↗</span>
+                  </div>
+                  <div class="rz-card-caption"><div><span class="rz-card-count">{String(index + 1).padStart(2, '0')} /</span><h2>{project.title}</h2><p>{project.category}</p></div><span aria-hidden="true">↗</span></div>
+                </button>
+              )}
+            </article>
+          ))}
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
+    <footer class="rz-portfolio-footer"><span>RIZZOMA © {new Date().getFullYear()}</span><span>PROYECTOS · CONCEPTO · VISUALIZACIÓN</span><a href={withBase('/contacto/')}>Hablemos de tu proyecto ↗</a></footer>
+
+    <dialog class="rz-archive-dialog" data-archive-dialog aria-labelledby="rz-archive-title">
+      <button type="button" class="rz-dialog-close" data-archive-close aria-label="Cerrar">×</button>
+      <p class="rz-overline">ARCHIVO RIZZOMA / PROYECTO</p>
+      <h2 id="rz-archive-title" data-archive-title></h2>
+      <p data-archive-category></p>
+      <div class="rz-dialog-facts"><span data-archive-location></span><span data-archive-year></span></div>
+      <p class="rz-dialog-note">La documentación visual y la ficha completa de este proyecto están pendientes de publicación.</p>
+      <a href={withBase('/contacto/')}>Consultar sobre este proyecto ↗</a>
+    </dialog>
   </main>
+  <script>
+    const dialog = document.querySelector<HTMLDialogElement>('[data-archive-dialog]');
+    document.querySelectorAll<HTMLButtonElement>('[data-archive-open]').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (!dialog) return;
+        const title = dialog.querySelector<HTMLElement>('[data-archive-title]');
+        const category = dialog.querySelector<HTMLElement>('[data-archive-category]');
+        const location = dialog.querySelector<HTMLElement>('[data-archive-location]');
+        const year = dialog.querySelector<HTMLElement>('[data-archive-year]');
+        if (title) title.textContent = button.dataset.title ?? '';
+        if (category) category.textContent = button.dataset.category ?? '';
+        if (location) { location.textContent = button.dataset.location ?? ''; location.hidden = !button.dataset.location; }
+        if (year) { year.textContent = button.dataset.year ?? ''; year.hidden = !button.dataset.year; }
+        dialog.showModal();
+      });
+    });
+    document.querySelector('[data-archive-close]')?.addEventListener('click', () => dialog?.close());
+    dialog?.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+  </script>
 </PortfolioLayout>
