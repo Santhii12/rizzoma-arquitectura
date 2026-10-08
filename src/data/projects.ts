@@ -41,19 +41,19 @@ export const projects: Project[] = [
     ],
     statement: 'Habitar entre el interior y el paisaje.',
     intro:
-      'Una vivienda concebida para diluir los límites entre habitar y contemplar, haciendo que el territorio y las visuales formen parte de la experiencia cotidiana.',
+      'Una vivienda concebida para diluir los límites entre habitar y contemplar. La arquitectura se abre al territorio y convierte las vistas en parte esencial de la experiencia cotidiana.',
     sections: [
       {
         title: 'Integración con el paisaje',
-        text: 'Las visuales y las condiciones naturales orientan la organización de los espacios. Aperturas estratégicas incorporan luz, vegetación y paisaje al interior.'
+        text: 'Las visuales y las condiciones naturales del lugar orientan la organización de los espacios. Las aperturas estratégicas incorporan luz, vegetación y paisaje al interior.'
       },
       {
         title: 'Continuidad espacial',
-        text: 'Patios, terrazas y aperturas construyen una transición gradual entre interior y exterior, extendiendo las áreas habitables hacia el paisaje.'
+        text: 'Patios, terrazas y aperturas construyen una transición gradual entre interior y exterior. Los espacios se conectan y se extienden hacia el paisaje.'
       },
       {
         title: 'Materialidad honesta',
-        text: 'Volúmenes horizontales y materiales expresivos construyen una arquitectura sobria y atemporal, vinculada al carácter del lugar.'
+        text: 'Los volúmenes horizontales y los materiales expresivos construyen una arquitectura sobria y atemporal. La materialidad conserva su carácter y refuerza la relación de la vivienda con el lugar.'
       }
     ],
     available: true,
