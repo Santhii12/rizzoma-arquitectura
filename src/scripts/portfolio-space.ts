@@ -32,9 +32,9 @@ if (root && stage && world) {
   const centerY = worldHeight / 2;
 
   const holdDuration = reduceMotion ? 0 : 320;
-  const vortexDuration = reduceMotion ? 1 : 1180;
-  const stagger = reduceMotion ? 0 : 34;
-  const vortexTurns = 1.72;
+  const vortexDuration = reduceMotion ? 1 : 1650;
+  const stagger = reduceMotion ? 0 : 72;
+  const vortexTurns = 2.35;
 
   let fitScale = 1;
   let panX = 0;
@@ -165,6 +165,7 @@ if (root && stage && world) {
     renderInitialStack();
 
     const startedAt = performance.now();
+    const sharedStartAngle = -Math.PI / 2;
 
     if (withSound && !reduceMotion) {
       soundTimer = window.setTimeout(() => {
@@ -184,9 +185,6 @@ if (root && stage && world) {
 
         if (raw < 1) allDone = false;
 
-        const eased = easeOutCubic(raw);
-        const radial = easeOutBack(raw);
-
         const finalX = Number(item.dataset.finalX ?? centerX);
         const finalY = Number(item.dataset.finalY ?? centerY);
         const finalRotate = Number(item.dataset.finalRotate ?? 0);
@@ -197,35 +195,48 @@ if (root && stage && world) {
         const finalRadius = Math.hypot(dx, dy);
         const finalAngle = Math.atan2(dy, dx);
 
-        const spinDirection = index % 2 === 0 ? 1 : -1;
-        const turns = vortexTurns + index * .03;
-        const angle =
-          finalAngle -
-          (1 - eased) * Math.PI * 2 * turns * spinDirection;
+        // All cards leave through the same stream. The final slot angle is
+        // introduced progressively, so they visibly follow one another.
+        const progress = raw;
+        const radiusProgress = Math.pow(progress, 1.18);
+        const settle = progress > .84
+          ? 1 + Math.sin(((progress - .84) / .16) * Math.PI) * .035
+          : 1;
 
-        const radius = finalRadius * radial;
+        const targetDelta = finalAngle - sharedStartAngle;
+        const angle =
+          sharedStartAngle +
+          progress * Math.PI * 2 * vortexTurns +
+          targetDelta * progress;
+
+        const radius = finalRadius * radiusProgress * settle;
         const x = centerX + Math.cos(angle) * radius;
         const y = centerY + Math.sin(angle) * radius;
 
         const depth = (Math.sin(angle) + 1) / 2;
-        const scale = .68 + eased * .32 + depth * .035;
+        const scale =
+          .58 +
+          progress * .42 +
+          depth * .045 +
+          (progress > .88 ? Math.sin(((progress - .88) / .12) * Math.PI) * .025 : 0);
+
         const rotation =
-          finalRotate +
-          (1 - eased) * spinDirection * (18 + index * 2.2);
+          (1 - progress) * (26 + index * 3.2) +
+          finalRotate * progress;
 
         const opacity =
           raw <= 0
             ? index === 0
               ? 1
-              : .78
-            : clamp(.72 + eased * .28, 0, 1);
+              : 0
+            : clamp(raw * 4, 0, 1);
 
         item.style.left = `${x}px`;
         item.style.top = `${y}px`;
         item.style.opacity = String(opacity);
         item.style.zIndex = String(
-          raw < 1
-            ? 20 + Math.round(depth * 50)
+          progress < 1
+            ? 30 + Math.round(depth * 50) + (items.length - index)
             : finalZ
         );
         item.style.transform =
