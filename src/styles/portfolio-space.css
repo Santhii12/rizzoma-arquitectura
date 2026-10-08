@@ -11,7 +11,7 @@
 .rz-back { color:#efdfbb; border-bottom:1px solid #cfb77f; padding:10px 0; }
 .rz-portfolio-shell { width:min(100%,1680px); margin:auto; padding:clamp(26px,3.2vw,56px) clamp(22px,4vw,72px); display:grid; grid-template-columns:minmax(220px,.33fr) minmax(0,1fr); gap:clamp(24px,3vw,52px); align-items:center; flex:1; }
 .rz-portfolio-editorial { align-self:center; padding-bottom:30px; }
-.rz-overline { color:#777363; margin:0 0:20px; }
+.rz-overline { color:#777363; margin:0 0 20px; }
 .rz-portfolio-editorial h1 { margin:22px 0; font-family:var(--serif,Georgia,serif); font-weight:400; font-size:clamp(3.7rem,6.1vw,7.7rem); line-height:.82; letter-spacing:-.075em; }
 .rz-portfolio-editorial h1 span { color:#b69b67; }
 .rz-rule { width:54px; height:2px; background:#c4a76f; margin:40px 0 25px; }
