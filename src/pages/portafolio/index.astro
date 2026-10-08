@@ -4,99 +4,127 @@ import { projects, featuredProject } from '@/data/projects';
 import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
 
+const galleryImages = featuredProject?.gallery ?? [];
 const otherProjects = projects.filter((project) => project.slug !== featuredProject?.slug);
+
+const positions = [
+  { x: 1090, y: 730, w: 390, h: 290 },
+  { x: 1090, y: 295, w: 180, h: 250 },
+  { x: 1090, y: 1170, w: 205, h: 270 },
+  { x: 660, y: 690, w: 230, h: 300 },
+  { x: 1510, y: 690, w: 250, h: 185 },
+  { x: 520, y: 350, w: 190, h: 145 },
+  { x: 1600, y: 350, w: 185, h: 245 },
+  { x: 430, y: 1040, w: 220, h: 165 },
+  { x: 1660, y: 1050, w: 220, h: 285 },
+  { x: 780, y: 1080, w: 160, h: 210 },
+  { x: 1380, y: 1120, w: 175, h: 130 }
+];
+
+const visualItems = [
+  ...galleryImages.map((image, index) => ({
+    image,
+    title: featuredProject?.title ?? 'Proyecto Rizzoma',
+    meta: [featuredProject?.category, featuredProject?.location, featuredProject?.year].filter(Boolean).join(' · '),
+    text: featuredProject?.statement ?? featuredProject?.intro ?? '',
+    href: featuredProject ? withBase(`/proyectos/${featuredProject.slug}/`) : '',
+    kind: 'image'
+  })),
+  ...otherProjects.map((project) => ({
+    image: '',
+    title: project.title,
+    meta: [project.category, project.location, project.region, project.year].filter(Boolean).join(' · '),
+    text: project.available
+      ? project.statement ?? project.intro ?? 'Proyecto de Rizzoma Arquitectura.'
+      : 'Proyecto del archivo Rizzoma. La documentación visual se incorporará al portafolio.',
+    href: project.available ? withBase(`/proyectos/${project.slug}/`) : '',
+    kind: 'project'
+  }))
+].slice(0, positions.length);
 ---
 <PortfolioLayout
-  title="Portafolio | Rizzoma Arquitectura"
-  description="Selección visual de proyectos de arquitectura, interiorismo y visualización de Rizzoma Arquitectura."
+  title="Portafolio espacial | Rizzoma Arquitectura"
+  description="Explora el portafolio de Rizzoma Arquitectura mediante una galería espacial interactiva."
 >
-  <header class="portfolio-experience-header">
-    <a class="portfolio-experience-brand" href={withBase('/')} aria-label="Volver a Rizzoma">
-      <img src={withBase(site.brand.wordmark)} alt="Rizzoma" width="900" height="200" />
-    </a>
-    <div class="portfolio-experience-nav">
-      <span>Portafolio / {String(projects.length).padStart(2, '0')}</span>
-      <a href={withBase('/')} aria-label="Volver al sitio principal">Volver al sitio ↙</a>
+  <main
+    id="portfolio-space"
+    class="portfolio-space"
+    data-space-gallery
+    aria-label="Portafolio interactivo de Rizzoma Arquitectura"
+  >
+    <div class="portfolio-space__topbar">
+      <a class="portfolio-space__brand" href={withBase('/')} aria-label="Volver al sitio de Rizzoma">
+        <img src={withBase(site.brand.wordmark)} alt="Rizzoma" width="900" height="200" />
+      </a>
+      <span class="portfolio-space__mode">Archivo espacial / Arrastra + zoom</span>
+      <a class="portfolio-space__back" href={withBase('/')}>Volver al sitio ↙</a>
     </div>
-  </header>
 
-  <main id="portfolio-content" class="portfolio-experience">
-    <section class="portfolio-experience-intro">
-      <div class="portfolio-experience-intro-meta">
-        <span>Rizzoma Arquitectura</span>
-        <span>{site.location}</span>
-      </div>
-      <h1>Selected<br />works.</h1>
-      <div class="portfolio-experience-intro-copy">
-        <p>Arquitectura, interiorismo y visualización desarrollados desde una práctica independiente dirigida por {site.founder.name}.</p>
-        <span>2025—2026</span>
-      </div>
-    </section>
-
-    {featuredProject && (
-      <section class="portfolio-experience-featured">
-        <a class="portfolio-experience-featured-link" href={withBase(`/proyectos/${featuredProject.slug}/`)}>
-          {featuredProject.cover && (
-            <figure class="portfolio-experience-featured-image">
-              <img
-                src={featuredProject.cover}
-                alt={`${featuredProject.title}, proyecto de Rizzoma`}
-                fetchpriority="high"
-                decoding="async"
-              />
-            </figure>
-          )}
-          <div class="portfolio-experience-featured-info">
-            <div>
-              <span>01 / Proyecto destacado</span>
-              <h2>{featuredProject.title}</h2>
-            </div>
-            <div>
-              <span>{featuredProject.category}</span>
-              <span>{[featuredProject.location, featuredProject.region, featuredProject.year].filter(Boolean).join(' · ')}</span>
-            </div>
-          </div>
-        </a>
-      </section>
-    )}
-
-    <section class="portfolio-experience-grid" aria-label="Archivo de proyectos">
-      {otherProjects.map((project, i) => (
-        <article class="portfolio-experience-card">
-          <div class="portfolio-experience-card-top">
-            <span>{String(i + 2).padStart(2, '0')}</span>
-            <span>{project.year ?? '—'}</span>
-          </div>
-
-          {project.cover ? (
-            <a class="portfolio-experience-card-media" href={withBase(`/proyectos/${project.slug}/`)}>
-              <img src={project.cover} alt={project.title} loading="lazy" decoding="async" />
-            </a>
-          ) : (
-            <div class="portfolio-experience-card-placeholder" aria-hidden="true">
-              <img src={withBase(site.brand.monogram)} alt="" width="200" height="200" loading="lazy" />
-            </div>
-          )}
-
-          <div class="portfolio-experience-card-info">
-            <h2>{project.title}</h2>
-            <div>
-              <span>{project.category}</span>
-              {(project.location || project.region) && (
-                <span>{[project.location, project.region].filter(Boolean).join(' · ')}</span>
+    <div class="portfolio-space__world" data-space-world>
+      {visualItems.map((item, index) => {
+        const pos = positions[index];
+        return (
+          <button
+            class="portfolio-space__item"
+            type="button"
+            data-space-item
+            data-image={item.image}
+            data-title={item.title}
+            data-meta={item.meta}
+            data-text={item.text}
+            data-href={item.href}
+            style={`left:${pos.x}px;top:${pos.y}px;--w:${pos.w}px;--h:${pos.h}px;`}
+            aria-label={`Abrir ${item.title}`}
+          >
+            <div class="portfolio-space__thumb">
+              {item.image ? (
+                <img src={item.image} alt="" loading={index < 3 ? 'eager' : 'lazy'} decoding="async" />
+              ) : (
+                <div class="portfolio-space__placeholder">
+                  <img src={withBase(site.brand.monogram)} alt="" aria-hidden="true" width="200" height="200" />
+                  <strong>{item.title}</strong>
+                </div>
               )}
             </div>
-          </div>
-        </article>
-      ))}
-    </section>
+            <div class="portfolio-space__caption" aria-hidden="true">
+              <span>{String(index + 1).padStart(2, '0')} · {item.title}</span>
+              <span>{item.kind === 'image' ? 'Imagen' : 'Proyecto'}</span>
+            </div>
+          </button>
+        );
+      })}
+    </div>
 
-    <section class="portfolio-experience-outro">
-      <div>
-        <span>Rizzoma / Medellín</span>
-        <h2>¿Tienes un proyecto<br />en mente?</h2>
+    <div class="portfolio-space__index" data-space-counter>
+      00 / {String(visualItems.length).padStart(2, '0')}
+    </div>
+
+    <div class="portfolio-space__hud">
+      <span class="portfolio-space__hint">Arrastra para explorar · rueda para zoom · clic para abrir</span>
+      <div class="portfolio-space__controls" data-space-controls aria-label="Controles de la galería">
+        <button type="button" data-space-zoom-out aria-label="Alejar">−</button>
+        <button type="button" data-space-reset aria-label="Ver mapa completo">◎</button>
+        <button type="button" data-space-zoom-in aria-label="Acercar">+</button>
       </div>
-      <a href={withBase('/contacto/')}>Conversemos ↗</a>
+    </div>
+
+    <section
+      class="portfolio-space__focus"
+      data-space-focus
+      data-monogram={withBase(site.brand.monogram)}
+      aria-hidden="true"
+      aria-label="Vista ampliada"
+    >
+      <button class="portfolio-space__focus-close" type="button" data-focus-close aria-label="Cerrar">×</button>
+      <div class="portfolio-space__focus-inner">
+        <div class="portfolio-space__focus-visual" data-focus-visual></div>
+        <div class="portfolio-space__focus-meta">
+          <span data-focus-meta></span>
+          <h2 data-focus-title></h2>
+          <p data-focus-text></p>
+          <a class="portfolio-space__focus-link" data-focus-link href="#">Ver proyecto completo ↗</a>
+        </div>
+      </div>
     </section>
   </main>
 </PortfolioLayout>
