@@ -113,7 +113,11 @@ const schema = [
           <div><p class="eyebrow">02 / Archivo visual</p><h2>Otras miradas<br />del proyecto.</h2></div>
           <p>Seis imágenes adicionales se incorporarán a esta sección cuando estén disponibles.</p>
         </div>
-        <div class="rizzoma-case-future-grid">
+        <div class="rizzoma-case-carousel-controls">
+          <span data-future-counter aria-live="polite">01 / 06</span>
+          <div><button type="button" data-future-prev aria-label="Ver imagen anterior">←</button><button type="button" data-future-next aria-label="Ver imagen siguiente">→</button></div>
+        </div>
+        <div class="rizzoma-case-future-grid" data-future-track tabindex="0" aria-label="Carrusel de seis imágenes pendientes">
           {Array.from({length:6},(_,i)=>(
             <div class="rizzoma-case-future-slot" aria-label={`Espacio reservado para imagen ${i+1}`}>
               <span>{String(i+1).padStart(2,'0')}</span><span>Imagen pendiente</span>
@@ -146,6 +150,23 @@ const schema = [
       thumbs.forEach((el,i)=>{el.classList.toggle('is-active',i===selected);el.setAttribute('aria-pressed',String(i===selected));});
       if(counter)counter.textContent=`${String(selected+1).padStart(2,'0')} / ${String(thumbs.length).padStart(2,'0')}`;
     }
+
+    const futureTrack=document.querySelector<HTMLElement>('[data-future-track]');
+    const futureCounter=document.querySelector<HTMLElement>('[data-future-counter]');
+    const futureSlots=Array.from(futureTrack?.querySelectorAll<HTMLElement>('.rizzoma-case-future-slot')??[]);
+    const closestFutureIndex=()=>futureSlots.reduce((best,el,i)=>Math.abs(el.offsetLeft-futureTrack!.offsetLeft-futureTrack!.scrollLeft)<Math.abs(futureSlots[best].offsetLeft-futureTrack!.offsetLeft-futureTrack!.scrollLeft)?i:best,0);
+    const updateFutureCounter=()=>{
+      if(!futureTrack || !futureSlots.length)return;
+      if(futureCounter)futureCounter.textContent=String(closestFutureIndex()+1).padStart(2,'0')+' / '+String(futureSlots.length).padStart(2,'0');
+    };
+    const moveFuture=(direction:number)=>{
+      if(!futureTrack || !futureSlots.length)return;
+      const index=Math.max(0,Math.min(futureSlots.length-1,closestFutureIndex()+direction));
+      futureTrack.scrollTo({left:futureSlots[index].offsetLeft-futureTrack.offsetLeft,behavior:'smooth'});
+    };
+    document.querySelector('[data-future-prev]')?.addEventListener('click',()=>moveFuture(-1));
+    document.querySelector('[data-future-next]')?.addEventListener('click',()=>moveFuture(1));
+    futureTrack?.addEventListener('scroll',updateFutureCounter,{passive:true});
     thumbs.forEach((el,i)=>el.addEventListener('click',()=>show(i)));
     document.querySelector('[data-case-prev]')?.addEventListener('click',()=>show(selected-1));
     document.querySelector('[data-case-next]')?.addEventListener('click',()=>show(selected+1));
@@ -210,16 +231,21 @@ const schema = [
     .rizzoma-case-future-heading{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:32px}
     .rizzoma-case-future-heading h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.8rem,5.3vw,6rem);line-height:.9;letter-spacing:-.05em;margin:18px 0 0}
     .rizzoma-case-future-heading>p{max-width:30ch;font-size:13px;line-height:1.6;color:#817a6b}
-    .rizzoma-case-future-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-    .rizzoma-case-future-slot{aspect-ratio:4/3;display:flex;flex-direction:column;justify-content:space-between;padding:18px;border:1px solid #c9beaa;background:#eae4d7;color:#988b70}
+    .rizzoma-case-carousel-controls{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:15px;color:#9b8864;font-size:12px;letter-spacing:.12em}
+    .rizzoma-case-carousel-controls>div{display:flex;gap:8px}
+    .rizzoma-case-carousel-controls button{width:46px;height:46px;border:1px solid #b7a17d;border-radius:50%;background:transparent;color:#655843;font-size:20px;cursor:pointer}
+    .rizzoma-case-carousel-controls button:hover,.rizzoma-case-carousel-controls button:focus-visible{background:#4d4c3f;color:#f2e9d5}
+    .rizzoma-case-future-grid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:#bda982 transparent;padding:3px 3px 16px;overscroll-behavior-inline:contain}
+    .rizzoma-case-future-grid:focus-visible{outline:2px solid #b7a17d;outline-offset:4px}
+    .rizzoma-case-future-slot{flex:0 0 calc((100% - 28px)/3);scroll-snap-align:start;aspect-ratio:4/3;display:flex;flex-direction:column;justify-content:space-between;padding:18px;border:1px solid #c9beaa;background:#eae4d7;color:#988b70}
     .rizzoma-case-future-slot span:first-child{font-family:var(--serif);font-size:22px}
     .rizzoma-case-future-slot span:last-child{font-size:9px;letter-spacing:.13em;text-transform:uppercase}
     .rizzoma-case-future-gallery+.rizzoma-case-chapters.section-pad{padding-top:30px}
     @media(max-width:800px){
       .rizzoma-case-overview.section-pad{grid-template-columns:1fr;margin:14px 18px 0;padding:34px 25px}
       .rizzoma-case-future-heading{align-items:start;flex-direction:column;gap:12px}
-      .rizzoma-case-future-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-      .rizzoma-case-future-slot{padding:13px}
+      .rizzoma-case-future-grid{gap:10px}
+      .rizzoma-case-future-slot{flex-basis:min(82%,360px);padding:13px}
 
       .rizzoma-case-heading,.rizzoma-case-overview{grid-template-columns:1fr;gap:24px}
       .rizzoma-case-heading h1{font-size:clamp(3.4rem,13vw,6rem)}
