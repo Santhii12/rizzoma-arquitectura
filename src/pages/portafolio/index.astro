@@ -7,48 +7,56 @@ import { withBase } from '@/utils/paths';
 const galleryImages = featuredProject?.gallery ?? [];
 const otherProjects = projects.filter((project) => project.slug !== featuredProject?.slug);
 
-const orbitSpecs = [
-  { angle: 0, radius: 0, speed: .00, w: 360, h: 265, phase: .2 },
-  { angle: .20, radius: 245, speed: .080, w: 175, h: 235, phase: .8 },
-  { angle: 1.24, radius: 255, speed: .068, w: 165, h: 220, phase: 1.7 },
-  { angle: 2.28, radius: 250, speed: .074, w: 190, h: 145, phase: 2.5 },
-  { angle: 3.30, radius: 255, speed: .062, w: 185, h: 245, phase: 3.2 },
-  { angle: 4.35, radius: 245, speed: .083, w: 205, h: 155, phase: 4.0 },
-  { angle: .70, radius: 470, speed: -.043, w: 210, h: 280, phase: 1.1 },
-  { angle: 1.90, radius: 455, speed: -.048, w: 190, h: 145, phase: 2.1 },
-  { angle: 3.04, radius: 475, speed: -.039, w: 220, h: 165, phase: 3.0 },
-  { angle: 4.18, radius: 460, speed: -.046, w: 185, h: 250, phase: 4.3 },
-  { angle: 5.38, radius: 470, speed: -.041, w: 205, h: 150, phase: 5.2 }
+const finalSpecs = [
+  { x: 750, y: 285, w: 360, h: 255, r: -1, z: 40 },
+  { x: 475, y: 250, w: 175, h: 235, r: -4, z: 22 },
+  { x: 1030, y: 250, w: 170, h: 225, r: 4, z: 21 },
+  { x: 1205, y: 465, w: 245, h: 170, r: 2, z: 20 },
+  { x: 1010, y: 675, w: 245, h: 170, r: -3, z: 25 },
+  { x: 720, y: 610, w: 250, h: 185, r: 2, z: 30 },
+  { x: 430, y: 650, w: 225, h: 170, r: -3, z: 19 },
+  { x: 265, y: 455, w: 180, h: 240, r: -4, z: 18 },
+  { x: 300, y: 185, w: 180, h: 135, r: 3, z: 17 },
+  { x: 1220, y: 180, w: 170, h: 230, r: 4, z: 16 },
+  { x: 1270, y: 720, w: 190, h: 245, r: -2, z: 15 }
 ];
 
 const visualItems = [
-  ...galleryImages.map((image, index) => ({
+  ...galleryImages.map((image) => ({
     image,
     title: featuredProject?.title ?? 'Proyecto Rizzoma',
-    meta: [featuredProject?.category, featuredProject?.location, featuredProject?.year].filter(Boolean).join(' · '),
-    text: featuredProject?.statement ?? featuredProject?.intro ?? '',
+    category: featuredProject?.category ?? '',
+    location: featuredProject?.location ?? '',
+    region: featuredProject?.region ?? '',
+    year: featuredProject?.year ?? '',
+    statement: featuredProject?.statement ?? '',
+    text: featuredProject?.intro ?? featuredProject?.statement ?? '',
     href: featuredProject ? withBase(`/proyectos/${featuredProject.slug}/`) : '',
     kind: 'image'
   })),
   ...otherProjects.map((project) => ({
-    image: '',
+    image: project.cover ?? '',
     title: project.title,
-    meta: [project.category, project.location, project.region, project.year].filter(Boolean).join(' · '),
-    text: project.available
-      ? project.statement ?? project.intro ?? 'Proyecto de Rizzoma Arquitectura.'
-      : 'Proyecto del archivo Rizzoma. La documentación visual se incorporará al portafolio.',
+    category: project.category,
+    location: project.location ?? '',
+    region: project.region ?? '',
+    year: project.year ?? '',
+    statement: project.statement ?? '',
+    text: project.intro ?? (project.available
+      ? 'Proyecto de Rizzoma Arquitectura.'
+      : 'Proyecto perteneciente al archivo Rizzoma. La documentación visual completa se incorporará al portafolio.'),
     href: project.available ? withBase(`/proyectos/${project.slug}/`) : '',
     kind: 'project'
   }))
-].slice(0, orbitSpecs.length);
+].slice(0, finalSpecs.length);
 ---
 <PortfolioLayout
-  title="Portafolio espacial | Rizzoma Arquitectura"
-  description="Explora el portafolio de Rizzoma Arquitectura mediante una galería espacial interactiva."
+  title="Portafolio | Rizzoma Arquitectura"
+  description="Portafolio interactivo de proyectos de arquitectura y visualización de Rizzoma Arquitectura."
 >
   <main
     id="portfolio-space"
-    class="portfolio-space is-vortex-loading"
+    class="portfolio-space is-entry-playing"
     data-space-gallery
     aria-label="Portafolio interactivo de Rizzoma Arquitectura"
   >
@@ -56,65 +64,62 @@ const visualItems = [
       <a class="portfolio-space__brand" href={withBase('/')} data-back-site aria-label="Volver al sitio de Rizzoma">
         <img src={withBase(site.brand.wordmark)} alt="Rizzoma" width="900" height="200" />
       </a>
-      <span class="portfolio-space__mode">Portafolio vivo / Arrastra + zoom</span>
+      <span class="portfolio-space__mode">Portafolio / Selecciona una pieza</span>
       <a class="portfolio-space__back" href={withBase('/')} data-back-site>Volver al sitio ↙</a>
     </div>
 
-    <div class="portfolio-space__world" data-space-world>
-      <div class="portfolio-space__core" aria-hidden="true">
-        <img src={withBase(site.brand.monogram)} alt="" width="220" height="220" />
+    <div class="portfolio-space__stage" data-space-stage>
+      <div class="portfolio-space__world" data-space-world>
+        {visualItems.map((item, index) => {
+          const spec = finalSpecs[index];
+          return (
+            <button
+              class="portfolio-space__item"
+              type="button"
+              data-space-item
+              data-index={index}
+              data-final-x={spec.x}
+              data-final-y={spec.y}
+              data-final-rotate={spec.r}
+              data-final-z={spec.z}
+              data-image={item.image}
+              data-title={item.title}
+              data-category={item.category}
+              data-location={item.location}
+              data-region={item.region}
+              data-year={item.year}
+              data-statement={item.statement}
+              data-text={item.text}
+              data-href={item.href}
+              style={`--w:${spec.w}px;--h:${spec.h}px;`}
+              aria-label={`Abrir información de ${item.title}`}
+            >
+              <div class="portfolio-space__thumb">
+                {item.image ? (
+                  <img src={item.image} alt="" loading={index < 5 ? 'eager' : 'lazy'} decoding="async" />
+                ) : (
+                  <div class="portfolio-space__placeholder">
+                    <img src={withBase(site.brand.monogram)} alt="" aria-hidden="true" width="200" height="200" />
+                    <strong>{item.title}</strong>
+                  </div>
+                )}
+              </div>
+              <div class="portfolio-space__caption" aria-hidden="true">
+                <span>{String(index + 1).padStart(2, '0')} · {item.title}</span>
+                <span>{item.kind === 'image' ? 'Imagen' : 'Proyecto'}</span>
+              </div>
+            </button>
+          );
+        })}
       </div>
-
-      {visualItems.map((item, index) => {
-        const orbit = orbitSpecs[index];
-        return (
-          <button
-            class="portfolio-space__item"
-            type="button"
-            data-space-item
-            data-index={index}
-            data-angle={orbit.angle}
-            data-radius={orbit.radius}
-            data-speed={orbit.speed}
-            data-phase={orbit.phase}
-            data-image={item.image}
-            data-title={item.title}
-            data-meta={item.meta}
-            data-text={item.text}
-            data-href={item.href}
-            style={`--w:${orbit.w}px;--h:${orbit.h}px;`}
-            aria-label={`Abrir ${item.title}`}
-          >
-            <div class="portfolio-space__thumb">
-              {item.image ? (
-                <img src={item.image} alt="" loading={index < 4 ? 'eager' : 'lazy'} decoding="async" />
-              ) : (
-                <div class="portfolio-space__placeholder">
-                  <img src={withBase(site.brand.monogram)} alt="" aria-hidden="true" width="200" height="200" />
-                  <strong>{item.title}</strong>
-                </div>
-              )}
-            </div>
-            <div class="portfolio-space__caption" aria-hidden="true">
-              <span>{String(index + 1).padStart(2, '0')} · {item.title}</span>
-              <span>{item.kind === 'image' ? 'Imagen' : 'Proyecto'}</span>
-            </div>
-          </button>
-        );
-      })}
     </div>
 
-    <div class="portfolio-space__index" data-space-counter>
-      {String(visualItems.length).padStart(2, '0')} piezas / archivo vivo
+    <div class="portfolio-space__index">
+      {String(visualItems.length).padStart(2, '0')} piezas / Rizzoma
     </div>
 
-    <div class="portfolio-space__hud">
-      <span class="portfolio-space__hint">Arrastra · rueda/pellizca · toca una pieza</span>
-      <div class="portfolio-space__controls" data-space-controls aria-label="Controles de la galería">
-        <button type="button" data-space-zoom-out aria-label="Alejar">−</button>
-        <button type="button" data-space-reset aria-label="Centrar torbellino">◎</button>
-        <button type="button" data-space-zoom-in aria-label="Acercar">+</button>
-      </div>
+    <div class="portfolio-space__hint">
+      La secuencia se organiza una sola vez · selecciona cualquier pieza
     </div>
 
     <section
@@ -122,15 +127,30 @@ const visualItems = [
       data-space-focus
       data-monogram={withBase(site.brand.monogram)}
       aria-hidden="true"
-      aria-label="Vista ampliada"
+      aria-label="Información del proyecto"
     >
       <button class="portfolio-space__focus-close" type="button" data-focus-close aria-label="Cerrar">×</button>
+
       <div class="portfolio-space__focus-inner">
         <div class="portfolio-space__focus-visual" data-focus-visual></div>
+
         <div class="portfolio-space__focus-meta">
-          <span data-focus-meta></span>
+          <span class="portfolio-space__focus-kicker" data-focus-category></span>
           <h2 data-focus-title></h2>
-          <p data-focus-text></p>
+          <p class="portfolio-space__focus-statement" data-focus-statement></p>
+
+          <dl class="portfolio-space__focus-facts">
+            <div data-focus-location-row>
+              <dt>Ubicación</dt>
+              <dd data-focus-location></dd>
+            </div>
+            <div data-focus-year-row>
+              <dt>Año</dt>
+              <dd data-focus-year></dd>
+            </div>
+          </dl>
+
+          <p class="portfolio-space__focus-description" data-focus-text></p>
           <a class="portfolio-space__focus-link" data-focus-link href="#">Ver proyecto completo ↗</a>
         </div>
       </div>
