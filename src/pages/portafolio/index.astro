@@ -44,7 +44,7 @@ const visualItems = projects.map((project) => ({
       <a class="portfolio-space__brand" href={withBase('/')} aria-label="Volver al sitio de Rizzoma">
         <img src={withBase(site.brand.wordmark)} alt="Rizzoma" width="900" height="200" />
       </a>
-      <span class="portfolio-space__mode">Portafolio / Selecciona o arrastra el tablero</span>
+      <span class="portfolio-space__mode">Selected works / Rizzoma Arquitectura</span>
       <div class="portfolio-space__top-actions">
         <button class="portfolio-space__sound" type="button" data-space-sound aria-pressed="true" title="Repetir efecto con sonido">
           Sonido <span aria-hidden="true">↻</span>
@@ -55,6 +55,11 @@ const visualItems = projects.map((project) => ({
 
     <div class="portfolio-space__stage" data-space-stage>
       <div class="portfolio-space__world" data-space-world>
+        <div class="portfolio-space__center-mark" aria-hidden="true">
+          <img src={withBase(site.brand.monogram)} alt="" width="160" height="160" />
+          <span>Selected works</span>
+          <small>Rizzoma / Medellín</small>
+        </div>
         {visualItems.map((item, index) => {
           const spec = finalSpecs[index];
           return (
@@ -101,11 +106,12 @@ const visualItems = projects.map((project) => ({
     </div>
 
     <div class="portfolio-space__index">
-      {String(visualItems.length).padStart(2, '0')} proyectos / Rizzoma
+      <span>{String(visualItems.length).padStart(2, '0')}</span>
+      <span>Proyectos seleccionados</span>
     </div>
 
     <div class="portfolio-space__hint" data-space-hint>
-      Clic para abrir · mantén clic y arrastra para moverte
+      Explora · arrastra · selecciona
     </div>
 
     <section
