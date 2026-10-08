@@ -9,9 +9,9 @@ const schema = [
   {
     '@type': 'CollectionPage',
     '@id': `${servicesUrl}#page`,
-    name: 'Servicios de Rizzoma Arquitectura',
+    name: 'Servicios de arquitectura y visualización de Rizzoma',
     url: servicesUrl,
-    description: 'Visualización arquitectónica, diseño arquitectónico e interiores y remodelación desde Medellín.',
+    description: 'Arquitectura, diseño y visualización arquitectónica desde Medellín.',
     isPartOf: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#website` },
     about: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#business` }
   },
@@ -22,20 +22,20 @@ const schema = [
       {
         '@type': 'ListItem',
         position: 1,
-        name: 'Visualización arquitectónica',
-        url: new URL(withBase('/visualizacion-arquitectonica-medellin/'), baseSite).toString()
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Diseño arquitectónico',
+        name: 'Arquitectura',
         url: new URL(withBase('/arquitectura-medellin/'), baseSite).toString()
       },
       {
         '@type': 'ListItem',
+        position: 2,
+        name: 'Diseño + visualización',
+        url: servicesUrl + '#diseno-visualizacion'
+      },
+      {
+        '@type': 'ListItem',
         position: 3,
-        name: 'Diseño y remodelación de interiores',
-        url: servicesUrl + '#interiores'
+        name: 'Visualización arquitectónica',
+        url: new URL(withBase('/visualizacion-arquitectonica-medellin/'), baseSite).toString()
       }
     ]
   },
@@ -49,85 +49,73 @@ const schema = [
 ];
 ---
 <BaseLayout
-  title="Servicios de arquitectura y visualización | Rizzoma"
-  description="Visualización arquitectónica, diseño arquitectónico, interiores y remodelación con interlocución directa de Juan José Quintero Tobón."
+  title="Servicios de arquitectura y visualización en Medellín | Rizzoma"
+  description="Arquitectura, vivienda, remodelación, diseño, renders y visualización arquitectónica desde Medellín con interlocución directa de Juan José Quintero Tobón."
   schema={schema}
 >
-  <section class="page-hero section-pad rizzoma-services-page-hero">
+  <section class="page-hero section-pad">
     <p class="eyebrow reveal">Servicios</p>
-    <h1 class="page-title reveal">Diseñar, entender<br />y comunicar.</h1>
-    <p class="page-intro reveal">Rizzoma trabaja la arquitectura y su representación como partes de una misma conversación. El alcance cambia según lo que necesite cada encargo.</p>
+    <h1 class="page-title reveal">Del espacio<br />a la imagen.</h1>
+    <p class="page-intro reveal">Rizzoma trabaja desde las primeras decisiones de un proyecto hasta la manera en que ese proyecto se hace visible y comprensible, con interlocución directa de {site.founder.name}.</p>
   </section>
 
-  <section id="visualizacion" class="rizzoma-service-primary section-pad no-top">
-    <div class="rizzoma-service-primary-number reveal">01 / Servicio principal</div>
-    <div class="rizzoma-service-primary-copy reveal">
-      <p class="service-kicker">Hacer visible lo que aún no existe</p>
-      <h2>Visualización arquitectónica</h2>
-      <p class="rizzoma-service-lede">Imágenes para comprender, evaluar y comunicar arquitectura con criterio espacial, material y atmosférico.</p>
-      <p>Rizzoma puede acompañar proyectos propios o desarrollados por arquitectos, oficinas, constructoras y otros profesionales que necesitan presentar una propuesta con claridad sin separar la imagen del pensamiento arquitectónico.</p>
-      <ul>
-        <li>Renders exteriores</li>
-        <li>Renders interiores</li>
-        <li>Modelado 3D</li>
-        <li>Materialidad y atmósfera</li>
-        <li>Dirección de encuadres</li>
-        <li>Imágenes para presentación</li>
-      </ul>
-      <div class="rizzoma-service-actions">
-        <a class="primary-link" href={withBase('/visualizacion-arquitectonica-medellin/')}>Conocer visualización <span aria-hidden="true">↗</span></a>
-        <a class="text-link" href={withBase('/contacto/?servicio=Visualizaci%C3%B3n%20arquitect%C3%B3nica')}>Solicitar una conversación ↗</a>
+  <section class="services-full section-pad no-top">
+    <article id="arquitectura" class="service-detail reveal">
+      <span>01</span>
+      <div>
+        <p class="service-kicker">Espacio · contexto · habitar</p>
+        <h2>Arquitectura</h2>
+        <p>Rizzoma desarrolla proyectos que responden al lugar, las necesidades de quienes lo habitan y las condiciones propias de cada encargo.</p>
+        <ul><li>Vivienda</li><li>Remodelación</li><li>Conceptualización</li><li>Diseño arquitectónico</li><li>Modelado 3D</li><li>Desarrollo gráfico</li></ul>
+        <a class="service-detail-link" href={withBase('/arquitectura-medellin/')}>Ver arquitectura en Medellín y Antioquia ↗</a>
+      </div>
+    </article>
+
+    <article id="diseno-visualizacion" class="service-detail reveal">
+      <span>02</span>
+      <div>
+        <p class="service-kicker">Del concepto a la imagen</p>
+        <h2>Diseño + visualización</h2>
+        <p>Diseño y representación avanzan juntos para que las decisiones espaciales, materiales y atmosféricas puedan evaluarse, afinarse y comunicarse con claridad.</p>
+        <ul><li>Concepto</li><li>Modelado</li><li>Materialidad</li><li>Dirección visual</li><li>Renders</li><li>Presentación de proyecto</li></ul>
+      </div>
+    </article>
+
+    <article id="visualizacion" class="service-detail reveal">
+      <span>03</span>
+      <div>
+        <p class="service-kicker">Hacer visible lo que aún no existe</p>
+        <h2>Visualización</h2>
+        <p>Imágenes arquitectónicas orientadas a transmitir escala, atmósfera, materiales y la intención general de un proyecto, tanto propio como desarrollado por otros estudios.</p>
+        <ul><li>Interiores</li><li>Exteriores</li><li>Visualización comercial</li><li>Postproducción</li><li>Dirección de encuadres</li><li>Imágenes para presentación</li></ul>
+        <a class="service-detail-link" href={withBase('/visualizacion-arquitectonica-medellin/')}>Ver renders y visualización arquitectónica ↗</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="service-relationship section-pad no-top">
+    <div class="service-relationship-rule reveal"></div>
+    <p class="eyebrow reveal">Cómo se trabaja</p>
+    <div class="service-relationship-grid">
+      <h2 class="reveal">Un estudio pequeño significa una conversación directa.</h2>
+      <div class="reveal">
+        <p>El contacto, la lectura del encargo y el desarrollo del proyecto pasan por Juan José. No hay capas innecesarias entre la idea del cliente y las decisiones de diseño.</p>
+        <p>El alcance se define según la etapa real del proyecto: desde una idea inicial hasta un encargo específico de visualización.</p>
       </div>
     </div>
   </section>
 
-  <section class="rizzoma-services-pair section-pad">
-    <article id="arquitectura" class="rizzoma-service-column reveal">
-      <span>02</span>
-      <p class="service-kicker">Lugar · espacio · habitar</p>
-      <h2>Diseño arquitectónico</h2>
-      <p>Propuestas que parten de las condiciones del lugar, las necesidades del encargo y la experiencia cotidiana de quienes van a habitarlo.</p>
-      <ul>
-        <li>Vivienda</li>
-        <li>Conceptualización</li>
-        <li>Organización espacial</li>
-        <li>Modelado y desarrollo gráfico</li>
-      </ul>
-      <a class="text-link" href={withBase('/arquitectura-medellin/')}>Conocer arquitectura ↗</a>
-    </article>
-
-    <article id="interiores" class="rizzoma-service-column reveal">
-      <span>03</span>
-      <p class="service-kicker">Transformar lo existente</p>
-      <h2>Interiores + remodelación</h2>
-      <p>Lectura y transformación de espacios existentes desde el uso, la luz, los recorridos, los materiales y la atmósfera que se quiere construir.</p>
-      <ul>
-        <li>Redistribución espacial</li>
-        <li>Concepto de interiores</li>
-        <li>Materialidad</li>
-        <li>Visualización de la propuesta</li>
-      </ul>
-      <a class="text-link" href={withBase('/contacto/?servicio=Dise%C3%B1o%20y%20remodelaci%C3%B3n%20de%20interiores')}>Consultar un proyecto ↗</a>
-    </article>
-  </section>
-
-  <section class="rizzoma-service-method dark-block">
+  <section class="brief-section dark-block">
     <div class="section-pad">
-      <p class="eyebrow reveal">Una misma lógica</p>
-      <div class="rizzoma-service-method-grid">
-        <h2 class="reveal">Diseñar y visualizar no son dos mundos separados.</h2>
-        <div class="reveal">
-          <p>La representación permite comprobar escala, luz, materialidad y atmósfera mientras el proyecto evoluciona. Por eso puede formar parte del diseño o funcionar como un servicio independiente cuando el proyecto ya existe.</p>
-          <p>En ambos casos, la intención es la misma: hacer comprensibles las decisiones arquitectónicas.</p>
+      <p class="eyebrow reveal">Para empezar</p>
+      <div class="brief-grid">
+        <h2 class="statement reveal">No necesitas tenerlo todo resuelto para iniciar una conversación.</h2>
+        <div class="brief-list reveal">
+          <p>Según la etapa del proyecto, ayuda tener:</p>
+          <ul><li>Ubicación o información del lote</li><li>Necesidades y programa aproximado</li><li>Planos o modelo, si ya existen</li><li>Referencias visuales</li><li>Objetivo y alcance esperado</li></ul>
         </div>
       </div>
+      <a href={withBase('/contacto/')} class="pill-link reveal">Hablar con Juan José ↗</a>
     </div>
-  </section>
-
-  <section class="rizzoma-service-start section-pad">
-    <p class="eyebrow reveal">Para empezar</p>
-    <h2 class="reveal">No necesitas tenerlo todo resuelto.</h2>
-    <p class="reveal">Planos, un modelo, referencias, información del lugar o incluso una idea inicial pueden ser suficiente para entender el punto de partida y definir el alcance.</p>
-    <a class="primary-link reveal" href={withBase('/contacto/')}>Conversar con Juan José <span aria-hidden="true">↗</span></a>
   </section>
 </BaseLayout>
