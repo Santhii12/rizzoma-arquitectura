@@ -842,3 +842,29 @@
 .portfolio-space__center-mark::after {inset:-85px;}
 }
 @media(prefers-reduced-motion:reduce) {.portfolio-space__center-mark {transition:none;}}
+
+/* Viewport-aware orbital layout; JS reserves the editorial column. */
+.portfolio-space__stage {
+  padding-left: 0;
+  padding-right: 0;
+  box-sizing: border-box;
+}
+.portfolio-space__world { flex-shrink: 0; }
+.portfolio-space__item { touch-action: none; }
+.portfolio-space__item:focus-visible .portfolio-space__thumb {
+  outline: 2px solid #b89a63;
+  outline-offset: 4px;
+}
+@media (max-width:800px) {
+  .portfolio-space__stage {
+    inset: 158px 0 48px;
+    padding: 0;
+  }
+  .portfolio-space__editorial { top: 85px; }
+  .portfolio-space__editorial h1 { font-size: clamp(2rem, 7vw, 3.1rem); }
+}
+@media (max-height:620px) and (min-width:801px) {
+  .portfolio-space__editorial { top: 112px; }
+  .portfolio-space__editorial h1 { font-size: clamp(2.4rem, 4.5vw, 4.5rem); }
+  .portfolio-space__stage { inset: 70px 0 35px; }
+}
