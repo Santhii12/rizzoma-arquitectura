@@ -37,6 +37,7 @@ if (root && stage && world) {
   const vortexTurns = 2.35;
 
   let fitScale = 1;
+  let previousReservedOffset = 0;
   let panX = 0;
   let panY = 0;
   let dragging = false;
@@ -85,19 +86,26 @@ if (root && stage && world) {
 
   const fitWorldToStage = (resetPan = false) => {
     const rect = stage.getBoundingClientRect();
-    const horizontalPadding = window.innerWidth < 600 ? 36 : 100;
-    const verticalPadding = window.innerWidth < 600 ? 46 : 86;
+    // Reserve room for the editorial introduction on desktop, but keep
+    // the entire ring visible without relying on a fixed CSS viewport.
+    const reserved = window.innerWidth > 1000
+      ? Math.min(350, rect.width * 0.29)
+      : window.innerWidth > 800 ? 225 : 0;
+    const margin = window.innerWidth <= 800 ? 20 : 38;
+    const availableWidth = Math.max(1, rect.width - reserved - margin * 2);
+    const availableHeight = Math.max(1, rect.height - margin * 2);
+    fitScale = Math.min(availableWidth / worldWidth, availableHeight / worldHeight, 1.08);
 
-    const scaleX = Math.max(0.1, (rect.width - horizontalPadding * 2) / worldWidth);
-    const scaleY = Math.max(0.1, (rect.height - verticalPadding * 2) / worldHeight);
-
-    fitScale = Math.min(scaleX, scaleY, 1);
-
+    // The world is CSS-centered in the stage. Offset it by half the reserved
+    // editorial column to center the project circle in the remaining area.
+    const destinationX = reserved / 2;
     if (resetPan) {
-      panX = 0;
+      panX = destinationX;
       panY = 0;
+    } else {
+      panX += destinationX - previousReservedOffset;
     }
-
+    previousReservedOffset = destinationX;
     renderBoardTransform();
   };
 
@@ -422,7 +430,14 @@ if (root && stage && world) {
         return;
       }
 
-      openFocus(item);
+      const href = item.dataset.href;
+      if (href) {
+        // Open the full editorial case study in the same tab.
+        window.location.assign(href);
+      } else {
+        // Unpublished projects keep their factual archive preview.
+        openFocus(item);
+      }
     });
   });
 
@@ -455,6 +470,9 @@ if (root && stage && world) {
   });
 
   window.addEventListener('resize', () => fitWorldToStage(false));
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(() => fitWorldToStage(false)).observe(stage);
+  }
 
   fitWorldToStage(true);
 
