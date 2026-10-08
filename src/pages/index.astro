@@ -1,9 +1,11 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { featuredProject } from '@/data/projects';
+import ProjectCard from '@/components/ProjectCard.astro';
+import { projects, featuredProject } from '@/data/projects';
 import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
 
+const archiveProjects = projects.filter((project) => !project.available).slice(0, 3);
 const baseSite = Astro.site ?? new URL(site.domain);
 const homeUrl = new URL(withBase('/'), baseSite).toString();
 const schema = {
@@ -19,146 +21,149 @@ const schema = {
     ? { '@type': 'ImageObject', contentUrl: featuredProject.cover }
     : undefined
 };
-
-const projectImages = featuredProject?.gallery ?? [];
 ---
 <BaseLayout schema={schema}>
-  <section class="rizzoma-home-hero">
-    <div class="rizzoma-home-hero-top reveal">
+  <section class="hero hero-home">
+    <div class="hero-topline reveal">
       <span>Estudio independiente</span>
       <span>{site.location}</span>
-      <span>Arquitectura · Diseño · Visualización</span>
+      <span>Arquitectura + visualización</span>
     </div>
 
-    <div class="rizzoma-home-hero-main">
-      <div class="rizzoma-home-hero-copy reveal">
-        <img class="rizzoma-home-signature" src={withBase(site.brand.wordmark)} alt="Rizzoma" width="1000" height="220" />
-        <h1>Arquitectura que construye relaciones.</h1>
-        <p>Diseñamos y visualizamos espacios a partir de su relación con las personas, la materia y el territorio.</p>
-        <div class="rizzoma-home-actions">
-          <a class="primary-link" href={withBase('/proyectos/')}>Explorar proyectos <span aria-hidden="true">↗</span></a>
-          <a class="text-link" href={withBase('/contacto/')}>Hablemos de tu proyecto ↗</a>
-        </div>
+    <div class="hero-title-wrap brand-hero-title">
+      <h1 class="sr-only">Rizzoma Arquitectura</h1>
+      <img
+        class="hero-wordmark-image hero-title"
+        data-hero-title
+        src={withBase(site.brand.wordmark)}
+        alt=""
+        width="1000"
+        height="220"
+        decoding="async"
+      />
+      <div class="hero-deck-wrap reveal">
+        <p class="hero-deck">Arquitectura y visualización con una mirada directa sobre lugar, materia y forma de habitar.</p>
+        <a class="hero-inline-link" href={withBase('/contacto/')}>Cuéntanos tu proyecto ↗</a>
       </div>
-
-      {featuredProject?.cover && (
-        <a class="rizzoma-home-hero-image reveal" href={withBase(`/proyectos/${featuredProject.slug}/`)}>
-          <img src={featuredProject.cover} alt={`${featuredProject.title}, proyecto de Rizzoma`} fetchpriority="high" decoding="async" />
-          <div>
-            <span>{featuredProject.title}</span>
-            <span>{[featuredProject.location, featuredProject.year].filter(Boolean).join(' · ')}</span>
-          </div>
-        </a>
-      )}
     </div>
+
+    {featuredProject?.cover && (
+      <a
+        href={withBase(`/proyectos/${featuredProject.slug}/`)}
+        class="hero-media reveal parallax-media"
+        aria-label={`Ver ${featuredProject.title}`}
+      >
+        <img
+          src={featuredProject.cover}
+          alt={`${featuredProject.title}, proyecto de Rizzoma`}
+          fetchpriority="high"
+          decoding="async"
+        />
+        <div class="hero-media-caption">
+          <span>{featuredProject.title}</span>
+          <span>{featuredProject.location} · {featuredProject.year}</span>
+        </div>
+      </a>
+    )}
   </section>
 
-  {featuredProject && (
-    <section class="rizzoma-case section-pad">
-      <div class="rizzoma-case-heading reveal">
-        <div>
-          <p class="eyebrow">Proyecto / Caso actual</p>
-          <h2>{featuredProject.title}</h2>
-        </div>
-        <p>{featuredProject.statement}</p>
+  <section id="proyectos" class="portfolio-home section-pad">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow">Portafolio</p>
+        <h2 class="section-title">Trabajo seleccionado</h2>
       </div>
+      <a class="text-link" href={withBase('/portafolio/')} target="_blank" rel="noopener noreferrer">Abrir portafolio ↗</a>
+    </div>
 
-      <div class="rizzoma-case-grid">
-        {projectImages[0] && (
-          <figure class="rizzoma-case-main reveal">
-            <img src={projectImages[0]} alt={`${featuredProject.title}, vista principal`} loading="lazy" decoding="async" />
-          </figure>
-        )}
-        <div class="rizzoma-case-copy reveal">
-          <p>{featuredProject.intro}</p>
-          <a class="text-link" href={withBase(`/proyectos/${featuredProject.slug}/`)}>Ver caso completo ↗</a>
-        </div>
-        {projectImages[1] && (
-          <figure class="rizzoma-case-detail reveal">
-            <img src={projectImages[1]} alt={`${featuredProject.title}, detalle arquitectónico`} loading="lazy" decoding="async" />
-          </figure>
-        )}
+    {featuredProject && (
+      <div class="portfolio-featured">
+        <ProjectCard project={featuredProject} index={0} />
       </div>
-    </section>
-  )}
+    )}
 
-  <section class="rizzoma-services dark-block">
+    {archiveProjects.length > 0 && (
+      <div class="portfolio-mini-grid reveal">
+        {archiveProjects.map((project, i) => (
+          <article class="portfolio-mini-card">
+            <div class="portfolio-mini-top">
+              <span>{String(i + 2).padStart(2, '0')}</span>
+              <span>{project.year ?? 'Archivo'}</span>
+            </div>
+            <div class="portfolio-mini-copy">
+              <h3>{project.title}</h3>
+              <p>{project.category}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    )}
+  </section>
+
+  <section class="services-compact dark-block">
     <div class="section-pad">
-      <div class="rizzoma-services-head reveal">
+      <div class="section-head reveal">
         <div>
           <p class="eyebrow">Servicios</p>
-          <h2>Del proyecto<br />a su comprensión.</h2>
+          <h2 class="section-title">Del espacio a la imagen.</h2>
         </div>
-        <p>Rizzoma combina criterio arquitectónico y herramientas visuales para diseñar, estudiar y comunicar espacios con claridad.</p>
+        <a class="text-link" href={withBase('/servicios/')}>Ver servicios ↗</a>
       </div>
 
-      <a class="rizzoma-service-lead reveal" href={withBase('/visualizacion-arquitectonica-medellin/')}>
-        <div>
-          <span>01 / Servicio principal</span>
-          <h3>Visualización arquitectónica</h3>
-        </div>
-        <p>Representamos proyectos para que puedan entenderse, evaluarse y comunicarse antes de existir: renders, materialidad, atmósfera, modelado y dirección visual.</p>
-        <b aria-hidden="true">↗</b>
-      </a>
-
-      <div class="rizzoma-services-secondary">
-        <a class="rizzoma-service-secondary reveal" href={withBase('/arquitectura-medellin/')}>
+      <div class="services-compact-grid">
+        <a class="service-compact-card reveal" href={withBase('/arquitectura-medellin/')}>
+          <span>01</span>
+          <h3>Arquitectura</h3>
+          <p>Vivienda, remodelación y conceptualización.</p>
+          <b aria-hidden="true">↗</b>
+        </a>
+        <a class="service-compact-card reveal" href={withBase('/servicios/#diseno-visualizacion')}>
           <span>02</span>
-          <h3>Diseño arquitectónico</h3>
-          <p>Vivienda, conceptualización y desarrollo de propuestas desde el contexto y la forma de habitar.</p>
+          <h3>Diseño + visualización</h3>
+          <p>Diseñar y representar como un mismo proceso.</p>
           <b aria-hidden="true">↗</b>
         </a>
-        <a class="rizzoma-service-secondary reveal" href={withBase('/servicios/#interiores')}>
+        <a class="service-compact-card reveal" href={withBase('/visualizacion-arquitectonica-medellin/')}>
           <span>03</span>
-          <h3>Interiores + remodelación</h3>
-          <p>Transformación de espacios existentes desde uso, materialidad, luz y atmósfera.</p>
+          <h3>Visualización</h3>
+          <p>Renders, atmósfera, materialidad y comunicación.</p>
           <b aria-hidden="true">↗</b>
         </a>
       </div>
-
-      <div class="rizzoma-services-more reveal">
-        <a class="text-link" href={withBase('/servicios/')}>Conocer todos los servicios ↗</a>
-      </div>
     </div>
   </section>
 
-  <section class="rizzoma-process section-pad">
-    <div class="rizzoma-process-head reveal">
-      <p class="eyebrow">Proceso</p>
-      <h2>Una conversación que se convierte en proyecto.</h2>
-    </div>
-
-    <ol class="rizzoma-process-rail">
-      <li class="reveal"><span>01</span><strong>Escuchar</strong><p>Entender la necesidad, el lugar, el material disponible y el objetivo real del encargo.</p></li>
-      <li class="reveal"><span>02</span><strong>Explorar</strong><p>Leer referencias, contexto, posibilidades espaciales y decisiones que vale la pena poner a prueba.</p></li>
-      <li class="reveal"><span>03</span><strong>Diseñar</strong><p>Construir una dirección clara para espacio, uso, materia y experiencia.</p></li>
-      <li class="reveal"><span>04</span><strong>Desarrollar</strong><p>Precisar el proyecto según el alcance acordado y la etapa en la que se encuentra.</p></li>
-      <li class="reveal"><span>05</span><strong>Visualizar</strong><p>Hacer visible la propuesta para evaluarla, presentarla y comunicarla con coherencia.</p></li>
-    </ol>
-  </section>
-
-  <section class="rizzoma-studio-home section-pad">
-    <figure class="rizzoma-studio-home-image reveal">
-      <img src={withBase(site.founder.portrait)} alt={`${site.founder.name}, arquitecto y director de Rizzoma`} width="300" height="375" loading="lazy" decoding="async" />
+  <section class="studio-compact section-pad">
+    <figure class="studio-compact-image reveal">
+      <img
+        src={withBase(site.founder.portrait)}
+        alt={`${site.founder.name}, arquitecto y director de Rizzoma`}
+        width="300"
+        height="375"
+        loading="lazy"
+        decoding="async"
+      />
     </figure>
 
-    <div class="rizzoma-studio-home-copy reveal">
+    <div class="studio-compact-copy reveal">
       <p class="eyebrow">Estudio / {site.founder.name}</p>
-      <h2>Una práctica independiente. Una conversación directa.</h2>
-      <p>Rizzoma está dirigido por Juan José Quintero Tobón desde Medellín. Cada encargo se trabaja desde relaciones concretas entre espacio, luz, materialidad, territorio y experiencia humana.</p>
-      <p>El proyecto se conversa directamente con quien lo desarrolla.</p>
+      <h2>Una práctica independiente y cercana a cada proyecto.</h2>
+      <p>Rizzoma está dirigido directamente por Juan José Quintero Tobón desde Medellín. Arquitectura y visualización se desarrollan como una misma conversación, con atención al contexto, la luz, la materialidad y la experiencia de habitar.</p>
+
+      <div class="studio-compact-meta">
+        <div><span>Base</span><strong>{site.location}</strong></div>
+        <div><span>Práctica</span><strong>Arquitectura + visualización</strong></div>
+      </div>
+
       <a class="primary-link" href={withBase('/estudio/')}>Conocer el estudio <span aria-hidden="true">↗</span></a>
     </div>
   </section>
 
-  <section class="rizzoma-home-contact dark-block">
+  <section class="home-contact-cta dark-block">
     <div class="section-pad">
-      <p class="eyebrow reveal">Empecemos por lo que necesitas</p>
-      <h2 class="reveal">Un proyecto puede comenzar con una idea, un plano o una imagen que todavía no existe.</h2>
-      <div class="rizzoma-home-contact-actions reveal">
-        <a href={withBase('/contacto/?servicio=Visualizaci%C3%B3n%20arquitect%C3%B3nica')}>Necesito visualizar un proyecto <span>↗</span></a>
-        <a href={withBase('/contacto/?servicio=Dise%C3%B1o%20arquitect%C3%B3nico')}>Quiero desarrollar un proyecto <span>↗</span></a>
-      </div>
+      <p class="eyebrow reveal">¿Tienes un proyecto?</p>
+      <p class="closing-copy reveal">Cuéntanos dónde estás y qué quieres crear.</p>
+      <a class="primary-link reveal" href={withBase('/contacto/')}>Hablar con Juan José <span aria-hidden="true">↗</span></a>
     </div>
   </section>
 </BaseLayout>
