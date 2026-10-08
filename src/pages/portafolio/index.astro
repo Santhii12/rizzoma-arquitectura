@@ -5,13 +5,12 @@ import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
 
 const finalSpecs = [
-  { x: 600, y: 340, w: 330, h: 235, r: -1, z: 40 },
-  { x: 315, y: 225, w: 205, h: 255, r: -4, z: 22 },
-  { x: 885, y: 210, w: 220, h: 165, r: 3, z: 21 },
-  { x: 1010, y: 465, w: 205, h: 260, r: 4, z: 20 },
-  { x: 760, y: 565, w: 250, h: 180, r: -3, z: 25 },
-  { x: 455, y: 570, w: 235, h: 175, r: 2, z: 24 },
-  { x: 190, y: 465, w: 195, h: 245, r: -3, z: 19 }
+  { x: 600, y: 360, w: 300, h: 210, r: -1, z: 50 },
+  { x: 385, y: 235, w: 170, h: 220, r: -5, z: 24 },
+  { x: 640, y: 190, w: 155, h: 200, r: 3, z: 22 },
+  { x: 835, y: 315, w: 190, h: 140, r: 4, z: 21 },
+  { x: 745, y: 525, w: 180, h: 225, r: -3, z: 25 },
+  { x: 420, y: 505, w: 205, h: 150, r: 2, z: 23 }
 ];
 
 const visualItems = projects.map((project) => ({
@@ -46,7 +45,12 @@ const visualItems = projects.map((project) => ({
         <img src={withBase(site.brand.wordmark)} alt="Rizzoma" width="900" height="200" />
       </a>
       <span class="portfolio-space__mode">Portafolio / Selecciona o arrastra el tablero</span>
-      <a class="portfolio-space__back" href={withBase('/')}>Volver al sitio ↙</a>
+      <div class="portfolio-space__top-actions">
+        <button class="portfolio-space__sound" type="button" data-space-sound aria-pressed="true" title="Repetir efecto con sonido">
+          Sonido <span aria-hidden="true">↻</span>
+        </button>
+        <a class="portfolio-space__back" href={withBase('/')}>Volver al sitio ↙</a>
+      </div>
     </div>
 
     <div class="portfolio-space__stage" data-space-stage>
@@ -100,7 +104,7 @@ const visualItems = projects.map((project) => ({
       {String(visualItems.length).padStart(2, '0')} proyectos / Rizzoma
     </div>
 
-    <div class="portfolio-space__hint">
+    <div class="portfolio-space__hint" data-space-hint>
       Clic para abrir · mantén clic y arrastra para moverte
     </div>
 
