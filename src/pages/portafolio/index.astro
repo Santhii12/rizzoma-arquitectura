@@ -7,18 +7,18 @@ import { withBase } from '@/utils/paths';
 const galleryImages = featuredProject?.gallery ?? [];
 const otherProjects = projects.filter((project) => project.slug !== featuredProject?.slug);
 
-const positions = [
-  { x: 1090, y: 730, w: 390, h: 290 },
-  { x: 1090, y: 295, w: 180, h: 250 },
-  { x: 1090, y: 1170, w: 205, h: 270 },
-  { x: 660, y: 690, w: 230, h: 300 },
-  { x: 1510, y: 690, w: 250, h: 185 },
-  { x: 520, y: 350, w: 190, h: 145 },
-  { x: 1600, y: 350, w: 185, h: 245 },
-  { x: 430, y: 1040, w: 220, h: 165 },
-  { x: 1660, y: 1050, w: 220, h: 285 },
-  { x: 780, y: 1080, w: 160, h: 210 },
-  { x: 1380, y: 1120, w: 175, h: 130 }
+const orbitSpecs = [
+  { angle: 0, radius: 0, speed: .00, w: 360, h: 265, phase: .2 },
+  { angle: .20, radius: 245, speed: .080, w: 175, h: 235, phase: .8 },
+  { angle: 1.24, radius: 255, speed: .068, w: 165, h: 220, phase: 1.7 },
+  { angle: 2.28, radius: 250, speed: .074, w: 190, h: 145, phase: 2.5 },
+  { angle: 3.30, radius: 255, speed: .062, w: 185, h: 245, phase: 3.2 },
+  { angle: 4.35, radius: 245, speed: .083, w: 205, h: 155, phase: 4.0 },
+  { angle: .70, radius: 470, speed: -.043, w: 210, h: 280, phase: 1.1 },
+  { angle: 1.90, radius: 455, speed: -.048, w: 190, h: 145, phase: 2.1 },
+  { angle: 3.04, radius: 475, speed: -.039, w: 220, h: 165, phase: 3.0 },
+  { angle: 4.18, radius: 460, speed: -.046, w: 185, h: 250, phase: 4.3 },
+  { angle: 5.38, radius: 470, speed: -.041, w: 205, h: 150, phase: 5.2 }
 ];
 
 const visualItems = [
@@ -40,7 +40,7 @@ const visualItems = [
     href: project.available ? withBase(`/proyectos/${project.slug}/`) : '',
     kind: 'project'
   }))
-].slice(0, positions.length);
+].slice(0, orbitSpecs.length);
 ---
 <PortfolioLayout
   title="Portafolio espacial | Rizzoma Arquitectura"
@@ -48,37 +48,46 @@ const visualItems = [
 >
   <main
     id="portfolio-space"
-    class="portfolio-space"
+    class="portfolio-space is-vortex-loading"
     data-space-gallery
     aria-label="Portafolio interactivo de Rizzoma Arquitectura"
   >
     <div class="portfolio-space__topbar">
-      <a class="portfolio-space__brand" href={withBase('/')} aria-label="Volver al sitio de Rizzoma">
+      <a class="portfolio-space__brand" href={withBase('/')} data-back-site aria-label="Volver al sitio de Rizzoma">
         <img src={withBase(site.brand.wordmark)} alt="Rizzoma" width="900" height="200" />
       </a>
-      <span class="portfolio-space__mode">Archivo espacial / Arrastra + zoom</span>
-      <a class="portfolio-space__back" href={withBase('/')}>Volver al sitio ↙</a>
+      <span class="portfolio-space__mode">Portafolio vivo / Arrastra + zoom</span>
+      <a class="portfolio-space__back" href={withBase('/')} data-back-site>Volver al sitio ↙</a>
     </div>
 
     <div class="portfolio-space__world" data-space-world>
+      <div class="portfolio-space__core" aria-hidden="true">
+        <img src={withBase(site.brand.monogram)} alt="" width="220" height="220" />
+      </div>
+
       {visualItems.map((item, index) => {
-        const pos = positions[index];
+        const orbit = orbitSpecs[index];
         return (
           <button
             class="portfolio-space__item"
             type="button"
             data-space-item
+            data-index={index}
+            data-angle={orbit.angle}
+            data-radius={orbit.radius}
+            data-speed={orbit.speed}
+            data-phase={orbit.phase}
             data-image={item.image}
             data-title={item.title}
             data-meta={item.meta}
             data-text={item.text}
             data-href={item.href}
-            style={`left:${pos.x}px;top:${pos.y}px;--w:${pos.w}px;--h:${pos.h}px;`}
+            style={`--w:${orbit.w}px;--h:${orbit.h}px;`}
             aria-label={`Abrir ${item.title}`}
           >
             <div class="portfolio-space__thumb">
               {item.image ? (
-                <img src={item.image} alt="" loading={index < 3 ? 'eager' : 'lazy'} decoding="async" />
+                <img src={item.image} alt="" loading={index < 4 ? 'eager' : 'lazy'} decoding="async" />
               ) : (
                 <div class="portfolio-space__placeholder">
                   <img src={withBase(site.brand.monogram)} alt="" aria-hidden="true" width="200" height="200" />
@@ -96,14 +105,14 @@ const visualItems = [
     </div>
 
     <div class="portfolio-space__index" data-space-counter>
-      00 / {String(visualItems.length).padStart(2, '0')}
+      {String(visualItems.length).padStart(2, '0')} piezas / archivo vivo
     </div>
 
     <div class="portfolio-space__hud">
-      <span class="portfolio-space__hint">Arrastra para explorar · rueda para zoom · clic para abrir</span>
+      <span class="portfolio-space__hint">Arrastra · rueda/pellizca · toca una pieza</span>
       <div class="portfolio-space__controls" data-space-controls aria-label="Controles de la galería">
         <button type="button" data-space-zoom-out aria-label="Alejar">−</button>
-        <button type="button" data-space-reset aria-label="Ver mapa completo">◎</button>
+        <button type="button" data-space-reset aria-label="Centrar torbellino">◎</button>
         <button type="button" data-space-zoom-in aria-label="Acercar">+</button>
       </div>
     </div>
