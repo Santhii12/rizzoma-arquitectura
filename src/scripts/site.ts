@@ -49,20 +49,12 @@ const isValidPhone = (value: string) =>
   value === '' || /^[0-9+() .-]{7,24}$/.test(value);
 
 const allowedServices = new Set([
-  'Visualización arquitectónica',
   'Diseño arquitectónico',
-  'Diseño y remodelación de interiores',
+  'Remodelación',
+  'Diseño + visualización',
+  'Visualización',
   'Otro'
 ]);
-
-if (form) {
-  const requestedService = new URLSearchParams(window.location.search).get('servicio');
-  const select = form.querySelector<HTMLSelectElement>('[data-service-select]');
-
-  if (requestedService && select && allowedServices.has(requestedService)) {
-    select.value = requestedService;
-  }
-}
 
 const getRecentSubmissions = () => {
   try {
@@ -119,13 +111,7 @@ form?.addEventListener('submit', (event) => {
   const ubicacion = cleanSingleLine(data.get('ubicacion'), 120);
   const mensaje = cleanMultiline(data.get('mensaje'), 1800);
 
-  if (
-    nombre.length < 2 ||
-    mensaje.length < 10 ||
-    !isValidEmail(email) ||
-    !isValidPhone(telefono) ||
-    !allowedServices.has(servicio)
-  ) {
+  if (nombre.length < 2 || mensaje.length < 10 || !isValidEmail(email) || !isValidPhone(telefono) || !allowedServices.has(servicio)) {
     if (note) note.textContent = 'Revisa los datos del formulario antes de continuar.';
     return;
   }
@@ -193,6 +179,7 @@ if (!reduceMotion) {
 
   updateParallax();
 }
+
 
 const shareButtons = document.querySelectorAll<HTMLButtonElement>('[data-share-project]');
 shareButtons.forEach((button) => {
