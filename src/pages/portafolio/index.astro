@@ -44,7 +44,7 @@ const visualItems = projects.map((project) => ({
       <a class="portfolio-space__brand" href={withBase('/')} aria-label="Volver al sitio de Rizzoma">
         <img src={withBase(site.brand.wordmark)} alt="Rizzoma" width="900" height="200" />
       </a>
-      <span class="portfolio-space__mode">Selected works / Rizzoma Arquitectura</span>
+      <span class="portfolio-space__mode">Portafolio · Estudio · Proyectos</span>
       <div class="portfolio-space__top-actions">
         <button class="portfolio-space__sound" type="button" data-space-sound aria-pressed="true" title="Repetir efecto con sonido">
           Sonido <span aria-hidden="true">↻</span>
@@ -53,13 +53,11 @@ const visualItems = projects.map((project) => ({
       </div>
     </div>
 
+    <aside class="portfolio-space__editorial" aria-label="Introducción al portafolio"><p>Portafolio / Rizzoma</p><h1>Obras<br />seleccionadas<span>.</span></h1><div class="portfolio-space__gold-rule"></div><p class="portfolio-space__editorial-copy">Arquitectura, visualización y relaciones entre espacio, materia y territorio.</p></aside>
+
     <div class="portfolio-space__stage" data-space-stage>
       <div class="portfolio-space__world" data-space-world>
-        <div class="portfolio-space__center-mark" aria-hidden="true">
-          <img src={withBase(site.brand.monogram)} alt="" width="160" height="160" />
-          <span>Selected works</span>
-          <small>Rizzoma / Medellín</small>
-        </div>
+        <div class="portfolio-space__center-mark" aria-hidden="true"><span>Arquitectura<br />·<br />Paisaje</span></div>
         {visualItems.map((item, index) => {
           const spec = finalSpecs[index];
           return (
@@ -97,7 +95,7 @@ const visualItems = projects.map((project) => ({
               </div>
               <div class="portfolio-space__caption" aria-hidden="true">
                 <span>{String(index + 1).padStart(2, '0')} · {item.title}</span>
-                <span>{item.category}</span>
+                <span>Explorar ↗</span>
               </div>
             </button>
           );
