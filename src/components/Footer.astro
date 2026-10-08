@@ -2,25 +2,18 @@
 import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
 ---
-<footer class="site-footer">
+<footer class="site-footer rizzoma-footer">
   <div class="footer-inner">
     <div class="footer-signature" aria-label="Rizzoma Arquitectura">
       <img class="footer-wordmark-image" src={withBase(site.brand.wordmark)} alt="Rizzoma" width="1000" height="220" loading="lazy" />
-      <img class="footer-monogram-image" src={withBase(site.brand.monogram)} alt="" aria-hidden="true" width="280" height="280" loading="lazy" />
     </div>
 
-    <p class="footer-kicker">¿Tienes un proyecto en mente?</p>
-    <a href={withBase('/contacto/')} class="footer-cta">
-      <span>Conversemos.</span><span aria-hidden="true">↗</span>
-    </a>
+    <div class="rizzoma-footer-lead">
+      <p class="footer-kicker">Arquitectura · Diseño · Visualización</p>
+      <p>Práctica independiente dirigida por {site.founder.name}.</p>
+    </div>
 
-    <div class="footer-grid">
-      <div class="footer-brand-block">
-        <strong>{site.name}</strong>
-        <p>{site.tagline}</p>
-        <p class="footer-founder">Práctica independiente dirigida por {site.founder.name}.</p>
-      </div>
-
+    <div class="footer-grid rizzoma-footer-grid">
       <div class="footer-contact">
         <span>{site.location}</span>
         <a href={`mailto:${site.email}`}>{site.email}</a>
@@ -28,10 +21,15 @@ import { withBase } from '@/utils/paths';
       </div>
 
       <div class="footer-links">
-        <a href={withBase('/portafolio/')} target="_blank" rel="noopener noreferrer">Portafolio ↗</a>
-        <a href={withBase('/arquitectura-medellin/')}>Arquitectura en Medellín</a>
-        <a href={withBase('/visualizacion-arquitectonica-medellin/')}>Visualización arquitectónica</a>
+        <a href={withBase('/proyectos/')}>Proyectos</a>
+        <a href={withBase('/servicios/')}>Servicios</a>
+        <a href={withBase('/estudio/')}>Estudio</a>
+        <a href={withBase('/portafolio/')} target="_blank" rel="noopener noreferrer">Archivo visual ↗</a>
+      </div>
+
+      <div class="footer-links">
         <a href={site.instagramUrl} target="_blank" rel="noreferrer">Instagram ↗</a>
+        <a href={withBase('/contacto/')}>Contacto</a>
         <a href={withBase('/privacidad/')}>Privacidad</a>
         <span>© {new Date().getFullYear()} Rizzoma</span>
       </div>
