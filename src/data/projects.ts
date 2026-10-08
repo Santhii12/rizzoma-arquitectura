@@ -81,15 +81,6 @@ export const projects: Project[] = [
     available: false
   },
   {
-    slug: 'el-refugio',
-    title: 'El Refugio',
-    category: 'Diseño arquitectónico',
-    year: '2025',
-    location: 'San Vicente de Ferrer',
-    region: 'Antioquia',
-    available: false
-  },
-  {
     slug: 'oasis-del-bosque',
     title: 'Oasis del Bosque',
     category: 'Diseño arquitectónico',
