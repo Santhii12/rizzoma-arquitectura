@@ -66,22 +66,26 @@ const cards = projects.filter((p) => p.slug !== 'el-refugio');
     </dialog>
   </main>
   <script>
-    // Animate the approved layout without changing its final geometry.
+    // Editorial entrance: a slow, coherent spiral settling exactly into
+    // the already-approved card arrangement.
     const gallery = document.querySelector<HTMLElement>('.rz-portfolio-gallery');
     const cards = Array.from(document.querySelectorAll<HTMLElement>('.rz-project-card'));
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (gallery && cards.length && !prefersReducedMotion && 'animate' in HTMLElement.prototype) {
+    if (gallery && cards.length && !reducedMotion && 'animate' in HTMLElement.prototype) {
       const galleryBox = gallery.getBoundingClientRect();
       const centerX = galleryBox.left + galleryBox.width / 2;
       const centerY = galleryBox.top + galleryBox.height / 2;
       const compact = window.matchMedia('(max-width: 700px)').matches;
-      const duration = compact ? 960 : 1500;
-      const stagger = compact ? 65 : 90;
-      const turns = compact ? 1.15 : 2.25;
-      const initialAngle = -Math.PI / 2;
+      const duration = compact ? 2150 : 2850;
+      const stagger = compact ? 100 : 145;
+      const turns = compact ? 0.9 : 1.35;
+      const rotations = [-3, 2, 4, -2, 3, -4];
 
-      const keyframePath = (card: HTMLElement) => {
+      const ease = (t: number) =>
+        t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+      const keyframePath = (card: HTMLElement, index: number) => {
         const rect = card.getBoundingClientRect();
         const destinationX = rect.left + rect.width / 2;
         const destinationY = rect.top + rect.height / 2;
@@ -89,35 +93,36 @@ const cards = projects.filter((p) => p.slug !== 'el-refugio');
         const dy = destinationY - centerY;
         const radius = Math.hypot(dx, dy);
         const destinationAngle = Math.atan2(dy, dx);
-        const rotations = compact ? 0 : [-3, 2, 4, -2, 3, -4][cards.indexOf(card)] ?? 0;
+        const finalRotation = compact ? 0 : (rotations[index] ?? 0);
 
-        // The final point exactly matches the existing CSS card placement.
-        return Array.from({ length: 51 }, (_, step) => {
-          const t = step / 50;
-          const radial = t * t * (3 - 2 * t);
-          const angular = initialAngle + (Math.PI * 2 * turns) * t + (destinationAngle - initialAngle) * t;
-          const x = centerX + Math.cos(angular) * radius * radial;
-          const y = centerY + Math.sin(angular) * radius * radial;
-          const settle = t > 0.86 ? Math.sin((t - 0.86) / 0.14 * Math.PI) * 0.015 : 0;
-          const scale = 0.57 + t * 0.43 + settle;
-          const rotation = rotations + (1 - t) * 22;
+        return Array.from({ length: 101 }, (_, step) => {
+          const t = step / 100;
+          const p = ease(t);
+          // The angular offset tends to zero: no snapping on the last frame.
+          const angle = destinationAngle - (1 - p) * 2 * Math.PI * turns;
+          const radial = radius * p;
+          const x = centerX + Math.cos(angle) * radial;
+          const y = centerY + Math.sin(angle) * radial;
+          const scale = 0.74 + 0.26 * p;
+          const rotation = finalRotation + (1 - p) * 7;
+
           return {
             offset: t,
-            opacity: t < 0.08 ? t / 0.08 : 1,
+            opacity: t < 0.1 ? t / 0.1 : 1,
             transform: `translate(${x - destinationX}px, ${y - destinationY}px) rotate(${rotation}deg) scale(${scale})`
           };
         });
       };
 
-      // Gather layout geometry before any animation affects measurements.
       const paths = cards.map(keyframePath);
+      gallery.classList.add('rz-spiral-playing');
       const ongoing = cards.map((card, index) => card.animate(paths[index], {
         duration,
-        delay: index * stagger,
+        delay: 260 + index * stagger,
         easing: 'linear',
         fill: 'backwards'
       }));
-      gallery.classList.add('rz-spiral-playing');
+
       Promise.all(ongoing.map(animation => animation.finished.catch(() => null)))
         .then(() => {
           ongoing.forEach(animation => animation.cancel());
