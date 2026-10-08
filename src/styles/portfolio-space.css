@@ -62,3 +62,10 @@
 @media(max-width:700px){.rz-portfolio-header {min-height:66px;padding:12px 20px;} .rz-header-label{display:none;} .rz-portfolio-shell {padding:36px 20px;} .rz-portfolio-editorial{display:block;} .rz-portfolio-editorial h1{font-size:clamp(3.7rem,14vw,5.5rem);} .rz-portfolio-editorial>p:not(.rz-overline){max-width:36ch;} .rz-editorial-bottom{margin-top:20px;} .rz-portfolio-gallery { min-height:0;display:block;} .rz-rings,.rz-ring-center{display:none;} .rz-card-grid {height:auto;min-height:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:35px 16px;} .rz-project-card {position:static;width:100%;transform:none;} .rz-project-image {aspect-ratio:4/3;padding:5px;} .rz-card-caption h2{font-size:clamp(16px,4vw,22px);} .rz-card-caption p {font-size:8px;} .rz-portfolio-footer{font-size:8px;flex-wrap:wrap;gap:12px;} }
 @media(max-width:390px){.rz-card-grid {grid-template-columns:1fr;} .rz-project-image {aspect-ratio:16/10;} .rz-card-caption h2{font-size:22px;} }
 @media(prefers-reduced-motion:reduce){.rz-project-image,.rz-image-arrow{transition:none;}}
+
+/* Entrance spiral: cards settle into their existing editorial layout. */
+.rz-portfolio-gallery.rz-spiral-playing .rz-project-card { pointer-events: none; }
+.rz-project-card { will-change: auto; }
+@media(prefers-reduced-motion:reduce) {
+  .rz-project-card { animation: none !important; }
+}
