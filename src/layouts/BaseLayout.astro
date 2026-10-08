@@ -99,15 +99,7 @@ const coreGraph: JsonLd[] = [
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
-            name: 'Visualización arquitectónica',
-            url: new URL(withBase('/visualizacion-arquitectonica-medellin/'), baseSite).toString()
-          }
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Diseño arquitectónico',
+            name: 'Arquitectura',
             url: new URL(withBase('/arquitectura-medellin/'), baseSite).toString()
           }
         },
@@ -115,8 +107,16 @@ const coreGraph: JsonLd[] = [
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
-            name: 'Diseño y remodelación de interiores',
-            url: new URL(withBase('/servicios/#interiores'), baseSite).toString()
+            name: 'Diseño + visualización',
+            url: new URL(withBase('/servicios/'), baseSite).toString()
+          }
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Visualización arquitectónica y renders',
+            url: new URL(withBase('/visualizacion-arquitectonica-medellin/'), baseSite).toString()
           }
         }
       ]
