@@ -15,22 +15,34 @@ if (root && stage && world) {
   const focusLocationRow = focus?.querySelector<HTMLElement>('[data-focus-location-row]');
   const focusYear = focus?.querySelector<HTMLElement>('[data-focus-year]');
   const focusYearRow = focus?.querySelector<HTMLElement>('[data-focus-year-row]');
+  const focusSections = focus?.querySelector<HTMLElement>('[data-focus-sections]');
   const focusLink = focus?.querySelector<HTMLAnchorElement>('[data-focus-link]');
   const focusClose = focus?.querySelector<HTMLButtonElement>('[data-focus-close]');
 
-  const backLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-back-site]'));
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const worldWidth = 1500;
-  const worldHeight = 900;
+  const worldWidth = 1200;
+  const worldHeight = 720;
   const centerX = worldWidth / 2;
   const centerY = worldHeight / 2;
 
-  const holdDuration = reduceMotion ? 0 : 650;
-  const itemDelay = reduceMotion ? 0 : 115;
-  const moveDuration = reduceMotion ? 1 : 1650;
-  const spiralTurns = 2.15;
+  const holdDuration = reduceMotion ? 0 : 620;
+  const itemDelay = reduceMotion ? 0 : 105;
+  const moveDuration = reduceMotion ? 1 : 1550;
+  const spiralTurns = 2.05;
   const animationStart = performance.now();
+
+  let fitScale = 1;
+  let panX = 0;
+  let panY = 0;
+  let dragging = false;
+  let dragMoved = false;
+  let activePointer: number | null = null;
+  let startPointerX = 0;
+  let startPointerY = 0;
+  let startPanX = 0;
+  let startPanY = 0;
+  let suppressClickUntil = 0;
 
   const clamp = (value: number, min: number, max: number) =>
     Math.min(max, Math.max(min, value));
@@ -38,16 +50,26 @@ if (root && stage && world) {
   const easeOutQuint = (value: number) =>
     1 - Math.pow(1 - value, 5);
 
-  const fitWorldToStage = () => {
+  const renderBoardTransform = () => {
+    world.style.transform =
+      `translate3d(${panX}px, ${panY}px, 0) scale(${fitScale})`;
+  };
+
+  const fitWorldToStage = (resetPan = false) => {
     const rect = stage.getBoundingClientRect();
-    const horizontalPadding = window.innerWidth < 600 ? 12 : 34;
-    const verticalPadding = window.innerWidth < 600 ? 22 : 36;
+    const horizontalPadding = window.innerWidth < 600 ? 28 : 84;
+    const verticalPadding = window.innerWidth < 600 ? 36 : 72;
 
     const scaleX = Math.max(0.1, (rect.width - horizontalPadding * 2) / worldWidth);
     const scaleY = Math.max(0.1, (rect.height - verticalPadding * 2) / worldHeight);
-    const fit = Math.min(scaleX, scaleY, 1);
+    fitScale = Math.min(scaleX, scaleY, 1);
 
-    world.style.setProperty('--portfolio-fit-scale', String(fit));
+    if (resetPan) {
+      panX = 0;
+      panY = 0;
+    }
+
+    renderBoardTransform();
   };
 
   const renderInitialStack = () => {
@@ -56,7 +78,8 @@ if (root && stage && world) {
       item.style.top = `${centerY}px`;
       item.style.opacity = '1';
       item.style.zIndex = String(100 - index);
-      item.style.transform = `translate(-50%, -50%) scale(${1 - index * 0.006}) rotate(${index % 2 === 0 ? -.25 : .25}deg)`;
+      item.style.transform =
+        `translate(-50%, -50%) scale(${1 - index * 0.008}) rotate(${index % 2 === 0 ? -.4 : .4}deg)`;
     });
   };
 
@@ -71,7 +94,8 @@ if (root && stage && world) {
       item.style.top = `${finalY}px`;
       item.style.opacity = '1';
       item.style.zIndex = String(finalZ);
-      item.style.transform = `translate(-50%, -50%) scale(1) rotate(${finalRotate}deg)`;
+      item.style.transform =
+        `translate(-50%, -50%) scale(1) rotate(${finalRotate}deg)`;
     });
 
     root.classList.remove('is-entry-playing');
@@ -95,7 +119,6 @@ if (root && stage && world) {
       if (progress < 1) complete = false;
 
       const eased = easeOutQuint(progress);
-
       const finalX = Number(item.dataset.finalX ?? centerX);
       const finalY = Number(item.dataset.finalY ?? centerY);
       const finalRotate = Number(item.dataset.finalRotate ?? 0);
@@ -106,22 +129,23 @@ if (root && stage && world) {
       const radius = Math.hypot(dx, dy);
       const finalAngle = Math.atan2(dy, dx);
 
-      const delayedTurns = index === 0 ? spiralTurns + .32 : spiralTurns;
-      const angle = finalAngle - (1 - eased) * Math.PI * 2 * delayedTurns;
+      const turns = index === 0 ? spiralTurns + .28 : spiralTurns;
+      const angle = finalAngle - (1 - eased) * Math.PI * 2 * turns;
       const currentRadius = radius * eased;
 
       const x = centerX + Math.cos(angle) * currentRadius;
       const y = centerY + Math.sin(angle) * currentRadius;
-
-      const trailScale = .86 + eased * .14;
-      const rotation = finalRotate * eased + (1 - eased) * (index === 0 ? -7 : -12 - index * .8);
-      const opacity = progress <= 0 ? 1 : .82 + eased * .18;
+      const scale = .84 + eased * .16;
+      const rotation =
+        finalRotate * eased +
+        (1 - eased) * (index === 0 ? -6 : -11 - index * .65);
 
       item.style.left = `${x}px`;
       item.style.top = `${y}px`;
-      item.style.opacity = String(opacity);
+      item.style.opacity = String(.84 + eased * .16);
       item.style.zIndex = String(progress < 1 ? 120 - index : finalZ);
-      item.style.transform = `translate(-50%, -50%) scale(${trailScale}) rotate(${rotation}deg)`;
+      item.style.transform =
+        `translate(-50%, -50%) scale(${scale}) rotate(${rotation}deg)`;
     });
 
     if (!complete) {
@@ -170,6 +194,41 @@ if (root && stage && world) {
       focusYearRow.hidden = !year;
     }
 
+    if (focusSections) {
+      focusSections.replaceChildren();
+
+      try {
+        const sections = JSON.parse(item.dataset.sections || '[]') as Array<{
+          title?: string;
+          text?: string;
+        }>;
+
+        sections.forEach((section) => {
+          if (!section?.title && !section?.text) return;
+
+          const article = document.createElement('article');
+
+          if (section.title) {
+            const heading = document.createElement('h3');
+            heading.textContent = section.title;
+            article.appendChild(heading);
+          }
+
+          if (section.text) {
+            const paragraph = document.createElement('p');
+            paragraph.textContent = section.text;
+            article.appendChild(paragraph);
+          }
+
+          focusSections.appendChild(article);
+        });
+
+        focusSections.hidden = sections.length === 0;
+      } catch {
+        focusSections.hidden = true;
+      }
+    }
+
     focusVisual.replaceChildren();
 
     if (image) {
@@ -212,8 +271,67 @@ if (root && stage && world) {
     focus.setAttribute('aria-hidden', 'true');
   };
 
+  stage.addEventListener('pointerdown', (event) => {
+    if (!root.classList.contains('is-entry-complete')) return;
+    if (event.button !== 0 && event.pointerType === 'mouse') return;
+
+    dragging = true;
+    dragMoved = false;
+    activePointer = event.pointerId;
+    startPointerX = event.clientX;
+    startPointerY = event.clientY;
+    startPanX = panX;
+    startPanY = panY;
+
+    stage.setPointerCapture(event.pointerId);
+    root.classList.add('is-board-dragging');
+  });
+
+  stage.addEventListener('pointermove', (event) => {
+    if (!dragging || activePointer !== event.pointerId) return;
+
+    const dx = event.clientX - startPointerX;
+    const dy = event.clientY - startPointerY;
+
+    if (Math.hypot(dx, dy) > 5) {
+      dragMoved = true;
+    }
+
+    if (!dragMoved) return;
+
+    panX = startPanX + dx;
+    panY = startPanY + dy;
+    renderBoardTransform();
+  });
+
+  const endDrag = (event: PointerEvent) => {
+    if (!dragging || activePointer !== event.pointerId) return;
+
+    if (dragMoved) {
+      suppressClickUntil = performance.now() + 260;
+    }
+
+    dragging = false;
+    activePointer = null;
+    root.classList.remove('is-board-dragging');
+
+    if (stage.hasPointerCapture(event.pointerId)) {
+      stage.releasePointerCapture(event.pointerId);
+    }
+  };
+
+  stage.addEventListener('pointerup', endDrag);
+  stage.addEventListener('pointercancel', endDrag);
+
   items.forEach((item) => {
-    item.addEventListener('click', () => openFocus(item));
+    item.addEventListener('click', (event) => {
+      if (performance.now() < suppressClickUntil) {
+        event.preventDefault();
+        return;
+      }
+
+      openFocus(item);
+    });
   });
 
   focusClose?.addEventListener('click', closeFocus);
@@ -222,39 +340,13 @@ if (root && stage && world) {
     if (event.target === focus) closeFocus();
   });
 
-  backLinks.forEach((link) => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      const destination = link.href;
-
-      if (window.opener && !window.opener.closed) {
-        try {
-          window.opener.focus();
-          window.close();
-
-          window.setTimeout(() => {
-            window.location.assign(destination);
-          }, 160);
-          return;
-        } catch {
-          window.location.assign(destination);
-          return;
-        }
-      }
-
-      window.location.assign(destination);
-    });
-  });
-
   window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') closeFocus();
   });
 
-  window.addEventListener('resize', fitWorldToStage);
+  window.addEventListener('resize', () => fitWorldToStage(false));
 
-  fitWorldToStage();
+  fitWorldToStage(true);
   renderInitialStack();
 
   if (reduceMotion) {
