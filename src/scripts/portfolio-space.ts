@@ -383,8 +383,8 @@ if (root && stage && world) {
     startPanX = panX;
     startPanY = panY;
 
-    stage.setPointerCapture(event.pointerId);
-    root.classList.add('is-board-dragging');
+    // Do not capture on pointerdown: capture retargets normal clicks away
+    // from the project card and prevents its click handler from running.
   });
 
   stage.addEventListener('pointermove', (event) => {
@@ -393,8 +393,10 @@ if (root && stage && world) {
     const dx = event.clientX - startPointerX;
     const dy = event.clientY - startPointerY;
 
-    if (Math.hypot(dx, dy) > 5) {
+    if (!dragMoved && Math.hypot(dx, dy) > 7) {
       dragMoved = true;
+      stage.setPointerCapture(event.pointerId);
+      root.classList.add('is-board-dragging');
     }
 
     if (!dragMoved) return;
