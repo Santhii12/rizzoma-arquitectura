@@ -1,54 +1,35 @@
 ---
 import PortfolioLayout from '@/layouts/PortfolioLayout.astro';
-import { projects, featuredProject } from '@/data/projects';
+import { projects } from '@/data/projects';
 import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
 
-const galleryImages = featuredProject?.gallery ?? [];
-const otherProjects = projects.filter((project) => project.slug !== featuredProject?.slug);
-
 const finalSpecs = [
-  { x: 750, y: 285, w: 360, h: 255, r: -1, z: 40 },
-  { x: 475, y: 250, w: 175, h: 235, r: -4, z: 22 },
-  { x: 1030, y: 250, w: 170, h: 225, r: 4, z: 21 },
-  { x: 1205, y: 465, w: 245, h: 170, r: 2, z: 20 },
-  { x: 1010, y: 675, w: 245, h: 170, r: -3, z: 25 },
-  { x: 720, y: 610, w: 250, h: 185, r: 2, z: 30 },
-  { x: 430, y: 650, w: 225, h: 170, r: -3, z: 19 },
-  { x: 265, y: 455, w: 180, h: 240, r: -4, z: 18 },
-  { x: 300, y: 185, w: 180, h: 135, r: 3, z: 17 },
-  { x: 1220, y: 180, w: 170, h: 230, r: 4, z: 16 },
-  { x: 1270, y: 720, w: 190, h: 245, r: -2, z: 15 }
+  { x: 600, y: 340, w: 330, h: 235, r: -1, z: 40 },
+  { x: 315, y: 225, w: 205, h: 255, r: -4, z: 22 },
+  { x: 885, y: 210, w: 220, h: 165, r: 3, z: 21 },
+  { x: 1010, y: 465, w: 205, h: 260, r: 4, z: 20 },
+  { x: 760, y: 565, w: 250, h: 180, r: -3, z: 25 },
+  { x: 455, y: 570, w: 235, h: 175, r: 2, z: 24 },
+  { x: 190, y: 465, w: 195, h: 245, r: -3, z: 19 }
 ];
 
-const visualItems = [
-  ...galleryImages.map((image) => ({
-    image,
-    title: featuredProject?.title ?? 'Proyecto Rizzoma',
-    category: featuredProject?.category ?? '',
-    location: featuredProject?.location ?? '',
-    region: featuredProject?.region ?? '',
-    year: featuredProject?.year ?? '',
-    statement: featuredProject?.statement ?? '',
-    text: featuredProject?.intro ?? featuredProject?.statement ?? '',
-    href: featuredProject ? withBase(`/proyectos/${featuredProject.slug}/`) : '',
-    kind: 'image'
-  })),
-  ...otherProjects.map((project) => ({
-    image: project.cover ?? '',
-    title: project.title,
-    category: project.category,
-    location: project.location ?? '',
-    region: project.region ?? '',
-    year: project.year ?? '',
-    statement: project.statement ?? '',
-    text: project.intro ?? (project.available
+const visualItems = projects.map((project) => ({
+  image: project.cover ?? '',
+  title: project.title,
+  category: project.category,
+  location: project.location ?? '',
+  region: project.region ?? '',
+  year: project.year ?? '',
+  statement: project.statement ?? '',
+  text: project.intro ?? (
+    project.available
       ? 'Proyecto de Rizzoma Arquitectura.'
-      : 'Proyecto perteneciente al archivo Rizzoma. La documentación visual completa se incorporará al portafolio.'),
-    href: project.available ? withBase(`/proyectos/${project.slug}/`) : '',
-    kind: 'project'
-  }))
-].slice(0, finalSpecs.length);
+      : 'Proyecto perteneciente al archivo Rizzoma. La información y documentación visual completa se incorporará cuando esté confirmada.'
+  ),
+  sections: project.sections ?? [],
+  href: project.available ? withBase(`/proyectos/${project.slug}/`) : ''
+}));
 ---
 <PortfolioLayout
   title="Portafolio | Rizzoma Arquitectura"
@@ -61,11 +42,11 @@ const visualItems = [
     aria-label="Portafolio interactivo de Rizzoma Arquitectura"
   >
     <div class="portfolio-space__topbar">
-      <a class="portfolio-space__brand" href={withBase('/')} data-back-site aria-label="Volver al sitio de Rizzoma">
+      <a class="portfolio-space__brand" href={withBase('/')} aria-label="Volver al sitio de Rizzoma">
         <img src={withBase(site.brand.wordmark)} alt="Rizzoma" width="900" height="200" />
       </a>
-      <span class="portfolio-space__mode">Portafolio / Selecciona una pieza</span>
-      <a class="portfolio-space__back" href={withBase('/')} data-back-site>Volver al sitio ↙</a>
+      <span class="portfolio-space__mode">Portafolio / Selecciona o arrastra el tablero</span>
+      <a class="portfolio-space__back" href={withBase('/')}>Volver al sitio ↙</a>
     </div>
 
     <div class="portfolio-space__stage" data-space-stage>
@@ -90,13 +71,14 @@ const visualItems = [
               data-year={item.year}
               data-statement={item.statement}
               data-text={item.text}
+              data-sections={JSON.stringify(item.sections)}
               data-href={item.href}
               style={`--w:${spec.w}px;--h:${spec.h}px;`}
               aria-label={`Abrir información de ${item.title}`}
             >
               <div class="portfolio-space__thumb">
                 {item.image ? (
-                  <img src={item.image} alt="" loading={index < 5 ? 'eager' : 'lazy'} decoding="async" />
+                  <img src={item.image} alt="" loading={index < 3 ? 'eager' : 'lazy'} decoding="async" />
                 ) : (
                   <div class="portfolio-space__placeholder">
                     <img src={withBase(site.brand.monogram)} alt="" aria-hidden="true" width="200" height="200" />
@@ -106,7 +88,7 @@ const visualItems = [
               </div>
               <div class="portfolio-space__caption" aria-hidden="true">
                 <span>{String(index + 1).padStart(2, '0')} · {item.title}</span>
-                <span>{item.kind === 'image' ? 'Imagen' : 'Proyecto'}</span>
+                <span>{item.category}</span>
               </div>
             </button>
           );
@@ -115,11 +97,11 @@ const visualItems = [
     </div>
 
     <div class="portfolio-space__index">
-      {String(visualItems.length).padStart(2, '0')} piezas / Rizzoma
+      {String(visualItems.length).padStart(2, '0')} proyectos / Rizzoma
     </div>
 
     <div class="portfolio-space__hint">
-      La secuencia se organiza una sola vez · selecciona cualquier pieza
+      Clic para abrir · mantén clic y arrastra para moverte
     </div>
 
     <section
@@ -151,6 +133,7 @@ const visualItems = [
           </dl>
 
           <p class="portfolio-space__focus-description" data-focus-text></p>
+          <div class="portfolio-space__focus-sections" data-focus-sections></div>
           <a class="portfolio-space__focus-link" data-focus-link href="#">Ver proyecto completo ↗</a>
         </div>
       </div>
