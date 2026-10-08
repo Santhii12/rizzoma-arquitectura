@@ -3,7 +3,7 @@ import { withBase } from '@/utils/paths';
 import { site } from '@/config/site';
 const pathname = Astro.url.pathname;
 const nav = [
-  { href: withBase('/portafolio/'), label: 'Portafolio ↗', externalTab: true },
+  { href: withBase('/portafolio/'), label: 'Portafolio' },
   { href: withBase('/servicios/'), label: 'Servicios' },
   { href: withBase('/estudio/'), label: 'Estudio' }
 ];
@@ -22,12 +22,7 @@ const isActive = (href: string) => pathname.startsWith(href);
 
   <nav id="main-nav" class="main-nav" aria-label="Navegación principal" data-menu>
     {nav.map((item) => (
-      <a
-        href={item.href}
-        target={item.externalTab ? '_blank' : undefined}
-        rel={item.externalTab ? 'noopener noreferrer' : undefined}
-        aria-current={!item.externalTab && isActive(item.href) ? 'page' : undefined}
-      >
+      <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
         {item.label}
       </a>
     ))}
