@@ -541,3 +541,58 @@
     padding-right: 0;
   }
 }
+
+
+/* Reference burst + Howler controls */
+.portfolio-space__top-actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.portfolio-space__sound {
+  border: 0;
+  padding: 9px 0;
+  background: transparent;
+  color: rgba(23,24,19,.58);
+  cursor: pointer;
+  font: inherit;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+.portfolio-space__sound span {
+  display: inline-block;
+  margin-left: 4px;
+  color: #b69d69;
+  transition: transform .3s cubic-bezier(.16,1,.3,1);
+}
+
+.portfolio-space__sound:hover span,
+.portfolio-space__sound:focus-visible span {
+  transform: rotate(135deg);
+}
+
+.portfolio-space.is-sound-blocked .portfolio-space__sound {
+  color: #8f6f31;
+}
+
+.portfolio-space__sound.is-muted {
+  opacity: .45;
+}
+
+.is-entry-playing .portfolio-space__item:not(:first-child) .portfolio-space__caption {
+  opacity: 0;
+}
+
+@media (max-width: 800px) {
+  .portfolio-space__top-actions {
+    gap: 12px;
+  }
+
+  .portfolio-space__sound {
+    display: none;
+  }
+}
