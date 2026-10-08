@@ -95,7 +95,7 @@ const schema = [
         </div>}
       </section>
     )}
-    <section class="rizzoma-case-overview section-pad">
+    <section class="rizzoma-case-overview section-pad" aria-label="Concepto y datos del proyecto">
       <div><p class="eyebrow">01 / Concepto</p><h2>El proyecto.</h2></div>
       <div><p class="rizzoma-case-intro">{project.intro ?? project.statement ?? 'Caso del archivo de Rizzoma Arquitectura.'}</p>
         <dl class="rizzoma-case-facts">
@@ -107,6 +107,21 @@ const schema = [
         </dl>
       </div>
     </section>
+    {project.slug === 'casa-patio-horizonte' && (
+      <section class="rizzoma-case-future-gallery section-pad" aria-label="Espacio para próximas imágenes del proyecto">
+        <div class="rizzoma-case-future-heading">
+          <div><p class="eyebrow">02 / Archivo visual</p><h2>Otras miradas<br />del proyecto.</h2></div>
+          <p>Seis imágenes adicionales se incorporarán a esta sección cuando estén disponibles.</p>
+        </div>
+        <div class="rizzoma-case-future-grid">
+          {Array.from({length:6},(_,i)=>(
+            <div class="rizzoma-case-future-slot" aria-label={`Espacio reservado para imagen ${i+1}`}>
+              <span>{String(i+1).padStart(2,'0')}</span><span>Imagen pendiente</span>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
     {project.sections?.length > 0 && <section class="rizzoma-case-chapters section-pad no-top">
       {project.sections.map((section,i)=><article class="rizzoma-case-chapter"><span>{String(i+2).padStart(2,'0')}</span><h2>{section.title}</h2><p>{section.text}</p></article>)}
     </section>}
@@ -170,7 +185,42 @@ const schema = [
     .rizzoma-case-end h2{max-width:11ch}
     .rizzoma-case-end-actions{display:flex;flex-wrap:wrap;gap:16px 40px;margin-top:40px}
     .rizzoma-case-end-actions a{padding-bottom:10px;border-bottom:1px solid #cfb77f;color:#eadbb7;font-size:11px;text-transform:uppercase;letter-spacing:.1em}
+
+    /* Acercar el bloque conceptual a la galería y reducir el gran vacío. */
+    .rizzoma-case-gallery.section-pad{padding-bottom:clamp(12px,2vw,28px)}
+    .rizzoma-case-thumbs{margin-top:8px}
+    .rizzoma-case-overview.section-pad{
+      margin:clamp(10px,1.6vw,22px) var(--pad,clamp(22px,5vw,78px)) 0;
+      padding:clamp(35px,5vw,75px);
+      background:#4d4c3f;
+      color:#f2e9d5;
+      display:grid;
+      grid-template-columns:.75fr 1.25fr;
+      gap:clamp(30px,5vw,85px);
+      align-items:start;
+    }
+    .rizzoma-case-overview .eyebrow{color:#d5be8b}
+    .rizzoma-case-overview h2{color:#f2e9d5;margin:12px 0}
+    .rizzoma-case-overview .rizzoma-case-intro{color:#f2e9d5}
+    .rizzoma-case-overview .rizzoma-case-facts{border-color:rgba(213,190,139,.28);margin-top:30px}
+    .rizzoma-case-overview .rizzoma-case-facts>div{border-color:rgba(213,190,139,.25)}
+    .rizzoma-case-overview .rizzoma-case-facts dt{color:#d5be8b}
+    .rizzoma-case-overview .rizzoma-case-facts dd{color:#f2e9d5}
+    .rizzoma-case-future-gallery.section-pad{padding-top:clamp(55px,7vw,110px);padding-bottom:clamp(60px,7vw,110px)}
+    .rizzoma-case-future-heading{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:32px}
+    .rizzoma-case-future-heading h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.8rem,5.3vw,6rem);line-height:.9;letter-spacing:-.05em;margin:18px 0 0}
+    .rizzoma-case-future-heading>p{max-width:30ch;font-size:13px;line-height:1.6;color:#817a6b}
+    .rizzoma-case-future-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .rizzoma-case-future-slot{aspect-ratio:4/3;display:flex;flex-direction:column;justify-content:space-between;padding:18px;border:1px solid #c9beaa;background:#eae4d7;color:#988b70}
+    .rizzoma-case-future-slot span:first-child{font-family:var(--serif);font-size:22px}
+    .rizzoma-case-future-slot span:last-child{font-size:9px;letter-spacing:.13em;text-transform:uppercase}
+    .rizzoma-case-future-gallery+.rizzoma-case-chapters.section-pad{padding-top:30px}
     @media(max-width:800px){
+      .rizzoma-case-overview.section-pad{grid-template-columns:1fr;margin:14px 18px 0;padding:34px 25px}
+      .rizzoma-case-future-heading{align-items:start;flex-direction:column;gap:12px}
+      .rizzoma-case-future-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+      .rizzoma-case-future-slot{padding:13px}
+
       .rizzoma-case-heading,.rizzoma-case-overview{grid-template-columns:1fr;gap:24px}
       .rizzoma-case-heading h1{font-size:clamp(3.4rem,13vw,6rem)}
       .rizzoma-case-strip{gap:8px}
