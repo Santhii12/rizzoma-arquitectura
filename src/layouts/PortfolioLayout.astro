@@ -1,0 +1,41 @@
+---
+import { site } from '@/config/site';
+import { withBase } from '@/utils/paths';
+import '@/styles/global-1.css';
+import '@/styles/global-2.css';
+import '@/styles/global-3.css';
+import '@/styles/global-4.css';
+import '@/styles/global-5.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Portafolio | Rizzoma Arquitectura',
+  description = 'Portafolio visual de arquitectura y visualización de Rizzoma Arquitectura.'
+} = Astro.props;
+
+const baseSite = Astro.site ?? new URL(site.domain);
+const canonical = new URL(Astro.url.pathname, baseSite);
+---
+<!doctype html>
+<html lang="es-CO">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#4d4c3f" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, follow" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <link rel="apple-touch-icon" href={withBase(site.brand.monogram)} />
+    <title>{title}</title>
+  </head>
+  <body class="portfolio-experience-body">
+    <a class="skip-link" href="#portfolio-content">Ir al portafolio</a>
+    <slot />
+  </body>
+</html>
