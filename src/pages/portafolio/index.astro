@@ -66,57 +66,51 @@ const cards = projects.filter((p) => p.slug !== 'el-refugio');
     </dialog>
   </main>
   <script>
-    // A single shared spiral path: cards follow the leader in order,
-    // then smoothly branch into their individual, unchanged CSS positions.
+    // Ordered outward expansion: a short curved arc per card, with no
+    // complete turns and no movement after the final CSS position.
     const gallery = document.querySelector<HTMLElement>('.rz-portfolio-gallery');
     const cards = Array.from(document.querySelectorAll<HTMLElement>('.rz-project-card'));
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (gallery && cards.length && !reducedMotion && 'animate' in HTMLElement.prototype) {
-      const galleryBox = gallery.getBoundingClientRect();
-      const centerX = galleryBox.left + galleryBox.width / 2;
-      const centerY = galleryBox.top + galleryBox.height / 2;
+      const rect = gallery.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
       const compact = window.matchMedia('(max-width: 700px)').matches;
-      const duration = compact ? 2350 : 3100;
-      const stagger = compact ? 160 : 200;
-      const rotations = [-3, 2, 4, -2, 3, -4];
-      const smooth = (t: number) => {
-        const x = Math.max(0, Math.min(1, t));
-        return x * x * (3 - 2 * x);
+      const duration = compact ? 1450 : 1700;
+      const stagger = compact ? 130 : 160;
+      const smooth = (v: number) => {
+        const t = Math.max(0, Math.min(1, v));
+        return t * t * (3 - 2 * t);
       };
 
-      // Read every destination before animation begins.
-      const destinations = cards.map(card => {
-        const rect = card.getBoundingClientRect();
-        return {
-          x: rect.left + rect.width / 2,
-          y: rect.top + rect.height / 2
-        };
-      });
-      const ringRadius = Math.min(galleryBox.width * .31, galleryBox.height * .33);
-      const sharedPath = (p: number) => {
-        const angle = -Math.PI / 2 + p * Math.PI * (compact ? 2.6 : 3.7);
-        const radius = ringRadius * smooth(p);
-        return {
-          x: centerX + Math.cos(angle) * radius,
-          y: centerY + Math.sin(angle) * radius
-        };
-      };
+      // All coordinates are measured before animation starts. Each card
+      // grows outward on a gentle clockwise arc ending at its own position.
+      const paths = cards.map(card => {
+        const target = card.getBoundingClientRect();
+        const destX = target.left + target.width / 2;
+        const destY = target.top + target.height / 2;
+        const dx = destX - centerX;
+        const dy = destY - centerY;
+        const distance = Math.hypot(dx, dy);
+        const endAngle = Math.atan2(dy, dx);
+        const arc = compact ? 0.48 : 0.68; // radians, far less than one revolution
 
-      const paths = cards.map((card, index) => {
-        const destination = destinations[index];
-        const rotation = compact ? 0 : rotations[index] ?? 0;
-        return Array.from({ length: 121 }, (_, step) => {
-          const t = step / 120;
-          // First 76% is exactly the same trail for every project.
-          const trail = sharedPath(Math.min(t / .76, 1));
-          const settle = smooth((t - .76) / .24);
-          const x = trail.x + (destination.x - trail.x) * settle;
-          const y = trail.y + (destination.y - trail.y) * settle;
+        // CSS already applies the final tilt. Animate only the additional
+        // translation and scale using individual transform properties, so
+        // there is never a rotation jump at the end.
+        return Array.from({ length: 81 }, (_, step) => {
+          const t = step / 80;
+          const p = smooth(t);
+          const angle = endAngle - arc * (1 - p);
+          const radius = distance * p;
+          const x = centerX + Math.cos(angle) * radius;
+          const y = centerY + Math.sin(angle) * radius;
           return {
             offset: t,
-            opacity: Math.min(1, t * 12),
-            transform: `translate(${x - destination.x}px, ${y - destination.y}px) rotate(${rotation + (1 - t) * 5}deg) scale(${.79 + .21 * smooth(t)})`
+            opacity: Math.min(1, t * 9),
+            translate: `${x - destX}px ${y - destY}px`,
+            scale: String(0.84 + 0.16 * p)
           };
         });
       });
@@ -124,15 +118,14 @@ const cards = projects.filter((p) => p.slug !== 'el-refugio');
       gallery.classList.add('rz-spiral-playing');
       const animations = cards.map((card, index) => card.animate(paths[index], {
         duration,
-        delay: 220 + index * stagger,
+        delay: 180 + index * stagger,
         easing: 'linear',
         fill: 'backwards'
       }));
-      Promise.all(animations.map(animation => animation.finished.catch(() => null)))
-        .then(() => {
-          animations.forEach(animation => animation.cancel());
-          gallery.classList.remove('rz-spiral-playing');
-        });
+      Promise.all(animations.map(animation => animation.finished.catch(() => null))).then(() => {
+        animations.forEach(animation => animation.cancel());
+        gallery.classList.remove('rz-spiral-playing');
+      });
     }
 
     const dialog = document.querySelector<HTMLDialogElement>('[data-archive-dialog]');
