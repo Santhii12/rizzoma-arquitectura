@@ -4,6 +4,7 @@ import ProjectCard from '@/components/ProjectCard.astro';
 import { projects, featuredProject } from '@/data/projects';
 import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
+import '@/styles/home-immersive.css';
 
 const archiveProjects = projects.filter((project) => !project.available).slice(0, 3);
 const baseSite = Astro.site ?? new URL(site.domain);
@@ -23,48 +24,31 @@ const schema = {
 };
 ---
 <BaseLayout schema={schema}>
-  <section class="hero hero-home">
-    <div class="hero-topline reveal">
-      <span>Estudio independiente</span>
-      <span>{site.location}</span>
-      <span>Arquitectura + visualización</span>
-    </div>
-
-    <div class="hero-title-wrap brand-hero-title">
-      <h1 class="sr-only">Rizzoma Arquitectura</h1>
-      <img
-        class="hero-wordmark-image hero-title"
-        data-hero-title
-        src={withBase(site.brand.wordmark)}
-        alt=""
-        width="1000"
-        height="220"
-        decoding="async"
-      />
-      <div class="hero-deck-wrap reveal">
-        <p class="hero-deck">Arquitectura y visualización con una mirada directa sobre lugar, materia y forma de habitar.</p>
-        <a class="hero-inline-link" href={withBase('/contacto/')}>Cuéntanos tu proyecto ↗</a>
+  <section class="rizzoma-immersive-hero" aria-label="Presentación de Rizzoma Arquitectura">
+    {featuredProject?.cover ? (
+      <div class="rizzoma-hero-media" data-ripple-hero>
+        <img src={featuredProject.cover} alt={`Arquitectura y paisaje en ${featuredProject.title}, Rizzoma Arquitectura`} fetchpriority="high" decoding="async" data-ripple-image />
+        <canvas class="rizzoma-hero-canvas" data-ripple-canvas aria-hidden="true"></canvas>
+      </div>
+    ) : <div class="rizzoma-hero-media rizzoma-hero-fallback"></div>}
+    <div class="rizzoma-hero-shade" aria-hidden="true"></div>
+    <div class="rizzoma-hero-content">
+      <p class="rizzoma-hero-overline">Taller y estudio de arquitectura · Medellín, Colombia</p>
+      <h1 class="rizzoma-hero-name">Rizzoma <em>Arquitectura.</em></h1>
+      <p class="rizzoma-hero-statement">Hay espacios que cambian la forma de habitar el mundo.</p>
+      <p class="rizzoma-hero-description">Diseño arquitectónico y visualización para proyectos en relación con el lugar, la materia y la vida.</p>
+      <div class="rizzoma-hero-actions">
+        <a href={withBase('/portafolio/')}>Explorar proyectos <span aria-hidden="true">↗</span></a>
+        <a href={withBase('/visualizacion-arquitectonica-medellin/')}>Solicitar visualización <span aria-hidden="true">↗</span></a>
       </div>
     </div>
-
-    {featuredProject?.cover && (
-      <a
-        href={withBase(`/proyectos/${featuredProject.slug}/`)}
-        class="hero-media reveal parallax-media"
-        aria-label={`Ver ${featuredProject.title}`}
-      >
-        <img
-          src={featuredProject.cover}
-          alt={`${featuredProject.title}, proyecto de Rizzoma`}
-          fetchpriority="high"
-          decoding="async"
-        />
-        <div class="hero-media-caption">
-          <span>{featuredProject.title}</span>
-          <span>{featuredProject.location} · {featuredProject.year}</span>
-        </div>
-      </a>
+    {featuredProject && (
+      <div class="rizzoma-hero-credit">
+        <span>Imagen / {featuredProject.title}</span>
+        <a href={withBase(`/proyectos/${featuredProject.slug}/`)}>Ver proyecto ↗</a>
+      </div>
     )}
+    <span class="rizzoma-hero-scroll" aria-hidden="true">DESCUBRIR ↓</span>
   </section>
 
   <section id="proyectos" class="portfolio-home section-pad">
@@ -166,4 +150,5 @@ const schema = {
       <a class="primary-link reveal" href={withBase('/contacto/')}>Hablar con Juan José <span aria-hidden="true">↗</span></a>
     </div>
   </section>
+  <script>import '@/scripts/hero-ripple';</script>
 </BaseLayout>
