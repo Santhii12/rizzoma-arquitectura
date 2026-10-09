@@ -8,6 +8,7 @@ import '@/styles/servicios-editorial.css';
 const baseSite = Astro.site ?? new URL(site.domain);
 const servicesUrl = new URL(withBase('/servicios/'), baseSite).toString();
 const cover = withBase('/images/studio/home/rizzoma-hero-portada.webp');
+const coverAbsoluteUrl = new URL(cover, baseSite).toString();
 const gallery = featuredProject?.gallery ?? [];
 const serviceLines = [
   {
@@ -107,7 +108,7 @@ const schema = [
   title="Servicios de arquitectura, renders y remodelación en Medellín | Rizzoma"
   description="Conoce las tres líneas de Rizzoma: visualización arquitectónica y renders, diseño arquitectónico y remodelación de espacios. Estudio independiente en Medellín."
   schema={schema}
-  image={cover}
+  image={coverAbsoluteUrl}
   imageAlt="Arquitectura contemporánea de Casa Patio Horizonte, archivo de Rizzoma"
 >
   <header class="rz-services-guide__hero" aria-labelledby="rz-services-page-title">
