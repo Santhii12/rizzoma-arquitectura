@@ -28,18 +28,20 @@
 .nuestra-mirada__title {
   margin: 0 0 clamp(36px, 4.5vw, 74px);
   max-width: 11.5ch;
-  font-family: "Instrument Sans", var(--sans, Arial, sans-serif);
+  font-family: "Soligant", var(--serif, Georgia, serif);
   font-weight: 400;
+  font-style: normal;
+  font-synthesis: none;
   font-size: clamp(3rem, 5.2vw, 6.6rem);
-  line-height: .98;
-  letter-spacing: -.057em;
+  line-height: 1.045;
+  letter-spacing: -.028em;
   text-wrap: balance;
 }
 .nuestra-mirada__title em {
-  font-family: var(--serif, Georgia, serif);
-  font-weight: 400;
-  font-style: italic;
-  letter-spacing: -.065em;
+  font-family: inherit;
+  font-weight: inherit;
+  font-style: normal;
+  letter-spacing: inherit;
 }
 .nuestra-mirada__body {
   max-width: 46ch;
@@ -118,7 +120,7 @@
     max-width: 14ch;
     margin-bottom: 32px;
     font-size: clamp(2.8rem, 9.3vw, 5.5rem);
-    line-height: 1.01;
+    line-height: 1.07;
     overflow-wrap: normal;
   }
   .nuestra-mirada__body { max-width: 56ch; font-size: 15px; line-height: 1.72; }
