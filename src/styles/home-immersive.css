@@ -52,49 +52,84 @@ body:has(.rizzoma-immersive-hero) .site-header .main-nav{color:#f2e9d5}
 .rizzoma-hero-overline,.rizzoma-hero-description,.rizzoma-hero-actions a,
 .rizzoma-hero-credit,.rizzoma-hero-scroll,
 body:has(.rizzoma-immersive-hero) .main-nav{
- font-family:"Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+ font-family:var(--sans);
  font-weight:400;
 }
-.rizzoma-hero-statement{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400;}
+.rizzoma-hero-statement{font-family:var(--sans);font-weight:400;}
 @media(max-width:900px){
  .rizzoma-hero-shade{background:linear-gradient(0deg,rgba(17,20,16,.58),rgba(17,20,16,.1) 85%),linear-gradient(90deg,rgba(17,20,16,.21),transparent);}
 }
 
-/* Restrict editorial type refinements to the homepage; the spiral is untouched. */
-/* Soligant belongs to the architectural headlines, not navigation or card labels. */
+/* v2 — Soligant only for the main conceptual wordmark.
+   Manrope is used for section titles, founder profile and the final invitation. */
+.rizzoma-hero-content .rizzoma-hero-name {
+  font-family: "Soligant", Georgia, serif;
+  font-weight: 400;
+  font-style: normal;
+  font-synthesis: none;
+}
+.rizzoma-hero-statement {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: clamp(1.3rem, 2.2vw, 2.35rem);
+  line-height: 1.2;
+  letter-spacing: -.03em;
+}
+.rizzoma-hero-overline,
+.rizzoma-hero-description,
+.rizzoma-hero-actions a,
+.rizzoma-hero-credit,
+.rizzoma-hero-scroll {
+  font-family: var(--sans);
+  font-weight: 400;
+}
+body:has(.rizzoma-immersive-hero) .main-nav {
+  font-family: var(--sans);
+  font-weight: 500;
+}
 body:has(.rizzoma-immersive-hero) .section-title,
+body:has(.rizzoma-immersive-hero) .services-compact-card h3,
+body:has(.rizzoma-immersive-hero) .portfolio-mini-copy h3,
 body:has(.rizzoma-immersive-hero) .studio-compact-copy h2,
-body:has(.rizzoma-immersive-hero) .closing-copy{
-  font-family:"Soligant","Iowan Old Style",Georgia,serif;
-  font-weight:400;
-  font-style:normal;
-  font-synthesis:none;
-  letter-spacing:-.025em;
-  line-height:1.05;
+body:has(.rizzoma-immersive-hero) .closing-copy {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-style: normal;
+  font-synthesis: none;
+  line-height: 1.07;
+  letter-spacing: -.052em;
 }
 body:has(.rizzoma-immersive-hero) .section-title {
-  max-width:100%;
-  font-size:clamp(2.7rem,5.6vw,6.5rem);
+  max-width: 100%;
+  font-size: clamp(2.8rem, 5.2vw, 6rem);
 }
-body:has(.rizzoma-immersive-hero) .services-compact-card h3,
-body:has(.rizzoma-immersive-hero) .portfolio-mini-copy h3 {
-  font-family:"Instrument Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-  font-weight:500;
-  letter-spacing:-.04em;
-  line-height:1.03;
+body:has(.rizzoma-immersive-hero) .studio-compact-copy h2 {
+  max-width: 16ch;
+  font-size: clamp(2.7rem, 4.25vw, 5.5rem);
+  line-height: 1.1;
 }
-@media (max-width:600px) {
+body:has(.rizzoma-immersive-hero) .home-contact-cta .closing-copy {
+  max-width: 19ch;
+  font-size: clamp(3.2rem, 6.2vw, 7rem);
+  line-height: 1.1;
+}
+@media (max-width: 760px) {
   body:has(.rizzoma-immersive-hero) .section-title {
-    font-size:clamp(2.8rem,10.5vw,4.2rem);
-    line-height:1.07;
-    overflow-wrap:normal;
+    font-size: clamp(2.4rem, 9.7vw, 4.25rem);
+    line-height: 1.08;
   }
-  body:has(.rizzoma-immersive-hero) .studio-compact-copy h2,
-  body:has(.rizzoma-immersive-hero) .closing-copy {
-    line-height:1.1;
-    overflow-wrap:normal;
+  body:has(.rizzoma-immersive-hero) .studio-compact-copy h2 {
+    max-width: 19ch;
+    font-size: clamp(2.35rem, 9.5vw, 4.2rem);
+    line-height: 1.11;
+  }
+  body:has(.rizzoma-immersive-hero) .home-contact-cta .closing-copy {
+    max-width: 20ch;
+    font-size: clamp(2.35rem, 9.3vw, 4.4rem);
+    line-height: 1.12;
   }
 }
+
 @media(max-width:600px){
   .rizzoma-hero-name{font-size:clamp(3.2rem,13vw,5.1rem);line-height:.94;}
   .rizzoma-hero-media>img,.rizzoma-hero-canvas{object-position:53% center;}
