@@ -143,3 +143,83 @@ button {
   .studio-compact-copy h2 { font-size: clamp(2.1rem, 9vw, 3rem); }
   .home-contact-cta .closing-copy { font-size: clamp(2.2rem, 9vw, 3.3rem); }
 }
+
+
+/* v2: architectural display headlines in Soligant */
+@font-face {
+  font-family: "Soligant";
+  src: url("../assets/fonts/soligant-headings-fixed.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+:root {
+  --display: "Soligant", Georgia, serif;
+}
+
+/* Main section headlines and editorial introductions.
+   Project/card names, navigation and descriptions remain Manrope. */
+.section-title,
+.nuestra-mirada__title,
+.studio-compact-copy h2,
+.home-contact-cta .closing-copy,
+.founder-preview-copy h2,
+.service-relationship-grid h2,
+.service-detail h2,
+.service-detail .service-heading,
+.page-title,
+.portfolio-page-heading h1,
+.legal-title,
+.founder-cta .closing-copy,
+.values-grid h3,
+.principle h3,
+.footer-cta,
+.rz-portfolio-editorial h1 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-style: normal;
+  font-synthesis: none;
+  letter-spacing: -.018em;
+  line-height: 1.09;
+  overflow-wrap: normal;
+}
+.section-title {
+  max-width: 100%;
+  font-size: clamp(2.85rem, 5.4vw, 6.3rem);
+}
+.studio-compact-copy h2 {
+  max-width: 16ch;
+  font-size: clamp(2.8rem, 4.5vw, 5.5rem);
+  line-height: 1.1;
+}
+.home-contact-cta .closing-copy {
+  max-width: 17ch;
+  font-size: clamp(3rem, 6.1vw, 7rem);
+  line-height: 1.09;
+}
+.rz-portfolio-editorial h1 {
+  line-height: 1.12;
+  letter-spacing: -.024em;
+}
+@media (max-width: 760px) {
+  .section-title { font-size: clamp(2.7rem, 10.4vw, 4.4rem); line-height: 1.12; }
+  .studio-compact-copy h2 {
+    max-width: 19ch;
+    font-size: clamp(2.45rem, 9.4vw, 4.45rem);
+    line-height: 1.12;
+  }
+  .home-contact-cta .closing-copy {
+    max-width: 18ch;
+    font-size: clamp(2.5rem, 9.5vw, 4.5rem);
+    line-height: 1.13;
+  }
+  .rz-portfolio-editorial h1 {
+    font-size: clamp(3.35rem, 12vw, 5.25rem);
+    line-height: 1.12;
+  }
+}
+@media (max-width: 390px) {
+  .section-title { font-size: clamp(2.45rem, 10.25vw, 3.1rem); }
+  .studio-compact-copy h2 { font-size: clamp(2.3rem, 9vw, 3.3rem); }
+  .home-contact-cta .closing-copy { font-size: clamp(2.35rem, 9vw, 3.5rem); }
+}
