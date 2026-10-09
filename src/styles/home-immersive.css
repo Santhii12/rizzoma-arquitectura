@@ -28,3 +28,26 @@ body:has(.rizzoma-immersive-hero) .site-header .main-nav{color:#f2e9d5}
 @media(max-width:600px){.rizzoma-immersive-hero{height:100svh;min-height:660px}.rizzoma-hero-media>img,.rizzoma-hero-canvas{object-position:57% center}.rizzoma-hero-content{left:22px;right:22px;bottom:112px;max-width:calc(100% - 44px)}.rizzoma-hero-overline{font-size:8px;line-height:1.5;margin-bottom:18px}.rizzoma-hero-name{font-size:clamp(3.2rem,13.8vw,5.4rem);margin-bottom:25px}.rizzoma-hero-statement{font-size:clamp(1.5rem,6.2vw,2rem);max-width:27ch}.rizzoma-hero-description{font-size:12px;max-width:39ch}.rizzoma-hero-actions{gap:4px 24px;margin-top:19px}.rizzoma-hero-actions a{font-size:9px;min-height:40px}.rizzoma-hero-credit{bottom:22px;left:22px;gap:12px;font-size:8px}.rizzoma-hero-scroll{display:none}}
 @media(max-height:690px) and (min-width:601px){.rizzoma-immersive-hero{min-height:540px}.rizzoma-hero-content{bottom:84px}.rizzoma-hero-name{font-size:clamp(3.5rem,8vw,7rem);margin-bottom:18px}.rizzoma-hero-statement{font-size:clamp(1.2rem,2vw,2rem)}.rizzoma-hero-overline{margin-bottom:16px}.rizzoma-hero-actions{margin-top:12px}}
 @media(prefers-reduced-motion:reduce){.rizzoma-hero-canvas{display:none!important}}
+
+/* v1.1 — brighter architectural atmosphere, disciplined typography */
+.rizzoma-hero-shade{
+  background:linear-gradient(90deg,rgba(17,21,17,.43),rgba(17,21,17,.16) 49%,rgba(17,21,17,.015) 86%),
+             linear-gradient(0deg,rgba(17,21,17,.34),transparent 42%);
+}
+.rizzoma-hero-media>img{filter:brightness(1.07) saturate(1.04);}
+/* Keep the WebGL image at the same perceived exposure as the fallback. */
+.rizzoma-hero-canvas.is-ready{filter:brightness(1.07) saturate(1.04);}
+.rizzoma-hero-content .rizzoma-hero-name{
+ font-family:"Soligant", "Cormorant Garamond", Georgia, serif;
+ font-weight:400;letter-spacing:-.015em;line-height:.88;
+}
+.rizzoma-hero-overline,.rizzoma-hero-description,.rizzoma-hero-actions a,
+.rizzoma-hero-credit,.rizzoma-hero-scroll,
+body:has(.rizzoma-immersive-hero) .main-nav{
+ font-family:"Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+ font-weight:400;
+}
+.rizzoma-hero-statement{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400;}
+@media(max-width:900px){
+ .rizzoma-hero-shade{background:linear-gradient(0deg,rgba(17,20,16,.58),rgba(17,20,16,.1) 85%),linear-gradient(90deg,rgba(17,20,16,.21),transparent);}
+}
