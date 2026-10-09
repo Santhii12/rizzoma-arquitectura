@@ -170,3 +170,47 @@ body:has(.rizzoma-immersive-hero) .home-contact-cta .closing-copy {
   body:has(.rizzoma-immersive-hero) .studio-compact-copy h2 { font-size: clamp(2.3rem, 9vw, 3.3rem); }
   body:has(.rizzoma-immersive-hero) .home-contact-cta .closing-copy { font-size: clamp(2.35rem, 9vw, 3.5rem); }
 }
+
+
+/* Fix: Manrope Medium for accented study/contact headings.
+   Soligant's unsupported composite glyphs created visible gaps in these words.
+   Keep Soligant on the other conceptual section headlines. */
+body:has(.rizzoma-immersive-hero) .studio-compact-copy h2,
+body:has(.rizzoma-immersive-hero) .home-contact-cta .closing-copy {
+  font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-synthesis: none;
+  letter-spacing: -.045em;
+  line-height: 1.12;
+  overflow-wrap: normal;
+  text-wrap: balance;
+}
+body:has(.rizzoma-immersive-hero) .studio-compact-copy h2 {
+  max-width: 19ch;
+  font-size: clamp(2.8rem, 4.05vw, 5.1rem);
+}
+body:has(.rizzoma-immersive-hero) .home-contact-cta .closing-copy {
+  max-width: 22ch;
+  font-size: clamp(3rem, 5.25vw, 6.2rem);
+}
+@media (max-width: 760px) {
+  body:has(.rizzoma-immersive-hero) .studio-compact-copy h2 {
+    max-width: 20ch;
+    font-size: clamp(2.3rem, 8.6vw, 4rem);
+    line-height: 1.15;
+  }
+  body:has(.rizzoma-immersive-hero) .home-contact-cta .closing-copy {
+    max-width: 22ch;
+    font-size: clamp(2.35rem, 8.6vw, 4.2rem);
+    line-height: 1.16;
+  }
+}
+@media (max-width: 390px) {
+  body:has(.rizzoma-immersive-hero) .studio-compact-copy h2 {
+    font-size: clamp(2.05rem, 8.5vw, 2.6rem);
+  }
+  body:has(.rizzoma-immersive-hero) .home-contact-cta .closing-copy {
+    font-size: clamp(2.1rem, 8.35vw, 2.65rem);
+  }
+}
