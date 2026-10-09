@@ -1,0 +1,49 @@
+---
+import '@/styles/nuestra-mirada.css';
+
+interface Props {
+  image?: string;
+  imageAlt?: string;
+  imageCredit?: string;
+}
+
+const {
+  image,
+  imageAlt = 'Vista arquitectónica de Casa Patio Horizonte, proyecto de Rizzoma Arquitectura',
+  imageCredit = 'Casa Patio Horizonte / Rizzoma Arquitectura'
+} = Astro.props;
+---
+<section class="nuestra-mirada" aria-labelledby="nuestra-mirada-title">
+  <div class="nuestra-mirada__inner">
+    <div class="nuestra-mirada__editorial">
+      <p class="nuestra-mirada__eyebrow">Nuestra mirada</p>
+      <h2 id="nuestra-mirada-title" class="nuestra-mirada__title">
+        La arquitectura comienza <em>antes de la forma.</em>
+      </h2>
+      <div class="nuestra-mirada__body">
+        <p>Cada proyecto parte de comprender el lugar, reconocer sus condiciones y descubrir las relaciones que pueden darle sentido.</p>
+        <p>En Rizzoma entendemos la arquitectura como una conexión entre territorio, materialidad y experiencia. Buscamos propuestas donde cada decisión tenga una razón de ser y cada espacio construya una atmósfera propia.</p>
+        <p>Diseñamos y representamos arquitectura con criterio, sensibilidad y atención al detalle.</p>
+      </div>
+      <p class="nuestra-mirada__signature">Territorio. Materialidad. Atmósfera.</p>
+    </div>
+    <figure class="nuestra-mirada__visual">
+      {image ? (
+        <img
+          src={image}
+          alt={imageAlt}
+          width="1024"
+          height="1536"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
+        />
+      ) : (
+        <div class="nuestra-mirada__visual-placeholder" aria-label="Espacio para imagen arquitectónica del estudio">
+          <span>Imagen arquitectónica en preparación</span>
+        </div>
+      )}
+      {image && <figcaption>{imageCredit}</figcaption>}
+    </figure>
+  </div>
+</section>
