@@ -1,0 +1,138 @@
+/* Nuestra mirada — Rizzoma's editorial transition between hero and work.
+   Isolated selectors prevent any effect on the orbital portfolio. */
+.nuestra-mirada {
+  position: relative;
+  background: #eae5da;
+  color: #303026;
+  overflow: clip;
+}
+.nuestra-mirada__inner {
+  width: min(100%, 1680px);
+  margin: 0 auto;
+  padding: clamp(88px, 10vw, 152px) clamp(22px, 4.4vw, 76px);
+  display: grid;
+  grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+  gap: clamp(40px, 7.4vw, 135px);
+  align-items: center;
+}
+.nuestra-mirada__editorial { min-width: 0; }
+.nuestra-mirada__eyebrow {
+  margin: 0 0 clamp(25px, 3vw, 48px);
+  font-family: var(--sans, Arial, sans-serif);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: #777362;
+}
+.nuestra-mirada__title {
+  margin: 0 0 clamp(36px, 4.5vw, 74px);
+  max-width: 11.5ch;
+  font-family: "Instrument Sans", var(--sans, Arial, sans-serif);
+  font-weight: 400;
+  font-size: clamp(3rem, 5.2vw, 6.6rem);
+  line-height: .98;
+  letter-spacing: -.057em;
+  text-wrap: balance;
+}
+.nuestra-mirada__title em {
+  font-family: var(--serif, Georgia, serif);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -.065em;
+}
+.nuestra-mirada__body {
+  max-width: 46ch;
+  font-family: var(--sans, Arial, sans-serif);
+  color: #666357;
+  font-size: clamp(14px, 1.05vw, 16px);
+  line-height: 1.77;
+}
+.nuestra-mirada__body p { margin: 0 0 1.3em; }
+.nuestra-mirada__body p:last-child { margin-bottom: 0; }
+.nuestra-mirada__signature {
+  margin: clamp(35px, 5vw, 70px) 0 0;
+  font-family: var(--sans, Arial, sans-serif);
+  font-size: 9px;
+  line-height: 1.6;
+  font-weight: 500;
+  letter-spacing: .135em;
+  text-transform: uppercase;
+  color: #857450;
+}
+.nuestra-mirada__visual {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+}
+.nuestra-mirada__visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center center;
+  background: #d0c8b8;
+}
+.nuestra-mirada__visual figcaption {
+  margin: 12px 0 0;
+  color: #888171;
+  font-family: var(--sans, Arial, sans-serif);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: .12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+.nuestra-mirada__visual-placeholder {
+  aspect-ratio: 3 / 4;
+  display: grid;
+  place-items: end start;
+  padding: 20px;
+  background: #696959;
+  color: #e8dcc5;
+}
+.nuestra-mirada__visual-placeholder span {
+  font-size: 10px;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+@media (max-width: 980px) {
+  .nuestra-mirada__inner {
+    gap: clamp(28px, 4vw, 55px);
+    padding-block: clamp(70px, 9vw, 110px);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .nuestra-mirada__title { font-size: clamp(2.5rem, 5.6vw, 4.6rem); }
+}
+@media (max-width: 760px) {
+  .nuestra-mirada__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: clamp(36px, 7vw, 56px);
+    padding: clamp(74px, 14vw, 112px) clamp(20px, 5.3vw, 34px);
+  }
+  .nuestra-mirada__eyebrow { margin-bottom: 23px; font-size: 9px; }
+  .nuestra-mirada__title {
+    max-width: 14ch;
+    margin-bottom: 32px;
+    font-size: clamp(2.8rem, 9.3vw, 5.5rem);
+    line-height: 1.01;
+    overflow-wrap: normal;
+  }
+  .nuestra-mirada__body { max-width: 56ch; font-size: 15px; line-height: 1.72; }
+  .nuestra-mirada__signature { margin-top: 36px; }
+  .nuestra-mirada__visual { max-width: 640px; }
+  .nuestra-mirada__visual img { aspect-ratio: 3 / 4; }
+}
+@media (max-width: 390px) {
+  .nuestra-mirada__title { font-size: clamp(2.4rem, 10vw, 3.2rem); }
+  .nuestra-mirada__signature { letter-spacing: .095em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nuestra-mirada *, .nuestra-mirada *::before, .nuestra-mirada *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
