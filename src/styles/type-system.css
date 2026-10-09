@@ -1,0 +1,145 @@
+/* Rizzoma's two-family typographic system.
+   Manrope is served locally (regular for reading, medium for headings/UI).
+   Soligant is reserved for the existing gold wordmark and selected concepts.
+   Keep structural layouts and the orbital portfolio animation unchanged. */
+
+@font-face {
+  font-family: "Manrope";
+  src: url("../assets/fonts/manrope-latin-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("../assets/fonts/manrope-latin-500.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+:root {
+  --sans: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  /* Legacy editorial selectors inherit Manrope instead of adding a third face. */
+  --serif: "Manrope", "Helvetica Neue", Arial, sans-serif;
+}
+html, body { font-family: var(--sans); }
+button, input, select, textarea { font-family: inherit; }
+
+/* Sections, work, page headings and project names: Manrope Medium. */
+.section-title,
+.page-title,
+.project-title,
+.project-info h3,
+.project-card h3,
+.project-tile h3,
+.portfolio-page-heading h1,
+.portfolio-mini-copy h3,
+.portfolio-project-tile h2,
+.portfolio-experience-card-info h2,
+.portfolio-experience-featured-info h2,
+.studio-compact-copy h2,
+.service-compact-card h3,
+.service-row h3,
+.service-detail h2,
+.service-relationship-grid h2,
+.values-grid h3,
+.principle h3,
+.chapter-heading h2,
+.founder-preview-copy h2,
+.studio-profile h2,
+.founder-cta .closing-copy,
+.home-contact-cta .closing-copy,
+.closing-copy,
+.legal-title,
+.footer-cta,
+.archive-word,
+.archive-project-title h3 {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-style: normal;
+  font-synthesis: none;
+  line-height: 1.065;
+  letter-spacing: -.052em;
+}
+
+/* All conventional headings, including those without component classes. */
+h1, h2, h3 { text-wrap: balance; }
+h1:not(.rizzoma-hero-name),
+h2:not(.nuestra-mirada__title),
+h3 { font-synthesis: none; }
+
+/* Supporting copy remains lighter and quiet, including labels. */
+p, figcaption, dl, dd, dt, li { font-family: var(--sans); }
+.main-nav, .menu-toggle, .nav-cta,
+.primary-link, .text-link, .hero-inline-link,
+.rizzoma-hero-actions a, .project-open, .submit-button,
+.rz-back, .rz-dialog-link,
+button {
+  font-family: var(--sans);
+  font-weight: 500;
+}
+.eyebrow, .hero-topline, .section-count, .project-meta,
+.portfolio-page-label, .project-facts dt, .founder-name,
+.rz-overline, .rz-header-label, .rz-portfolio-footer,
+.rz-card-count, .rz-card-caption p {
+  font-family: var(--sans);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+/* Scope the largest editorial prompts so Manrope stays readable. */
+.studio-compact-copy h2 {
+  max-width: 16ch;
+  font-size: clamp(2.8rem, 4.3vw, 5.5rem);
+  line-height: 1.09;
+}
+.home-contact-cta .closing-copy {
+  max-width: 19ch;
+  font-size: clamp(3.2rem, 6.4vw, 7rem);
+  line-height: 1.09;
+}
+.studio-compact-meta strong {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(1.02rem, 1.3vw, 1.2rem);
+}
+.section-title {
+  max-width: 100%;
+  font-size: clamp(2.8rem, 5.4vw, 6.1rem);
+  line-height: 1.045;
+}
+.page-title, .project-title, .portfolio-page-heading h1 {
+  line-height: 1.02;
+}
+
+/* The curated orbital portfolio keeps its geometry, with refined labels. */
+.rz-portfolio-editorial h1,
+.rz-card-caption h2,
+.rz-archive-dialog h2,
+.rz-editorial-bottom strong,
+.rz-ring-center span,
+.rz-cover-placeholder span {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-style: normal;
+  font-synthesis: none;
+  letter-spacing: -.047em;
+}
+.rz-portfolio-editorial h1 { line-height: 1.06; }
+.rz-card-caption h2 { line-height: 1.2; letter-spacing: -.035em; }
+.rz-archive-dialog h2 { line-height: 1.04; }
+
+/* Mobile typography is composed deliberately, not scaled from desktop. */
+@media (max-width: 760px) {
+  .section-title { font-size: clamp(2.5rem, 10.1vw, 4.25rem); line-height: 1.08; }
+  .studio-compact-copy h2 { max-width: 19ch; font-size: clamp(2.3rem, 9.8vw, 4.15rem); line-height: 1.1; }
+  .home-contact-cta .closing-copy { max-width: 20ch; font-size: clamp(2.3rem, 9.4vw, 4.45rem); line-height: 1.11; }
+  .page-title, .project-title, .portfolio-page-heading h1 { line-height: 1.045; }
+  .rz-portfolio-editorial h1 { line-height: 1.1; letter-spacing: -.055em; }
+}
+@media (max-width: 390px) {
+  .studio-compact-copy h2 { font-size: clamp(2.1rem, 9vw, 3rem); }
+  .home-contact-cta .closing-copy { font-size: clamp(2.2rem, 9vw, 3.3rem); }
+}
