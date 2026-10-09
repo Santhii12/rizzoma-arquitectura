@@ -26,9 +26,11 @@ if (hero && image && canvas && interactive && !reduced) {
       float viewportRatio=resolution.x/resolution.y;
       vec2 delta=vec2((p.x-pointer.x)*viewportRatio,p.y-pointer.y);
       float dist=length(delta);
-      float envelope=exp(-dist*dist*40.0);
-      float wave=sin(dist*62.0-time*9.0)*envelope*strength*0.006;
-      p+=normalize(delta+vec2(0.00001))*wave/vec2(viewportRatio,1.0);
+      float envelope=exp(-dist*dist*28.0);
+      float waveA=sin(dist*78.0-time*10.5)*envelope;
+      float waveB=sin(dist*46.0-time*7.0)*envelope*0.65;
+      float ripple=(waveA+waveB)*strength*0.0095;
+      p+=normalize(delta+vec2(0.00001))*ripple/vec2(viewportRatio,1.0);
       float fit=max(resolution.x/imageSize.x,resolution.y/imageSize.y);
       vec2 shown=imageSize*fit;
       vec2 texUV=(p*resolution-(resolution-shown)*0.5)/shown;
@@ -78,10 +80,10 @@ if (hero && image && canvas && interactive && !reduced) {
             frame=0;
             if(!ready)return;
             const dt=Math.min((now-last)||16,48);last=now;
-            const damping=1-Math.exp(-dt/115);
+            const damping=1-Math.exp(-dt/90);
             followX+=(mouseX-followX)*damping;
             followY+=(mouseY-followY)*damping;
-            intensity+=(Number(active)-intensity)*(1-Math.exp(-dt/(active?240:340)));
+            intensity+=(Number(active)-intensity)*(1-Math.exp(-dt/(active?180:260)));
             gl.uniform2f(resolution,canvas.width,canvas.height);
             gl.uniform2f(imageSize,image.naturalWidth,image.naturalHeight);
             gl.uniform2f(pointer,followX,followY);
