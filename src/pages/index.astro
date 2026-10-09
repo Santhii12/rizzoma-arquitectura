@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import NuestraMirada from '@/components/NuestraMirada.astro';
+import QuePodemosHacer from '@/components/QuePodemosHacer.astro';
 import { projects, featuredProject } from '@/data/projects';
 import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
@@ -61,6 +62,12 @@ const schema = {
   </section>
 
   <NuestraMirada image={miradaPhoto} imageCredit="Casa Patio Horizonte / Rizzoma Arquitectura" />
+
+  <QuePodemosHacer
+    visualizacionImage={heroCover}
+    disenoImage={heroProject?.gallery?.[2]}
+    remodelacionImage={heroProject?.gallery?.[4]}
+  />
 
   <section id="proyectos" class="portfolio-home section-pad">
     <div class="section-head reveal">
