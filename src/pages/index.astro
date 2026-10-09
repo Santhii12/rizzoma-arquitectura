@@ -6,6 +6,9 @@ import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
 import '@/styles/home-immersive.css';
 
+const heroCover = withBase('/images/studio/home/rizzoma-hero-portada.webp');
+const heroProject = projects.find((project) => project.slug === 'casa-patio-horizonte');
+const heroImageUrl = new URL(heroCover, Astro.site ?? new URL(site.domain)).toString();
 const archiveProjects = projects.filter((project) => !project.available).slice(0, 3);
 const baseSite = Astro.site ?? new URL(site.domain);
 const homeUrl = new URL(withBase('/'), baseSite).toString();
@@ -18,19 +21,23 @@ const schema = {
   inLanguage: 'es-CO',
   isPartOf: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#website` },
   about: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#business` },
-  primaryImageOfPage: featuredProject?.cover
-    ? { '@type': 'ImageObject', contentUrl: featuredProject.cover }
-    : undefined
+  primaryImageOfPage: { '@type': 'ImageObject', contentUrl: heroImageUrl }
 };
 ---
-<BaseLayout schema={schema}>
+<BaseLayout schema={schema} image={heroImageUrl} imageAlt="Casa Patio Horizonte, arquitectura contemporánea integrada al paisaje">
   <section class="rizzoma-immersive-hero" aria-label="Presentación de Rizzoma Arquitectura">
-    {featuredProject?.cover ? (
-      <div class="rizzoma-hero-media" data-ripple-hero>
-        <img src={featuredProject.cover} alt={`Arquitectura y paisaje en ${featuredProject.title}, Rizzoma Arquitectura`} fetchpriority="high" decoding="async" data-ripple-image />
-        <canvas class="rizzoma-hero-canvas" data-ripple-canvas aria-hidden="true"></canvas>
-      </div>
-    ) : <div class="rizzoma-hero-media rizzoma-hero-fallback"></div>}
+    <div class="rizzoma-hero-media" data-ripple-hero>
+      <img
+        src={heroCover}
+        alt="Casa Patio Horizonte, residencia contemporánea integrada al paisaje y la vegetación"
+        fetchpriority="high"
+        decoding="async"
+        width="2048"
+        height="1529"
+        data-ripple-image
+      />
+      <canvas class="rizzoma-hero-canvas" data-ripple-canvas aria-hidden="true"></canvas>
+    </div>
     <div class="rizzoma-hero-shade" aria-hidden="true"></div>
     <div class="rizzoma-hero-content">
       <p class="rizzoma-hero-overline">Taller y estudio de arquitectura · Medellín, Colombia</p>
@@ -42,10 +49,10 @@ const schema = {
         <a href={withBase('/visualizacion-arquitectonica-medellin/')}>Solicitar visualización <span aria-hidden="true">↗</span></a>
       </div>
     </div>
-    {featuredProject && (
+    {heroProject && (
       <div class="rizzoma-hero-credit">
-        <span>Imagen / {featuredProject.title}</span>
-        <a href={withBase(`/proyectos/${featuredProject.slug}/`)}>Ver proyecto ↗</a>
+        <span>Imagen / {heroProject.title}</span>
+        <a href={withBase(`/proyectos/${heroProject.slug}/`)}>Ver proyecto ↗</a>
       </div>
     )}
     <span class="rizzoma-hero-scroll" aria-hidden="true">DESCUBRIR ↓</span>
