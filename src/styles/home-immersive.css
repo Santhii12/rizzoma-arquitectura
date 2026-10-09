@@ -52,8 +52,7 @@ body:has(.rizzoma-immersive-hero) .main-nav{
  .rizzoma-hero-shade{background:linear-gradient(0deg,rgba(17,20,16,.58),rgba(17,20,16,.1) 85%),linear-gradient(90deg,rgba(17,20,16,.21),transparent);}
 }
 
-/* v2 — Soligant only for the main conceptual wordmark.
-   Manrope is used for section titles, founder profile and the final invitation. */
+/* Rizzoma hero wordmark uses Soligant. Manrope remains for supporting text/UI. */
 .rizzoma-hero-content .rizzoma-hero-name {
   font-family: "Soligant", Georgia, serif;
   font-weight: 400;
@@ -127,7 +126,7 @@ body:has(.rizzoma-immersive-hero) .home-contact-cta .closing-copy {
   .rizzoma-hero-media>img,.rizzoma-hero-canvas{object-position:53% center;}
 }
 
-/* Section headlines use Soligant; supporting titles/cards keep Manrope. */
+/* Editorial section headlines use the shared --display face; project names remain Manrope. */
 body:has(.rizzoma-immersive-hero) .section-title,
 body:has(.rizzoma-immersive-hero) .studio-compact-copy h2,
 body:has(.rizzoma-immersive-hero) .home-contact-cta .closing-copy {
@@ -172,45 +171,44 @@ body:has(.rizzoma-immersive-hero) .home-contact-cta .closing-copy {
 }
 
 
-/* Fix: Manrope Medium for accented study/contact headings.
-   Soligant's unsupported composite glyphs created visible gaps in these words.
-   Keep Soligant on the other conceptual section headlines. */
+/* DM Serif Display replaces the temporary Manrope workaround on conceptual
+   study and contact titles. Spanish accented letters use native glyphs. */
 body:has(.rizzoma-immersive-hero) .studio-compact-copy h2,
 body:has(.rizzoma-immersive-hero) .home-contact-cta .closing-copy {
-  font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
-  font-weight: 500;
+  font-family: var(--display);
+  font-weight: 400;
   font-style: normal;
   font-synthesis: none;
-  letter-spacing: -.045em;
-  line-height: 1.12;
+  letter-spacing: -.025em;
+  line-height: 1.11;
   overflow-wrap: normal;
   text-wrap: balance;
 }
 body:has(.rizzoma-immersive-hero) .studio-compact-copy h2 {
-  max-width: 19ch;
-  font-size: clamp(2.8rem, 4.05vw, 5.1rem);
+  max-width: 18ch;
+  font-size: clamp(2.9rem, 4.5vw, 5.4rem);
 }
 body:has(.rizzoma-immersive-hero) .home-contact-cta .closing-copy {
-  max-width: 22ch;
-  font-size: clamp(3rem, 5.25vw, 6.2rem);
+  max-width: 19ch;
+  font-size: clamp(3rem, 5.6vw, 6.4rem);
 }
 @media (max-width: 760px) {
   body:has(.rizzoma-immersive-hero) .studio-compact-copy h2 {
-    max-width: 20ch;
-    font-size: clamp(2.3rem, 8.6vw, 4rem);
-    line-height: 1.15;
+    max-width: 19ch;
+    font-size: clamp(2.5rem, 9.3vw, 4.3rem);
+    line-height: 1.14;
   }
   body:has(.rizzoma-immersive-hero) .home-contact-cta .closing-copy {
-    max-width: 22ch;
-    font-size: clamp(2.35rem, 8.6vw, 4.2rem);
-    line-height: 1.16;
+    max-width: 20ch;
+    font-size: clamp(2.55rem, 9.1vw, 4.45rem);
+    line-height: 1.14;
   }
 }
 @media (max-width: 390px) {
   body:has(.rizzoma-immersive-hero) .studio-compact-copy h2 {
-    font-size: clamp(2.05rem, 8.5vw, 2.6rem);
+    font-size: clamp(2.2rem, 9vw, 2.9rem);
   }
   body:has(.rizzoma-immersive-hero) .home-contact-cta .closing-copy {
-    font-size: clamp(2.1rem, 8.35vw, 2.65rem);
+    font-size: clamp(2.3rem, 9vw, 3rem);
   }
 }
