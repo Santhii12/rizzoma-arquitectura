@@ -19,8 +19,6 @@ const servicios = [
     imagen: disenoImage,
     alt: 'Arquitectura residencial contemporánea de Casa Patio Horizonte, con atención al espacio y la materialidad',
     pie: 'Casa Patio Horizonte · Archivo de Rizzoma',
-    url: withBase('/arquitectura-medellin/'),
-    enlace: 'Conocer diseño arquitectónico'
   },
   {
     numero: '03',
@@ -31,8 +29,6 @@ const servicios = [
     imagen: remodelacionImage,
     alt: 'Referencia arquitectónica de Casa Patio Horizonte para ilustrar la relación entre espacio y materialidad; no es una remodelación',
     pie: 'Referencia de materialidad · Casa Patio Horizonte',
-    url: withBase('/servicios/#arquitectura'),
-    enlace: 'Conocer el alcance'
   }
 ];
 ---
@@ -75,9 +71,6 @@ const servicios = [
           <li>Imágenes 360°.</li>
           <li>Modelado y apoyo visual para proyectos arquitectónicos.</li>
         </ul>
-        <a class="rizzoma-offer__feature-link" href={withBase('/visualizacion-arquitectonica-medellin/')}>
-          Conocer visualización arquitectónica <span aria-hidden="true">↗</span>
-        </a>
       </div>
     </article>
 
@@ -102,9 +95,6 @@ const servicios = [
             <ul class="rizzoma-offer__capabilities">
               {servicio.prestaciones.map((prestacion) => <li>{prestacion}</li>)}
             </ul>
-            <a class="rizzoma-offer__secondary-link" href={servicio.url}>
-              {servicio.enlace} <span aria-hidden="true">↗</span>
-            </a>
           </div>
         </article>
       ))}
@@ -112,12 +102,12 @@ const servicios = [
 
     <footer class="rizzoma-offer__closing">
       <div>
-        <p class="rizzoma-offer__eyebrow">Empecemos una conversación</p>
-        <h3>¿Tienes un proyecto en mente?</h3>
-        <p>Cuéntanos qué necesitas y exploremos cómo podemos ayudarte.</p>
+        <p class="rizzoma-offer__eyebrow">Los tres servicios / Un mismo criterio</p>
+        <h3>Del espacio a la imagen.</h3>
+        <p>La visualización, el diseño y la transformación de espacios forman parte de una misma mirada. Conoce sus alcances y descubre cuál responde mejor a la etapa de tu proyecto.</p>
       </div>
-      <a href={withBase('/contacto/')} class="rizzoma-offer__closing-link">
-        Hablemos de tu proyecto <span aria-hidden="true">↗</span>
+      <a href={withBase('/servicios/')} class="rizzoma-offer__closing-link">
+        Conocer los tres servicios <span aria-hidden="true">↗</span>
       </a>
     </footer>
   </div>
