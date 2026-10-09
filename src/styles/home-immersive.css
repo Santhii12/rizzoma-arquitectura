@@ -1,0 +1,30 @@
+/* Immersive home only. Portfolio and project pages remain independent. */
+.rizzoma-immersive-hero{position:relative;isolation:isolate;width:100%;height:100svh;min-height:650px;overflow:hidden;background:#35382e;color:#f2e9d5}
+.rizzoma-hero-media,.rizzoma-hero-shade{position:absolute;inset:0}
+.rizzoma-hero-media{overflow:hidden}
+.rizzoma-hero-media>img,.rizzoma-hero-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:50% 51%}
+.rizzoma-hero-canvas{opacity:0;pointer-events:none}
+.rizzoma-hero-canvas.is-ready{opacity:1}
+.rizzoma-hero-fallback{background:linear-gradient(135deg,#4d4c3f,#77735f)}
+.rizzoma-hero-shade{z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(18,22,18,.72),rgba(18,22,18,.32) 52%,rgba(18,22,18,.06) 88%),linear-gradient(0deg,rgba(18,22,18,.65),transparent 43%)}
+.rizzoma-hero-content{position:absolute;z-index:2;left:clamp(24px,6vw,110px);right:clamp(24px,6vw,110px);bottom:clamp(102px,13vh,155px);max-width:min(1100px,90%);pointer-events:none}
+.rizzoma-hero-content a{pointer-events:auto}
+.rizzoma-hero-overline,.rizzoma-hero-credit,.rizzoma-hero-scroll{font-size:10px;letter-spacing:.15em;text-transform:uppercase}
+.rizzoma-hero-overline{color:#dfceb0;margin:0 0 26px}
+.rizzoma-hero-name{font-family:var(--serif,Georgia,serif);font-size:clamp(4.1rem,10.5vw,10.8rem);letter-spacing:-.065em;font-weight:400;line-height:.77;margin:0 0 30px;text-wrap:balance;max-width:12ch}
+.rizzoma-hero-name em{font-weight:400;font-style:normal;display:block}
+.rizzoma-hero-statement{font-family:var(--serif,Georgia,serif);font-size:clamp(1.3rem,2.4vw,2.5rem);line-height:1.09;letter-spacing:-.02em;max-width:30ch;margin:0 0 15px;color:#f7eddb}
+.rizzoma-hero-description{font-size:clamp(12px,1.1vw,15px);line-height:1.6;max-width:48ch;margin:0;color:#e0d5c3}
+.rizzoma-hero-actions{display:flex;flex-wrap:wrap;gap:12px 32px;margin-top:30px}
+.rizzoma-hero-actions a{display:inline-flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid #d5be8b;padding:10px 0;color:#f4e4bf;text-transform:uppercase;letter-spacing:.13em;font-size:10px;min-height:45px}
+.rizzoma-hero-actions a:hover,.rizzoma-hero-actions a:focus-visible{color:#fff;border-color:#fff}
+.rizzoma-hero-credit{position:absolute;z-index:2;bottom:29px;left:clamp(24px,6vw,110px);display:flex;gap:20px;align-items:center;color:#dccbaa}
+.rizzoma-hero-credit a{border-bottom:1px solid #c4aa7a;padding-bottom:4px;color:#f2e9d5}
+.rizzoma-hero-scroll{position:absolute;z-index:2;bottom:32px;right:clamp(24px,6vw,110px);color:#dfceb0}
+body:has(.rizzoma-immersive-hero) .site-header{color:#f2e9d5;mix-blend-mode:normal}
+body:has(.rizzoma-immersive-hero) .site-header .brand-wordmark-image{filter:none}
+body:has(.rizzoma-immersive-hero) .site-header .main-nav{color:#f2e9d5}
+@media(max-width:900px){.rizzoma-immersive-hero{min-height:650px}.rizzoma-hero-content{bottom:130px;max-width:90%}.rizzoma-hero-name{font-size:clamp(4.2rem,12vw,7.3rem)}.rizzoma-hero-shade{background:linear-gradient(0deg,rgba(17,20,16,.79),rgba(17,20,16,.25) 82%),linear-gradient(90deg,rgba(17,20,16,.38),transparent)}}
+@media(max-width:600px){.rizzoma-immersive-hero{height:100svh;min-height:660px}.rizzoma-hero-media>img,.rizzoma-hero-canvas{object-position:57% center}.rizzoma-hero-content{left:22px;right:22px;bottom:112px;max-width:calc(100% - 44px)}.rizzoma-hero-overline{font-size:8px;line-height:1.5;margin-bottom:18px}.rizzoma-hero-name{font-size:clamp(3.2rem,13.8vw,5.4rem);margin-bottom:25px}.rizzoma-hero-statement{font-size:clamp(1.5rem,6.2vw,2rem);max-width:27ch}.rizzoma-hero-description{font-size:12px;max-width:39ch}.rizzoma-hero-actions{gap:4px 24px;margin-top:19px}.rizzoma-hero-actions a{font-size:9px;min-height:40px}.rizzoma-hero-credit{bottom:22px;left:22px;gap:12px;font-size:8px}.rizzoma-hero-scroll{display:none}}
+@media(max-height:690px) and (min-width:601px){.rizzoma-immersive-hero{min-height:540px}.rizzoma-hero-content{bottom:84px}.rizzoma-hero-name{font-size:clamp(3.5rem,8vw,7rem);margin-bottom:18px}.rizzoma-hero-statement{font-size:clamp(1.2rem,2vw,2rem)}.rizzoma-hero-overline{margin-bottom:16px}.rizzoma-hero-actions{margin-top:12px}}
+@media(prefers-reduced-motion:reduce){.rizzoma-hero-canvas{display:none!important}}
