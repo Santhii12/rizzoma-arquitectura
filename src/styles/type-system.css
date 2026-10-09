@@ -223,3 +223,38 @@ button {
   .studio-compact-copy h2 { font-size: clamp(2.3rem, 9vw, 3.3rem); }
   .home-contact-cta .closing-copy { font-size: clamp(2.35rem, 9vw, 3.5rem); }
 }
+
+
+/* Contact-page accent-safe title (Manrope Medium). */
+.contact-page .contact-intro .page-title {
+  font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-synthesis: none;
+  font-size: clamp(3.25rem, 5.15vw, 5.9rem);
+  line-height: 1.12;
+  letter-spacing: -.055em;
+  text-wrap: balance;
+  overflow-wrap: normal;
+  max-width: 100%;
+  margin: clamp(26px, 3vw, 44px) 0 clamp(27px, 3.2vw, 48px);
+}
+@media (max-width: 800px) {
+  .contact-page .contact-intro .page-title {
+    font-size: clamp(3rem, 8.6vw, 5.2rem);
+    line-height: 1.12;
+  }
+}
+@media (max-width: 540px) {
+  .contact-page .contact-intro .page-title {
+    font-size: clamp(2.5rem, 10.2vw, 3.45rem);
+    line-height: 1.14;
+    letter-spacing: -.048em;
+    margin: 26px 0 32px;
+  }
+}
+@media (max-width: 360px) {
+  .contact-page .contact-intro .page-title {
+    font-size: clamp(2.35rem, 10vw, 2.6rem);
+  }
+}
