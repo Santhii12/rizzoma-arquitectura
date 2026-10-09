@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
+import NuestraMirada from '@/components/NuestraMirada.astro';
 import { projects, featuredProject } from '@/data/projects';
 import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
@@ -8,6 +9,7 @@ import '@/styles/home-immersive.css';
 
 const heroCover = withBase('/images/studio/home/rizzoma-hero-portada.webp');
 const heroProject = projects.find((project) => project.slug === 'casa-patio-horizonte');
+const miradaPhoto = heroProject?.gallery?.[1];
 const heroImageUrl = new URL(heroCover, Astro.site ?? new URL(site.domain)).toString();
 const archiveProjects = projects.filter((project) => !project.available).slice(0, 3);
 const baseSite = Astro.site ?? new URL(site.domain);
@@ -57,6 +59,8 @@ const schema = {
     )}
     <span class="rizzoma-hero-scroll" aria-hidden="true">DESCUBRIR ↓</span>
   </section>
+
+  <NuestraMirada image={miradaPhoto} imageCredit="Casa Patio Horizonte / Rizzoma Arquitectura" />
 
   <section id="proyectos" class="portfolio-home section-pad">
     <div class="section-head reveal">
