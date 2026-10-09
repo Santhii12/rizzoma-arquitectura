@@ -1,43 +1,98 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { site } from '@/config/site';
+import { featuredProject } from '@/data/projects';
 import { withBase } from '@/utils/paths';
+import '@/styles/servicios-editorial.css';
 
 const baseSite = Astro.site ?? new URL(site.domain);
 const servicesUrl = new URL(withBase('/servicios/'), baseSite).toString();
+const cover = withBase('/images/studio/home/rizzoma-hero-portada.webp');
+const gallery = featuredProject?.gallery ?? [];
+const serviceLines = [
+  {
+    id: 'visualizacion',
+    number: '01',
+    name: 'Visualización arquitectónica',
+    title: 'Arquitectura que se puede imaginar.',
+    summary: 'Creamos imágenes y recorridos que permiten visualizar el proyecto, comunicar sus cualidades y transmitir la experiencia de habitarlo.',
+    description: 'La visualización permite estudiar cómo se relacionan la luz, los materiales, las proporciones y el paisaje antes de construir. Cada encuadre debe contar algo verdadero sobre la propuesta: su escala, su atmósfera y la forma en que podría ser habitada. Podemos trabajar sobre proyectos de Rizzoma o propuestas desarrolladas por otros estudios.',
+    services: [
+      'Renders arquitectónicos de interiores y exteriores.',
+      'Animación arquitectónica.',
+      'Recorridos virtuales.',
+      'Imágenes 360°.',
+      'Modelado y apoyo visual para proyectos arquitectónicos.'
+    ],
+    startingPoint: 'Planos, un modelo tridimensional, referencias de materiales o imágenes del lugar son un buen punto de partida. El tipo de imagen, la cantidad de vistas y el nivel de desarrollo se definen según lo que necesitas comunicar.',
+    image: cover,
+    alt: 'Casa Patio Horizonte, visualización de vivienda contemporánea integrada al paisaje',
+    caption: 'Casa Patio Horizonte / Archivo visual de Rizzoma',
+    imageWidth: 2048,
+    imageHeight: 1529,
+    featured: true
+  },
+  {
+    id: 'arquitectura',
+    number: '02',
+    name: 'Diseño arquitectónico',
+    title: 'Espacios con sentido.',
+    summary: 'Desarrollamos propuestas arquitectónicas que parten del lugar, las necesidades de quienes lo habitan y la relación entre espacio, luz y materialidad.',
+    description: 'El diseño comienza por comprender cómo se vive o se quiere vivir un espacio. Estudiamos el contexto, las condiciones del terreno, las relaciones interiores y exteriores y las decisiones que dan coherencia a cada proyecto. Buscamos que el concepto, la organización espacial y la materialidad expresen una misma intención.',
+    services: [
+      'Diseño de vivienda.',
+      'Diseño conceptual.',
+      'Desarrollo arquitectónico.'
+    ],
+    startingPoint: 'Basta comenzar con una idea, la ubicación del proyecto y las necesidades principales. Si ya cuentas con información del lote, referencias o planos, esos materiales ayudan a definir la etapa y el alcance del trabajo.',
+    image: gallery[2] ?? featuredProject?.cover ?? cover,
+    alt: 'Casa Patio Horizonte: vista de arquitectura residencial contemporánea y sus materiales',
+    caption: 'Casa Patio Horizonte / Proyecto de Rizzoma',
+    imageWidth: 1024,
+    imageHeight: 1536,
+    featured: false
+  },
+  {
+    id: 'remodelacion',
+    number: '03',
+    name: 'Remodelación y transformación de espacios',
+    title: 'Lo existente, de otra manera.',
+    summary: 'Replanteamos espacios para mejorar su funcionalidad, atmósfera y materialidad, reconociendo el potencial de lo que ya existe.',
+    description: 'Transformar un espacio no significa borrar su historia. Implica reconocer qué funciona, qué necesita cambiar y cómo aprovechar mejor la luz, las circulaciones, los materiales y las posibilidades reales del lugar. La intervención se define según el estado actual del inmueble y el propósito de quienes lo utilizan.',
+    services: [
+      'Remodelaciones residenciales.',
+      'Diseño interior.',
+      'Actualización de espacios comerciales.'
+    ],
+    startingPoint: 'Fotografías, medidas aproximadas o planos existentes ayudan a entender el espacio. A partir de ahí es posible conversar sobre sus limitaciones, la intención del cambio y el nivel de intervención necesario.',
+    image: gallery[4] ?? featuredProject?.cover ?? cover,
+    alt: 'Imagen de Casa Patio Horizonte utilizada como referencia de materialidad y atmósfera, no como obra de remodelación',
+    caption: 'Referencia de materialidad / Casa Patio Horizonte. No corresponde a una remodelación.',
+    imageWidth: 2048,
+    imageHeight: 1360,
+    featured: false
+  }
+] as const;
+
 const schema = [
   {
     '@type': 'CollectionPage',
     '@id': `${servicesUrl}#page`,
-    name: 'Servicios de arquitectura y visualización de Rizzoma',
+    name: 'Servicios de Rizzoma Arquitectura',
     url: servicesUrl,
-    description: 'Arquitectura, diseño y visualización arquitectónica desde Medellín.',
+    description: 'Visualización arquitectónica, diseño arquitectónico y remodelación: tres maneras de dar forma y comunicar la arquitectura en Rizzoma.',
     isPartOf: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#website` },
     about: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#business` }
   },
   {
     '@type': 'ItemList',
-    name: 'Servicios de Rizzoma Arquitectura',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Arquitectura',
-        url: new URL(withBase('/arquitectura-medellin/'), baseSite).toString()
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Diseño + visualización',
-        url: servicesUrl + '#diseno-visualizacion'
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: 'Visualización arquitectónica',
-        url: new URL(withBase('/visualizacion-arquitectonica-medellin/'), baseSite).toString()
-      }
-    ]
+    name: 'Líneas de trabajo de Rizzoma',
+    itemListElement: serviceLines.map((service, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: service.name,
+      url: `${servicesUrl}#${service.id}`
+    }))
   },
   {
     '@type': 'BreadcrumbList',
@@ -49,73 +104,98 @@ const schema = [
 ];
 ---
 <BaseLayout
-  title="Servicios de arquitectura y visualización en Medellín | Rizzoma"
-  description="Arquitectura, vivienda, remodelación, diseño, renders y visualización arquitectónica desde Medellín con interlocución directa de Juan José Quintero Tobón."
+  title="Servicios de arquitectura, renders y remodelación en Medellín | Rizzoma"
+  description="Conoce las tres líneas de Rizzoma: visualización arquitectónica y renders, diseño arquitectónico y remodelación de espacios. Estudio independiente en Medellín."
   schema={schema}
+  image={cover}
+  imageAlt="Arquitectura contemporánea de Casa Patio Horizonte, archivo de Rizzoma"
 >
-  <section class="page-hero section-pad">
-    <p class="eyebrow reveal">Servicios</p>
-    <h1 class="page-title reveal">Del espacio<br />a la imagen.</h1>
-    <p class="page-intro reveal">Rizzoma trabaja desde las primeras decisiones de un proyecto hasta la manera en que ese proyecto se hace visible y comprensible, con interlocución directa de {site.founder.name}.</p>
-  </section>
-
-  <section class="services-full section-pad no-top">
-    <article id="arquitectura" class="service-detail reveal">
-      <span>01</span>
-      <div>
-        <p class="service-kicker">Espacio · contexto · habitar</p>
-        <h2>Arquitectura</h2>
-        <p>Rizzoma desarrolla proyectos que responden al lugar, las necesidades de quienes lo habitan y las condiciones propias de cada encargo.</p>
-        <ul><li>Vivienda</li><li>Remodelación</li><li>Conceptualización</li><li>Diseño arquitectónico</li><li>Modelado 3D</li><li>Desarrollo gráfico</li></ul>
-        <a class="service-detail-link" href={withBase('/arquitectura-medellin/')}>Ver arquitectura en Medellín y Antioquia ↗</a>
+  <header class="rz-services-guide__hero" aria-labelledby="rz-services-page-title">
+    <div class="rz-services-guide__hero-inner">
+      <div class="rz-services-guide__hero-heading">
+        <p class="rz-services-guide__label">Rizzoma / Servicios</p>
+        <h1 id="rz-services-page-title">Del espacio <em>a la imagen.</em></h1>
       </div>
-    </article>
-
-    <article id="diseno-visualizacion" class="service-detail reveal">
-      <span>02</span>
-      <div>
-        <p class="service-kicker">Del concepto a la imagen</p>
-        <h2>Diseño + visualización</h2>
-        <p>Diseño y representación avanzan juntos para que las decisiones espaciales, materiales y atmosféricas puedan evaluarse, afinarse y comunicarse con claridad.</p>
-        <ul><li>Concepto</li><li>Modelado</li><li>Materialidad</li><li>Dirección visual</li><li>Renders</li><li>Presentación de proyecto</li></ul>
-      </div>
-    </article>
-
-    <article id="visualizacion" class="service-detail reveal">
-      <span>03</span>
-      <div>
-        <p class="service-kicker">Hacer visible lo que aún no existe</p>
-        <h2>Visualización</h2>
-        <p>Imágenes arquitectónicas orientadas a transmitir escala, atmósfera, materiales y la intención general de un proyecto, tanto propio como desarrollado por otros estudios.</p>
-        <ul><li>Interiores</li><li>Exteriores</li><li>Visualización comercial</li><li>Postproducción</li><li>Dirección de encuadres</li><li>Imágenes para presentación</li></ul>
-        <a class="service-detail-link" href={withBase('/visualizacion-arquitectonica-medellin/')}>Ver renders y visualización arquitectónica ↗</a>
-      </div>
-    </article>
-  </section>
-
-  <section class="service-relationship section-pad no-top">
-    <div class="service-relationship-rule reveal"></div>
-    <p class="eyebrow reveal">Cómo se trabaja</p>
-    <div class="service-relationship-grid">
-      <h2 class="reveal">Un estudio pequeño significa una conversación directa.</h2>
-      <div class="reveal">
-        <p>El contacto, la lectura del encargo y el desarrollo del proyecto pasan por Juan José. No hay capas innecesarias entre la idea del cliente y las decisiones de diseño.</p>
-        <p>El alcance se define según la etapa real del proyecto: desde una idea inicial hasta un encargo específico de visualización.</p>
+      <div class="rz-services-guide__hero-intro">
+        <p class="rz-services-guide__lead">Cada proyecto necesita una manera distinta de hacerse realidad.</p>
+        <p>Diseñamos espacios y construimos imágenes que permiten comprender, experimentar y comunicar la arquitectura antes de que exista. Tres líneas de trabajo, una misma atención al territorio, la materia y la experiencia de habitar.</p>
       </div>
     </div>
-  </section>
+    <nav class="rz-services-guide__index" aria-label="Ir a cada servicio">
+      {serviceLines.map((service) => (
+        <a href={`#${service.id}`}>
+          <span>{service.number}</span>
+          <span>{service.name}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </nav>
+  </header>
 
-  <section class="brief-section dark-block">
-    <div class="section-pad">
-      <p class="eyebrow reveal">Para empezar</p>
-      <div class="brief-grid">
-        <h2 class="statement reveal">No necesitas tenerlo todo resuelto para iniciar una conversación.</h2>
-        <div class="brief-list reveal">
-          <p>Según la etapa del proyecto, ayuda tener:</p>
-          <ul><li>Ubicación o información del lote</li><li>Necesidades y programa aproximado</li><li>Planos o modelo, si ya existen</li><li>Referencias visuales</li><li>Objetivo y alcance esperado</li></ul>
+  <div class="rz-services-guide__chapters">
+    {serviceLines.map((service) => (
+      <section
+        id={service.id}
+        class:list={['rz-services-guide__chapter', { 'rz-services-guide__chapter--featured': service.featured }]}
+        aria-labelledby={`rz-services-guide-${service.id}-title`}
+      >
+        <figure class="rz-services-guide__media">
+          <img
+            src={service.image}
+            alt={service.alt}
+            width={service.imageWidth}
+            height={service.imageHeight}
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>{service.caption}</figcaption>
+        </figure>
+        <div class="rz-services-guide__content">
+          <div class="rz-services-guide__chapter-meta">
+            <span>{service.number} / 03</span>
+            <span>Servicios / Rizzoma</span>
+          </div>
+          <h2 id={`rz-services-guide-${service.id}-title`}>{service.name}</h2>
+          <p class="rz-services-guide__concept">{service.title}</p>
+          <p class="rz-services-guide__summary">{service.summary}</p>
+          <p class="rz-services-guide__description">{service.description}</p>
+          {service.id === 'visualizacion' && <span id="diseno-visualizacion" class="rz-services-guide__anchor" aria-hidden="true"></span>}
+          <div class="rz-services-guide__details">
+            <div>
+              <h3>Qué podemos desarrollar</h3>
+              <ul>
+                {service.services.map((entry) => <li>{entry}</li>)}
+              </ul>
+            </div>
+            <div>
+              <h3>Por dónde empezar</h3>
+              <p>{service.startingPoint}</p>
+            </div>
+          </div>
         </div>
+      </section>
+    ))}
+  </div>
+
+  <section class="rz-services-guide__method" aria-labelledby="rz-services-guide-method-title">
+    <p class="rz-services-guide__label">Nuestra manera de trabajar</p>
+    <div>
+      <h2 id="rz-services-guide-method-title">Una conversación, un criterio claro.</h2>
+      <div class="rz-services-guide__method-copy">
+        <p>Rizzoma es una práctica independiente dirigida por Juan José Quintero Tobón. El contacto es directo y cada encargo parte de entender qué quieres resolver, en qué etapa se encuentra el proyecto y cómo puede aportar el estudio.</p>
+        <p>La visualización puede ser un servicio independiente o acompañar el diseño. La arquitectura y las remodelaciones se plantean según las necesidades y condiciones reales de cada espacio.</p>
       </div>
-      <a href={withBase('/contacto/')} class="pill-link reveal">Hablar con Juan José ↗</a>
     </div>
+  </section>
+
+  <section class="rz-services-guide__contact" aria-labelledby="rz-services-guide-contact-title">
+    <div>
+      <p class="rz-services-guide__label">Empecemos</p>
+      <h2 id="rz-services-guide-contact-title">¿Tienes un proyecto en mente?</h2>
+      <p>Cuéntanos qué necesitas y exploremos cómo podemos ayudarte. No hace falta tener todos los detalles resueltos para iniciar una conversación.</p>
+    </div>
+    <a href={withBase('/contacto/')} class="rz-services-guide__contact-link">
+      Hablemos de tu proyecto <span aria-hidden="true">↗</span>
+    </a>
   </section>
 </BaseLayout>
