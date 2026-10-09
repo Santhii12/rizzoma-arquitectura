@@ -28,13 +28,13 @@
 .nuestra-mirada__title {
   margin: 0 0 clamp(36px, 4.5vw, 74px);
   max-width: 11.5ch;
-  font-family: "Soligant", var(--serif, Georgia, serif);
+  font-family: var(--display, "DM Serif Display", Georgia, serif);
   font-weight: 400;
   font-style: normal;
   font-synthesis: none;
   font-size: clamp(3rem, 5.2vw, 6.6rem);
   line-height: 1.045;
-  letter-spacing: -.028em;
+  letter-spacing: -.021em;
   text-wrap: balance;
 }
 .nuestra-mirada__title em {
