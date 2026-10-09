@@ -1,6 +1,6 @@
-/* Rizzoma's two-family typographic system.
-   Manrope is served locally (regular for reading, medium for headings/UI).
-   Soligant is reserved for the existing gold wordmark and selected concepts.
+/* Rizzoma's typographic system.
+   Manrope supports text/UI, DM Serif Display is for editorial section titles.
+   Soligant remains reserved for the Rizzoma brand wordmark.
    Keep structural layouts and the orbital portfolio animation unchanged. */
 
 @font-face {
@@ -145,7 +145,8 @@ button {
 }
 
 
-/* v2: architectural display headlines in Soligant */
+/* Brand Soligant stays available; DM Serif Display is the section typeface.
+   Both fonts are served locally to work with the site's strict CSP. */
 @font-face {
   font-family: "Soligant";
   src: url("../assets/fonts/soligant-headings-fixed.woff2") format("woff2");
@@ -153,8 +154,15 @@ button {
   font-weight: 400;
   font-display: swap;
 }
+@font-face {
+  font-family: "DM Serif Display";
+  src: url("../assets/fonts/dm-serif-display-latin-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
 :root {
-  --display: "Soligant", Georgia, serif;
+  --display: "DM Serif Display", Georgia, serif;
 }
 
 /* Main section headlines and editorial introductions.
@@ -225,15 +233,15 @@ button {
 }
 
 
-/* Contact-page accent-safe title (Manrope Medium). */
+/* Contact editorial headline: proper Spanish accents in DM Serif Display. */
 .contact-page .contact-intro .page-title {
-  font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
-  font-weight: 500;
+  font-family: var(--display);
+  font-weight: 400;
   font-style: normal;
   font-synthesis: none;
-  font-size: clamp(3.25rem, 5.15vw, 5.9rem);
-  line-height: 1.12;
-  letter-spacing: -.055em;
+  font-size: clamp(3.25rem, 5.45vw, 6.2rem);
+  line-height: 1.10;
+  letter-spacing: -.025em;
   text-wrap: balance;
   overflow-wrap: normal;
   max-width: 100%;
@@ -247,9 +255,9 @@ button {
 }
 @media (max-width: 540px) {
   .contact-page .contact-intro .page-title {
-    font-size: clamp(2.5rem, 10.2vw, 3.45rem);
-    line-height: 1.14;
-    letter-spacing: -.048em;
+    font-size: clamp(2.6rem, 10.5vw, 3.65rem);
+    line-height: 1.13;
+    letter-spacing: -.025em;
     margin: 26px 0 32px;
   }
 }
