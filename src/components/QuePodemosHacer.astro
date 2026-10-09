@@ -40,6 +40,13 @@ const servicios = [
         <h2 id="rizzoma-offer-title" class="rizzoma-offer__headline">¿Qué podemos hacer por ti?</h2>
       </div>
       <div class="rizzoma-offer__intro-copy">
+        <a class="rizzoma-offer__intro-cta" href={withBase('/servicios/')} aria-label="Conocer los tres servicios de Rizzoma Arquitectura">
+          <span class="rizzoma-offer__intro-cta-content">
+            <span class="rizzoma-offer__intro-cta-kicker">Visualización · Diseño · Remodelación</span>
+            <span class="rizzoma-offer__intro-cta-title">Conoce nuestros servicios</span>
+          </span>
+          <span class="rizzoma-offer__intro-cta-arrow" aria-hidden="true">↗</span>
+        </a>
         <p>Cada proyecto necesita una manera distinta de hacerse realidad.</p>
         <p>Diseñamos espacios y construimos imágenes que permiten comprender, experimentar y comunicar la arquitectura antes de que exista.</p>
       </div>
@@ -100,15 +107,6 @@ const servicios = [
       ))}
     </div>
 
-    <footer class="rizzoma-offer__closing">
-      <div>
-        <p class="rizzoma-offer__eyebrow">Los tres servicios / Un mismo criterio</p>
-        <h3>Del espacio a la imagen.</h3>
-        <p>La visualización, el diseño y la transformación de espacios forman parte de una misma mirada. Conoce sus alcances y descubre cuál responde mejor a la etapa de tu proyecto.</p>
-      </div>
-      <a href={withBase('/servicios/')} class="rizzoma-offer__closing-link">
-        Conocer los tres servicios <span aria-hidden="true">↗</span>
-      </a>
-    </footer>
+
   </div>
 </section>
