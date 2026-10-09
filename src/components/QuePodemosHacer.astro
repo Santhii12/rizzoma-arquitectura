@@ -1,0 +1,124 @@
+---
+import { withBase } from '@/utils/paths';
+import '@/styles/que-podemos-hacer.css';
+
+interface Props {
+  visualizacionImage: string;
+  disenoImage?: string;
+  remodelacionImage?: string;
+}
+const { visualizacionImage, disenoImage, remodelacionImage } = Astro.props;
+
+const servicios = [
+  {
+    numero: '02',
+    nombre: 'Diseño arquitectónico',
+    titulo: 'Espacios con sentido.',
+    descripcion: 'Desarrollamos propuestas arquitectónicas que parten del lugar, las necesidades de quienes lo habitan y la relación entre espacio, luz y materialidad.',
+    prestaciones: ['Diseño de vivienda.', 'Diseño conceptual.', 'Desarrollo arquitectónico.'],
+    imagen: disenoImage,
+    alt: 'Arquitectura residencial contemporánea de Casa Patio Horizonte, con atención al espacio y la materialidad',
+    pie: 'Casa Patio Horizonte · Archivo de Rizzoma',
+    url: withBase('/arquitectura-medellin/'),
+    enlace: 'Conocer diseño arquitectónico'
+  },
+  {
+    numero: '03',
+    nombre: 'Remodelación y transformación de espacios',
+    titulo: 'Lo existente, de otra manera.',
+    descripcion: 'Replanteamos espacios para mejorar su funcionalidad, atmósfera y materialidad, reconociendo el potencial de lo que ya existe.',
+    prestaciones: ['Remodelaciones residenciales.', 'Diseño interior.', 'Actualización de espacios comerciales.'],
+    imagen: remodelacionImage,
+    alt: 'Referencia arquitectónica de Casa Patio Horizonte para ilustrar la relación entre espacio y materialidad; no es una remodelación',
+    pie: 'Referencia de materialidad · Casa Patio Horizonte',
+    url: withBase('/servicios/#arquitectura'),
+    enlace: 'Conocer el alcance'
+  }
+];
+---
+<section class="rizzoma-offer" id="que-podemos-hacer" aria-labelledby="rizzoma-offer-title">
+  <div class="rizzoma-offer__inner">
+    <header class="rizzoma-offer__introduction">
+      <div class="rizzoma-offer__intro-title">
+        <p class="rizzoma-offer__eyebrow">Servicios / Rizzoma Arquitectura</p>
+        <h2 id="rizzoma-offer-title" class="rizzoma-offer__headline">¿Qué podemos hacer por ti?</h2>
+      </div>
+      <div class="rizzoma-offer__intro-copy">
+        <p>Cada proyecto necesita una manera distinta de hacerse realidad.</p>
+        <p>Diseñamos espacios y construimos imágenes que permiten comprender, experimentar y comunicar la arquitectura antes de que exista.</p>
+      </div>
+    </header>
+
+    <article class="rizzoma-offer__featured" aria-labelledby="rizzoma-offer-visual-title">
+      <figure class="rizzoma-offer__featured-visual">
+        <img
+          src={visualizacionImage}
+          alt="Casa Patio Horizonte: visualización de una vivienda contemporánea integrada al paisaje natural"
+          loading="lazy"
+          decoding="async"
+          width="2048"
+          height="1529"
+        />
+        <figcaption>Casa Patio Horizonte <span>— Archivo visual de Rizzoma</span></figcaption>
+      </figure>
+      <div class="rizzoma-offer__featured-copy">
+        <div class="rizzoma-offer__service-top">
+          <span>01 / 03</span>
+          <span>Visualización arquitectónica</span>
+        </div>
+        <h3 id="rizzoma-offer-visual-title">Arquitectura que se puede imaginar.</h3>
+        <p class="rizzoma-offer__description">Creamos imágenes y recorridos que permiten visualizar el proyecto, comunicar sus cualidades y transmitir la experiencia de habitarlo.</p>
+        <ul class="rizzoma-offer__capabilities">
+          <li>Renders arquitectónicos.</li>
+          <li>Animación arquitectónica.</li>
+          <li>Recorridos virtuales.</li>
+          <li>Imágenes 360°.</li>
+          <li>Modelado y apoyo visual para proyectos arquitectónicos.</li>
+        </ul>
+        <a class="rizzoma-offer__feature-link" href={withBase('/visualizacion-arquitectonica-medellin/')}>
+          Conocer visualización arquitectónica <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <div class="rizzoma-offer__secondary" aria-label="Otras líneas del estudio">
+      {servicios.map((servicio) => (
+        <article class="rizzoma-offer__secondary-card" aria-labelledby={`rizzoma-offer-${servicio.numero}`}>
+          <div class="rizzoma-offer__secondary-top">
+            <span>{servicio.numero} / 03</span>
+            <span>{servicio.nombre}</span>
+          </div>
+          <figure class="rizzoma-offer__secondary-visual">
+            {servicio.imagen ? (
+              <img src={servicio.imagen} alt={servicio.alt} loading="lazy" decoding="async" width="1024" height="1360" />
+            ) : (
+              <div class="rizzoma-offer__image-pending" role="img" aria-label="Imagen del servicio pendiente de incorporar">Imagen de servicio pendiente</div>
+            )}
+            {servicio.imagen && <figcaption>{servicio.pie}</figcaption>}
+          </figure>
+          <div class="rizzoma-offer__secondary-content">
+            <h3 id={`rizzoma-offer-${servicio.numero}`}>{servicio.titulo}</h3>
+            <p class="rizzoma-offer__description">{servicio.descripcion}</p>
+            <ul class="rizzoma-offer__capabilities">
+              {servicio.prestaciones.map((prestacion) => <li>{prestacion}</li>)}
+            </ul>
+            <a class="rizzoma-offer__secondary-link" href={servicio.url}>
+              {servicio.enlace} <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <footer class="rizzoma-offer__closing">
+      <div>
+        <p class="rizzoma-offer__eyebrow">Empecemos una conversación</p>
+        <h3>¿Tienes un proyecto en mente?</h3>
+        <p>Cuéntanos qué necesitas y exploremos cómo podemos ayudarte.</p>
+      </div>
+      <a href={withBase('/contacto/')} class="rizzoma-offer__closing-link">
+        Hablemos de tu proyecto <span aria-hidden="true">↗</span>
+      </a>
+    </footer>
+  </div>
+</section>
