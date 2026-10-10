@@ -19,7 +19,7 @@ function paint(){
   const focus=position*(cards.length-1);
   const closest=Math.round(focus);
   // Use the rendered card height: fixed short spacing made larger images overlap their captions.
-  const cardHeight=cards[0]?.getBoundingClientRect().height || 500;
+  const cardHeight=cards[0]?.offsetHeight || 500;
   const frameSpacing=Math.max(innerHeight*.82,cardHeight*1.02);
   cards.forEach((card,index)=>{
     const delta=index-focus;
