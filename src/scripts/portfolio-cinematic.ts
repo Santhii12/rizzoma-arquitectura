@@ -2,6 +2,7 @@
 const section = document.querySelector<HTMLElement>('[data-cinema-scroll]');
 const cards = Array.from(section?.querySelectorAll<HTMLElement>('[data-cinema-card]') ?? []);
 const counter = section?.querySelector<HTMLElement>('[data-cinema-counter]');
+const heading = section?.querySelector<HTMLElement>('.rz-cinema-heading');
 const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const desktop = window.matchMedia('(min-width: 901px)');
 const clamp = (v: number, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, v));
@@ -16,25 +17,26 @@ function render() {
   const rect = section.getBoundingClientRect();
   const travel = Math.max(1, section.offsetHeight - window.innerHeight);
   const progress = clamp(-rect.top / travel);
-  const morph = smooth(progress / .25);
-  const focus = clamp((progress - .25) / .75) * Math.max(0, cards.length - 1);
+  const morph = smooth(progress / .18);
+  if (heading) { heading.style.opacity = String(1-smooth(progress/.14)); heading.style.transform = `translate(-50%, ${(-35*smooth(progress/.14)).toFixed(1)}px)`; }
+  const focus = clamp((progress - .18) / .82) * Math.max(0, cards.length - 1);
   const nearest = Math.min(cards.length - 1, Math.round(focus));
   const vw = window.innerWidth;
   const vh = window.innerHeight;
-  const radiusX = Math.min(vw * .31, 470);
-  const radiusY = Math.min(vh * .27, 225);
+  const radiusX = Math.min(vw * .24, 350);
+  const radiusY = Math.min(vh * .17, 145);
   cards.forEach((card, i) => {
     const angle = -Math.PI * .85 + i * (Math.PI * 1.65 / Math.max(1, cards.length - 1));
     const depth = (Math.sin(angle + .65) + 1) / 2;
     const spiralX = Math.cos(angle) * radiusX;
     const spiralY = Math.sin(angle) * radiusY;
-    const spiralScale = .58 + depth * .27;
+    const spiralScale = .28 + depth * .23;
     const spiralRotate = -11 + i * 4.5;
     const distance = i - focus;
     // Neighboring frames remain visible as a continuous vertical reel.
-    const listX = Math.sign(distance) * Math.min(Math.abs(distance), 1) * vw * .075;
-    const listY = distance * Math.min(vh * .71, 550);
-    const listScale = clamp(1.28 - Math.abs(distance) * .4, .36, 1.28);
+    const listX = 0;
+    const listY = distance * Math.min(vh * .65, 510);
+    const listScale = clamp(1.05 - Math.abs(distance) * .38, .25, 1.05);
     const x = spiralX * (1 - morph) + listX * morph;
     const y = spiralY * (1 - morph) + listY * morph;
     const scale = spiralScale * (1 - morph) + listScale * morph;
@@ -66,6 +68,7 @@ function configure(){
       const interactive=card.querySelector<HTMLElement>('a,button');
       if(interactive) interactive.removeAttribute('tabindex');
     });
+    if(heading){heading.style.removeProperty('opacity');heading.style.removeProperty('transform');}
     if(counter)counter.textContent=`01 / ${String(cards.length).padStart(2,'0')}`;
     return;
   }
@@ -85,7 +88,7 @@ if(section && cards.length){
     if(!card)return;
     const index=cards.indexOf(card);
     if(index < 0)return;
-    const focusPosition=.25+.75*(index/Math.max(1,cards.length-1));
+    const focusPosition=.18+.82*(index/Math.max(1,cards.length-1));
     const top=section.getBoundingClientRect().top+window.scrollY+focusPosition*(section.offsetHeight-window.innerHeight);
     window.scrollTo({top,behavior:'auto'});
   });
