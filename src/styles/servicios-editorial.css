@@ -131,6 +131,8 @@
   border: 0;
   color: var(--rz-guide-cream);
   background: var(--rz-guide-olive);
+  /* Match the full height of the editorial text column. */
+  align-items: stretch;
 }
 .rz-services-guide__chapter:not(.rz-services-guide__chapter--featured):nth-child(3) {
   grid-template-columns: minmax(0, 1.09fr) minmax(0, .91fr);
@@ -156,6 +158,8 @@
 }
 .rz-services-guide__chapter--featured .rz-services-guide__media {
   min-height: 780px;
+  height: 100%;
+  align-self: stretch;
   overflow: hidden;
 }
 .rz-services-guide__chapter--featured .rz-services-guide__media img {
@@ -425,6 +429,7 @@
   .rz-services-guide__media img { aspect-ratio: 16 / 10; }
   .rz-services-guide__chapter--featured .rz-services-guide__media {
     min-height: 0;
+    height: auto;
     aspect-ratio: 16 / 10;
     width: 100%;
   }
