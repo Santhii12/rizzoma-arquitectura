@@ -1,0 +1,43 @@
+name: Import two Services photographs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-services-photos.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download and verify user-approved images
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/images/services
+          curl --fail --location --silent --show-error --retry 3 --connect-timeout 12 --max-time 90 \
+            'https://d2ol7oe51mr4n9.cloudfront.net/user_3JyDbghZNXmeLLpGsUpuxXQddfw/01af4025-7395-4eaa-8251-e87a4149d209.jpg' \
+            --output public/images/services/diseno-arquitectonico-casa.jpg
+          curl --fail --location --silent --show-error --retry 3 --connect-timeout 12 --max-time 90 \
+            'https://d2ol7oe51mr4n9.cloudfront.net/user_3JyDbghZNXmeLLpGsUpuxXQddfw/ae84a208-4d47-452b-8a3e-d74bedbac956.jpg' \
+            --output public/images/services/remodelacion-interior.jpg
+          echo 'eb15245a85e136d0f9fa4a53f872da7982d37f46cf1e138c87dfb37fef14096b  public/images/services/diseno-arquitectonico-casa.jpg' | sha256sum --check
+          echo 'd16238062901ff880ffa8c2f477a4c5f92b3a7ed46df9ab49ac6e3786e4c5878  public/images/services/remodelacion-interior.jpg' | sha256sum --check
+          test "$(file --mime-type -b public/images/services/diseno-arquitectonico-casa.jpg)" = "image/jpeg"
+          test "$(file --mime-type -b public/images/services/remodelacion-interior.jpg)" = "image/jpeg"
+      - name: Commit verified images
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/images/services/diseno-arquitectonico-casa.jpg public/images/services/remodelacion-interior.jpg
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Add architectural design and interior photographs'
+          git push
