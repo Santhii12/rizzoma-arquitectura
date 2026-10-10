@@ -1,5 +1,6 @@
 ---
 import { site } from '@/config/site';
+import Footer from '@/components/Footer.astro';
 import { withBase } from '@/utils/paths';
 import '@/styles/global-1.css';
 import '@/styles/global-2.css';
@@ -38,6 +39,7 @@ const canonical = new URL(Astro.url.pathname, baseSite);
   <body class="portfolio-experience-body">
     <a class="skip-link" href="#portfolio-space">Ir al portafolio</a>
     <slot />
+    <Footer />
 
   </body>
 </html>
