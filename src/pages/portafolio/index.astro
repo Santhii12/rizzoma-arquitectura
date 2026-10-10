@@ -2,6 +2,7 @@
 import PortfolioLayout from '@/layouts/PortfolioLayout.astro';
 import { projects } from '@/data/projects';
 import { withBase } from '@/utils/paths';
+import '@/styles/portfolio-cinematic.css';
 
 const cards = projects.filter((p) => p.slug !== 'el-refugio');
 ---
@@ -15,6 +16,7 @@ const cards = projects.filter((p) => p.slug !== 'el-refugio');
       <a href={withBase('/')} class="rz-back">Volver al sitio <span aria-hidden="true">↗</span></a>
     </header>
 
+    <div class="rz-cinema-intro">
     <div class="rz-portfolio-shell">
       <section class="rz-portfolio-editorial">
         <p class="rz-overline">PORTAFOLIO / RIZZOMA</p>
@@ -24,19 +26,26 @@ const cards = projects.filter((p) => p.slug !== 'el-refugio');
         <div class="rz-editorial-bottom"><strong>{String(cards.length).padStart(2, '0')}</strong><span>PROYECTOS EN EL ARCHIVO</span></div>
       </section>
 
+    </div>
+    </div>
+
+    <section class="rz-cinema-scroll" aria-label="Recorrido cinematográfico por los proyectos" data-cinema-scroll>
+      <div class="rz-cinema-sticky">
+        <div class="rz-cinema-topline"><span>RIZZOMA / ARCHIVO VISUAL</span><span data-cinema-counter>01 / {String(cards.length).padStart(2, '0')}</span></div>
+        <p class="rz-cinema-instruction">Desplázate para recorrer los proyectos ↓</p>
       <section class="rz-portfolio-gallery" aria-label="Proyectos de Rizzoma">
         <div class="rz-rings" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="rz-ring-center" aria-hidden="true"><span>R I Z Z O M A</span><small>ARQUITECTURA · MEDELLÍN</small></div>
         <div class="rz-card-grid">
           {cards.map((project, index) => (
-            <article class={`rz-project-card rz-card-${index + 1}`}>
+            <article class={`rz-project-card rz-card-${index + 1}`} data-cinema-card data-index={index}>
               {project.available ? (
                 <a class="rz-project-link" href={withBase(`/proyectos/${project.slug}/`)} aria-label={`Abrir proyecto ${project.title}`}>
                   <div class="rz-project-image">
                     {project.cover ? <img src={project.cover} alt={`Portada de ${project.title}`} loading={index < 2 ? 'eager' : 'lazy'} decoding="async" /> : <div class="rz-cover-placeholder"><span>R / A</span></div>}
                     <span class="rz-image-arrow" aria-hidden="true">↗</span>
                   </div>
-                  <div class="rz-card-caption"><div><span class="rz-card-count">{String(index + 1).padStart(2, '0')} /</span><h2>{project.title}</h2><p>{project.category}</p></div><span aria-hidden="true">↗</span></div>
+                  <div class="rz-card-caption"><div><span class="rz-card-count">{String(index + 1).padStart(2, '0')} /</span><h2>{project.title}</h2><p>{project.category}</p>{(project.intro ?? project.statement) && <p class="rz-cinema-description">{project.intro ?? project.statement}</p>}</div><span aria-hidden="true">↗</span></div>
                 </a>
               ) : (
                 <button type="button" class="rz-project-link rz-project-button" data-archive-open data-title={project.title} data-category={project.category} data-year={project.year ?? ''} data-location={[project.location, project.region].filter(Boolean).join(', ')} aria-label={`Ver datos disponibles de ${project.title}`}>
@@ -44,14 +53,15 @@ const cards = projects.filter((p) => p.slug !== 'el-refugio');
                     {project.cover ? <img src={project.cover} alt={`Portada de ${project.title}`} loading="lazy" decoding="async" /> : <div class="rz-cover-placeholder"><span>R / A</span></div>}
                     <span class="rz-image-arrow" aria-hidden="true">↗</span>
                   </div>
-                  <div class="rz-card-caption"><div><span class="rz-card-count">{String(index + 1).padStart(2, '0')} /</span><h2>{project.title}</h2><p>{project.category}</p></div><span aria-hidden="true">↗</span></div>
+                  <div class="rz-card-caption"><div><span class="rz-card-count">{String(index + 1).padStart(2, '0')} /</span><h2>{project.title}</h2><p>{project.category}</p>{(project.intro ?? project.statement) && <p class="rz-cinema-description">{project.intro ?? project.statement}</p>}</div><span aria-hidden="true">↗</span></div>
                 </button>
               )}
             </article>
           ))}
         </div>
       </section>
-    </div>
+      </div>
+    </section>
 
     <dialog class="rz-archive-dialog" data-archive-dialog aria-labelledby="rz-archive-title">
       <button type="button" class="rz-dialog-close" data-archive-close aria-label="Cerrar">×</button>
@@ -64,67 +74,7 @@ const cards = projects.filter((p) => p.slug !== 'el-refugio');
     </dialog>
   </main>
   <script>
-    // Ordered outward expansion: a short curved arc per card, with no
-    // complete turns and no movement after the final CSS position.
-    const gallery = document.querySelector<HTMLElement>('.rz-portfolio-gallery');
-    const cards = Array.from(document.querySelectorAll<HTMLElement>('.rz-project-card'));
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (gallery && cards.length && !reducedMotion && 'animate' in HTMLElement.prototype) {
-      const rect = gallery.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const compact = window.matchMedia('(max-width: 700px)').matches;
-      const duration = compact ? 1450 : 1700;
-      const stagger = compact ? 130 : 160;
-      const smooth = (v: number) => {
-        const t = Math.max(0, Math.min(1, v));
-        return t * t * (3 - 2 * t);
-      };
-
-      // All coordinates are measured before animation starts. Each card
-      // grows outward on a gentle clockwise arc ending at its own position.
-      const paths = cards.map(card => {
-        const target = card.getBoundingClientRect();
-        const destX = target.left + target.width / 2;
-        const destY = target.top + target.height / 2;
-        const dx = destX - centerX;
-        const dy = destY - centerY;
-        const distance = Math.hypot(dx, dy);
-        const endAngle = Math.atan2(dy, dx);
-        const arc = compact ? 0.48 : 0.68; // radians, far less than one revolution
-
-        // CSS already applies the final tilt. Animate only the additional
-        // translation and scale using individual transform properties, so
-        // there is never a rotation jump at the end.
-        return Array.from({ length: 81 }, (_, step) => {
-          const t = step / 80;
-          const p = smooth(t);
-          const angle = endAngle - arc * (1 - p);
-          const radius = distance * p;
-          const x = centerX + Math.cos(angle) * radius;
-          const y = centerY + Math.sin(angle) * radius;
-          return {
-            offset: t,
-            opacity: Math.min(1, t * 9),
-            translate: `${x - destX}px ${y - destY}px`,
-            scale: String(0.84 + 0.16 * p)
-          };
-        });
-      });
-
-      gallery.classList.add('rz-spiral-playing');
-      const animations = cards.map((card, index) => card.animate(paths[index], {
-        duration,
-        delay: 180 + index * stagger,
-        easing: 'linear',
-        fill: 'backwards'
-      }));
-      Promise.all(animations.map(animation => animation.finished.catch(() => null))).then(() => {
-        animations.forEach(animation => animation.cancel());
-        gallery.classList.remove('rz-spiral-playing');
-      });
-    }
+    import '@/scripts/portfolio-cinematic';
 
     const dialog = document.querySelector<HTMLDialogElement>('[data-archive-dialog]');
     document.querySelectorAll<HTMLButtonElement>('[data-archive-open]').forEach((button) => {
