@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { site } from '@/config/site';
-import { featuredProject } from '@/data/projects';
 import { withBase } from '@/utils/paths';
 import '@/styles/servicios-editorial.css';
 
@@ -9,7 +8,6 @@ const baseSite = Astro.site ?? new URL(site.domain);
 const servicesUrl = new URL(withBase('/servicios/'), baseSite).toString();
 const cover = withBase('/images/studio/home/rizzoma-hero-portada.webp');
 const coverAbsoluteUrl = new URL(cover, baseSite).toString();
-const gallery = featuredProject?.gallery ?? [];
 const serviceLines = [
   {
     id: 'visualizacion',
@@ -50,11 +48,11 @@ const serviceLines = [
     startingPoint: 'Una idea, la ubicación y las necesidades principales. Si existen planos, información del lote o referencias, ayudan a definir la etapa del proyecto.',
     ctaLabel: 'Consultar diseño arquitectónico',
     contactMessage: 'Hola, quisiera conversar sobre un proyecto de diseño arquitectónico. ¿Qué información necesitan para empezar?',
-    image: gallery[2] ?? featuredProject?.cover ?? cover,
-    alt: 'Casa Patio Horizonte: vista de arquitectura residencial contemporánea y sus materiales',
-    caption: 'Casa Patio Horizonte / Proyecto de Rizzoma',
-    imageWidth: 1024,
-    imageHeight: 1536,
+    image: withBase('/images/services/diseno-arquitectonico-casa.jpg'),
+    alt: 'Visualización exterior de casa contemporánea con fachadas de madera y vidrio, rodeada de vegetación al atardecer',
+    caption: 'Diseño arquitectónico / Imagen de referencia',
+    imageWidth: 1122,
+    imageHeight: 1402,
     featured: false
   },
   {
@@ -72,11 +70,11 @@ const serviceLines = [
     startingPoint: 'Fotografías, medidas o planos del estado actual y una breve descripción de los cambios deseados.',
     ctaLabel: 'Consultar una remodelación',
     contactMessage: 'Hola, quisiera conversar sobre la remodelación de un espacio. Tengo algunas referencias y me gustaría conocer cómo empezar.',
-    image: gallery[4] ?? featuredProject?.cover ?? cover,
-    alt: 'Referencia de materialidad y atmósfera de Casa Patio Horizonte; no corresponde a una obra de remodelación',
-    caption: 'Referencia de materialidad / Casa Patio Horizonte · No es una remodelación',
-    imageWidth: 2048,
-    imageHeight: 1360,
+    image: withBase('/images/services/remodelacion-interior.jpg'),
+    alt: 'Interior de sala residencial con sofá claro, mesa de centro, cocina abierta y escalera de madera',
+    caption: 'Interior residencial / Referencia de espacio y materialidad',
+    imageWidth: 1448,
+    imageHeight: 814,
     featured: false
   }
 ] as const;
