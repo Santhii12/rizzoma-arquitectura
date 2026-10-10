@@ -1,40 +1,51 @@
 ---
 import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
+import '@/styles/editorial-footer.css';
+
+const homeAnchor = (id: string) => `${withBase('/') }#${id}`;
 ---
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-signature" aria-label="Rizzoma Arquitectura">
-      <img class="footer-wordmark-image" src={withBase(site.brand.wordmark)} alt="Rizzoma" width="1000" height="220" loading="lazy" />
-      <img class="footer-monogram-image" src={withBase(site.brand.monogram)} alt="" aria-hidden="true" width="280" height="280" loading="lazy" />
+<footer class="site-footer rz-editorial-footer">
+  <div class="rz-footer__inner">
+    <div class="rz-footer__closing">
+      <p class="rz-footer__overline">RIZZOMA · ARQUITECTURA Y VISUALIZACIÓN</p>
+      <h2>Toda idea merece encontrar su forma.</h2>
+      <div class="rz-footer__invitation">
+        <p>Conversemos sobre lo que estás imaginando y exploremos cómo llevarlo más lejos.</p>
+        <a class="rz-footer__cta" href={withBase('/contacto/')}>
+          <span>Iniciar una conversación</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
     </div>
 
-    <p class="footer-kicker">¿Tienes un proyecto en mente?</p>
-    <a href={withBase('/contacto/')} class="footer-cta">
-      <span>Conversemos.</span><span aria-hidden="true">↗</span>
-    </a>
-
-    <div class="footer-grid">
-      <div class="footer-brand-block">
-        <strong>{site.name}</strong>
-        <p>{site.tagline}</p>
-        <p class="footer-founder">Práctica independiente dirigida por {site.founder.name}.</p>
+    <nav class="rz-footer__nav" aria-label="Navegación del pie de página">
+      <div class="rz-footer__nav-group">
+        <h3>Explorar</h3>
+        <a href={withBase('/portafolio/')}>Proyectos</a>
+        <a href={withBase('/servicios/')}>Servicios</a>
+        <a href={homeAnchor('nuestra-mirada')}>Nuestra mirada</a>
       </div>
-
-      <div class="footer-contact">
-        <span>{site.location}</span>
-        <a href={`mailto:${site.email}`}>{site.email}</a>
-        <a href={site.whatsappUrl} target="_blank" rel="noreferrer">WhatsApp ↗</a>
+      <div class="rz-footer__nav-group">
+        <h3>Conectar</h3>
+        <a href={withBase('/contacto/')}>Contacto</a>
+        <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+        <a href={`mailto:${site.email}`}>Correo electrónico</a>
       </div>
-
-      <div class="footer-links">
-        <a href={withBase('/portafolio/')}>Portafolio</a>
-        <a href={withBase('/arquitectura-medellin/')}>Arquitectura en Medellín</a>
-        <a href={withBase('/visualizacion-arquitectonica-medellin/')}>Visualización arquitectónica</a>
-        <a href={site.instagramUrl} target="_blank" rel="noreferrer">Instagram ↗</a>
-        <a href={withBase('/privacidad/')}>Privacidad</a>
-        <span>© {new Date().getFullYear()} Rizzoma</span>
+      <div class="rz-footer__nav-group">
+        <h3>Rizzoma</h3>
+        <a href={withBase('/estudio/')}>El estudio</a>
+        <a href={homeAnchor('como-trabajamos')}>Cómo trabajamos</a>
+        <a href={homeAnchor('como-empezar')}>Cómo empezar</a>
       </div>
+    </nav>
+
+    <div class="rz-footer__signature">
+      <a class="rz-footer__brand" href={withBase('/')} aria-label="Rizzoma Arquitectura, volver al inicio">
+        <img src={withBase(site.brand.wordmark)} alt="Rizzoma Arquitectura" width="1000" height="220" loading="lazy" decoding="async" />
+      </a>
+      <p>Arquitectura con intención</p>
+      <small>© 2026 Rizzoma. Todos los derechos reservados.</small>
     </div>
   </div>
 </footer>
