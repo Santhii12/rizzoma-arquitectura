@@ -16,16 +16,18 @@ const serviceLines = [
     number: '01',
     name: 'Visualización arquitectónica',
     title: 'Arquitectura que se puede imaginar.',
-    summary: 'Creamos imágenes y recorridos que permiten visualizar el proyecto, comunicar sus cualidades y transmitir la experiencia de habitarlo.',
-    description: 'La visualización permite estudiar cómo se relacionan la luz, los materiales, las proporciones y el paisaje antes de construir. Cada encuadre debe contar algo verdadero sobre la propuesta: su escala, su atmósfera y la forma en que podría ser habitada. Podemos trabajar sobre proyectos de Rizzoma o propuestas desarrolladas por otros estudios.',
+    summary: 'Creamos imágenes y recorridos que permiten comprender el proyecto, explorar su atmósfera y comunicar su intención antes de construirlo.',
+    description: 'La luz, las proporciones y los materiales se hacen visibles para estudiar decisiones de diseño y presentar propuestas propias o de otros estudios.',
     services: [
-      'Renders arquitectónicos de interiores y exteriores.',
+      'Renders de interiores y exteriores.',
       'Animación arquitectónica.',
       'Recorridos virtuales.',
       'Imágenes 360°.',
-      'Modelado y apoyo visual para proyectos arquitectónicos.'
+      'Modelado para visualización.'
     ],
-    startingPoint: 'Planos, un modelo tridimensional, referencias de materiales o imágenes del lugar son un buen punto de partida. El tipo de imagen, la cantidad de vistas y el nivel de desarrollo se definen según lo que necesitas comunicar.',
+    startingPoint: 'Planos, modelos 3D, referencias o fotografías del lugar. El alcance y los entregables se definen según las necesidades de cada proyecto.',
+    ctaLabel: 'Solicitar una propuesta',
+    contactMessage: 'Hola, quisiera solicitar una propuesta de visualización arquitectónica. ¿Podemos conversar sobre mi proyecto y el material necesario?',
     image: withBase('/images/services/visualizacion-atardecer.jpg'),
     alt: 'Visualización arquitectónica de embarcaciones junto a una costa tropical durante el atardecer',
     caption: 'Visualización arquitectónica / Archivo visual de Rizzoma',
@@ -38,14 +40,16 @@ const serviceLines = [
     number: '02',
     name: 'Diseño arquitectónico',
     title: 'Espacios con sentido.',
-    summary: 'Desarrollamos propuestas arquitectónicas que parten del lugar, las necesidades de quienes lo habitan y la relación entre espacio, luz y materialidad.',
-    description: 'El diseño comienza por comprender cómo se vive o se quiere vivir un espacio. Estudiamos el contexto, las condiciones del terreno, las relaciones interiores y exteriores y las decisiones que dan coherencia a cada proyecto. Buscamos que el concepto, la organización espacial y la materialidad expresen una misma intención.',
+    summary: 'Diseñamos espacios a partir del lugar, de quienes los habitan y de la relación entre luz, materia y uso cotidiano.',
+    description: 'El contexto, las condiciones del terreno y la manera de habitar orientan la organización espacial. Cada decisión busca dar coherencia a la propuesta.',
     services: [
       'Diseño de vivienda.',
       'Diseño conceptual.',
       'Desarrollo arquitectónico.'
     ],
-    startingPoint: 'Basta comenzar con una idea, la ubicación del proyecto y las necesidades principales. Si ya cuentas con información del lote, referencias o planos, esos materiales ayudan a definir la etapa y el alcance del trabajo.',
+    startingPoint: 'Una idea, la ubicación y las necesidades principales. Si existen planos, información del lote o referencias, ayudan a definir la etapa del proyecto.',
+    ctaLabel: 'Consultar diseño arquitectónico',
+    contactMessage: 'Hola, quisiera conversar sobre un proyecto de diseño arquitectónico. ¿Qué información necesitan para empezar?',
     image: gallery[2] ?? featuredProject?.cover ?? cover,
     alt: 'Casa Patio Horizonte: vista de arquitectura residencial contemporánea y sus materiales',
     caption: 'Casa Patio Horizonte / Proyecto de Rizzoma',
@@ -58,22 +62,26 @@ const serviceLines = [
     number: '03',
     name: 'Remodelación y transformación de espacios',
     title: 'Lo existente, de otra manera.',
-    summary: 'Replanteamos espacios para mejorar su funcionalidad, atmósfera y materialidad, reconociendo el potencial de lo que ya existe.',
-    description: 'Transformar un espacio no significa borrar su historia. Implica reconocer qué funciona, qué necesita cambiar y cómo aprovechar mejor la luz, las circulaciones, los materiales y las posibilidades reales del lugar. La intervención se define según el estado actual del inmueble y el propósito de quienes lo utilizan.',
+    summary: 'Exploramos cómo transformar un espacio existente para mejorar su funcionamiento, su atmósfera y su relación con los materiales.',
+    description: 'Partimos de lo que merece permanecer y de lo que necesita cambiar: recorridos, luz, distribución y acabados. La intervención se plantea según el estado y el uso del lugar.',
     services: [
       'Remodelaciones residenciales.',
       'Diseño interior.',
       'Actualización de espacios comerciales.'
     ],
-    startingPoint: 'Fotografías, medidas aproximadas o planos existentes ayudan a entender el espacio. A partir de ahí es posible conversar sobre sus limitaciones, la intención del cambio y el nivel de intervención necesario.',
+    startingPoint: 'Fotografías, medidas o planos del estado actual y una breve descripción de los cambios deseados.',
+    ctaLabel: 'Consultar una remodelación',
+    contactMessage: 'Hola, quisiera conversar sobre la remodelación de un espacio. Tengo algunas referencias y me gustaría conocer cómo empezar.',
     image: gallery[4] ?? featuredProject?.cover ?? cover,
-    alt: 'Imagen de Casa Patio Horizonte utilizada como referencia de materialidad y atmósfera, no como obra de remodelación',
-    caption: 'Referencia de materialidad / Casa Patio Horizonte. No corresponde a una remodelación.',
+    alt: 'Referencia de materialidad y atmósfera de Casa Patio Horizonte; no corresponde a una obra de remodelación',
+    caption: 'Referencia de materialidad / Casa Patio Horizonte · No es una remodelación',
     imageWidth: 2048,
     imageHeight: 1360,
     featured: false
   }
 ] as const;
+
+const serviceContactUrl = (message: string) => `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(message)}`;
 
 const schema = [
   {
@@ -118,8 +126,8 @@ const schema = [
         <h1 id="rz-services-page-title">Del espacio <em>a la imagen.</em></h1>
       </div>
       <div class="rz-services-guide__hero-intro">
-        <p class="rz-services-guide__lead">Cada proyecto necesita una manera distinta de hacerse realidad.</p>
-        <p>Diseñamos espacios y construimos imágenes que permiten comprender, experimentar y comunicar la arquitectura antes de que exista. Tres líneas de trabajo, una misma atención al territorio, la materia y la experiencia de habitar.</p>
+        <p class="rz-services-guide__lead">Cada proyecto pide una mirada propia.</p>
+        <p>Visualización arquitectónica, diseño y transformación de espacios. Tres maneras de trabajar con el lugar, la luz y la materialidad, desde una práctica independiente.</p>
       </div>
     </div>
     <nav class="rz-services-guide__index" aria-label="Ir a cada servicio">
@@ -146,7 +154,7 @@ const schema = [
             alt={service.alt}
             width={service.imageWidth}
             height={service.imageHeight}
-            loading="lazy"
+            loading={service.featured ? 'eager' : 'lazy'}
             decoding="async"
           />
           <figcaption>{service.caption}</figcaption>
@@ -154,12 +162,15 @@ const schema = [
         <div class="rz-services-guide__content">
           <div class="rz-services-guide__chapter-meta">
             <span>{service.number} / 03</span>
-            <span>Servicios / Rizzoma</span>
+            <span>{service.featured ? 'Servicio destacado / Rizzoma' : 'Servicios / Rizzoma'}</span>
           </div>
           <h2 id={`rz-services-guide-${service.id}-title`}>{service.name}</h2>
           <p class="rz-services-guide__concept">{service.title}</p>
           <p class="rz-services-guide__summary">{service.summary}</p>
           <p class="rz-services-guide__description">{service.description}</p>
+          <a class="rz-services-guide__chapter-action" href={serviceContactUrl(service.contactMessage)} target="_blank" rel="noopener noreferrer" aria-label={`${service.ctaLabel} por WhatsApp, se abre en una pestaña nueva`}>
+            {service.ctaLabel}<span aria-hidden="true">↗</span>
+          </a>
           {service.id === 'visualizacion' && <span id="diseno-visualizacion" class="rz-services-guide__anchor" aria-hidden="true"></span>}
           <div class="rz-services-guide__details">
             <div>
@@ -183,8 +194,8 @@ const schema = [
     <div>
       <h2 id="rz-services-guide-method-title">Una conversación, un criterio claro.</h2>
       <div class="rz-services-guide__method-copy">
-        <p>Rizzoma es una práctica independiente dirigida por Juan José Quintero Tobón. El contacto es directo y cada encargo parte de entender qué quieres resolver, en qué etapa se encuentra el proyecto y cómo puede aportar el estudio.</p>
-        <p>La visualización puede ser un servicio independiente o acompañar el diseño. La arquitectura y las remodelaciones se plantean según las necesidades y condiciones reales de cada espacio.</p>
+        <p>Rizzoma es una práctica independiente dirigida por Juan José Quintero Tobón. Cada conversación comienza por entender el lugar, la necesidad y la etapa del proyecto.</p>
+        <p>La visualización puede contratarse por separado o acompañar un proceso de diseño. El alcance se acuerda según el material disponible y las condiciones de cada encargo.</p>
       </div>
     </div>
   </section>
@@ -193,7 +204,7 @@ const schema = [
     <div>
       <p class="rz-services-guide__label">Empecemos</p>
       <h2 id="rz-services-guide-contact-title">¿Tienes un proyecto en mente?</h2>
-      <p>Cuéntanos qué necesitas y exploremos cómo podemos ayudarte. No hace falta tener todos los detalles resueltos para iniciar una conversación.</p>
+      <p>Cuéntanos qué necesitas y en qué etapa estás. No necesitas tener todo definido para iniciar una conversación.</p>
     </div>
     <a href={withBase('/contacto/')} class="rz-services-guide__contact-link">
       Hablemos de tu proyecto <span aria-hidden="true">↗</span>
