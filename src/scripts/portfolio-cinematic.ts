@@ -18,14 +18,15 @@ function paint(){
   const position=clamp(-area.top/distance);
   const focus=position*(cards.length-1);
   const closest=Math.round(focus);
-  // Use the rendered card height: fixed short spacing made larger images overlap their captions.
+  // Frame spacing follows the physical card height, not the viewport.
+  // Neighboring frames shrink enough to retain a small, consistent film-strip gap.
   const cardHeight=cards[0]?.offsetHeight || 500;
-  const frameSpacing=Math.max(innerHeight*.82,cardHeight*1.02);
+  const frameSpacing=cardHeight*.84 + 18;
   cards.forEach((card,index)=>{
     const delta=index-focus;
     const magnitude=Math.abs(delta);
     const y=delta*frameSpacing;
-    const scale=clamp(1-magnitude*.28,.42,1);
+    const scale=clamp(1-magnitude*.34,.38,1);
     const opacity=clamp(1-magnitude*.27,.18,1);
     card.style.transform=`translate3d(-50%,calc(-50% + ${y.toFixed(1)}px),0) scale(${scale.toFixed(3)})`;
     card.style.opacity=String(opacity);
