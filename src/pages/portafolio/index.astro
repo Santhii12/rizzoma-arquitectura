@@ -1,7 +1,6 @@
 ---
 import PortfolioLayout from '@/layouts/PortfolioLayout.astro';
 import { projects } from '@/data/projects';
-import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
 
 const cards = projects.filter((p) => p.slug !== 'el-refugio');
@@ -10,7 +9,7 @@ const cards = projects.filter((p) => p.slug !== 'el-refugio');
   <main class="rz-portfolio" id="portfolio-space">
     <header class="rz-portfolio-header">
       <a href={withBase('/')} class="rz-brand" aria-label="Rizzoma, volver al sitio">
-        <img src={withBase(site.brand.wordmark)} alt="Rizzoma" width="900" height="200" />
+        <img src={withBase('/brand/rizzoma-rzm-original.svg')} alt="Rizzoma, monograma RZM" width="565" height="400" />
       </a>
       <span class="rz-header-label">Arquitectura / Estudio independiente</span>
       <a href={withBase('/')} class="rz-back">Volver al sitio <span aria-hidden="true">↗</span></a>
@@ -53,7 +52,6 @@ const cards = projects.filter((p) => p.slug !== 'el-refugio');
         </div>
       </section>
     </div>
-    <footer class="rz-portfolio-footer"><span>RIZZOMA © {new Date().getFullYear()}</span><span>PROYECTOS · CONCEPTO · VISUALIZACIÓN</span><a href={withBase('/contacto/')}>Hablemos de tu proyecto ↗</a></footer>
 
     <dialog class="rz-archive-dialog" data-archive-dialog aria-labelledby="rz-archive-title">
       <button type="button" class="rz-dialog-close" data-archive-close aria-label="Cerrar">×</button>
