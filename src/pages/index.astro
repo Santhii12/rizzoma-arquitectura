@@ -70,11 +70,18 @@ const schema = {
         <p class="eyebrow">Portafolio</p>
         <h2 class="section-title">Trabajo seleccionado</h2>
       </div>
-      <a class="text-link" href={withBase('/portafolio/')}>Abrir portafolio ↗</a>
     </div>
 
     {mainPortfolioProject && (
-      <HomeSelectedProjects featured={mainPortfolioProject} projects={previewProjects} />
+      <>
+        <HomeSelectedProjects featured={mainPortfolioProject} projects={previewProjects} />
+        <div class="portfolio-home__action">
+          <a class="portfolio-home__cta" href={withBase('/portafolio/')} aria-label="Explorar el portafolio completo de Rizzoma Arquitectura">
+            <span class="portfolio-home__cta-label">Explora todos nuestros proyectos</span>
+            <span class="portfolio-home__cta-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </>
     )}
   </section>
 
