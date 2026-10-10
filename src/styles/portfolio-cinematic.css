@@ -14,21 +14,21 @@
 .rz-cinema-scroll .rz-card-grid{width:min(100%,1000px);height:auto;min-height:0;margin:30px auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
 .rz-cinema-scroll .rz-portfolio-gallery{min-height:0;display:block}
 .rz-cinema-scroll .rz-project-card{position:relative;inset:auto!important;width:100%;transform:none;min-width:0}
-.rz-cinema-scroll .rz-project-image{aspect-ratio:16/10;box-shadow:none;transition:none}
+.rz-cinema-scroll .rz-project-image{aspect-ratio:4/3;box-shadow:none;transition:none}
 .rz-cinema-scroll .rz-card-caption h2{font-size:clamp(1.15rem,1.8vw,1.8rem)}
 .rz-cinema-scroll .rz-card-caption{margin-top:10px}
-.rz-cinema-scroll .rz-cinema-description{margin:8px 0 0;max-width:45ch;color:#645f54;font:400 12px/1.55 var(--sans,Arial,sans-serif);letter-spacing:0;text-transform:none}
+.rz-cinema-scroll .rz-card-meta{display:flex;flex-wrap:wrap;gap:5px 14px;margin:8px 0 0;color:#746f5e;font-size:10px;letter-spacing:.1em;text-transform:uppercase}
 .rz-cinema-scroll .rz-project-link:hover .rz-project-image,.rz-cinema-scroll .rz-project-link:focus-visible .rz-project-image{transform:none;box-shadow:none}
 @media(min-width:901px) and (prefers-reduced-motion:no-preference){
  .rz-cinema-scroll.is-cinematic{height:calc((var(--rz-count,6) + 1) * 85svh)}
  .rz-cinema-scroll.is-cinematic .rz-cinema-sticky{
    position:sticky;top:0;width:100%;max-width:none;height:100svh;min-height:500px;
    padding:0;overflow:hidden;isolation:isolate;display:grid;
-   grid-template-columns:minmax(0,42%) minmax(0,58%);align-items:center
+   grid-template-columns:minmax(0,44%) minmax(0,56%);align-items:center
  }
  .rz-cinema-scroll.is-cinematic .rz-cinema-heading{
    position:relative;grid-column:1;grid-row:1;z-index:4;
-   width:100%;max-width:680px;padding:0 clamp(16px,2vw,38px) 0 clamp(70px,8vw,170px);
+   width:100%;max-width:none;padding:0 clamp(12px,1.5vw,30px) 0 clamp(110px,15vw,320px);
    margin:0;text-align:left;pointer-events:auto
  }
  .rz-cinema-scroll.is-cinematic .rz-cinema-heading .rz-portfolio-editorial{display:block}
@@ -48,7 +48,7 @@
  }
  .rz-cinema-scroll.is-cinematic .rz-project-card{
    position:absolute;left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;
-   width:min(52vw,820px);max-width:calc(100% - 2 * var(--pad,40px));transform-origin:center;will-change:transform,opacity
+   width:calc(100% - var(--pad,40px) - 8px);max-width:900px;transform-origin:center;will-change:transform,opacity
  }
  .rz-cinema-scroll.is-cinematic .rz-project-card:not(.is-active){pointer-events:none}
  .rz-cinema-scroll.is-cinematic .rz-card-caption h2{font-size:clamp(1.4rem,1.85vw,2.1rem)}
@@ -65,3 +65,6 @@
  .rz-cinema-topline{font-size:9px}
 }
 @media(prefers-reduced-motion:reduce){.rz-cinema-scroll .rz-project-card{will-change:auto!important}}
+
+/* Project captions: only title, known year and discipline. */
+.rz-cinema-scroll .rz-card-caption h2{display:block;margin:0}
