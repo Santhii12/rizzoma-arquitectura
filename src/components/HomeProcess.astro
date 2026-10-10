@@ -1,0 +1,65 @@
+---
+import { withBase } from '@/utils/paths';
+import '@/styles/home-process.css';
+
+const etapas = [
+  { numero: '01', titulo: 'Comprender', descripcion: 'Escuchamos las necesidades, estudiamos el contexto y definimos los objetivos del proyecto.' },
+  { numero: '02', titulo: 'Explorar', descripcion: 'Encontramos una dirección a partir de las condiciones, las posibilidades y la intención de cada encargo.' },
+  { numero: '03', titulo: 'Desarrollar', descripcion: 'Convertimos las ideas en diseño, documentación o representaciones visuales, según el alcance acordado.' },
+  { numero: '04', titulo: 'Entregar', descripcion: 'Presentamos resultados claros y cuidados, preparados para responder al propósito del proyecto.' }
+];
+const inicio = [
+  { numero: '01', titulo: 'Cuéntanos', descripcion: 'Comparte tu idea, tus necesidades y la información que tengas disponible.' },
+  { numero: '02', titulo: 'Definimos', descripcion: 'Revisamos el proyecto y preparamos una propuesta acorde con su alcance.' },
+  { numero: '03', titulo: 'Comenzamos', descripcion: 'Aprobada la propuesta y acordadas las condiciones, damos inicio al trabajo.' }
+];
+---
+<section class="rz-process" aria-labelledby="rz-process-title">
+  <div class="rz-process__inner">
+    <header class="rz-process__heading">
+      <div>
+        <p class="rz-process__eyebrow">Nuestro proceso / 01—04</p>
+        <h2 id="rz-process-title">Cómo trabajamos</h2>
+      </div>
+      <p class="rz-process__intro">Cada proyecto comienza por comprender lo que necesita y encontrar la manera adecuada de darle forma.</p>
+    </header>
+    <ol class="rz-process__steps">
+      {etapas.map((etapa) => (
+        <li class="rz-process__step">
+          <span class="rz-process__number">{etapa.numero} / 04</span>
+          <div>
+            <h3>{etapa.titulo}</h3>
+            <p>{etapa.descripcion}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<section class="rz-start" aria-labelledby="rz-start-title">
+  <div class="rz-start__inner">
+    <header class="rz-start__heading">
+      <p class="rz-start__eyebrow">Cómo empezar</p>
+      <h2 id="rz-start-title">Todo comienza con una conversación.</h2>
+      <p>Cuéntanos qué tienes en mente. Revisaremos tus necesidades y definiremos juntos el alcance, los tiempos y los siguientes pasos.</p>
+    </header>
+    <div class="rz-start__body">
+      <ol class="rz-start__steps">
+        {inicio.map((paso) => (
+          <li>
+            <span class="rz-start__number">{paso.numero}</span>
+            <div>
+              <h3>{paso.titulo}</h3>
+              <p>{paso.descripcion}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <a class="rz-start__cta" href={withBase('/contacto/')}>
+        <span>Hablemos de tu proyecto</span>
+        <span class="rz-start__arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
