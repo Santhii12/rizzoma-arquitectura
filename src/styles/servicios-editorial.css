@@ -170,6 +170,12 @@
   aspect-ratio: auto;
   object-position: 50% 58%;
 }
+/* The horizontal interior render keeps its full composition beside the text. */
+.rz-services-guide__chapter#remodelacion .rz-services-guide__media img {
+  aspect-ratio: 16 / 10;
+  object-position: center;
+}
+
 .rz-services-guide__media::after {
   content: "";
   position: absolute;
@@ -503,6 +509,7 @@
   .rz-services-guide__chapter--featured { padding-block: 0; }
   .rz-services-guide__media img { aspect-ratio: 4 / 3; }
   .rz-services-guide__chapter--featured .rz-services-guide__media { aspect-ratio: 4 / 3; }
+  .rz-services-guide__chapter#remodelacion .rz-services-guide__media img { aspect-ratio: 4 / 3; }
   .rz-services-guide__media figcaption { font-size: 8px; }
   .rz-services-guide__chapter--featured .rz-services-guide__content { padding: 32px 22px 42px; }
   .rz-services-guide__content h2,
