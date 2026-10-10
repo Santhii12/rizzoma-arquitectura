@@ -14,9 +14,9 @@
 .rz-cinema-scroll .rz-card-grid{width:min(100%,1000px);height:auto;min-height:0;margin:30px auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
 .rz-cinema-scroll .rz-portfolio-gallery{min-height:0;display:block}
 .rz-cinema-scroll .rz-project-card{position:relative;inset:auto!important;width:100%;transform:none;min-width:0}
-.rz-cinema-scroll .rz-project-image{aspect-ratio:4/3;box-shadow:none;transition:none}
+.rz-cinema-scroll .rz-project-image{aspect-ratio:16/10;box-shadow:none;transition:none}
 .rz-cinema-scroll .rz-card-caption h2{font-size:clamp(1.15rem,1.8vw,1.8rem)}
-.rz-cinema-scroll .rz-card-caption{margin-top:10px}
+.rz-cinema-scroll .rz-card-caption{margin-top:0;padding:14px 12px 18px;background:var(--rz-cream,#f3eee4);position:relative;z-index:1}
 .rz-cinema-scroll .rz-card-meta{display:flex;flex-wrap:wrap;gap:5px 14px;margin:8px 0 0;color:#746f5e;font-size:10px;letter-spacing:.1em;text-transform:uppercase}
 .rz-cinema-scroll .rz-project-link:hover .rz-project-image,.rz-cinema-scroll .rz-project-link:focus-visible .rz-project-image{transform:none;box-shadow:none}
 @media(min-width:901px) and (prefers-reduced-motion:no-preference){
@@ -48,9 +48,10 @@
  }
  .rz-cinema-scroll.is-cinematic .rz-project-card{
    position:absolute;left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;
-   width:calc(100% - var(--pad,40px) - 8px);max-width:900px;transform-origin:center;will-change:transform,opacity
+   width:calc(100% - 22px);max-width:1020px;transform-origin:center;will-change:transform,opacity
  }
  .rz-cinema-scroll.is-cinematic .rz-project-card:not(.is-active){pointer-events:none}
+ .rz-cinema-scroll.is-cinematic .rz-project-card:not(.is-active) .rz-card-caption{visibility:hidden}
  .rz-cinema-scroll.is-cinematic .rz-card-caption h2{font-size:clamp(1.4rem,1.85vw,2.1rem)}
  .rz-cinema-scroll.is-cinematic .rz-cinema-description{max-height:92px;overflow:hidden;font-size:clamp(12px,.93vw,15px)}
 }
@@ -68,3 +69,6 @@
 
 /* Project captions: only title, known year and discipline. */
 .rz-cinema-scroll .rz-card-caption h2{display:block;margin:0}
+
+/* Keep the active caption on its own opaque reading surface, separate from frames behind it. */
+.rz-cinema-scroll.is-cinematic .rz-project-link{background:var(--rz-cream,#f3eee4)}
