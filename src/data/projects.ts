@@ -1,3 +1,5 @@
+import { withBase } from '@/utils/paths';
+
 export type ProjectSection = {
   title: string;
   text: string;
@@ -71,6 +73,7 @@ export const projects: Project[] = [
     title: 'Cabo San Miguel',
     category: 'Visualización comercial',
     year: '2026',
+    cover: withBase('/images/projects/cabo-san-miguel.webp'),
     available: false
   },
   {
