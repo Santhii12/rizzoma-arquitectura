@@ -212,3 +212,84 @@ body:has(.rizzoma-immersive-hero) .home-contact-cta .closing-copy {
     font-size: clamp(2.3rem, 9vw, 3rem);
   }
 }
+
+/* Home-only editorial rhythm and selected-work CTA. */
+body:has(.rizzoma-immersive-hero) {
+  --home-section-space: clamp(64px, 7.2vw, 112px);
+}
+body:has(.rizzoma-immersive-hero) .portfolio-home.section-pad,
+body:has(.rizzoma-immersive-hero) .studio-compact.section-pad,
+body:has(.rizzoma-immersive-hero) .home-contact-cta .section-pad {
+  padding-top: var(--home-section-space);
+  padding-bottom: var(--home-section-space);
+}
+body:has(.rizzoma-immersive-hero) .nuestra-mirada__inner,
+body:has(.rizzoma-immersive-hero) .rizzoma-offer__inner {
+  padding-top: var(--home-section-space);
+  padding-bottom: var(--home-section-space);
+}
+body:has(.rizzoma-immersive-hero) .portfolio-home .section-head {
+  margin-bottom: clamp(26px, 3.5vw, 48px);
+}
+body:has(.rizzoma-immersive-hero) .portfolio-home .rz-home-feature {
+  margin-bottom: clamp(22px, 3vw, 42px);
+}
+body:has(.rizzoma-immersive-hero) .portfolio-home__action {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(24px, 3vw, 42px);
+}
+body:has(.rizzoma-immersive-hero) .portfolio-home__cta {
+  display: flex;
+  width: min(100%, 640px);
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(17px, 2vw, 25px) clamp(19px, 2.6vw, 34px);
+  min-height: 78px;
+  border: 1px solid #77715d;
+  background: #565844;
+  color: #f4eee2;
+  text-decoration: none;
+  transition: background .25s ease, border-color .25s ease;
+}
+body:has(.rizzoma-immersive-hero) .portfolio-home__cta-label {
+  font: 500 clamp(1.05rem, 1.65vw, 1.5rem)/1.25 var(--sans, Arial, sans-serif);
+  letter-spacing: -.025em;
+}
+body:has(.rizzoma-immersive-hero) .portfolio-home__cta-arrow {
+  display: grid;
+  flex: 0 0 46px;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border: 1px solid rgba(244,238,226,.5);
+  border-radius: 50%;
+  font: 400 25px/1 var(--sans, Arial, sans-serif);
+  transition: transform .25s ease, background .25s ease, color .25s ease;
+}
+body:has(.rizzoma-immersive-hero) .portfolio-home__cta:hover,
+body:has(.rizzoma-immersive-hero) .portfolio-home__cta:focus-visible {
+  background: #393e31;
+  border-color: #393e31;
+}
+body:has(.rizzoma-immersive-hero) .portfolio-home__cta:hover .portfolio-home__cta-arrow,
+body:has(.rizzoma-immersive-hero) .portfolio-home__cta:focus-visible .portfolio-home__cta-arrow {
+  transform: translate(3px,-3px);
+  background: #f4eee2;
+  color: #393e31;
+}
+body:has(.rizzoma-immersive-hero) .portfolio-home__cta:focus-visible {
+  outline: 2px solid #a89163;
+  outline-offset: 4px;
+}
+@media(max-width:700px) {
+  body:has(.rizzoma-immersive-hero) { --home-section-space: clamp(48px, 10vw, 70px); }
+  body:has(.rizzoma-immersive-hero) .portfolio-home__action { margin-top: 24px; }
+  body:has(.rizzoma-immersive-hero) .portfolio-home__cta { min-height: 72px; padding: 14px 16px; gap: 13px; }
+  body:has(.rizzoma-immersive-hero) .portfolio-home__cta-arrow { flex-basis: 40px; width: 40px; height: 40px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  body:has(.rizzoma-immersive-hero) .portfolio-home__cta,
+  body:has(.rizzoma-immersive-hero) .portfolio-home__cta-arrow { transition: none; }
+}
