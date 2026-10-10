@@ -170,10 +170,23 @@
   aspect-ratio: auto;
   object-position: 50% 58%;
 }
-/* The horizontal interior render keeps its full composition beside the text. */
+/* Matched editorial portrait frames for the two secondary services.
+   Original image files remain unchanged; cover crops only the display. */
+.rz-services-guide__chapter:not(.rz-services-guide__chapter--featured) .rz-services-guide__media {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+.rz-services-guide__chapter:not(.rz-services-guide__chapter--featured) .rz-services-guide__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+  object-position: center center;
+}
 .rz-services-guide__chapter#remodelacion .rz-services-guide__media img {
-  aspect-ratio: 16 / 10;
-  object-position: center;
+  object-position: 55% 50%;
 }
 
 .rz-services-guide__media::after {
@@ -470,6 +483,7 @@
   .rz-services-guide__chapter--featured { padding-block: 0; margin-bottom: 65px; }
   .rz-services-guide__chapter:not(.rz-services-guide__chapter--featured):nth-child(3) .rz-services-guide__media { order: 0; }
   .rz-services-guide__media img { aspect-ratio: 16 / 10; }
+  .rz-services-guide__chapter:not(.rz-services-guide__chapter--featured) .rz-services-guide__media { aspect-ratio: 5 / 6; }
   .rz-services-guide__chapter--featured .rz-services-guide__media {
     min-height: 0;
     height: auto;
@@ -508,8 +522,8 @@
   .rz-services-guide__chapter:not(.rz-services-guide__chapter--featured):nth-child(3) { padding-block: 56px; }
   .rz-services-guide__chapter--featured { padding-block: 0; }
   .rz-services-guide__media img { aspect-ratio: 4 / 3; }
+  .rz-services-guide__chapter:not(.rz-services-guide__chapter--featured) .rz-services-guide__media { aspect-ratio: 4 / 3; }
   .rz-services-guide__chapter--featured .rz-services-guide__media { aspect-ratio: 4 / 3; }
-  .rz-services-guide__chapter#remodelacion .rz-services-guide__media img { aspect-ratio: 4 / 3; }
   .rz-services-guide__media figcaption { font-size: 8px; }
   .rz-services-guide__chapter--featured .rz-services-guide__content { padding: 32px 22px 42px; }
   .rz-services-guide__content h2,
