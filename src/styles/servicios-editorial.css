@@ -261,6 +261,43 @@
 .rz-services-guide__chapter--featured .rz-services-guide__summary {
   color: rgba(248,238,218,.94);
 }
+/* Direct, service-specific contact links: an editorial underline, not a generic card. */
+.rz-services-guide__chapter-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(20px, 3vw, 50px);
+  max-width: 100%;
+  margin-top: clamp(22px, 2.8vw, 36px);
+  padding: 0 0 11px;
+  border-bottom: 1px solid currentColor;
+  color: var(--rz-guide-olive, #4f5040);
+  font-size: clamp(11px, .9vw, 13px);
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.rz-services-guide__chapter-action span {
+  flex: none;
+  font-size: 17px;
+  line-height: 1;
+}
+.rz-services-guide__chapter-action:hover { color: #9b7a41; }
+.rz-services-guide__chapter-action:focus-visible {
+  outline: 2px solid #bc9d64;
+  outline-offset: 5px;
+}
+.rz-services-guide__chapter--featured .rz-services-guide__chapter-action {
+  color: var(--rz-guide-gold, #d5be8b);
+  border-bottom-color: rgba(213,190,139,.72);
+}
+.rz-services-guide__chapter--featured .rz-services-guide__chapter-action:hover {
+  color: var(--rz-guide-cream, #f8eeda);
+}
+
 .rz-services-guide__anchor {
   display: block;
   height: 0;
@@ -490,5 +527,6 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .rz-services-guide__index a,
-  .rz-services-guide__contact-link { transition: none !important; }
+  .rz-services-guide__contact-link,
+  .rz-services-guide__chapter-action { transition: none !important; }
 }
