@@ -39,7 +39,7 @@ const cards = projects.filter((p) => p.slug !== 'el-refugio');
                     {project.cover ? <img src={project.cover} alt={`Portada de ${project.title}`} loading={index < 2 ? 'eager' : 'lazy'} decoding="async" /> : <div class="rz-cover-placeholder"><span>R / A</span></div>}
                     <span class="rz-image-arrow" aria-hidden="true">↗</span>
                   </div>
-                  <div class="rz-card-caption"><div><span class="rz-card-count">{String(index + 1).padStart(2, '0')} /</span><h2>{project.title}</h2><p>{project.category}</p>{(project.intro ?? project.statement) && <p class="rz-cinema-description">{project.intro ?? project.statement}</p>}</div><span aria-hidden="true">↗</span></div>
+                  <div class="rz-card-caption"><div><h2>{project.title}</h2><p class="rz-card-meta">{project.year && <span>{project.year}</span>}<span>{project.category}</span></p></div><span aria-hidden="true">↗</span></div>
                 </a>
               ) : (
                 <button type="button" class="rz-project-link rz-project-button" data-archive-open data-title={project.title} data-category={project.category} data-year={project.year ?? ''} data-location={[project.location, project.region].filter(Boolean).join(', ')} aria-label={`Ver datos disponibles de ${project.title}`}>
@@ -47,7 +47,7 @@ const cards = projects.filter((p) => p.slug !== 'el-refugio');
                     {project.cover ? <img src={project.cover} alt={`Portada de ${project.title}`} loading="lazy" decoding="async" /> : <div class="rz-cover-placeholder"><span>R / A</span></div>}
                     <span class="rz-image-arrow" aria-hidden="true">↗</span>
                   </div>
-                  <div class="rz-card-caption"><div><span class="rz-card-count">{String(index + 1).padStart(2, '0')} /</span><h2>{project.title}</h2><p>{project.category}</p>{(project.intro ?? project.statement) && <p class="rz-cinema-description">{project.intro ?? project.statement}</p>}</div><span aria-hidden="true">↗</span></div>
+                  <div class="rz-card-caption"><div><h2>{project.title}</h2><p class="rz-card-meta">{project.year && <span>{project.year}</span>}<span>{project.category}</span></p></div><span aria-hidden="true">↗</span></div>
                 </button>
               )}
             </article>
