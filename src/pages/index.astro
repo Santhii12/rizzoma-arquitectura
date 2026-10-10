@@ -1,9 +1,9 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import ProjectCard from '@/components/ProjectCard.astro';
+import HomeSelectedProjects from '@/components/HomeSelectedProjects.astro';
 import NuestraMirada from '@/components/NuestraMirada.astro';
 import QuePodemosHacer from '@/components/QuePodemosHacer.astro';
-import { projects, featuredProject } from '@/data/projects';
+import { projects } from '@/data/projects';
 import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
 import '@/styles/home-immersive.css';
@@ -12,7 +12,8 @@ const heroCover = withBase('/images/studio/home/rizzoma-hero-portada.webp');
 const heroProject = projects.find((project) => project.slug === 'casa-patio-horizonte');
 const miradaPhoto = heroProject?.gallery?.[1];
 const heroImageUrl = new URL(heroCover, Astro.site ?? new URL(site.domain)).toString();
-const archiveProjects = projects.filter((project) => !project.available).slice(0, 3);
+const mainPortfolioProject = projects.find((project) => project.slug === 'cabo-san-miguel');
+const previewProjects = projects.filter((project) => project.slug !== 'cabo-san-miguel').slice(0, 3);
 const baseSite = Astro.site ?? new URL(site.domain);
 const homeUrl = new URL(withBase('/'), baseSite).toString();
 const schema = {
@@ -72,27 +73,8 @@ const schema = {
       <a class="text-link" href={withBase('/portafolio/')}>Abrir portafolio ↗</a>
     </div>
 
-    {featuredProject && (
-      <div class="portfolio-featured">
-        <ProjectCard project={featuredProject} index={0} />
-      </div>
-    )}
-
-    {archiveProjects.length > 0 && (
-      <div class="portfolio-mini-grid reveal">
-        {archiveProjects.map((project, i) => (
-          <article class="portfolio-mini-card">
-            <div class="portfolio-mini-top">
-              <span>{String(i + 2).padStart(2, '0')}</span>
-              <span>{project.year ?? 'Archivo'}</span>
-            </div>
-            <div class="portfolio-mini-copy">
-              <h3>{project.title}</h3>
-              <p>{project.category}</p>
-            </div>
-          </article>
-        ))}
-      </div>
+    {mainPortfolioProject && (
+      <HomeSelectedProjects featured={mainPortfolioProject} projects={previewProjects} />
     )}
   </section>
 
