@@ -16,21 +16,15 @@ const cards = projects.filter((p) => p.slug !== 'el-refugio');
       <a href={withBase('/')} class="rz-back">Volver al sitio <span aria-hidden="true">↗</span></a>
     </header>
 
-    <div class="rz-cinema-intro">
-    <div class="rz-portfolio-shell">
-      <section class="rz-portfolio-editorial">
+    <section class="rz-cinema-scroll" aria-label="Recorrido cinematográfico por los proyectos" data-cinema-scroll>
+      <div class="rz-cinema-sticky">
+        <div class="rz-cinema-heading"><section class="rz-portfolio-editorial">
         <p class="rz-overline">PORTAFOLIO / RIZZOMA</p>
-        <h1>Obras<br />seleccionadas<span>.</span></h1>
+        <h1>Obras seleccionadas<span>.</span></h1>
         <div class="rz-rule"></div>
         <p>Una mirada sobre arquitectura, visualización y la relación entre espacio, materia y territorio.</p>
         <div class="rz-editorial-bottom"><strong>{String(cards.length).padStart(2, '0')}</strong><span>PROYECTOS EN EL ARCHIVO</span></div>
-      </section>
-
-    </div>
-    </div>
-
-    <section class="rz-cinema-scroll" aria-label="Recorrido cinematográfico por los proyectos" data-cinema-scroll>
-      <div class="rz-cinema-sticky">
+      </section></div>
         <div class="rz-cinema-topline"><span>RIZZOMA / ARCHIVO VISUAL</span><span data-cinema-counter>01 / {String(cards.length).padStart(2, '0')}</span></div>
         <p class="rz-cinema-instruction">Desplázate para recorrer los proyectos ↓</p>
       <section class="rz-portfolio-gallery" aria-label="Proyectos de Rizzoma">
