@@ -1,0 +1,119 @@
+---
+import type { Project } from '@/data/projects';
+import { withBase } from '@/utils/paths';
+import '@/styles/home-selected-projects.css';
+
+interface Props {
+  featured: Project;
+  projects: Project[];
+}
+
+const { featured, projects } = Astro.props;
+const publishedUrl = featured.available ? withBase(`/proyectos/${featured.slug}/`) : undefined;
+const previewCopy = (project: Project) =>
+  project.intro ??
+  project.statement ??
+  'La ficha visual y el texto de este proyecto se incorporarán cuando esté listo el material del estudio.';
+---
+<div class="rz-home-projects" aria-label="Proyectos destacados del estudio">
+  <article class="rz-home-feature" aria-labelledby="rz-home-feature-name">
+    <figure class="rz-home-feature__figure">
+      {featured.cover ? (
+        <img
+          src={featured.cover}
+          alt="Vista aérea de Cabo San Miguel, conjunto arquitectónico en un entorno natural junto al agua"
+          loading="lazy"
+          decoding="async"
+          width="1440"
+          height="901"
+        />
+      ) : (
+        <div class="rz-home-feature__no-image">Fotografía del proyecto en preparación</div>
+      )}
+      <span class="rz-home-feature__index" aria-hidden="true">01</span>
+    </figure>
+    <div class="rz-home-feature__caption">
+      <div class="rz-home-feature__name">
+        <p>Proyecto destacado / 01</p>
+        <h3 id="rz-home-feature-name">{featured.title}</h3>
+      </div>
+      <div class="rz-home-feature__meta">
+        <span>{featured.category}</span>
+        {featured.year && <span>{featured.year}</span>}
+        {publishedUrl ? (
+          <a href={publishedUrl}>Ver proyecto <span aria-hidden="true">↗</span></a>
+        ) : (
+          <span class="rz-home-feature__status">Ficha en preparación</span>
+        )}
+      </div>
+    </div>
+  </article>
+
+  <div class="rz-home-project-grid" aria-label="Otros proyectos seleccionados">
+    {projects.map((project, i) => (
+      <details class="rz-home-project" data-rz-home-project>
+        <summary class="rz-home-project__summary">
+          <span class="rz-home-project__eyebrow">
+            <span>{String(i + 2).padStart(2, '0')}</span>
+            <span>{project.year ?? 'Archivo'}</span>
+          </span>
+          <span class="rz-home-project__name">{project.title}</span>
+          <span class="rz-home-project__footer">
+            <span>{project.category}</span>
+            <span class="rz-home-project__expand">Explorar <span aria-hidden="true">↗</span></span>
+          </span>
+        </summary>
+        <div class="rz-home-project__reveal">
+          <figure class="rz-home-project__figure">
+            {project.cover ? (
+              <img
+                src={project.cover}
+                alt={`Vista del proyecto ${project.title}`}
+                loading="lazy"
+                decoding="async"
+                width="1100"
+                height="760"
+              />
+            ) : (
+              <div class="rz-home-project__placeholder" aria-label="Imagen de este proyecto todavía no disponible">
+                <span>R / A</span>
+                <small>Imagen del proyecto pendiente</small>
+              </div>
+            )}
+          </figure>
+          <p class="rz-home-project__description">{previewCopy(project)}</p>
+          {project.available ? (
+            <a class="rz-home-project__link" href={withBase(`/proyectos/${project.slug}/`)}>
+              Ver proyecto completo <span aria-hidden="true">↗</span>
+            </a>
+          ) : (
+            <span class="rz-home-project__pending">Material visual en preparación</span>
+          )}
+        </div>
+      </details>
+    ))}
+  </div>
+</div>
+
+<script>
+  // On desktop hover expands each tile. On touch / keyboard, native
+  // <details>/<summary> stays usable without JavaScript.
+  const media = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const tiles = document.querySelectorAll<HTMLDetailsElement>('[data-rz-home-project]');
+  tiles.forEach((tile) => {
+    tile.addEventListener('pointerenter', (event) => {
+      if (media.matches && event.pointerType === 'mouse') tile.open = true;
+    });
+    tile.addEventListener('pointerleave', (event) => {
+      if (media.matches && event.pointerType === 'mouse' && !tile.contains(document.activeElement)) {
+        tile.open = false;
+      }
+    });
+    tile.addEventListener('toggle', () => {
+      if (!tile.open) return;
+      tiles.forEach((other) => {
+        if (other !== tile && !other.contains(document.activeElement)) other.open = false;
+      });
+    });
+  });
+</script>
