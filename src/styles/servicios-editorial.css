@@ -487,3 +487,6 @@
   .rz-services-guide__index a,
   .rz-services-guide__contact-link { transition: none !important; }
 }
+
+/* Featured sunset visualization: preserve boats and shoreline in wide crops. */
+.rz-services-guide__chapter--featured .rz-services-guide__media img { object-position: 50% 75%; }
