@@ -24,20 +24,20 @@
  .rz-cinema-scroll.is-cinematic .rz-cinema-sticky{
    position:sticky;top:0;width:100%;max-width:none;height:100svh;min-height:500px;
    padding:0;overflow:hidden;isolation:isolate;display:grid;
-   grid-template-columns:minmax(0,40%) minmax(0,60%);align-items:center
+   grid-template-columns:minmax(0,38%) minmax(0,62%);align-items:center
  }
  .rz-cinema-scroll.is-cinematic .rz-cinema-heading{
    position:relative;grid-column:1;grid-row:1;z-index:4;
-   width:auto;max-width:none;padding:0 clamp(25px,4vw,75px);
+   width:auto;max-width:none;padding:0 var(--pad,clamp(18px,3.2vw,60px));
    margin:0;text-align:left;pointer-events:auto
  }
  .rz-cinema-scroll.is-cinematic .rz-cinema-heading .rz-portfolio-editorial{display:block}
  .rz-cinema-scroll.is-cinematic .rz-cinema-heading .rz-portfolio-editorial h1{font-size:clamp(3.2rem,5.2vw,6.8rem)}
  .rz-cinema-scroll.is-cinematic .rz-cinema-topline{
-   position:absolute;top:clamp(22px,4vh,45px);left:clamp(25px,4vw,75px);right:clamp(25px,4vw,75px);z-index:15
+   position:absolute;top:clamp(22px,4vh,45px);left:var(--pad,clamp(18px,3.2vw,60px));right:var(--pad,clamp(18px,3.2vw,60px));z-index:15
  }
  .rz-cinema-scroll.is-cinematic .rz-cinema-instruction{
-   position:absolute;bottom:clamp(18px,3vh,38px);right:clamp(25px,4vw,75px);z-index:15;margin:0;text-align:right
+   position:absolute;bottom:clamp(18px,3vh,38px);right:var(--pad,clamp(18px,3.2vw,60px));z-index:15;margin:0;text-align:right
  }
  .rz-cinema-scroll.is-cinematic .rz-portfolio-gallery{
    grid-column:2;grid-row:1;position:relative;inset:auto;width:100%;height:100%;min-height:0;overflow:hidden
@@ -48,11 +48,11 @@
  }
  .rz-cinema-scroll.is-cinematic .rz-project-card{
    position:absolute;left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;
-   width:clamp(225px,27vw,420px);transform-origin:center;will-change:transform,opacity
+   width:clamp(320px,39vw,640px);max-width:calc(100% - 2 * var(--pad,40px));transform-origin:center;will-change:transform,opacity
  }
  .rz-cinema-scroll.is-cinematic .rz-project-card:not(.is-active){pointer-events:none}
- .rz-cinema-scroll.is-cinematic .rz-card-caption h2{font-size:clamp(1.2rem,1.55vw,1.65rem)}
- .rz-cinema-scroll.is-cinematic .rz-cinema-description{max-height:78px;overflow:hidden}
+ .rz-cinema-scroll.is-cinematic .rz-card-caption h2{font-size:clamp(1.35rem,1.8vw,2rem)}
+ .rz-cinema-scroll.is-cinematic .rz-cinema-description{max-height:92px;overflow:hidden;font-size:clamp(12px,.93vw,15px)}
 }
 @media(max-width:900px){
  .rz-cinema-sticky{padding:48px 22px 70px}
