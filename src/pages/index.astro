@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import HomeSelectedProjects from '@/components/HomeSelectedProjects.astro';
 import NuestraMirada from '@/components/NuestraMirada.astro';
 import QuePodemosHacer from '@/components/QuePodemosHacer.astro';
+import HomeProcess from '@/components/HomeProcess.astro';
 import { projects } from '@/data/projects';
 import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
@@ -116,6 +117,8 @@ const schema = {
       <a class="primary-link" href={withBase('/estudio/')}>Conocer el estudio <span aria-hidden="true">↗</span></a>
     </div>
   </section>
+
+  <HomeProcess />
 
   <section class="home-contact-cta dark-block">
     <div class="section-pad">
