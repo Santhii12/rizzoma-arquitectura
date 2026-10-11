@@ -581,7 +581,13 @@
   border: 0;
 }
 .rz-pe__overview.section-pad {
-  margin: clamp(10px, 1.6vw, 22px) var(--pad, clamp(18px, 4vw, 65px)) 0;
+  /* Explicitly center this framed olive panel in every project template.
+     The base .section-pad normally has a 100% width; a fixed side margin
+     previously pushed the panel left and produced an uneven composition. */
+  width: min(calc(100% - var(--pad) - var(--pad)), 1520px);
+  max-width: none;
+  min-width: 0;
+  margin: clamp(10px, 1.6vw, 22px) auto 0;
   padding: clamp(38px, 5vw, 80px);
   grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr);
   gap: clamp(30px, 5vw, 85px);
@@ -663,7 +669,8 @@
   .rz-pe__headline h1 { font-size: clamp(3.4rem, 10vw, 6rem); }
   .rz-pe__overview.section-pad {
     grid-template-columns: 1fr;
-    margin: 14px clamp(18px, 3vw, 30px) 0;
+    width: calc(100% - var(--pad) - var(--pad));
+    margin: 14px auto 0;
     padding: clamp(28px, 5vw, 50px);
   }
   .rz-pe__overview h2 { font-size: clamp(3.1rem, 10vw, 5.3rem); }
