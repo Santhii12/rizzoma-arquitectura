@@ -1,0 +1,285 @@
+---
+import type { Project, ProjectImage } from '@/data/projects';
+import { withBase } from '@/utils/paths';
+import '@/styles/project-editorial.css';
+
+interface Props {
+  project: Project;
+  index: number;
+  total: number;
+  nextProject?: Project;
+}
+
+const { project, index, total, nextProject } = Astro.props;
+const pad = (index: number) => String(index).padStart(2, '0');
+const tour = (project.tour ?? []).filter((group) => group.images?.length > 0);
+const insights = (project.sections ?? []).filter((item) => item.title && item.text);
+const archive = (project.archive ?? []).filter((group) => group.images?.length > 0);
+const hasGallery = tour.length > 0;
+const hasInsights = insights.length > 0;
+const hasArchive = archive.length > 0;
+const heroAlt = project.coverAlt ?? `Imagen principal de ${project.title}`;
+const location = [project.location, project.region].filter(Boolean).join(', ');
+const hasFacts = !!(project.typology || project.category || project.participation || location || project.year);
+const allVisuals: ProjectImage[] = [
+  ...(project.cover ? [{ src: project.cover, alt: heroAlt, caption: project.title }] : []),
+  ...tour.flatMap((group) => group.images),
+  ...insights.flatMap((section) => section.image ? [section.image] : []),
+  ...archive.flatMap((group) => group.images)
+];
+const availableAssets = new Set<string>();
+const repeats = allVisuals.filter((visual) => {
+  if (availableAssets.has(visual.src)) return true;
+  availableAssets.add(visual.src);
+  return false;
+});
+if (repeats.length) console.warn(`Project ${project.slug}: repeated visual assets in editorial page`);
+---
+<article class="rz-pe" aria-labelledby="rz-pe-title">
+  <header class="rz-pe__opening section-pad">
+    <div class="rz-pe__topline">
+      <a href={withBase('/portafolio/')} class="rz-pe__back">← Volver al portafolio</a>
+      <span aria-label={`Proyecto ${index + 1} de ${total} proyectos publicados`}>{pad(index + 1)} / {pad(total)}</span>
+    </div>
+    <div class="rz-pe__intro-grid">
+      <div class="rz-pe__headline">
+        <p class="rz-pe__eyebrow">Rizzoma / Proyecto seleccionado</p>
+        <h1 id="rz-pe-title">{project.title}</h1>
+      </div>
+      <div class="rz-pe__opening-aside">
+        {project.statement && <p class="rz-pe__statement">{project.statement}</p>}
+        <p class="rz-pe__discipline">{project.category}</p>
+      </div>
+    </div>
+    {(location || project.year) && (
+      <div class="rz-pe__header-meta">
+        {location && <span>{location}</span>}
+        {project.year && <span>{project.year}</span>}
+      </div>
+    )}
+  </header>
+
+  {project.cover && (
+    <figure class="rz-pe__hero">
+      <button
+        class="rz-pe__image-trigger rz-pe__hero-trigger"
+        type="button"
+        data-editorial-image
+        data-full-src={project.cover}
+        data-full-alt={heroAlt}
+        data-full-caption={project.title}
+        aria-label={`Ampliar imagen principal de ${project.title}`}
+      >
+        <img src={project.cover} alt={heroAlt} fetchpriority="high" decoding="async" />
+        <span class="rz-pe__zoom-indicator" aria-hidden="true">Ampliar imagen ↗</span>
+      </button>
+      <figcaption class="rz-pe__hero-caption section-pad">
+        <span>{project.title}</span><span>{project.category}</span>
+      </figcaption>
+    </figure>
+  )}
+
+  {(project.intro || hasFacts) && (
+    <section class="rz-pe__overview section-pad" aria-labelledby="rz-pe-overview">
+      <div class="rz-pe__section-identity">
+        <p class="rz-pe__eyebrow">01 / Presentación</p>
+        <h2 id="rz-pe-overview">El proyecto.</h2>
+      </div>
+      <div class="rz-pe__overview-detail">
+        {project.intro && <p class="rz-pe__overview-lead">{project.intro}</p>}
+        {hasFacts && <dl class="rz-pe__facts">
+          {project.typology && <div><dt>Tipología</dt><dd>{project.typology}</dd></div>}
+          {project.category && <div><dt>Disciplina</dt><dd>{project.category}</dd></div>}
+          {project.participation && <div><dt>Participación de Rizzoma</dt><dd>{project.participation}</dd></div>}
+          {location && <div><dt>Ubicación</dt><dd>{location}</dd></div>}
+          {project.year && <div><dt>Año</dt><dd>{project.year}</dd></div>}
+        </dl>}
+      </div>
+    </section>
+  )}
+
+  {hasGallery && (
+    <section class="rz-pe__tour section-pad" aria-labelledby="rz-pe-tour">
+      <div class="rz-pe__section-header">
+        <div>
+          <p class="rz-pe__eyebrow">02 / Recorrido visual</p>
+          <h2 id="rz-pe-tour">Miradas del proyecto.</h2>
+        </div>
+        <p>Un recorrido por sus espacios y perspectivas, con imágenes del archivo real de {project.title}.</p>
+      </div>
+      {tour.map((group, groupIndex) => (
+        <section class="rz-pe__tour-group" aria-label={group.title}>
+          <div class="rz-pe__group-intro">
+            <h3>{group.title}</h3>
+            {group.description && <p>{group.description}</p>}
+          </div>
+          <div class:list={['rz-pe__visual-grid', group.images.length > 3 ? 'rz-pe__visual-grid--rhythm' : 'rz-pe__visual-grid--short']}>
+            {group.images.map((visual, imageIndex) => (
+              <figure class="rz-pe__visual">
+                <button
+                  type="button"
+                  class="rz-pe__image-trigger"
+                  data-editorial-image
+                  data-full-src={visual.src}
+                  data-full-alt={visual.alt}
+                  data-full-caption={visual.caption ?? group.title}
+                  aria-label={`Ampliar imagen ${imageIndex + 1} de ${group.title}`}
+                >
+                  <img src={visual.src} alt={visual.alt} loading="lazy" decoding="async" />
+                  <span class="rz-pe__zoom-indicator" aria-hidden="true">Ampliar ↗</span>
+                </button>
+                {visual.caption && <figcaption>{visual.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        </section>
+      ))}
+    </section>
+  )}
+
+  {hasInsights && (
+    <section class="rz-pe__insights section-pad" aria-labelledby="rz-pe-insights">
+      <header class="rz-pe__section-header">
+        <div>
+          <p class="rz-pe__eyebrow">03 / La mirada de Rizzoma</p>
+          <h2 id="rz-pe-insights">Lo que revela el proyecto.</h2>
+        </div>
+        <p>Una lectura de los aspectos que dan carácter a este trabajo y de lo que sus imágenes permiten comprender.</p>
+      </header>
+      <div class="rz-pe__insight-list">
+        {insights.map((item, itemIndex) => (
+          <article class:list={['rz-pe__insight', item.image ? 'rz-pe__insight--with-image' : '']}>
+            <div class="rz-pe__insight-copy">
+              <span class="rz-pe__number">{pad(itemIndex + 1)}</span>
+              <div><h3>{item.title}</h3><p>{item.text}</p></div>
+            </div>
+            {item.image && (
+              <figure class="rz-pe__insight-figure">
+                <button
+                  type="button"
+                  class="rz-pe__image-trigger"
+                  data-editorial-image
+                  data-full-src={item.image.src}
+                  data-full-alt={item.image.alt}
+                  data-full-caption={item.image.caption ?? item.title}
+                  aria-label={`Ampliar imagen de ${item.title}`}
+                >
+                  <img src={item.image.src} alt={item.image.alt} loading="lazy" decoding="async" />
+                  <span class="rz-pe__zoom-indicator" aria-hidden="true">Ampliar ↗</span>
+                </button>
+                {item.image.caption && <figcaption>{item.image.caption}</figcaption>}
+              </figure>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {hasArchive && (
+    <section class="rz-pe__archive section-pad" aria-labelledby="rz-pe-archive">
+      <div class="rz-pe__section-header">
+        <div>
+          <p class="rz-pe__eyebrow">04 / Archivo complementario</p>
+          <h2 id="rz-pe-archive">Otras formas de verlo.</h2>
+        </div>
+        <p>Documentación adicional que amplía la lectura del proyecto, sin atribuir a las imágenes una fase de trabajo no confirmada.</p>
+      </div>
+      {archive.map((group) => (
+        <section class="rz-pe__tour-group" aria-label={group.title}>
+          <div class="rz-pe__group-intro">
+            <h3>{group.title}</h3>
+            {group.description && <p>{group.description}</p>}
+          </div>
+          <div class="rz-pe__visual-grid rz-pe__visual-grid--archive">
+            {group.images.map((visual, imageIndex) => (
+              <figure class="rz-pe__visual">
+                <button
+                  type="button"
+                  class="rz-pe__image-trigger"
+                  data-editorial-image
+                  data-full-src={visual.src}
+                  data-full-alt={visual.alt}
+                  data-full-caption={visual.caption ?? group.title}
+                  aria-label={`Ampliar documento visual ${imageIndex + 1}: ${group.title}`}
+                >
+                  <img src={visual.src} alt={visual.alt} loading="lazy" decoding="async" />
+                  <span class="rz-pe__zoom-indicator" aria-hidden="true">Ampliar ↗</span>
+                </button>
+                {visual.caption && <figcaption>{visual.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        </section>
+      ))}
+    </section>
+  )}
+
+  <footer class="rz-pe__ending section-pad">
+    <div>
+      <p class="rz-pe__eyebrow">Arquitectura / Visualización</p>
+      <h2>¿Tienes un proyecto en mente?</h2>
+      <p>Conversemos sobre el lugar, el alcance y lo que necesitas comunicar o desarrollar.</p>
+    </div>
+    <nav class="rz-pe__ending-links" aria-label="Continuar explorando proyectos">
+      <a href={withBase('/contacto/')}>Hablemos de tu proyecto <span aria-hidden="true">↗</span></a>
+      <a href={withBase('/portafolio/')}>Volver al portafolio <span aria-hidden="true">↗</span></a>
+      {nextProject && <a href={withBase(`/proyectos/${nextProject.slug}/`)}>Siguiente proyecto: {nextProject.title} <span aria-hidden="true">→</span></a>}
+    </nav>
+  </footer>
+
+  {allVisuals.length > 0 && (
+    <dialog class="rz-pe__lightbox" data-rz-pe-lightbox aria-label="Visor ampliado de imágenes del proyecto">
+      <div class="rz-pe__lightbox-inside">
+        <button class="rz-pe__lightbox-close" type="button" data-rz-pe-close aria-label="Cerrar imagen ampliada">Cerrar ×</button>
+        <figure class="rz-pe__lightbox-figure">
+          <img data-rz-pe-main alt="" />
+          <figcaption data-rz-pe-caption></figcaption>
+        </figure>
+        <div class="rz-pe__lightbox-controls">
+          <button type="button" data-rz-pe-prev aria-label="Imagen anterior">←</button>
+          <span data-rz-pe-counter aria-live="polite"></span>
+          <button type="button" data-rz-pe-next aria-label="Imagen siguiente">→</button>
+        </div>
+      </div>
+    </dialog>
+  )}
+</article>
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('[data-rz-pe-lightbox]');
+  const triggers = [...document.querySelectorAll<HTMLButtonElement>('[data-editorial-image]')];
+  const main = dialog?.querySelector<HTMLImageElement>('[data-rz-pe-main]');
+  const caption = dialog?.querySelector<HTMLElement>('[data-rz-pe-caption]');
+  const counter = dialog?.querySelector<HTMLElement>('[data-rz-pe-counter]');
+  const close = dialog?.querySelector<HTMLButtonElement>('[data-rz-pe-close]');
+  const prev = dialog?.querySelector<HTMLButtonElement>('[data-rz-pe-prev]');
+  const next = dialog?.querySelector<HTMLButtonElement>('[data-rz-pe-next]');
+  let active = 0;
+  let origin: HTMLButtonElement | null = null;
+  const show = (index: number) => {
+    if (!main || !triggers.length) return;
+    active = (index + triggers.length) % triggers.length;
+    const image = triggers[active];
+    main.src = image.dataset.fullSrc || '';
+    main.alt = image.dataset.fullAlt || '';
+    if (caption) caption.textContent = image.dataset.fullCaption || '';
+    if (counter) counter.textContent = `${String(active + 1).padStart(2, '0')} / ${String(triggers.length).padStart(2, '0')}`;
+    if (prev) prev.hidden = triggers.length < 2;
+    if (next) next.hidden = triggers.length < 2;
+  };
+  triggers.forEach((trigger, index) => trigger.addEventListener('click', () => {
+    if (!dialog) return;
+    origin = trigger;
+    show(index);
+    dialog.showModal();
+  }));
+  close?.addEventListener('click', () => dialog?.close());
+  prev?.addEventListener('click', () => show(active - 1));
+  next?.addEventListener('click', () => show(active + 1));
+  dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+  dialog?.addEventListener('close', () => { if (main) main.removeAttribute('src'); origin?.focus(); });
+  dialog?.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') { event.preventDefault(); show(active - 1); }
+    if (event.key === 'ArrowRight') { event.preventDefault(); show(active + 1); }
+  });
+</script>
