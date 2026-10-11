@@ -36,6 +36,7 @@ export type Project = {
   archive?: ProjectImageGroup[];
   statement?: string;
   intro?: string;
+  closingText?: string;
   sections?: ProjectSection[];
   available: boolean;
   featured?: boolean;
@@ -79,6 +80,7 @@ export const projects: Project[] = [
       }
     ],
     statement: 'Habitar entre el interior y el paisaje.',
+    closingText: 'Si tienes un lugar por habitar o una idea de vivienda por desarrollar, conversemos sobre sus necesidades, el paisaje y las posibilidades del proyecto.',
     intro:
       'Una vivienda concebida para diluir los límites entre habitar y contemplar. La arquitectura se abre al territorio y convierte las vistas en parte esencial de la experiencia cotidiana.',
     sections: [
@@ -129,6 +131,7 @@ export const projects: Project[] = [
     ],
     galleryLabel: 'Exteriores y fachada',
     statement: 'Un edificio de vivienda en relación con el paisaje de Guatapé.',
+    closingText: 'Si buscas desarrollar la fachada de un proyecto o comunicar su propuesta mediante visualizaciones arquitectónicas, conversemos sobre el alcance y el material disponible.',
     intro: 'Cabo San Miguel es un edificio de vivienda en Guatapé, Antioquia. El trabajo de Rizzoma comprende el diseño de fachada y la visualización comercial; no el diseño integral del edificio.',
     tour: [
       {
