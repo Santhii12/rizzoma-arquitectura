@@ -1,0 +1,78 @@
+name: Import Casa El Umbral images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-casa-el-umbral.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download supplied ZIP and verify exact bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error --retry 3 --connect-timeout 20 --max-time 150 \
+            'https://d2ol7oe51mr4n9.cloudfront.net/user_3JyDbghZNXmeLLpGsUpuxXQddfw/6b7f7709-8ae5-4b60-8592-590e62ada37e.zip' \
+            -o /tmp/casa-el-umbral.zip
+          echo 'ca9d5c406a5ce8663d556af9ca19f7368241c9d8676e59914f84210dcd83abbc  /tmp/casa-el-umbral.zip' | sha256sum --check
+      - name: Optimize into local WebP assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m venv /tmp/umbral-venv
+          /tmp/umbral-venv/bin/pip install --quiet Pillow
+          /tmp/umbral-venv/bin/python - <<'PY'
+          import zipfile, io
+          from pathlib import Path
+          from PIL import Image, ImageOps
+          src='/tmp/casa-el-umbral.zip'
+          root=Path('public/images/projects/casa-el-umbral')
+          mapping={
+             'RECUERDO_1.1.jpg':'principal/sala-integrada.webp',
+             'RECUERDO_1.2.jpg':'principal/cocina-comedor.webp',
+             'RECUERDO_1.3.jpg':'principal/dormitorio-principal.webp',
+             'RECUERDO_1.4.jpg':'principal/espacio-de-trabajo.webp',
+             'RECUERDO_1.5.jpg':'principal/bano.webp',
+             'Salón minimalista con vistas al campo.jpg':'ambientes/sala-con-vistas.webp',
+             'Dormitorio cálido con arte y texturas naturales.jpg':'ambientes/dormitorio-calido.webp',
+             'Dormitorio minimalista bañado por el sol.jpg':'ambientes/dormitorio-soleado.webp',
+             'Serene minimalist bedroom with natural light.jpg':'ambientes/dormitorio-natural.webp',
+             'Gimnasio doméstico de lujo con luz natural.jpg':'mirada/gimnasio.webp',
+             'Oficina moderna bañada por el sol.jpg':'mirada/oficina-luminosa.webp',
+             'Baño spa con mosaicos verdes y madera.jpg':'mirada/bano-mosaicos.webp',
+          }
+          with zipfile.ZipFile(src) as z:
+              originals=[n for n in z.namelist() if n.lower().endswith(('.jpg','.jpeg','.png','.webp'))]
+              actual={n.rsplit('/',1)[-1] for n in originals}
+              assert actual==set(mapping), f'Unexpected image names: {actual ^ set(mapping)}'
+              for original in originals:
+                  name=original.rsplit('/',1)[-1]
+                  with z.open(original) as file:
+                      im=ImageOps.exif_transpose(Image.open(io.BytesIO(file.read()))).convert('RGB')
+                  im.thumbnail((1920, 1920),Image.Resampling.LANCZOS)
+                  destination=root/mapping[name]
+                  destination.parent.mkdir(parents=True,exist_ok=True)
+                  im.save(destination,'WEBP',quality=86,method=6)
+                  with Image.open(destination) as check:
+                      assert check.size==im.size and check.format=='WEBP'
+                  print(destination, im.size, destination.stat().st_size)
+          print('Imported',len(mapping),'images.')
+          PY
+      - name: Commit images to repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/images/projects/casa-el-umbral/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Import twelve Casa El Umbral architectural interior images'
+          git push
