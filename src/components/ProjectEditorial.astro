@@ -21,7 +21,13 @@ const heroSlides: ProjectImage[] = (project.gallery?.length ? project.gallery : 
   caption: project.title
 }));
 const hasCarousel = heroSlides.length > 1;
-const hasGallery = tour.length > 0 && !hasCarousel;
+// Exclude images already used in the opening carousel. Other tour groups
+// can still render independently (e.g. Cabo San Miguel's interior gallery).
+const visibleTour = tour.map((group) => ({
+  ...group,
+  images: group.images.filter((image) => !heroSlides.some((slide) => slide.src === image.src))
+})).filter((group) => group.images.length > 0);
+const hasGallery = visibleTour.length > 0;
 const hasInsights = insights.length > 0;
 const hasArchive = archive.length > 0;
 const heroAlt = project.coverAlt ?? `Imagen principal de ${project.title}`;
@@ -29,7 +35,7 @@ const location = [project.location, project.region].filter(Boolean).join(', ');
 const hasFacts = !!(project.typology || project.category || project.participation || location || project.year);
 const allVisuals: ProjectImage[] = [
   ...heroSlides,
-  ...(!hasCarousel ? tour.flatMap((group) => group.images) : []),
+  ...visibleTour.flatMap((group) => group.images),
   ...insights.flatMap((section) => section.image ? [section.image] : []),
   ...archive.flatMap((group) => group.images)
 ].filter((visual, index, all) => all.findIndex((item) => item.src === visual.src) === index);
@@ -61,6 +67,7 @@ const allVisuals: ProjectImage[] = [
   {project.cover && (
     <section class="rz-pe__hero-section section-pad no-top" aria-label={`Galería principal de ${project.title}`}>
       <figure class="rz-pe__hero">
+        {project.galleryLabel && <p class="rz-pe__gallery-label">{project.galleryLabel}</p>}
         <div class="rz-pe__hero-stage" data-pe-gallery={JSON.stringify(heroSlides)}>
           <button
             class="rz-pe__image-trigger rz-pe__hero-trigger"
@@ -165,31 +172,76 @@ const allVisuals: ProjectImage[] = [
         </div>
         <p>Un recorrido por sus espacios y perspectivas, con imágenes del archivo real de {project.title}.</p>
       </div>
-      {tour.map((group, groupIndex) => (
+      {visibleTour.map((group) => (
         <section class="rz-pe__tour-group" aria-label={group.title}>
           <div class="rz-pe__group-intro">
             <h3>{group.title}</h3>
             {group.description && <p>{group.description}</p>}
           </div>
-          <div class:list={['rz-pe__visual-grid', group.images.length > 3 ? 'rz-pe__visual-grid--rhythm' : 'rz-pe__visual-grid--short']}>
-            {group.images.map((visual, imageIndex) => (
-              <figure class="rz-pe__visual">
+          {group.display === 'gallery' ? (
+            <figure class="rz-pe__hero rz-pe__tour-carousel">
+              <div class="rz-pe__hero-stage" data-pe-gallery={JSON.stringify(group.images)}>
                 <button
+                  class="rz-pe__image-trigger rz-pe__hero-trigger"
                   type="button"
-                  class="rz-pe__image-trigger"
                   data-editorial-image
-                  data-full-src={visual.src}
-                  data-full-alt={visual.alt}
-                  data-full-caption={visual.caption ?? group.title}
-                  aria-label={`Ampliar imagen ${imageIndex + 1} de ${group.title}`}
+                  data-full-src={group.images[0].src}
+                  data-full-alt={group.images[0].alt}
+                  data-full-caption={group.images[0].caption ?? group.title}
+                  aria-label={`Ampliar imagen 1 de ${group.title}`}
                 >
-                  <img src={visual.src} alt={visual.alt} loading="lazy" decoding="async" />
+                  <img src={group.images[0].src} alt={group.images[0].alt} data-pe-hero-img loading="lazy" decoding="async" />
                   <span class="rz-pe__zoom-indicator" aria-hidden="true">Ampliar ↗</span>
                 </button>
-                {visual.caption && <figcaption>{visual.caption}</figcaption>}
-              </figure>
-            ))}
-          </div>
+                {group.images.length > 1 && (
+                  <div class="rz-pe__carousel-controls" aria-label={`Controles de galería: ${group.title}`}>
+                    <span data-pe-slide-counter aria-live="polite">01 / {pad(group.images.length)}</span>
+                    <button type="button" data-pe-prev aria-label={`Imagen anterior de ${group.title}`}>←</button>
+                    <button type="button" data-pe-next aria-label={`Imagen siguiente de ${group.title}`}>→</button>
+                  </div>
+                )}
+              </div>
+              {group.images.length > 1 && (
+                <div class="rz-pe__thumb-strip" aria-label={`Seleccionar imagen de ${group.title}`}>
+                  {group.images.map((visual, imageIndex) => (
+                    <button
+                      type="button"
+                      class:list={['rz-pe__thumb', imageIndex === 0 && 'is-active']}
+                      data-pe-thumb
+                      aria-label={`Mostrar imagen ${imageIndex + 1} de ${group.title}`}
+                      aria-pressed={imageIndex === 0 ? 'true' : 'false'}
+                    >
+                      <img src={visual.src} alt="" loading="lazy" decoding="async" />
+                    </button>
+                  ))}
+                </div>
+              )}
+              <figcaption class="rz-pe__hero-caption">
+                <span data-pe-current-label>{group.images[0].caption ?? group.title}</span>
+                <span>{group.title} / {project.title}</span>
+              </figcaption>
+            </figure>
+          ) : (
+            <div class:list={['rz-pe__visual-grid', group.images.length > 3 ? 'rz-pe__visual-grid--rhythm' : 'rz-pe__visual-grid--short']}>
+              {group.images.map((visual, imageIndex) => (
+                <figure class="rz-pe__visual">
+                  <button
+                    type="button"
+                    class="rz-pe__image-trigger"
+                    data-editorial-image
+                    data-full-src={visual.src}
+                    data-full-alt={visual.alt}
+                    data-full-caption={visual.caption ?? group.title}
+                    aria-label={`Ampliar imagen ${imageIndex + 1} de ${group.title}`}
+                  >
+                    <img src={visual.src} alt={visual.alt} loading="lazy" decoding="async" />
+                    <span class="rz-pe__zoom-indicator" aria-hidden="true">Ampliar ↗</span>
+                  </button>
+                  {visual.caption && <figcaption>{visual.caption}</figcaption>}
+                </figure>
+              ))}
+            </div>
+          )}
         </section>
       ))}
     </section>
@@ -310,33 +362,38 @@ const allVisuals: ProjectImage[] = [
     if (event.key === 'ArrowRight') { event.preventDefault(); show(active + 1); }
   });
 
-  // Restore the original hero slideshow with a thumbnail filmstrip.
-  const gallery = document.querySelector<HTMLElement>('[data-pe-gallery]');
-  const hero = gallery?.querySelector<HTMLImageElement>('[data-pe-hero-img]');
-  const heroTrigger = gallery?.querySelector<HTMLButtonElement>('[data-editorial-image]');
-  const slideCounter = gallery?.querySelector<HTMLElement>('[data-pe-slide-counter]');
-  const thumbs = [...document.querySelectorAll<HTMLButtonElement>('[data-pe-thumb]')];
-  const slides: {src:string;alt:string;caption?:string}[] = gallery?.dataset.peGallery
-    ? JSON.parse(gallery.dataset.peGallery)
-    : [];
-  let current = 0;
-  const setSlide = (index: number) => {
-    if (!hero || !heroTrigger || !slides.length) return;
-    current = (index + slides.length) % slides.length;
-    const visual = slides[current];
-    hero.src = visual.src;
-    hero.alt = visual.alt;
-    heroTrigger.dataset.fullSrc = visual.src;
-    heroTrigger.dataset.fullAlt = visual.alt;
-    heroTrigger.dataset.fullCaption = visual.caption || '';
-    heroTrigger.setAttribute('aria-label', `Ampliar imagen ${current + 1} de ${slides.length}`);
-    if (slideCounter) slideCounter.textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
-    thumbs.forEach((thumb,i) => {
-      thumb.classList.toggle('is-active', i === current);
-      thumb.setAttribute('aria-pressed', String(i === current));
-    });
-  };
-  gallery?.querySelector('[data-pe-prev]')?.addEventListener('click', () => setSlide(current - 1));
-  gallery?.querySelector('[data-pe-next]')?.addEventListener('click', () => setSlide(current + 1));
-  thumbs.forEach((thumb, index) => thumb.addEventListener('click', () => setSlide(index)));
+  // A shared carousel controller powers both exterior and interior galleries.
+  // Scoping controls to their containing figure prevents galleries from interfering.
+  document.querySelectorAll<HTMLElement>('[data-pe-gallery]').forEach((stage) => {
+    const figure = stage.closest('figure');
+    const displayed = stage.querySelector<HTMLImageElement>('[data-pe-hero-img]');
+    const trigger = stage.querySelector<HTMLButtonElement>('[data-editorial-image]');
+    const slideCounter = stage.querySelector<HTMLElement>('[data-pe-slide-counter]');
+    const currentLabel = figure?.querySelector<HTMLElement>('[data-pe-current-label]');
+    const thumbs = [...(figure?.querySelectorAll<HTMLButtonElement>('[data-pe-thumb]') ?? [])];
+    const slides: { src: string; alt: string; caption?: string }[] = stage.dataset.peGallery
+      ? JSON.parse(stage.dataset.peGallery)
+      : [];
+    let current = 0;
+    const select = (index: number) => {
+      if (!displayed || !trigger || !slides.length) return;
+      current = (index + slides.length) % slides.length;
+      const visual = slides[current];
+      displayed.src = visual.src;
+      displayed.alt = visual.alt;
+      trigger.dataset.fullSrc = visual.src;
+      trigger.dataset.fullAlt = visual.alt;
+      trigger.dataset.fullCaption = visual.caption || '';
+      trigger.setAttribute('aria-label', `Ampliar imagen ${current + 1} de ${slides.length}`);
+      if (currentLabel) currentLabel.textContent = visual.caption || '';
+      if (slideCounter) slideCounter.textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+      thumbs.forEach((thumb, i) => {
+        thumb.classList.toggle('is-active', i === current);
+        thumb.setAttribute('aria-pressed', String(i === current));
+      });
+    };
+    stage.querySelector('[data-pe-prev]')?.addEventListener('click', () => select(current - 1));
+    stage.querySelector('[data-pe-next]')?.addEventListener('click', () => select(current + 1));
+    thumbs.forEach((thumb, index) => thumb.addEventListener('click', () => select(index)));
+  });
 </script>
