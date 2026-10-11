@@ -43,16 +43,17 @@ export type Project = {
   instagramUrl?: string;
 };
 
-const patioCover =
-  'https://framerusercontent.com/images/cabZ2D5YdDKd1m0vI8cRQ0o4o8o.png?height=1054&width=1493';
+const patioImage = (folder: 'exteriores' | 'interiores' | 'archivo', filename: string) =>
+  withBase(`/images/projects/casa-patio-horizonte/${folder}/${filename}.webp`);
 
 const patioGallery = [
-  patioCover,
-  'https://framerusercontent.com/images/F1pDPT8fmpPgztERE8eGCxkVa4.jpeg?height=1536&width=1024',
-  'https://framerusercontent.com/images/RbabW7Bbkb61cFQmJ04EeYJSC5c.jpeg?height=1536&width=1024',
-  'https://framerusercontent.com/images/H7cyWBHTHcgbfOHOWWI6PpFTR4.png?height=989&width=1320',
-  'https://framerusercontent.com/images/w5e50WABdiaAIByqnBCJeg9eYjw.png?height=1360&width=2048'
+  patioImage('exteriores', 'exterior-01'),
+  patioImage('exteriores', 'exterior-02'),
+  patioImage('exteriores', 'exterior-05'),
+  patioImage('exteriores', 'exterior-06'),
+  patioImage('exteriores', 'exterior-07')
 ];
+const patioCover = patioGallery[0];
 
 const caboImage = (name: string) => withBase(`/images/projects/cabo-san-miguel/${name}.webp`);
 
@@ -67,27 +68,45 @@ export const projects: Project[] = [
     typology: 'Vivienda',
     participation: 'Diseño arquitectónico',
     cover: patioCover,
-    coverAlt: 'Vista principal de Casa Patio Horizonte, vivienda integrada al entorno natural',
+    coverAlt: 'Vista exterior de Casa Patio Horizonte, una vivienda de volúmenes horizontales integrada al paisaje',
     gallery: patioGallery,
+    galleryLabel: 'Exteriores y arquitectura',
+    statement: 'Habitar entre el interior y el paisaje.',
+    closingText: 'Si tienes un lugar por habitar o una idea de vivienda por desarrollar, conversemos sobre sus necesidades, el paisaje y las posibilidades del proyecto.',
+    intro: 'Una vivienda concebida para diluir los límites entre habitar y contemplar. La arquitectura se abre al territorio y convierte las vistas en parte esencial de la experiencia cotidiana.',
     tour: [
       {
-        title: 'Vistas del proyecto',
-        description: 'Perspectivas seleccionadas de la vivienda, su arquitectura y su relación con los espacios exteriores.',
+        title: 'Espacios interiores',
+        description: 'Imágenes de los ambientes de la vivienda: la sala, la cocina-comedor y el dormitorio, donde la luz y los materiales contribuyen a su atmósfera.',
+        display: 'gallery',
         images: [
-          { src: patioGallery[1], alt: 'Perspectiva vertical de Casa Patio Horizonte y su arquitectura', caption: 'Lectura del conjunto' },
-          { src: patioGallery[3], alt: 'Otra perspectiva arquitectónica de Casa Patio Horizonte', caption: 'Vistas y espacios' }
+          {
+            src: patioImage('interiores', 'interior-01'),
+            alt: 'Sala de Casa Patio Horizonte con chimenea, madera, ventanales y luz cálida',
+            caption: 'Sala / Estar'
+          },
+          {
+            src: patioImage('interiores', 'interior-02'),
+            alt: 'Comedor y cocina de Casa Patio Horizonte con revestimientos de madera y apertura al paisaje',
+            caption: 'Cocina y comedor'
+          },
+          {
+            src: patioImage('interiores', 'interior-03'),
+            alt: 'Dormitorio de Casa Patio Horizonte con textiles naturales, madera y luz lateral',
+            caption: 'Dormitorio'
+          }
         ]
       }
     ],
-    statement: 'Habitar entre el interior y el paisaje.',
-    closingText: 'Si tienes un lugar por habitar o una idea de vivienda por desarrollar, conversemos sobre sus necesidades, el paisaje y las posibilidades del proyecto.',
-    intro:
-      'Una vivienda concebida para diluir los límites entre habitar y contemplar. La arquitectura se abre al territorio y convierte las vistas en parte esencial de la experiencia cotidiana.',
     sections: [
       {
         title: 'Integración con el paisaje',
         text: 'Las visuales y las condiciones naturales del lugar orientan la organización de los espacios. Las aperturas estratégicas incorporan luz, vegetación y paisaje al interior.',
-        image: { src: patioGallery[2], alt: 'Casa Patio Horizonte vista desde otra perspectiva, en relación con el paisaje', caption: 'Paisaje y arquitectura' }
+        image: {
+          src: patioImage('exteriores', 'exterior-03'),
+          alt: 'Vista cercana de la fachada de Casa Patio Horizonte con materiales naturales y vegetación',
+          caption: 'La vivienda y su paisaje'
+        }
       },
       {
         title: 'Continuidad espacial',
@@ -96,7 +115,34 @@ export const projects: Project[] = [
       {
         title: 'Materialidad honesta',
         text: 'Los volúmenes horizontales y los materiales expresivos construyen una arquitectura sobria y atemporal. La materialidad conserva su carácter y refuerza la relación de la vivienda con el lugar.',
-        image: { src: patioGallery[4], alt: 'Espacios y materiales de Casa Patio Horizonte', caption: 'Espacio y materialidad' }
+        image: {
+          src: patioImage('exteriores', 'exterior-04'),
+          alt: 'Detalle de Casa Patio Horizonte con aleros de madera, transparencias y luz del atardecer',
+          caption: 'Materia y atmósfera'
+        }
+      }
+    ],
+    archive: [
+      {
+        title: 'Planos y exploraciones',
+        description: 'Una planta arquitectónica, un esquema de organización de espacios y estudios volumétricos del proyecto.',
+        images: [
+          {
+            src: patioImage('archivo', 'planta-arquitectonica'),
+            alt: 'Planta arquitectónica de Casa Patio Horizonte con la distribución de espacios y los contornos del terreno',
+            caption: 'Planta arquitectónica'
+          },
+          {
+            src: patioImage('archivo', 'esquema-funcional'),
+            alt: 'Esquema tridimensional que identifica áreas funcionales de Casa Patio Horizonte',
+            caption: 'Organización espacial'
+          },
+          {
+            src: patioImage('archivo', 'modelo-volumetrico'),
+            alt: 'Lámina con seis esquemas volumétricos de Casa Patio Horizonte',
+            caption: 'Estudio volumétrico'
+          }
+        ]
       }
     ],
     available: true,
