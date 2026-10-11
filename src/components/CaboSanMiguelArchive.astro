@@ -1,0 +1,87 @@
+---
+import { withBase } from '@/utils/paths';
+import '@/styles/cabo-san-miguel-archive.css';
+
+type Visual = { file: string; label: string; alt: string };
+const source = (file: string) => withBase(`/images/projects/cabo-san-miguel/${file}`);
+
+const exteriors: Visual[] = [
+  { file: 'exteriores-01.webp', label: 'Panorama junto al embalse', alt: 'Cabo San Miguel visto desde el agua, con el edificio rodeado por el paisaje de Guatapé' },
+  { file: 'exteriores-02.webp', label: 'Llegada desde el agua', alt: 'Acceso escalonado al edificio Cabo San Miguel desde el borde del embalse' },
+  { file: 'exteriores-03.webp', label: 'Fachada y vegetación', alt: 'Perspectiva de la fachada del edificio con balcones, arcos y vegetación' },
+  { file: 'exteriores-04.webp', label: 'El conjunto al atardecer', alt: 'Cabo San Miguel al atardecer con fachadas iluminadas y el embalse al fondo' },
+  { file: 'exteriores-05.webp', label: 'Terrazas exteriores', alt: 'Vista cercana de terrazas y espacios abiertos del edificio Cabo San Miguel' },
+  { file: 'exteriores-06.webp', label: 'Vista aérea del conjunto', alt: 'Perspectiva aérea del edificio de vivienda y su entorno junto al agua' },
+  { file: 'exteriores-07.webp', label: 'Elevación y proporciones', alt: 'Vista lateral de Cabo San Miguel con sus balcones, arcos y niveles de vivienda' },
+  { file: 'exteriores-08.webp', label: 'Acceso peatonal', alt: 'Pasaje de acceso con arcos, ladrillo, vegetación y una persona caminando' },
+  { file: 'exteriores-09.webp', label: 'Acceso desde la vía', alt: 'Perspectiva de la entrada vehicular y la fachada de Cabo San Miguel' }
+];
+const interiors: Visual[] = [
+  { file: 'exteriores-10.webp', label: 'Escalera y zona social', alt: 'Espacio interior con escalera, zona de estar y mobiliario en tonos cálidos' },
+  { file: 'interiores-01.webp', label: 'Sala y cocina', alt: 'Visualización de sala y cocina abiertas con materiales cálidos y luz natural' },
+  { file: 'interiores-02.webp', label: 'Espacio social', alt: 'Visualización de cocina con isla y sala integrada junto a una ventana amplia' },
+  { file: 'interiores-03.webp', label: 'Área de estar', alt: 'Interior residencial con sofá, mesa de centro y cocina de fondo' },
+  { file: 'interiores-04.webp', label: 'Dormitorio con vistas', alt: 'Dormitorio con ventanales y paisaje exterior en el proyecto Cabo San Miguel' },
+  { file: 'interiores-05.webp', label: 'Dormitorio y terraza', alt: 'Habitación con cabecero verde y apertura hacia un balcón' },
+  { file: 'interiores-06.webp', label: 'Baño y materialidad', alt: 'Baño residencial con acabados cerámicos, madera y vegetación exterior' }
+];
+const models: Visual[] = [
+  { file: 'modelo-01.webp', label: 'Modelo / vista general', alt: 'Modelo tridimensional de Cabo San Miguel sobre una base de terreno, visto en perspectiva' },
+  { file: 'modelo-02.webp', label: 'Modelo / vista opuesta', alt: 'Segunda perspectiva del modelo tridimensional de Cabo San Miguel y su emplazamiento' },
+  { file: 'modelo-03.webp', label: 'Modelo / volumetría', alt: 'Vista cercana del modelo volumétrico del edificio de vivienda Cabo San Miguel' }
+];
+---
+<section class="rz-cabo-archive section-pad" aria-labelledby="rz-cabo-archive-heading">
+  <header class="rz-cabo-archive__intro">
+    <div>
+      <p class="eyebrow">Cabo San Miguel / Archivo visual</p>
+      <h2 id="rz-cabo-archive-heading">Del paisaje al detalle.</h2>
+    </div>
+    <p>El material del proyecto permite recorrer su fachada, los espacios interiores y la volumetría desde diferentes puntos de vista. Un archivo de visualización comercial y diseño de fachada, no una atribución del diseño integral del edificio.</p>
+  </header>
+
+  <section class="rz-cabo-archive__group" aria-labelledby="rz-cabo-exterior-heading">
+    <header class="rz-cabo-archive__group-head">
+      <div><span>01 / 03</span><h3 id="rz-cabo-exterior-heading">Exterior y fachada.</h3></div>
+      <p>Vistas del edificio en relación con el agua, los accesos y el entorno de Guatapé.</p>
+    </header>
+    <div class="rz-cabo-archive__grid rz-cabo-archive__grid--exterior">
+      {exteriors.map((visual, index) => (
+        <figure class="rz-cabo-archive__figure">
+          <img src={source(visual.file)} alt={visual.alt} loading="lazy" decoding="async" />
+          <figcaption><span>{String(index + 1).padStart(2, '0')} / {visual.label}</span><span>Cabo San Miguel</span></figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <section class="rz-cabo-archive__group" aria-labelledby="rz-cabo-interior-heading">
+    <header class="rz-cabo-archive__group-head">
+      <div><span>02 / 03</span><h3 id="rz-cabo-interior-heading">Espacios interiores.</h3></div>
+      <p>Perspectivas comerciales de los ambientes que acompañan la presentación del proyecto.</p>
+    </header>
+    <div class="rz-cabo-archive__grid rz-cabo-archive__grid--interior">
+      {interiors.map((visual, index) => (
+        <figure class="rz-cabo-archive__figure">
+          <img src={source(visual.file)} alt={visual.alt} loading="lazy" decoding="async" />
+          <figcaption><span>{String(index + 1).padStart(2, '0')} / {visual.label}</span><span>Cabo San Miguel</span></figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <section class="rz-cabo-archive__group rz-cabo-archive__group--models" aria-labelledby="rz-cabo-models-heading">
+    <header class="rz-cabo-archive__group-head">
+      <div><span>03 / 03</span><h3 id="rz-cabo-models-heading">Volumen y emplazamiento.</h3></div>
+      <p>Tres imágenes de modelo incluidas en el archivo del proyecto. Se muestran como documentación visual, sin asignarles una etapa específica del proceso.</p>
+    </header>
+    <div class="rz-cabo-archive__grid rz-cabo-archive__grid--models">
+      {models.map((visual, index) => (
+        <figure class="rz-cabo-archive__figure">
+          <img src={source(visual.file)} alt={visual.alt} loading="lazy" decoding="async" />
+          <figcaption><span>{String(index + 1).padStart(2, '0')} / {visual.label}</span><span>Cabo San Miguel</span></figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+</section>
