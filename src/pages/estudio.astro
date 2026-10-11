@@ -53,7 +53,7 @@ const schema = [
       <div class="studio-profile-copy reveal">
         <p class="eyebrow">Arquitectura / Práctica independiente</p>
         <h2 class="large-copy" id="rz-studio-profile-title">El lugar, la materia y las personas como punto de partida.</h2>
-        <p class="rz-studio-profile-intro">Rizzoma es una práctica de arquitectura y visualización con base en Medellín. Juan José Quintero Tobón la dirige y participa directamente en el desarrollo de cada encargo, desde su planteamiento hasta su comunicación.</p>
+        <p class="rz-studio-profile-intro">Con base en Medellín, Rizzoma reúne arquitectura y visualización bajo la dirección de Juan José Quintero Tobón, quien participa directamente en el desarrollo y la comunicación de cada encargo.</p>
         <blockquote class="rz-studio-voice">
           <p>Me interesa una arquitectura que comprenda el lugar antes de transformarlo. Una arquitectura en la que la luz, la materia, el paisaje y la vida cotidiana no sean elementos añadidos, sino parte de las decisiones que dan forma al espacio.</p>
           <p>Desde Rizzoma exploro esa relación a través del diseño y la visualización, entendiendo cada proyecto como una oportunidad para observar, interpretar y construir una respuesta propia.</p>
@@ -71,19 +71,19 @@ const schema = [
         <ol class="rz-studio-principles">
           <li class="reveal">
             <span class="rz-studio-principle-number">01</span>
-            <div><h3>Contexto</h3><p>Comprender la topografía, la orientación, el paisaje y las condiciones del lugar antes de definir cómo se implanta el proyecto.</p></div>
+            <div class="rz-studio-principle-text"><h3>Contexto</h3><p>Comprender la topografía, la orientación, el paisaje y las condiciones del lugar antes de definir cómo se implanta el proyecto.</p></div>
           </li>
           <li class="reveal">
             <span class="rz-studio-principle-number">02</span>
-            <div><h3>Habitar</h3><p>Estudiar las necesidades, los recorridos, los ritmos y las relaciones que construyen la experiencia cotidiana del espacio.</p></div>
+            <div class="rz-studio-principle-text"><h3>Habitar</h3><p>Estudiar las necesidades, los recorridos, los ritmos y las relaciones que construyen la experiencia cotidiana del espacio.</p></div>
           </li>
           <li class="reveal">
             <span class="rz-studio-principle-number">03</span>
-            <div><h3>Materia</h3><p>Trabajar con la luz, las texturas, los materiales y los detalles para dar carácter y atmósfera a cada lugar.</p></div>
+            <div class="rz-studio-principle-text"><h3>Materia</h3><p>Trabajar con la luz, las texturas, los materiales y los detalles para dar carácter y atmósfera a cada lugar.</p></div>
           </li>
           <li class="reveal">
             <span class="rz-studio-principle-number">04</span>
-            <div><h3>Claridad</h3><p>Hacer comprensibles las decisiones arquitectónicas mediante dibujos, modelos y visualizaciones que expresen el proyecto con precisión.</p></div>
+            <div class="rz-studio-principle-text"><h3>Claridad</h3><p>Hacer comprensibles las decisiones arquitectónicas mediante dibujos, modelos y visualizaciones que expresen el proyecto con precisión.</p></div>
           </li>
         </ol>
       </div>
@@ -96,9 +96,28 @@ const schema = [
       </div>
       <div class="rz-studio-representation-copy reveal">
         <p class="rz-studio-representation-lead">La representación no es únicamente la imagen final de un proyecto. Es una herramienta para estudiar proporciones, explorar la luz, evaluar materialidades y comprender la atmósfera de un espacio mientras evoluciona.</p>
-        <p>El diseño plantea preguntas sobre el lugar y la forma de habitar; los dibujos, los modelos y las imágenes ayudan a examinarlas y a comunicar las decisiones con claridad. Son formas complementarias de una misma práctica arquitectónica.</p>
+        <p>Observar distintas vistas de una misma propuesta permite poner atención en preguntas distintas: su relación con el entorno, la escala de los espacios o las cualidades de sus materiales. La imagen ayuda a comprender y comunicar las decisiones del proyecto.</p>
         <a class="text-link rz-studio-subtle-link" href={withBase('/servicios/')}>Conocer los servicios ↗</a>
       </div>
+      {featuredProject?.gallery?.[2] && featuredProject?.gallery?.[4] && (
+        <div class="rz-studio-visual-study" aria-label="Dos lecturas visuales de Casa Patio Horizonte">
+          <div class="rz-studio-visual-study-head reveal">
+            <p class="eyebrow">Dos vistas / Un mismo proyecto</p>
+            <p>Casa Patio Horizonte. Su archivo visual permite observar decisiones del proyecto desde escalas distintas, sin presentar estas imágenes como etapas de trabajo.</p>
+          </div>
+          <div class="rz-studio-visual-pair">
+            <figure class="rz-studio-visual-frame rz-studio-visual-frame--form reveal">
+              <img src={featuredProject.gallery[2]} alt="Vista arquitectónica de Casa Patio Horizonte que permite observar los volúmenes y la relación de sus espacios" loading="lazy" decoding="async" />
+              <figcaption><span>01 / Forma y escala</span><span>Casa Patio Horizonte</span></figcaption>
+            </figure>
+            <figure class="rz-studio-visual-frame rz-studio-visual-frame--material reveal">
+              <img src={featuredProject.gallery[4]} alt="Vista de Casa Patio Horizonte que permite observar las cualidades espaciales y materiales del proyecto" loading="lazy" decoding="async" />
+              <figcaption><span>02 / Espacio y materialidad</span><span>Casa Patio Horizonte</span></figcaption>
+            </figure>
+          </div>
+          <p class="rz-studio-visual-study-footer">Dos representaciones de Casa Patio Horizonte, no una comparación de antes y después ni de fases de desarrollo.</p>
+        </div>
+      )}
     </section>
 
     {featuredProject?.cover && (
@@ -110,7 +129,7 @@ const schema = [
           <p class="eyebrow reveal">Una mirada en proyecto / {featuredProject.location ?? 'Arquitectura'}</p>
           <div class="rz-studio-project-story reveal">
             <h2 id="rz-studio-project-title">{featuredProject.title}</h2>
-            <p>En Casa Patio Horizonte, los patios, las terrazas y las aperturas establecen transiciones entre interior y exterior. La luz y las vistas del entorno forman parte de la manera de habitar la vivienda.</p>
+            <p>En Casa Patio Horizonte, una decisión reconocible es articular patios, terrazas y aperturas para crear una transición gradual entre el interior y el exterior. Así, la luz y las vistas del entorno se incorporan a la experiencia cotidiana de la vivienda.</p>
             <a class="text-link" href={withBase(`/proyectos/${featuredProject.slug}/`)}>Explorar {featuredProject.title} ↗</a>
           </div>
         </div>
@@ -122,7 +141,7 @@ const schema = [
         <div class="rz-studio-contact-copy reveal">
           <p class="eyebrow">Del estudio al proyecto</p>
           <h2 id="rz-studio-contact-title">El diálogo también forma parte del diseño.</h2>
-          <p>Las necesidades de quien encarga un proyecto, las condiciones del lugar y su intención arquitectónica merecen estar conectadas. En Rizzoma, conversar directamente con Juan José permite que esas preguntas acompañen las decisiones de diseño y visualización.</p>
+          <p>La conversación directa con Juan José permite poner en relación las necesidades del encargo, las condiciones del lugar y las decisiones que orientan el diseño o la visualización.</p>
         </div>
         <div class="rz-studio-contact-next reveal">
           <div class="rz-studio-contact-detail">
