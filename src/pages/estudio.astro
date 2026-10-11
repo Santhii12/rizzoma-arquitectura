@@ -116,14 +116,26 @@ const schema = [
       </section>
     )}
 
-    <section class="founder-cta dark-block" aria-labelledby="rz-studio-contact-title">
-      <div class="section-pad founder-cta-inner">
+    <section class="founder-cta dark-block rz-studio-contact" aria-labelledby="rz-studio-contact-title">
+      <div class="section-pad founder-cta-inner rz-studio-contact-inner">
         <div class="rz-studio-contact-copy reveal">
-          <p class="eyebrow">Conversación directa</p>
-          <h2 id="rz-studio-contact-title">Cada encargo tiene una persona detrás.</h2>
-          <p>En Rizzoma, quien dirige la práctica también escucha y desarrolla el proyecto. Si tienes una idea, un espacio que transformar o una propuesta que visualizar, puedes conversar directamente con Juan José.</p>
+          <p class="eyebrow">Del estudio al proyecto</p>
+          <h2 id="rz-studio-contact-title">El diálogo también forma parte del diseño.</h2>
+          <p>Las necesidades de quien encarga un proyecto, las condiciones del lugar y su intención arquitectónica merecen estar conectadas. En Rizzoma, conversar directamente con Juan José permite que esas preguntas acompañen las decisiones de diseño y visualización.</p>
         </div>
-        <a class="primary-link reveal" href={withBase('/contacto/')}>Hablar con Juan José <span aria-hidden="true">↗</span></a>
+        <div class="rz-studio-contact-next reveal">
+          <div class="rz-studio-contact-detail">
+            <h3>El punto de partida</h3>
+            <p>Puede ser un terreno, un espacio por transformar o un proyecto que necesita visualizarse. Lo importante es entender qué buscas resolver y en qué etapa te encuentras.</p>
+          </div>
+          <div class="rz-studio-contact-detail">
+            <h3>Lo que ayuda a comprenderlo</h3>
+            <p>La ubicación y los materiales disponibles —planos, fotografías, referencias o modelos— permiten situar la conversación y explorar un alcance adecuado. No necesitas tenerlo todo definido.</p>
+          </div>
+          <a class="rz-studio-contact-link" href={withBase('/contacto/')}>
+            Hablar con Juan José <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </div>
     </section>
   </div>
