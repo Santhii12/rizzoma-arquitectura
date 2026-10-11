@@ -56,6 +56,8 @@ const patioGallery = [
 const patioCover = patioGallery[0];
 
 const caboImage = (name: string) => withBase(`/images/projects/cabo-san-miguel/${name}.webp`);
+const umbralImage = (category: 'principal' | 'ambientes' | 'mirada', filename: string) =>
+  withBase(`/images/projects/casa-el-umbral/${category}/${filename}.webp`);
 
 export const projects: Project[] = [
   {
@@ -234,7 +236,79 @@ export const projects: Project[] = [
     title: 'Casa El Umbral',
     category: 'Interiorismo',
     year: '2025',
-    available: false
+    typology: 'Vivienda',
+    cover: umbralImage('principal', 'sala-integrada'),
+    coverAlt: 'Sala de Casa El Umbral, con sofá claro, cocina al fondo, escalera de madera y luz natural',
+    galleryLabel: 'Interiores / Espacios de la vivienda',
+    gallery: [
+      umbralImage('principal', 'sala-integrada'),
+      umbralImage('principal', 'cocina-comedor'),
+      umbralImage('principal', 'dormitorio-principal'),
+      umbralImage('principal', 'espacio-de-trabajo'),
+      umbralImage('principal', 'bano')
+    ],
+    statement: 'Interiores en los que la luz y los materiales construyen atmósferas distintas.',
+    intro: 'Casa El Umbral reúne visualizaciones de espacios interiores residenciales: sala, cocina, dormitorios, lugares de trabajo y bienestar. Las imágenes permiten observar las relaciones entre el mobiliario, la entrada de luz natural y las texturas de cada ambiente.',
+    closingText: 'Si tienes un espacio interior que necesitas desarrollar o visualizar, podemos conversar sobre sus usos, referencias y el alcance del trabajo.',
+    tour: [
+      {
+        title: 'Ambientes para habitar',
+        description: 'Otras perspectivas de la sala y de los dormitorios, con distintas condiciones de iluminación y materialidad.',
+        display: 'gallery',
+        images: [
+          {
+            src: umbralImage('ambientes', 'sala-con-vistas'),
+            alt: 'Sala luminosa con sofá claro, muebles bajos y ventanal hacia el paisaje',
+            caption: 'Sala / Vistas al exterior'
+          },
+          {
+            src: umbralImage('ambientes', 'dormitorio-calido'),
+            alt: 'Dormitorio con paneles de madera, cuadros y cabecero en tonos cálidos',
+            caption: 'Dormitorio / Texturas'
+          },
+          {
+            src: umbralImage('ambientes', 'dormitorio-soleado'),
+            alt: 'Dormitorio con piso de madera, cama central y luz natural proyectada sobre una pared',
+            caption: 'Dormitorio / Luz natural'
+          },
+          {
+            src: umbralImage('ambientes', 'dormitorio-natural'),
+            alt: 'Dormitorio con ventanal, tonos neutros, cuadros y vegetación interior',
+            caption: 'Dormitorio / Paisaje'
+          }
+        ]
+      }
+    ],
+    sections: [
+      {
+        title: 'Luz y atmósfera',
+        text: 'Las entradas de luz natural permiten apreciar los acabados y las proporciones de los espacios. En el ambiente de trabajo, la luz lateral cambia la lectura de los muebles y las superficies.',
+        image: {
+          src: umbralImage('mirada', 'oficina-luminosa'),
+          alt: 'Oficina con dos puestos de trabajo junto a un ventanal y luz cálida sobre las superficies',
+          caption: 'Luz natural / Área de trabajo'
+        }
+      },
+      {
+        title: 'Materiales y detalles',
+        text: 'Los revestimientos, la madera y los mosaicos verdes aportan contraste y textura. La visualización de este baño permite examinar esas relaciones a escala del interior.',
+        image: {
+          src: umbralImage('mirada', 'bano-mosaicos'),
+          alt: 'Baño con mosaicos verdes, espejo circular, mueble de madera y luz cálida',
+          caption: 'Baño / Materialidad'
+        }
+      },
+      {
+        title: 'Distintas maneras de usar el espacio',
+        text: 'El archivo también presenta un espacio destinado al ejercicio. Su representación permite observar cómo el equipamiento y la luz se integran a un ambiente residencial.',
+        image: {
+          src: umbralImage('mirada', 'gimnasio'),
+          alt: 'Gimnasio residencial con caminadora, pesas, madera y entrada de luz natural',
+          caption: 'Espacio de ejercicio'
+        }
+      }
+    ],
+    available: true
   },
   {
     slug: 'oasis-del-bosque',
