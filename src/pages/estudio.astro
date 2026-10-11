@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { site } from '@/config/site';
 import { featuredProject } from '@/data/projects';
 import { withBase } from '@/utils/paths';
+import '@/styles/estudio-refinement.css';
 
 const baseSite = Astro.site ?? new URL(site.domain);
 const pageUrl = new URL(withBase('/estudio/'), baseSite).toString();
@@ -26,90 +27,104 @@ const schema = [
 ];
 ---
 <BaseLayout
-  title="Juan José Quintero Tobón | Rizzoma Arquitectura"
-  description={`Conoce Rizzoma, práctica independiente de arquitectura y visualización dirigida por ${site.founder.name} en Medellín, Colombia.`}
+  title="Estudio | Rizzoma Arquitectura — Juan José Quintero Tobón"
+  description={`Conoce la mirada de Rizzoma, práctica independiente de arquitectura y visualización dirigida por ${site.founder.name} en Medellín: lugar, habitar, materialidad y claridad.`}
   image={site.founder.portrait}
   imageAlt={`${site.founder.name}, arquitecto y director de Rizzoma`}
   schema={schema}
 >
-  <section class="page-hero section-pad studio-hero">
-    <p class="eyebrow reveal">Estudio</p>
-    <h1 class="page-title reveal">Una práctica independiente.<br />Una mirada propia.</h1>
-    <div class="studio-hero-meta reveal">
-      <span>Dirección · {site.founder.name}</span>
-      <span>{site.location}</span>
-    </div>
-  </section>
-
-  <section class="studio-profile section-pad no-top">
-    <figure class="studio-portrait reveal">
-      <img src={withBase(site.founder.portrait)} alt={`${site.founder.name}, arquitecto y director de Rizzoma`} width="300" height="375" fetchpriority="high" decoding="async" />
-      <figcaption><span>{site.founder.name}</span><span>{site.founder.role}</span></figcaption>
-    </figure>
-
-    <div class="studio-profile-copy reveal">
-      <p class="eyebrow">Rizzoma / Práctica independiente</p>
-      <p class="large-copy">Arquitectura entendida como una relación entre lugar, materia y vida cotidiana.</p>
-      <div class="studio-profile-body">
-        <p>Rizzoma es un estudio de arquitectura y visualización dirigido por Juan José Quintero Tobón. Cada proyecto pasa directamente por su mirada y por una forma de trabajo cercana, desde las primeras ideas hasta su representación.</p>
-        <p>La práctica se concentra en comprender el contexto, la forma de habitar, la luz, el paisaje y la materialidad para construir propuestas con identidad propia. La visualización no aparece al final: funciona como una herramienta para diseñar, comprobar y comunicar.</p>
-      </div>
-      <div class="studio-location"><span>Base</span><strong>{site.location}</strong></div>
-    </div>
-  </section>
-
-  <section class="values dark-block">
-    <div class="section-pad">
-      <p class="eyebrow reveal">Principios</p>
-      <div class="values-grid">
-        <div class="reveal"><span>01</span><h3>Contexto</h3><p>Leer el lugar antes de imponer una forma.</p></div>
-        <div class="reveal"><span>02</span><h3>Habitar</h3><p>Diseñar desde las personas, sus recorridos, ritmos y necesidades.</p></div>
-        <div class="reveal"><span>03</span><h3>Materia</h3><p>Usar materialidad, luz y detalle para construir carácter.</p></div>
-        <div class="reveal"><span>04</span><h3>Claridad</h3><p>Hacer comprensibles las decisiones tanto en el espacio como en su representación.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="studio-capabilities section-pad">
-    <div class="section-head reveal">
-      <div><p class="eyebrow">Capacidades</p><h2 class="section-title">Pensar, desarrollar y comunicar.</h2></div>
-      <span class="section-count">Rizzoma / 2026</span>
-    </div>
-    <div class="capability-grid">
-      <div class="reveal"><span>01</span><strong>Diseño arquitectónico</strong><p>Conceptualización, organización espacial y desarrollo de propuestas.</p></div>
-      <div class="reveal"><span>02</span><strong>Lectura del lugar</strong><p>Topografía, orientación, paisaje, recorridos y condiciones ambientales como insumos de proyecto.</p></div>
-      <div class="reveal"><span>03</span><strong>Desarrollo técnico</strong><p>Planimetría, modelado y documentación de acuerdo con el alcance contratado.</p></div>
-      <div class="reveal"><span>04</span><strong>Visualización</strong><p>Imágenes para estudiar y comunicar escala, atmósfera, materialidad e intención arquitectónica.</p></div>
-    </div>
-  </section>
-
-  {featuredProject?.cover && (
-    <section class="studio-project-break">
-      <div class="studio-project-image parallax-media">
-        <img src={featuredProject.cover} alt={`${featuredProject.title}, proyecto de Rizzoma`} loading="lazy" decoding="async" />
-      </div>
-      <div class="studio-project-caption section-pad">
-        <p class="eyebrow reveal">Trabajo</p>
-        <p class="large-copy reveal">Cada proyecto es una oportunidad para construir una relación específica con su lugar.</p>
-        <a class="text-link reveal" href={withBase(`/proyectos/${featuredProject.slug}/`)}>Ver {featuredProject.title} ↗</a>
+  <div class="rz-estudio">
+    <section class="page-hero section-pad studio-hero" aria-labelledby="rz-studio-title">
+      <p class="eyebrow reveal">Estudio / Rizzoma</p>
+      <h1 class="page-title reveal" id="rz-studio-title">Una práctica independiente.<br />Una mirada propia.</h1>
+      <div class="studio-hero-meta reveal">
+        <span>Dirección · {site.founder.name}</span>
+        <span>{site.location}</span>
       </div>
     </section>
-  )}
 
-  <section class="studio-method section-pad">
-    <p class="eyebrow reveal">Método</p>
-    <h2 class="statement reveal">Diseñar y visualizar no son dos mundos separados.</h2>
-    <div class="manifesto-foot reveal">
-      <a class="text-link" href={withBase('/servicios/')}>Ver servicios ↗</a>
-      <p>La representación permite evaluar escala, luz, materialidad y atmósfera mientras el proyecto evoluciona. Por eso forma parte del proceso, no solo del resultado final.</p>
-    </div>
-  </section>
+    <section class="studio-profile section-pad no-top" aria-labelledby="rz-studio-profile-title">
+      <figure class="studio-portrait reveal">
+        <img src={withBase(site.founder.portrait)} alt={`${site.founder.name}, arquitecto y director de Rizzoma`} width="300" height="375" fetchpriority="high" decoding="async" />
+        <figcaption><span>{site.founder.name}</span><span>{site.founder.role}</span></figcaption>
+      </figure>
 
-  <section class="founder-cta dark-block">
-    <div class="section-pad founder-cta-inner">
-      <p class="eyebrow reveal">Contacto directo</p>
-      <p class="closing-copy reveal">Tu proyecto se conversa directamente con quien lo va a desarrollar.</p>
-      <a class="primary-link reveal" href={withBase('/contacto/')}>Hablar con Juan José <span aria-hidden="true">↗</span></a>
-    </div>
-  </section>
+      <div class="studio-profile-copy reveal">
+        <p class="eyebrow">Arquitectura / Práctica independiente</p>
+        <h2 class="large-copy" id="rz-studio-profile-title">El lugar, la materia y las personas como punto de partida.</h2>
+        <p class="rz-studio-profile-intro">Rizzoma es una práctica de arquitectura y visualización con base en Medellín. Juan José Quintero Tobón la dirige y participa directamente en el desarrollo de cada encargo, desde su planteamiento hasta su comunicación.</p>
+        <blockquote class="rz-studio-voice">
+          <p>Me interesa una arquitectura que comprenda el lugar antes de transformarlo. Una arquitectura en la que la luz, la materia, el paisaje y la vida cotidiana no sean elementos añadidos, sino parte de las decisiones que dan forma al espacio.</p>
+          <p>Desde Rizzoma exploro esa relación a través del diseño y la visualización, entendiendo cada proyecto como una oportunidad para observar, interpretar y construir una respuesta propia.</p>
+          <footer><span>{site.founder.name}</span><span>Dirección de Rizzoma</span></footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="values dark-block rz-studio-values" aria-labelledby="rz-studio-principles-title">
+      <div class="section-pad">
+        <div class="rz-studio-section-head reveal">
+          <p class="eyebrow">Principios / La mirada del estudio</p>
+          <h2 id="rz-studio-principles-title">Cuatro maneras de leer un proyecto.</h2>
+        </div>
+        <ol class="rz-studio-principles">
+          <li class="reveal">
+            <span class="rz-studio-principle-number">01</span>
+            <div><h3>Contexto</h3><p>Comprender la topografía, la orientación, el paisaje y las condiciones del lugar antes de definir cómo se implanta el proyecto.</p></div>
+          </li>
+          <li class="reveal">
+            <span class="rz-studio-principle-number">02</span>
+            <div><h3>Habitar</h3><p>Estudiar las necesidades, los recorridos, los ritmos y las relaciones que construyen la experiencia cotidiana del espacio.</p></div>
+          </li>
+          <li class="reveal">
+            <span class="rz-studio-principle-number">03</span>
+            <div><h3>Materia</h3><p>Trabajar con la luz, las texturas, los materiales y los detalles para dar carácter y atmósfera a cada lugar.</p></div>
+          </li>
+          <li class="reveal">
+            <span class="rz-studio-principle-number">04</span>
+            <div><h3>Claridad</h3><p>Hacer comprensibles las decisiones arquitectónicas mediante dibujos, modelos y visualizaciones que expresen el proyecto con precisión.</p></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="studio-capabilities section-pad rz-studio-representation" aria-labelledby="rz-studio-representation-title">
+      <div class="rz-studio-representation-heading reveal">
+        <p class="eyebrow">Diseño y visualización</p>
+        <h2 id="rz-studio-representation-title">Pensar la arquitectura también es aprender a verla.</h2>
+      </div>
+      <div class="rz-studio-representation-copy reveal">
+        <p class="rz-studio-representation-lead">La representación no es únicamente la imagen final de un proyecto. Es una herramienta para estudiar proporciones, explorar la luz, evaluar materialidades y comprender la atmósfera de un espacio mientras evoluciona.</p>
+        <p>El diseño plantea preguntas sobre el lugar y la forma de habitar; los dibujos, los modelos y las imágenes ayudan a examinarlas y a comunicar las decisiones con claridad. Son formas complementarias de una misma práctica arquitectónica.</p>
+        <a class="text-link rz-studio-subtle-link" href={withBase('/servicios/')}>Conocer los servicios ↗</a>
+      </div>
+    </section>
+
+    {featuredProject?.cover && (
+      <section class="studio-project-break" aria-labelledby="rz-studio-project-title">
+        <div class="studio-project-image parallax-media">
+          <img src={featuredProject.cover} alt={`${featuredProject.title}, vivienda concebida en relación con su paisaje`} loading="lazy" decoding="async" />
+        </div>
+        <div class="studio-project-caption section-pad">
+          <p class="eyebrow reveal">Una mirada en proyecto / {featuredProject.location ?? 'Arquitectura'}</p>
+          <div class="rz-studio-project-story reveal">
+            <h2 id="rz-studio-project-title">{featuredProject.title}</h2>
+            <p>En Casa Patio Horizonte, los patios, las terrazas y las aperturas establecen transiciones entre interior y exterior. La luz y las vistas del entorno forman parte de la manera de habitar la vivienda.</p>
+            <a class="text-link" href={withBase(`/proyectos/${featuredProject.slug}/`)}>Explorar {featuredProject.title} ↗</a>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <section class="founder-cta dark-block" aria-labelledby="rz-studio-contact-title">
+      <div class="section-pad founder-cta-inner">
+        <div class="rz-studio-contact-copy reveal">
+          <p class="eyebrow">Conversación directa</p>
+          <h2 id="rz-studio-contact-title">Cada encargo tiene una persona detrás.</h2>
+          <p>En Rizzoma, quien dirige la práctica también escucha y desarrolla el proyecto. Si tienes una idea, un espacio que transformar o una propuesta que visualizar, puedes conversar directamente con Juan José.</p>
+        </div>
+        <a class="primary-link reveal" href={withBase('/contacto/')}>Hablar con Juan José <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </div>
 </BaseLayout>
