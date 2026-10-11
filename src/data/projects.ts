@@ -15,6 +15,7 @@ export type ProjectSection = {
 export type ProjectImageGroup = {
   title: string;
   description?: string;
+  display?: 'gallery' | 'grid';
   images: ProjectImage[];
 };
 
@@ -30,6 +31,7 @@ export type Project = {
   cover?: string;
   coverAlt?: string;
   gallery?: string[];
+  galleryLabel?: string;
   tour?: ProjectImageGroup[];
   archive?: ProjectImageGroup[];
   statement?: string;
@@ -116,25 +118,23 @@ export const projects: Project[] = [
     participation: 'Visualización comercial y diseño de fachada',
     cover: caboImage('exteriores-04'),
     coverAlt: 'Cabo San Miguel, edificio de vivienda en Guatapé presentado al atardecer frente al embalse',
-    gallery: [caboImage('exteriores-04')],
+    gallery: [
+      caboImage('exteriores-04'),
+      caboImage('exteriores-01'),
+      caboImage('exteriores-02'),
+      caboImage('exteriores-05'),
+      caboImage('exteriores-06'),
+      caboImage('exteriores-07'),
+      caboImage('exteriores-08')
+    ],
+    galleryLabel: 'Exteriores y fachada',
     statement: 'Un edificio de vivienda en relación con el paisaje de Guatapé.',
     intro: 'Cabo San Miguel es un edificio de vivienda en Guatapé, Antioquia. El trabajo de Rizzoma comprende el diseño de fachada y la visualización comercial; no el diseño integral del edificio.',
     tour: [
       {
-        title: 'Exterior y paisaje',
-        description: 'Perspectivas del conjunto junto al agua, sus terrazas y el acercamiento desde el entorno.',
-        images: [
-          { src: caboImage('exteriores-01'), alt: 'Vista panorámica de Cabo San Miguel junto al embalse de Guatapé', caption: 'Panorama junto al embalse' },
-          { src: caboImage('exteriores-02'), alt: 'Acceso escalonado desde el borde del agua al conjunto', caption: 'Llegada desde el agua' },
-          { src: caboImage('exteriores-05'), alt: 'Terrazas y áreas exteriores del edificio Cabo San Miguel', caption: 'Terrazas exteriores' },
-          { src: caboImage('exteriores-06'), alt: 'Vista aérea del conjunto junto al embalse y el paisaje de Guatapé', caption: 'Relación con el entorno' },
-          { src: caboImage('exteriores-07'), alt: 'Vista lateral de los niveles, arcos y balcones del conjunto', caption: 'Fachada y proporciones' },
-          { src: caboImage('exteriores-08'), alt: 'Recorrido peatonal bajo arcos de la edificación con vegetación', caption: 'Acceso peatonal' }
-        ]
-      },
-      {
         title: 'Espacios interiores',
-        description: 'Vistas comerciales de los ambientes residenciales y sus relaciones espaciales.',
+        description: 'Recorre los ambientes residenciales a través de sus visualizaciones comerciales: espacios sociales, habitaciones y detalles de materialidad.',
+        display: 'gallery',
         images: [
           { src: caboImage('exteriores-10'), alt: 'Escalera, sala de estar y mobiliario del espacio interior', caption: 'Escalera y zona social' },
           { src: caboImage('interiores-02'), alt: 'Espacio social con cocina integrada e iluminación natural', caption: 'Sala y cocina' },
