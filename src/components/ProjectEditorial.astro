@@ -286,16 +286,27 @@ const allVisuals: ProjectImage[] = [
     </section>
   )}
 
-  <footer class="rz-pe__ending section-pad">
-    <div>
-      <p class="rz-pe__eyebrow">Arquitectura / Visualización</p>
-      <h2>¿Tienes un proyecto en mente?</h2>
-      <p>Conversemos sobre el lugar, el alcance y lo que necesitas comunicar o desarrollar.</p>
+  <footer class="rz-pe__ending section-pad" aria-labelledby="rz-pe-contact-heading">
+    <div class="rz-pe__ending-topline">
+      <span>Rizzoma / Siguiente paso</span>
+      <span>Arquitectura + visualización</span>
     </div>
-    <nav class="rz-pe__ending-links" aria-label="Continuar explorando proyectos">
-      <a href={withBase('/contacto/')}>Hablemos de tu proyecto <span aria-hidden="true">↗</span></a>
-      <a href={withBase('/portafolio/')}>Volver al portafolio <span aria-hidden="true">↗</span></a>
-      {nextProject && <a href={withBase(`/proyectos/${nextProject.slug}/`)}>Siguiente proyecto: {nextProject.title} <span aria-hidden="true">→</span></a>}
+    <div class="rz-pe__ending-inner">
+      <div class="rz-pe__ending-intro">
+        <p class="rz-pe__eyebrow">Conversemos</p>
+        <h2 id="rz-pe-contact-heading">¿Tienes un proyecto en mente?</h2>
+      </div>
+      <div class="rz-pe__ending-contact">
+        <p>{project.closingText ?? 'Ya sea un espacio por diseñar, un proyecto que necesitas visualizar o una idea que buscas desarrollar, podemos conversar sobre lo que tienes en mente.'}</p>
+        <a class="rz-pe__ending-cta" href={withBase('/contacto/')}>Hablemos de tu proyecto <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <nav class="rz-pe__ending-navigation" aria-label="Continuar explorando proyectos">
+      <a href={withBase('/portafolio/')}>← Volver al portafolio</a>
+      {nextProject
+        ? <a href={withBase(`/proyectos/${nextProject.slug}/`)}>Siguiente proyecto: {nextProject.title} <span aria-hidden="true">→</span></a>
+        : <span>Rizzoma Arquitectura</span>
+      }
     </nav>
   </footer>
 
