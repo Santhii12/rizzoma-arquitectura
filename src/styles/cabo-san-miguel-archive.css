@@ -1,0 +1,148 @@
+/* Cabo San Miguel — project-only editorial archive, no external dependencies. */
+.rz-cabo-archive {
+  background: #eee8de;
+  color: #25261f;
+  padding-top: clamp(86px, 9vw, 150px);
+  padding-bottom: clamp(95px, 10vw, 180px);
+}
+.rz-cabo-archive__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(260px, .65fr);
+  align-items: end;
+  column-gap: clamp(48px, 8vw, 145px);
+  margin: 0 0 clamp(88px, 11vw, 175px);
+}
+.rz-cabo-archive__intro h2 {
+  max-width: 15ch;
+  margin: clamp(24px, 3vw, 38px) 0 0;
+  font-family: var(--display, Georgia, serif);
+  font-weight: 400;
+  font-synthesis: none;
+  font-size: clamp(3.5rem, 6.35vw, 8rem);
+  letter-spacing: -.03em;
+  line-height: 1.075;
+  text-wrap: balance;
+}
+.rz-cabo-archive__intro > p {
+  max-width: 50ch;
+  margin: 0 0 10px;
+  color: #625e54;
+  font-size: clamp(14px, 1.04vw, 17px);
+  line-height: 1.8;
+}
+.rz-cabo-archive__group + .rz-cabo-archive__group {
+  margin-top: clamp(110px, 13vw, 215px);
+}
+.rz-cabo-archive__group-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, .48fr);
+  gap: clamp(32px, 6vw, 96px);
+  align-items: end;
+  margin-bottom: clamp(32px, 4vw, 62px);
+  padding-top: 18px;
+  border-top: 1px solid #c5b9a9;
+}
+.rz-cabo-archive__group-head > div > span {
+  display: block;
+  margin-bottom: clamp(22px, 3vw, 40px);
+  color: #887b64;
+  font: 500 10px/1.5 var(--sans, Arial, sans-serif);
+  letter-spacing: .13em;
+}
+.rz-cabo-archive__group-head h3 {
+  max-width: 18ch;
+  margin: 0;
+  font-family: var(--display, Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 4.7vw, 6.2rem);
+  letter-spacing: -.025em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+.rz-cabo-archive__group-head > p {
+  max-width: 47ch;
+  margin: 0 0 8px;
+  color: #676257;
+  font-size: clamp(13px, 1vw, 16px);
+  line-height: 1.8;
+}
+.rz-cabo-archive__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(32px, 4vw, 65px) clamp(18px, 2.5vw, 42px);
+  align-items: start;
+}
+.rz-cabo-archive__figure {
+  margin: 0;
+  min-width: 0;
+}
+.rz-cabo-archive__figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: #ded7cb;
+}
+.rz-cabo-archive__grid--exterior .rz-cabo-archive__figure:first-child,
+.rz-cabo-archive__grid--interior .rz-cabo-archive__figure:first-child {
+  grid-column: 1 / -1;
+}
+.rz-cabo-archive__grid--exterior .rz-cabo-archive__figure:first-child img,
+.rz-cabo-archive__grid--interior .rz-cabo-archive__figure:first-child img {
+  aspect-ratio: 16 / 9;
+}
+.rz-cabo-archive__figure figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 25px;
+  padding-top: 14px;
+  border-top: 1px solid #c8bcac;
+  color: #716959;
+  font: 500 10px/1.6 var(--sans, Arial, sans-serif);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.rz-cabo-archive__grid--models {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 32px);
+}
+.rz-cabo-archive__grid--models .rz-cabo-archive__figure img {
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  background: #fafaf8;
+}
+@media (max-width: 900px) {
+  .rz-cabo-archive__intro,
+  .rz-cabo-archive__group-head {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .rz-cabo-archive__intro { margin-bottom: 95px; }
+  .rz-cabo-archive__intro > p,
+  .rz-cabo-archive__group-head > p { max-width: 65ch; }
+  .rz-cabo-archive__group + .rz-cabo-archive__group { margin-top: 95px; }
+  .rz-cabo-archive__grid--models { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .rz-cabo-archive { padding-top: 75px; padding-bottom: 96px; }
+  .rz-cabo-archive__intro { margin-bottom: 73px; }
+  .rz-cabo-archive__intro h2 { font-size: clamp(2.95rem, 10.2vw, 4.55rem); }
+  .rz-cabo-archive__group-head h3 { font-size: clamp(2.6rem, 9.1vw, 4.5rem); }
+  .rz-cabo-archive__grid,
+  .rz-cabo-archive__grid--models {
+    grid-template-columns: 1fr;
+    gap: 29px;
+  }
+  .rz-cabo-archive__grid--exterior .rz-cabo-archive__figure:first-child,
+  .rz-cabo-archive__grid--interior .rz-cabo-archive__figure:first-child { grid-column: auto; }
+  .rz-cabo-archive__figure img,
+  .rz-cabo-archive__grid--exterior .rz-cabo-archive__figure:first-child img,
+  .rz-cabo-archive__grid--interior .rz-cabo-archive__figure:first-child img {
+    aspect-ratio: 4 / 3;
+  }
+  .rz-cabo-archive__grid--models .rz-cabo-archive__figure img { aspect-ratio: 16 / 10; }
+  .rz-cabo-archive__group + .rz-cabo-archive__group { margin-top: 82px; }
+  .rz-cabo-archive__figure figcaption { font-size: 9px; }
+}
