@@ -12,6 +12,8 @@ export type Project = {
   year?: string;
   location?: string;
   region?: string;
+  typology?: string;
+  participation?: string;
   cover?: string;
   gallery?: string[];
   statement?: string;
@@ -71,10 +73,31 @@ export const projects: Project[] = [
   {
     slug: 'cabo-san-miguel',
     title: 'Cabo San Miguel',
-    category: 'Visualización comercial',
+    category: 'Visualización comercial · Diseño de fachada',
     year: '2026',
-    cover: withBase('/images/projects/cabo-san-miguel.webp'),
-    available: false
+    location: 'Guatapé',
+    region: 'Antioquia',
+    typology: 'Edificio de vivienda',
+    participation: 'Visualización comercial y diseño de fachada',
+    cover: withBase('/images/projects/cabo-san-miguel/exteriores-04.webp'),
+    gallery: [withBase('/images/projects/cabo-san-miguel/exteriores-04.webp')],
+    statement: 'Un edificio de vivienda en relación con el paisaje de Guatapé.',
+    intro: 'Cabo San Miguel es un proyecto de edificio de vivienda en Guatapé, Antioquia. La participación de Rizzoma comprende el diseño de fachada y la visualización comercial, con imágenes del conjunto, sus accesos, espacios interiores y entorno.',
+    sections: [
+      {
+        title: 'Diseño de fachada',
+        text: 'Los renders exteriores permiten observar la expresión del edificio: sus arcos, balcones, terrazas y materialidad, así como su presencia junto al paisaje del embalse.'
+      },
+      {
+        title: 'Visualización comercial',
+        text: 'Las perspectivas del exterior y de los espacios interiores presentan el proyecto a distintas escalas: desde el conjunto frente al agua hasta la experiencia de sus ambientes.'
+      },
+      {
+        title: 'Lectura del conjunto',
+        text: 'Tres imágenes de modelo complementan el archivo visual, mostrando la volumetría y su relación con el terreno. Se presentan como documentación del proyecto, sin atribuirles una fase específica de desarrollo.'
+      }
+    ],
+    available: true
   },
   {
     slug: 'casa-el-umbral',
