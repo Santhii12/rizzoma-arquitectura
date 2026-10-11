@@ -110,7 +110,12 @@ export const projects: Project[] = [
       },
       {
         title: 'Continuidad espacial',
-        text: 'Patios, terrazas y aperturas construyen una transición gradual entre interior y exterior. Los espacios se conectan y se extienden hacia el paisaje.'
+        text: 'Patios, terrazas y aperturas construyen una transición gradual entre interior y exterior. Los espacios se conectan y se extienden hacia el paisaje.',
+        image: {
+          src: patioImage('exteriores', 'exterior-07'),
+          alt: 'Vista de Casa Patio Horizonte desde el jardín, con terraza, piscina y ventanales que conectan la vivienda con el exterior',
+          caption: 'Terraza / Interior y exterior'
+        }
       },
       {
         title: 'Materialidad honesta',
