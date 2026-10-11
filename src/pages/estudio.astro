@@ -7,6 +7,7 @@ import '@/styles/estudio-refinement.css';
 
 const baseSite = Astro.site ?? new URL(site.domain);
 const pageUrl = new URL(withBase('/estudio/'), baseSite).toString();
+const studioPortrait = withBase('/images/studio/juan-jose-retrato-editorial.webp');
 const schema = [
   {
     '@type': 'AboutPage',
@@ -29,7 +30,7 @@ const schema = [
 <BaseLayout
   title="Estudio | Rizzoma Arquitectura — Juan José Quintero Tobón"
   description={`Conoce la mirada de Rizzoma, práctica independiente de arquitectura y visualización dirigida por ${site.founder.name} en Medellín: lugar, habitar, materialidad y claridad.`}
-  image={site.founder.portrait}
+  image={studioPortrait}
   imageAlt={`${site.founder.name}, arquitecto y director de Rizzoma`}
   schema={schema}
 >
@@ -45,7 +46,7 @@ const schema = [
 
     <section class="studio-profile section-pad no-top" aria-labelledby="rz-studio-profile-title">
       <figure class="studio-portrait reveal">
-        <img src={withBase(site.founder.portrait)} alt={`${site.founder.name}, arquitecto y director de Rizzoma`} width="300" height="375" fetchpriority="high" decoding="async" />
+        <img src={studioPortrait} alt={`${site.founder.name}, arquitecto y director de Rizzoma`} width="1122" height="1402" fetchpriority="high" decoding="async" />
         <figcaption><span>{site.founder.name}</span><span>{site.founder.role}</span></figcaption>
       </figure>
 
