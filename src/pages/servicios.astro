@@ -188,24 +188,51 @@ const schema = [
   </div>
 
   <section class="rz-services-guide__method" aria-labelledby="rz-services-guide-method-title">
-    <p class="rz-services-guide__label">Nuestra manera de trabajar</p>
-    <div>
-      <h2 id="rz-services-guide-method-title">Una conversación, un criterio claro.</h2>
-      <div class="rz-services-guide__method-copy">
-        <p>Rizzoma es una práctica independiente dirigida por Juan José Quintero Tobón. Cada conversación comienza por entender el lugar, la necesidad y la etapa del proyecto.</p>
-        <p>La visualización puede contratarse por separado o acompañar un proceso de diseño. El alcance se acuerda según el material disponible y las condiciones de cada encargo.</p>
+    <div class="rz-services-guide__method-inner">
+      <div class="rz-services-guide__method-intro">
+        <p class="rz-services-guide__label">Cómo empezamos</p>
+        <h2 id="rz-services-guide-method-title">Un punto de partida claro.</h2>
+        <p>Antes de definir un servicio, necesitamos entender el lugar, la etapa del proyecto y lo que buscas resolver. La primera conversación es directamente con Juan José Quintero Tobón, quien dirige Rizzoma.</p>
       </div>
+      <ol class="rz-services-guide__method-steps" aria-label="Información para comenzar un proyecto">
+        <li>
+          <span class="rz-services-guide__step-number" aria-hidden="true">01</span>
+          <div>
+            <h3>Cuéntanos qué necesitas</h3>
+            <p>Indica si buscas visualización, diseño o remodelación, dónde se encuentra el proyecto y en qué etapa está.</p>
+          </div>
+        </li>
+        <li>
+          <span class="rz-services-guide__step-number" aria-hidden="true">02</span>
+          <div>
+            <h3>Comparte lo que tengas</h3>
+            <p>Planos, modelos 3D, fotografías o referencias ayudan a comprender el encargo. Si aún no tienes esos materiales, puedes empezar con una descripción.</p>
+          </div>
+        </li>
+        <li>
+          <span class="rz-services-guide__step-number" aria-hidden="true">03</span>
+          <div>
+            <h3>Concretemos el alcance</h3>
+            <p>Con esa información podemos conversar sobre las tareas, los entregables necesarios y una propuesta acorde con el proyecto.</p>
+          </div>
+        </li>
+      </ol>
     </div>
   </section>
 
   <section class="rz-services-guide__contact" aria-labelledby="rz-services-guide-contact-title">
-    <div>
-      <p class="rz-services-guide__label">Empecemos</p>
-      <h2 id="rz-services-guide-contact-title">¿Tienes un proyecto en mente?</h2>
-      <p>Cuéntanos qué necesitas y en qué etapa estás. No necesitas tener todo definido para iniciar una conversación.</p>
+    <div class="rz-services-guide__contact-inner">
+      <div class="rz-services-guide__contact-heading">
+        <p class="rz-services-guide__label">Contacto directo</p>
+        <h2 id="rz-services-guide-contact-title">Hablemos de lo que tienes en mente.</h2>
+      </div>
+      <div class="rz-services-guide__contact-details">
+        <p>No hace falta tener una propuesta terminada. Cuéntanos qué tipo de trabajo necesitas y comparte la información disponible. Desde ahí podemos definir el siguiente paso.</p>
+        <a href={withBase('/contacto/')} class="rz-services-guide__contact-link">
+          Hablemos de tu proyecto <span aria-hidden="true">↗</span>
+        </a>
+        <p class="rz-services-guide__contact-note">El contacto es con Juan José, responsable del estudio.</p>
+      </div>
     </div>
-    <a href={withBase('/contacto/')} class="rz-services-guide__contact-link">
-      Hablemos de tu proyecto <span aria-hidden="true">↗</span>
-    </a>
   </section>
 </BaseLayout>
