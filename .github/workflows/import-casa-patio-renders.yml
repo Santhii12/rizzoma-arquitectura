@@ -1,0 +1,66 @@
+name: Import Casa Patio Horizonte renders
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-casa-patio-renders.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download the exact user-provided optimized archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error --retry 3 --connect-timeout 15 --max-time 120 \
+            'https://d2ol7oe51mr4n9.cloudfront.net/user_3JyDbghZNXmeLLpGsUpuxXQddfw/3761ef47-46dc-49f4-8847-fe9b3f98c526.zip' \
+            -o /tmp/casa-patio-archive.zip
+          echo '0a09ed8202a04ca49d7bcbf72736357136774287f95f46b14cc43d2f803ceaa5  /tmp/casa-patio-archive.zip' | sha256sum --check
+      - name: Validate and install images in project assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import zipfile, io
+          from pathlib import Path
+          archive = '/tmp/casa-patio-archive.zip'
+          dst = Path('public/images/projects/casa-patio-horizonte')
+          wanted = {
+              *(f'exteriores/exterior-{i:02d}.webp' for i in range(1,8)),
+              *(f'interiores/interior-{i:02d}.webp' for i in range(1,4)),
+              'archivo/modelo-volumetrico.webp',
+              'archivo/planta-arquitectonica.webp',
+              'archivo/esquema-funcional.webp',
+          }
+          with zipfile.ZipFile(archive) as z:
+              actual={n for n in z.namelist() if n.lower().endswith('.webp')}
+              assert actual==wanted, f'Unexpected file list: {actual.symmetric_difference(wanted)}'
+              for name in sorted(wanted):
+                  data=z.read(name)
+                  assert data[:4]==b'RIFF' and data[8:12]==b'WEBP', name
+                  target=dst/name
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  target.write_bytes(data)
+                  print(name, len(data))
+          print('Validated and installed 13 original optimized project images.')
+          PY
+      - name: Commit image assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/images/projects/casa-patio-horizonte
+          if git diff --cached --quiet; then
+            echo 'No new image changes.'
+            exit 0
+          fi
+          git commit -m 'Import 13 Casa Patio Horizonte WebP images'
+          git push
