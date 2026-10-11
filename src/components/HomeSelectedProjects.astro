@@ -21,7 +21,9 @@ const previewCopy = (project: Project) =>
       {featured.cover ? (
         <img
           src={featured.cover}
-          alt="Vista aérea de Cabo San Miguel, conjunto arquitectónico en un entorno natural junto al agua"
+          alt={featured.slug === 'cabo-san-miguel'
+            ? 'Cabo San Miguel al atardecer, edificio de vivienda frente al embalse en Guatapé'
+            : `Vista arquitectónica del proyecto ${featured.title}`}
           loading="lazy"
           decoding="async"
           width="1440"
