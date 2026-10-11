@@ -15,25 +15,24 @@ const pad = (index: number) => String(index).padStart(2, '0');
 const tour = (project.tour ?? []).filter((group) => group.images?.length > 0);
 const insights = (project.sections ?? []).filter((item) => item.title && item.text);
 const archive = (project.archive ?? []).filter((group) => group.images?.length > 0);
-const hasGallery = tour.length > 0;
+const heroSlides: ProjectImage[] = (project.gallery?.length ? project.gallery : (project.cover ? [project.cover] : [])).map((src, i) => ({
+  src,
+  alt: i === 0 ? (project.coverAlt ?? `Imagen principal de ${project.title}`) : `Vista ${i + 1} del proyecto ${project.title}`,
+  caption: project.title
+}));
+const hasCarousel = heroSlides.length > 1;
+const hasGallery = tour.length > 0 && !hasCarousel;
 const hasInsights = insights.length > 0;
 const hasArchive = archive.length > 0;
 const heroAlt = project.coverAlt ?? `Imagen principal de ${project.title}`;
 const location = [project.location, project.region].filter(Boolean).join(', ');
 const hasFacts = !!(project.typology || project.category || project.participation || location || project.year);
 const allVisuals: ProjectImage[] = [
-  ...(project.cover ? [{ src: project.cover, alt: heroAlt, caption: project.title }] : []),
-  ...tour.flatMap((group) => group.images),
+  ...heroSlides,
+  ...(!hasCarousel ? tour.flatMap((group) => group.images) : []),
   ...insights.flatMap((section) => section.image ? [section.image] : []),
   ...archive.flatMap((group) => group.images)
-];
-const availableAssets = new Set<string>();
-const repeats = allVisuals.filter((visual) => {
-  if (availableAssets.has(visual.src)) return true;
-  availableAssets.add(visual.src);
-  return false;
-});
-if (repeats.length) console.warn(`Project ${project.slug}: repeated visual assets in editorial page`);
+].filter((visual, index, all) => all.findIndex((item) => item.src === visual.src) === index);
 ---
 <article class="rz-pe" aria-labelledby="rz-pe-title">
   <header class="rz-pe__opening section-pad">
@@ -60,23 +59,43 @@ if (repeats.length) console.warn(`Project ${project.slug}: repeated visual asset
   </header>
 
   {project.cover && (
-    <figure class="rz-pe__hero">
-      <button
-        class="rz-pe__image-trigger rz-pe__hero-trigger"
-        type="button"
-        data-editorial-image
-        data-full-src={project.cover}
-        data-full-alt={heroAlt}
-        data-full-caption={project.title}
-        aria-label={`Ampliar imagen principal de ${project.title}`}
-      >
-        <img src={project.cover} alt={heroAlt} fetchpriority="high" decoding="async" />
-        <span class="rz-pe__zoom-indicator" aria-hidden="true">Ampliar imagen ↗</span>
-      </button>
-      <figcaption class="rz-pe__hero-caption section-pad">
-        <span>{project.title}</span><span>{project.category}</span>
-      </figcaption>
-    </figure>
+    <section class="rz-pe__hero-section section-pad no-top" aria-label={`Galería principal de ${project.title}`}>
+      <figure class="rz-pe__hero">
+        <div class="rz-pe__hero-stage" data-pe-gallery={JSON.stringify(heroSlides)}>
+          <button
+            class="rz-pe__image-trigger rz-pe__hero-trigger"
+            type="button"
+            data-editorial-image
+            data-full-src={project.cover}
+            data-full-alt={heroAlt}
+            data-full-caption={project.title}
+            aria-label={`Ampliar imagen principal de ${project.title}`}
+          >
+            <img src={project.cover} alt={heroAlt} data-pe-hero-img fetchpriority="high" decoding="async" />
+            <span class="rz-pe__zoom-indicator" aria-hidden="true">Ampliar ↗</span>
+          </button>
+          {hasCarousel && (
+            <div class="rz-pe__carousel-controls" aria-label="Controles de galería principal">
+              <span data-pe-slide-counter aria-live="polite">01 / {pad(heroSlides.length)}</span>
+              <button type="button" data-pe-prev aria-label="Imagen anterior">←</button>
+              <button type="button" data-pe-next aria-label="Imagen siguiente">→</button>
+            </div>
+          )}
+        </div>
+        {hasCarousel && (
+          <div class="rz-pe__thumb-strip" aria-label="Seleccionar imagen de la galería">
+            {heroSlides.map((visual, imageIndex) => (
+              <button type="button" class:list={['rz-pe__thumb', imageIndex === 0 && 'is-active']} data-pe-thumb data-pe-index={imageIndex} aria-label={`Mostrar imagen ${imageIndex + 1} de ${heroSlides.length}`} aria-pressed={imageIndex === 0 ? 'true' : 'false'}>
+                <img src={visual.src} alt="" loading="lazy" decoding="async" />
+              </button>
+            ))}
+          </div>
+        )}
+        <figcaption class="rz-pe__hero-caption">
+          <span>{project.title}</span><span>{project.category}</span>
+        </figcaption>
+      </figure>
+    </section>
   )}
 
   {(project.intro || hasFacts) && (
@@ -98,50 +117,11 @@ if (repeats.length) console.warn(`Project ${project.slug}: repeated visual asset
     </section>
   )}
 
-  {hasGallery && (
-    <section class="rz-pe__tour section-pad" aria-labelledby="rz-pe-tour">
-      <div class="rz-pe__section-header">
-        <div>
-          <p class="rz-pe__eyebrow">02 / Recorrido visual</p>
-          <h2 id="rz-pe-tour">Miradas del proyecto.</h2>
-        </div>
-        <p>Un recorrido por sus espacios y perspectivas, con imágenes del archivo real de {project.title}.</p>
-      </div>
-      {tour.map((group, groupIndex) => (
-        <section class="rz-pe__tour-group" aria-label={group.title}>
-          <div class="rz-pe__group-intro">
-            <h3>{group.title}</h3>
-            {group.description && <p>{group.description}</p>}
-          </div>
-          <div class:list={['rz-pe__visual-grid', group.images.length > 3 ? 'rz-pe__visual-grid--rhythm' : 'rz-pe__visual-grid--short']}>
-            {group.images.map((visual, imageIndex) => (
-              <figure class="rz-pe__visual">
-                <button
-                  type="button"
-                  class="rz-pe__image-trigger"
-                  data-editorial-image
-                  data-full-src={visual.src}
-                  data-full-alt={visual.alt}
-                  data-full-caption={visual.caption ?? group.title}
-                  aria-label={`Ampliar imagen ${imageIndex + 1} de ${group.title}`}
-                >
-                  <img src={visual.src} alt={visual.alt} loading="lazy" decoding="async" />
-                  <span class="rz-pe__zoom-indicator" aria-hidden="true">Ampliar ↗</span>
-                </button>
-                {visual.caption && <figcaption>{visual.caption}</figcaption>}
-              </figure>
-            ))}
-          </div>
-        </section>
-      ))}
-    </section>
-  )}
-
   {hasInsights && (
     <section class="rz-pe__insights section-pad" aria-labelledby="rz-pe-insights">
       <header class="rz-pe__section-header">
         <div>
-          <p class="rz-pe__eyebrow">03 / La mirada de Rizzoma</p>
+          <p class="rz-pe__eyebrow">02 / La mirada de Rizzoma</p>
           <h2 id="rz-pe-insights">Lo que revela el proyecto.</h2>
         </div>
         <p>Una lectura de los aspectos que dan carácter a este trabajo y de lo que sus imágenes permiten comprender.</p>
@@ -173,6 +153,45 @@ if (repeats.length) console.warn(`Project ${project.slug}: repeated visual asset
           </article>
         ))}
       </div>
+    </section>
+  )}
+
+  {hasGallery && (
+    <section class="rz-pe__tour section-pad" aria-labelledby="rz-pe-tour">
+      <div class="rz-pe__section-header">
+        <div>
+          <p class="rz-pe__eyebrow">03 / Recorrido visual</p>
+          <h2 id="rz-pe-tour">Miradas del proyecto.</h2>
+        </div>
+        <p>Un recorrido por sus espacios y perspectivas, con imágenes del archivo real de {project.title}.</p>
+      </div>
+      {tour.map((group, groupIndex) => (
+        <section class="rz-pe__tour-group" aria-label={group.title}>
+          <div class="rz-pe__group-intro">
+            <h3>{group.title}</h3>
+            {group.description && <p>{group.description}</p>}
+          </div>
+          <div class:list={['rz-pe__visual-grid', group.images.length > 3 ? 'rz-pe__visual-grid--rhythm' : 'rz-pe__visual-grid--short']}>
+            {group.images.map((visual, imageIndex) => (
+              <figure class="rz-pe__visual">
+                <button
+                  type="button"
+                  class="rz-pe__image-trigger"
+                  data-editorial-image
+                  data-full-src={visual.src}
+                  data-full-alt={visual.alt}
+                  data-full-caption={visual.caption ?? group.title}
+                  aria-label={`Ampliar imagen ${imageIndex + 1} de ${group.title}`}
+                >
+                  <img src={visual.src} alt={visual.alt} loading="lazy" decoding="async" />
+                  <span class="rz-pe__zoom-indicator" aria-hidden="true">Ampliar ↗</span>
+                </button>
+                {visual.caption && <figcaption>{visual.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        </section>
+      ))}
     </section>
   )}
 
@@ -244,10 +263,16 @@ if (repeats.length) console.warn(`Project ${project.slug}: repeated visual asset
       </div>
     </dialog>
   )}
+  <div hidden data-pe-catalog>
+    {allVisuals.map((visual) => (
+      <span data-pe-catalog-item data-full-src={visual.src} data-full-alt={visual.alt} data-full-caption={visual.caption ?? project.title}></span>
+    ))}
+  </div>
 </article>
 <script>
   const dialog = document.querySelector<HTMLDialogElement>('[data-rz-pe-lightbox]');
   const triggers = [...document.querySelectorAll<HTMLButtonElement>('[data-editorial-image]')];
+  const catalog = [...document.querySelectorAll<HTMLElement>('[data-pe-catalog-item]')];
   const main = dialog?.querySelector<HTMLImageElement>('[data-rz-pe-main]');
   const caption = dialog?.querySelector<HTMLElement>('[data-rz-pe-caption]');
   const counter = dialog?.querySelector<HTMLElement>('[data-rz-pe-counter]');
@@ -257,20 +282,22 @@ if (repeats.length) console.warn(`Project ${project.slug}: repeated visual asset
   let active = 0;
   let origin: HTMLButtonElement | null = null;
   const show = (index: number) => {
-    if (!main || !triggers.length) return;
-    active = (index + triggers.length) % triggers.length;
-    const image = triggers[active];
-    main.src = image.dataset.fullSrc || '';
-    main.alt = image.dataset.fullAlt || '';
-    if (caption) caption.textContent = image.dataset.fullCaption || '';
-    if (counter) counter.textContent = `${String(active + 1).padStart(2, '0')} / ${String(triggers.length).padStart(2, '0')}`;
-    if (prev) prev.hidden = triggers.length < 2;
-    if (next) next.hidden = triggers.length < 2;
+    if (!main || !catalog.length) return;
+    active = (index + catalog.length) % catalog.length;
+    const visual = catalog[active];
+    main.src = visual.dataset.fullSrc || '';
+    main.alt = visual.dataset.fullAlt || '';
+    if (caption) caption.textContent = visual.dataset.fullCaption || '';
+    if (counter) counter.textContent = `${String(active + 1).padStart(2, '0')} / ${String(catalog.length).padStart(2, '0')}`;
+    if (prev) prev.hidden = catalog.length < 2;
+    if (next) next.hidden = catalog.length < 2;
   };
-  triggers.forEach((trigger, index) => trigger.addEventListener('click', () => {
-    if (!dialog) return;
+  triggers.forEach(trigger => trigger.addEventListener('click', () => {
+    if (!dialog || !catalog.length) return;
     origin = trigger;
-    show(index);
+    const target = trigger.dataset.fullSrc;
+    const index = catalog.findIndex(item => item.dataset.fullSrc === target);
+    show(Math.max(0, index));
     dialog.showModal();
   }));
   close?.addEventListener('click', () => dialog?.close());
@@ -278,8 +305,38 @@ if (repeats.length) console.warn(`Project ${project.slug}: repeated visual asset
   next?.addEventListener('click', () => show(active + 1));
   dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
   dialog?.addEventListener('close', () => { if (main) main.removeAttribute('src'); origin?.focus(); });
-  dialog?.addEventListener('keydown', (event) => {
+  dialog?.addEventListener('keydown', event => {
     if (event.key === 'ArrowLeft') { event.preventDefault(); show(active - 1); }
     if (event.key === 'ArrowRight') { event.preventDefault(); show(active + 1); }
   });
+
+  // Restore the original hero slideshow with a thumbnail filmstrip.
+  const gallery = document.querySelector<HTMLElement>('[data-pe-gallery]');
+  const hero = gallery?.querySelector<HTMLImageElement>('[data-pe-hero-img]');
+  const heroTrigger = gallery?.querySelector<HTMLButtonElement>('[data-editorial-image]');
+  const slideCounter = gallery?.querySelector<HTMLElement>('[data-pe-slide-counter]');
+  const thumbs = [...document.querySelectorAll<HTMLButtonElement>('[data-pe-thumb]')];
+  const slides: {src:string;alt:string;caption?:string}[] = gallery?.dataset.peGallery
+    ? JSON.parse(gallery.dataset.peGallery)
+    : [];
+  let current = 0;
+  const setSlide = (index: number) => {
+    if (!hero || !heroTrigger || !slides.length) return;
+    current = (index + slides.length) % slides.length;
+    const visual = slides[current];
+    hero.src = visual.src;
+    hero.alt = visual.alt;
+    heroTrigger.dataset.fullSrc = visual.src;
+    heroTrigger.dataset.fullAlt = visual.alt;
+    heroTrigger.dataset.fullCaption = visual.caption || '';
+    heroTrigger.setAttribute('aria-label', `Ampliar imagen ${current + 1} de ${slides.length}`);
+    if (slideCounter) slideCounter.textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+    thumbs.forEach((thumb,i) => {
+      thumb.classList.toggle('is-active', i === current);
+      thumb.setAttribute('aria-pressed', String(i === current));
+    });
+  };
+  gallery?.querySelector('[data-pe-prev]')?.addEventListener('click', () => setSlide(current - 1));
+  gallery?.querySelector('[data-pe-next]')?.addEventListener('click', () => setSlide(current + 1));
+  thumbs.forEach((thumb, index) => thumb.addEventListener('click', () => setSlide(index)));
 </script>
