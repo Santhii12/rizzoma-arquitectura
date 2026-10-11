@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import CaboSanMiguelArchive from '@/components/CaboSanMiguelArchive.astro';
 import { site } from '@/config/site';
 import { availableProjects, projects } from '@/data/projects';
 
@@ -100,6 +101,8 @@ const schema = [
       <div><p class="rizzoma-case-intro">{project.intro ?? project.statement ?? 'Caso del archivo de Rizzoma Arquitectura.'}</p>
         <dl class="rizzoma-case-facts">
           <div><dt>Disciplina</dt><dd>{project.category}</dd></div>
+          {project.typology && <div><dt>Tipología</dt><dd>{project.typology}</dd></div>}
+          {project.participation && <div><dt>Participación de Rizzoma</dt><dd>{project.participation}</dd></div>}
           {project.slug === 'casa-patio-horizonte' && <div><dt>Tipología</dt><dd>Vivienda</dd></div>}
           {project.location && <div><dt>Ubicación</dt><dd>{project.location}{project.region ? `, ${project.region}`:''}</dd></div>}
           {project.year && <div><dt>Año</dt><dd>{project.year}</dd></div>}
@@ -129,6 +132,7 @@ const schema = [
     {project.sections?.length > 0 && <section class="rizzoma-case-chapters section-pad no-top">
       {project.sections.map((section,i)=><article class="rizzoma-case-chapter"><span>{String(i+2).padStart(2,'0')}</span><h2>{section.title}</h2><p>{section.text}</p></article>)}
     </section>}
+    {project.slug === 'cabo-san-miguel' && <CaboSanMiguelArchive />}
     <section class="rizzoma-case-end section-pad">
       <p class="eyebrow">Arquitectura + Visualización</p>
       <h2>¿Tienes un proyecto en mente?</h2>
