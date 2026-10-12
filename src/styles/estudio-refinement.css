@@ -159,152 +159,156 @@
   font-size: clamp(14px, 1.05vw, 17px);
   line-height: 1.8;
 }
-.rz-estudio .rz-studio-representation {
-  display: grid;
-  grid-template-columns: minmax(0, 1.12fr) minmax(0, .75fr);
-  column-gap: clamp(55px, 8vw, 160px);
-  align-items: start;
-  padding-top: clamp(96px, 10vw, 180px);
-  padding-bottom: clamp(96px, 10vw, 180px);
-  row-gap: clamp(58px, 7vw, 106px);
+/* One integrated visual essay: Studio thinking and one grounded project. */
+.rz-estudio .rz-studio-case {
+  padding-top: clamp(88px, 9vw, 148px);
+  padding-bottom: clamp(92px, 10vw, 166px);
+  background: var(--paper, #f4eee2);
+  min-width: 0;
 }
-.rz-estudio .rz-studio-representation-heading h2 {
-  max-width: 16ch;
-  margin: clamp(20px, 3vw, 43px) 0 0;
+.rz-estudio .rz-studio-case__opening {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, .77fr);
+  column-gap: clamp(44px, 8vw, 140px);
+  align-items: end;
+  margin: 0 0 clamp(69px, 8.5vw, 130px);
+}
+.rz-estudio .rz-studio-case__heading,
+.rz-estudio .rz-studio-case__introduction {
+  min-width: 0;
+}
+.rz-estudio .rz-studio-case__heading h2 {
+  margin: clamp(23px, 3vw, 43px) 0 0;
+  max-width: 17ch;
   font-family: var(--display, Georgia, serif);
-  font-size: clamp(3.2rem, 5.55vw, 6.75rem);
-  line-height: 1.055;
+  font-size: clamp(3.15rem, 5.25vw, 6.5rem);
   font-weight: 400;
+  line-height: 1.07;
   letter-spacing: -.03em;
   text-wrap: balance;
 }
-.rz-estudio .rz-studio-representation-copy {
-  max-width: 56ch;
-  padding-top: clamp(0px, 5vw, 72px);
+.rz-estudio .rz-studio-case__introduction {
+  padding-bottom: 8px;
 }
-.rz-estudio .rz-studio-representation-copy p {
-  margin: 0 0 25px;
-  font-size: clamp(14px, 1.04vw, 17px);
-  line-height: 1.82;
-  color: var(--muted);
-}
-.rz-estudio .rz-studio-representation-copy .rz-studio-representation-lead {
-  color: var(--ink);
-  font-size: clamp(17px, 1.4vw, 22px);
-  line-height: 1.65;
-}
-.rz-estudio .rz-studio-subtle-link {
-  display: inline-flex;
-  margin-top: clamp(10px, 2vw, 26px);
-}
-/* Two actual Rizzoma project views — never styled as a fabricated before/after. */
-.rz-estudio .rz-studio-visual-study {
-  grid-column: 1 / -1;
-  min-width: 0;
-  padding-top: clamp(21px, 3vw, 42px);
-  border-top: 1px solid var(--line);
-}
-.rz-estudio .rz-studio-visual-study-head {
-  display: grid;
-  grid-template-columns: minmax(150px, .4fr) minmax(0, 1fr);
-  gap: clamp(22px, 4.5vw, 72px);
-  align-items: start;
-  margin-bottom: clamp(26px, 3.5vw, 52px);
-}
-.rz-estudio .rz-studio-visual-study-head p:last-child {
+.rz-estudio .rz-studio-case__introduction p {
   max-width: 55ch;
-  margin: 0;
+  margin: 0 0 20px;
   color: var(--muted);
-  font-size: clamp(13px, 1.1vw, 16px);
-  line-height: 1.8;
+  font-size: clamp(13px, 1.05vw, 17px);
+  line-height: 1.82;
 }
-.rz-estudio .rz-studio-visual-pair {
+.rz-estudio .rz-studio-case__introduction .rz-studio-case__lead {
+  color: var(--ink);
+  font-size: clamp(16px, 1.32vw, 21px);
+  line-height: 1.7;
+}
+.rz-estudio .rz-studio-case__introduction .text-link {
+  display: inline-flex;
+  margin-top: 9px;
+}
+.rz-estudio .rz-studio-case__feature {
+  padding-top: clamp(18px, 2vw, 30px);
+  border-top: 1px solid var(--line);
+  min-width: 0;
+}
+.rz-estudio .rz-studio-case__feature-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 32px;
+  flex-wrap: wrap;
+  margin: 0 0 clamp(26px, 3vw, 47px);
+  color: #82745d;
+  font-family: var(--sans, Arial, sans-serif);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  line-height: 1.6;
+}
+.rz-estudio .rz-studio-case__composition {
   display: grid;
-  grid-template-columns: minmax(0, .43fr) minmax(0, .57fr);
-  gap: clamp(19px, 3vw, 54px);
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, .88fr);
+  gap: clamp(28px, 3.8vw, 66px);
   align-items: start;
 }
-.rz-estudio .rz-studio-visual-frame {
+.rz-estudio .rz-studio-case__hero,
+.rz-estudio .rz-studio-case__model {
   min-width: 0;
   margin: 0;
 }
-.rz-estudio .rz-studio-visual-frame--material {
-  margin-top: clamp(48px, 7vw, 112px);
-}
-.rz-estudio .rz-studio-visual-frame img {
+.rz-estudio .rz-studio-case__hero img {
   display: block;
   width: 100%;
   height: auto;
-  background: var(--paper-soft, #e5ded1);
+  aspect-ratio: 4 / 4.5;
   object-fit: cover;
+  object-position: 53% center;
 }
-.rz-estudio .rz-studio-visual-frame--form img {
-  aspect-ratio: 4 / 5;
-  object-position: center;
+.rz-estudio .rz-studio-case__complement {
+  min-width: 0;
 }
-.rz-estudio .rz-studio-visual-frame--material img {
-  aspect-ratio: 5 / 4;
-  object-position: center;
+.rz-estudio .rz-studio-case__model img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  background: #e5dfd5;
 }
-.rz-estudio .rz-studio-visual-frame figcaption {
+.rz-estudio .rz-studio-case__hero figcaption,
+.rz-estudio .rz-studio-case__model figcaption {
   display: flex;
-  flex-wrap: wrap;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 8px 24px;
-  padding-top: 13px;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
+  flex-wrap: wrap;
+  gap: 7px 20px;
+  padding-top: 12px;
+  color: #746b5c;
+  font-family: var(--sans, Arial, sans-serif);
   font-size: 10px;
   font-weight: 500;
-  line-height: 1.6;
+  line-height: 1.65;
   text-transform: uppercase;
-  letter-spacing: .08em;
+  letter-spacing: .075em;
 }
-.rz-estudio .rz-studio-visual-study-footer {
-  max-width: 85ch;
-  margin: clamp(22px, 3vw, 40px) 0 0;
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.7;
+.rz-estudio .rz-studio-case__feature-copy {
+  margin-top: clamp(42px, 5.3vw, 85px);
+  padding-top: clamp(19px, 2.4vw, 34px);
+  border-top: 1px solid var(--line);
 }
-
-.rz-estudio .studio-project-image { height: clamp(380px, 67svh, 840px); }
-.rz-estudio .studio-project-image img {
-  object-position: center 55%;
-}
-.rz-estudio .studio-project-caption {
-  display: grid;
-  grid-template-columns: minmax(165px, .4fr) minmax(0, 1fr);
-  gap: clamp(35px, 6vw, 110px);
-  padding-top: clamp(65px, 7vw, 110px);
-  padding-bottom: clamp(90px, 9vw, 150px);
-}
-.rz-estudio .studio-project-caption .eyebrow {
-  max-width: 24ch;
-  line-height: 1.7;
-}
-.rz-estudio .rz-studio-project-story {
-  max-width: 850px;
-}
-.rz-estudio .rz-studio-project-story h2 {
-  margin: 0 0 clamp(24px, 3vw, 42px);
+.rz-estudio .rz-studio-case__feature-copy h3 {
+  margin: clamp(16px, 2vw, 29px) 0 clamp(19px, 2vw, 31px);
   font-family: var(--display, Georgia, serif);
-  font-size: clamp(3.2rem, 5.4vw, 6.8rem);
-  line-height: 1.08;
+  font-size: clamp(2.9rem, 4vw, 5.2rem);
   font-weight: 400;
-  letter-spacing: -.025em;
+  line-height: 1.09;
+  letter-spacing: -.03em;
+  text-wrap: balance;
 }
-.rz-estudio .rz-studio-project-story p {
+.rz-estudio .rz-studio-case__feature-copy > p:not(.eyebrow) {
   max-width: 51ch;
   margin: 0;
   color: var(--muted);
-  font-size: clamp(15px, 1.13vw, 19px);
-  line-height: 1.78;
+  font-size: clamp(14px, 1.07vw, 17px);
+  line-height: 1.79;
 }
-.rz-estudio .studio-project-caption .rz-studio-project-story .text-link {
+.rz-estudio .rz-studio-case__feature-copy strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+.rz-estudio .rz-studio-case__feature-copy .text-link {
   display: inline-flex;
-  margin-top: clamp(25px, 3vw, 43px);
+  margin-top: clamp(22px, 3vw, 43px);
 }
+.rz-estudio .rz-studio-case__note {
+  margin: clamp(24px, 3.1vw, 45px) 0 0;
+  max-width: 72ch;
+  font-size: 11px;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
 /* The closing section bridges architectural principles with a real inquiry.
    Two measured columns replace the oversize headline and isolated full-width link. */
 .rz-estudio .rz-studio-contact .rz-studio-contact-inner {
@@ -392,7 +396,6 @@
   }
   .rz-estudio .studio-profile-copy .large-copy { font-size: clamp(2rem, 4vw, 3.4rem); }
   .rz-estudio .rz-studio-voice p { font-size: clamp(1.25rem, 2vw, 1.7rem); }
-  .rz-estudio .rz-studio-representation { gap: 50px; }
 }
 @media (max-width: 760px) {
   .rz-estudio .studio-hero { padding-top: 133px; padding-bottom: 45px; }
@@ -405,15 +408,13 @@
   .rz-estudio .studio-portrait { width: min(85%, 440px); }
   .rz-estudio .studio-profile-copy { max-width: 650px; padding-top: 0; }
   .rz-estudio .studio-profile-copy .large-copy { font-size: clamp(2.3rem, 6.4vw, 4rem); }
-  .rz-estudio .rz-studio-section-head,
-  .rz-estudio .rz-studio-representation,
-  .rz-estudio .studio-project-caption { grid-template-columns: 1fr; row-gap: 30px; }
+  .rz-estudio .rz-studio-section-head { grid-template-columns: 1fr; row-gap: 30px; }
   .rz-estudio .rz-studio-principles li { grid-template-columns: 42px minmax(0, 1fr); }
   .rz-estudio .rz-studio-principle-text { grid-template-columns: minmax(125px, .65fr) minmax(0, 1fr); column-gap: 26px; }
-  .rz-estudio .rz-studio-visual-study-head { grid-template-columns: 1fr; gap: 10px; }
-  .rz-estudio .rz-studio-representation-copy { padding-top: 0; }
-  .rz-estudio .rz-studio-representation-heading h2 { font-size: clamp(2.85rem, 7vw, 4.5rem); }
-  .rz-estudio .studio-project-caption .rz-studio-project-story .text-link { grid-column: auto; }
+  .rz-estudio .rz-studio-case__opening { grid-template-columns: 1fr; gap: 25px; margin-bottom: 67px; }
+  .rz-estudio .rz-studio-case__heading h2 { font-size: clamp(2.85rem, 7vw, 4.7rem); }
+  .rz-estudio .rz-studio-case__composition { gap: 28px; }
+  .rz-estudio .rz-studio-case__feature-copy h3 { font-size: clamp(2.6rem, 5.1vw, 3.8rem); }
   .rz-estudio .rz-studio-contact .rz-studio-contact-inner { grid-template-columns: 1fr; gap: 35px; }
   .rz-estudio .rz-studio-contact-copy h2 { max-width: 18ch; font-size: clamp(2.9rem, 6.7vw, 4.65rem); }
   .rz-estudio .rz-studio-contact-next { max-width: 610px; padding-top: 0; }
@@ -428,19 +429,19 @@
   .rz-estudio .rz-studio-principles { grid-template-columns: 1fr; margin-top: 42px; }
   .rz-estudio .rz-studio-principles li { padding-bottom: 28px; }
   .rz-estudio .rz-studio-principle-text { grid-template-columns: 1fr; gap: 13px; }
-  .rz-estudio .rz-studio-visual-pair { grid-template-columns: 1fr; gap: 33px; }
-  .rz-estudio .rz-studio-visual-frame--material { margin-top: 0; }
-  .rz-estudio .rz-studio-visual-frame--form img { aspect-ratio: 4 / 5; }
-  .rz-estudio .rz-studio-visual-frame--material img { aspect-ratio: 4 / 3; }
-  .rz-estudio .rz-studio-representation { row-gap: 43px; }
+  .rz-estudio .rz-studio-case { padding-top: 72px; padding-bottom: 85px; }
+  .rz-estudio .rz-studio-case__opening { gap: 22px; margin-bottom: 49px; }
+  .rz-estudio .rz-studio-case__heading h2 { font-size: clamp(2.65rem, 8.4vw, 4rem); }
+  .rz-estudio .rz-studio-case__composition { grid-template-columns: 1fr; gap: 37px; }
+  .rz-estudio .rz-studio-case__hero img { aspect-ratio: 4 / 3; object-position: center; }
+  .rz-estudio .rz-studio-case__model img { aspect-ratio: 16 / 10; }
+  .rz-estudio .rz-studio-case__feature-copy { margin-top: 30px; }
+  .rz-estudio .rz-studio-case__feature-copy h3 { font-size: clamp(2.8rem, 9vw, 4.1rem); }
   .rz-estudio .rz-studio-section-head h2 { font-size: clamp(2.6rem, 8.6vw, 4rem); }
-  .rz-estudio .rz-studio-representation-heading h2 { font-size: clamp(2.75rem, 8.8vw, 4.15rem); }
-  .rz-estudio .rz-studio-project-story h2 { font-size: clamp(2.8rem, 9.3vw, 4.1rem); }
   .rz-estudio .rz-studio-contact-copy h2 { font-size: clamp(2.7rem, 8.8vw, 4.2rem); }
   .rz-estudio .rz-studio-contact .rz-studio-contact-inner { gap: 26px; padding-top: 70px; padding-bottom: 85px; }
   .rz-estudio .rz-studio-contact-detail { padding-bottom: 27px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .rz-estudio .studio-project-image img { transform: none !important; }
   .rz-estudio .rz-studio-contact-link { transition: none !important; }
 }
