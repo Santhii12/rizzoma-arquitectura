@@ -3,11 +3,12 @@ import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
 import '@/styles/editorial-footer.css';
 
+const { compact = false } = Astro.props;
 const homeAnchor = (id: string) => `${withBase('/') }#${id}`;
 ---
 <footer class="site-footer rz-editorial-footer">
   <div class="rz-footer__inner">
-    <div class="rz-footer__closing">
+    {!compact && <div class="rz-footer__closing">
       <p class="rz-footer__overline">RIZZOMA · ARQUITECTURA Y VISUALIZACIÓN</p>
       <h2>Toda idea merece encontrar su forma.</h2>
       <div class="rz-footer__invitation">
@@ -17,7 +18,7 @@ const homeAnchor = (id: string) => `${withBase('/') }#${id}`;
           <span aria-hidden="true">↗</span>
         </a>
       </div>
-    </div>
+    </div>}
 
     <nav class="rz-footer__nav" aria-label="Navegación del pie de página">
       <div class="rz-footer__nav-group">
