@@ -1,0 +1,59 @@
+name: Import replacement Casa Oquedad cover image
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-casa-oquedad-new-cover.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import-cover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and verify the exact second image provided
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error --retry 3 --connect-timeout 20 --max-time 150 \
+            'https://d2ol7oe51mr4n9.cloudfront.net/user_3JyDbghZNXmeLLpGsUpuxXQddfw/f65348b5-7fa7-4aea-a799-ae038fdcd828.jpg' \
+            -o /tmp/casa-oquedad-new-cover.jpg
+          echo 'a7034cfedb9e49f210d425841d795dd57b7c83d7cb0661df902e38d963a895bd  /tmp/casa-oquedad-new-cover.jpg' | sha256sum --check
+      - name: Optimize the user's image for the project gallery
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m venv /tmp/rizzoma-cover-env
+          /tmp/rizzoma-cover-env/bin/pip install --quiet Pillow
+          /tmp/rizzoma-cover-env/bin/python - <<'PY'
+          from PIL import Image, ImageOps
+          from pathlib import Path
+          source = '/tmp/casa-oquedad-new-cover.jpg'
+          target = Path('public/images/projects/casa-oquedad/exteriores/fachada-principal.webp')
+          target.parent.mkdir(parents=True, exist_ok=True)
+          with Image.open(source) as opened:
+              im = ImageOps.exif_transpose(opened).convert('RGB')
+          assert im.size == (2048, 1529), f'Unexpected image dimensions: {im.size}'
+          im.save(target, 'WEBP', quality=88, method=6)
+          with Image.open(target) as check:
+              assert check.format == 'WEBP' and check.size == (2048,1529)
+          print('Optimized new photo:', target, 'size:', target.stat().st_size)
+          PY
+      - name: Commit replacement photo
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/images/projects/casa-oquedad/exteriores/fachada-principal.webp
+          if git diff --cached --quiet; then
+            echo 'Photo already present.'
+            exit 0
+          fi
+          git commit -m 'Upload new Casa Oquedad primary facade photograph'
+          git pull --rebase origin main
+          git push origin HEAD:main
