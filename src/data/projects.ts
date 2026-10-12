@@ -58,6 +58,9 @@ const patioCover = patioGallery[0];
 const santuarioImage = (category: 'exteriores' | 'interiores' | 'mirada' | 'archivo', filename: string) =>
   withBase(`/images/projects/casa-el-santuario/${category}/${filename}.webp`);
 
+const oquedadImage = (category: 'exteriores' | 'interiores' | 'mirada' | 'archivo', filename: string) =>
+  withBase(`/images/projects/casa-oquedad/${category}/${filename}.webp`);
+
 const caboImage = (name: string) => withBase(`/images/projects/cabo-san-miguel/${name}.webp`);
 const umbralImage = (category: 'principal' | 'ambientes' | 'mirada', filename: string) =>
   withBase(`/images/projects/casa-el-umbral/${category}/${filename}.webp`);
@@ -417,10 +420,49 @@ export const projects: Project[] = [
     available: false
   },
   {
-    slug: 'sune-villa',
-    title: 'Sune Villa',
-    category: 'Exploración arquitectónica',
-    available: false
+    slug: 'casa-oquedad',
+    title: 'Casa Oquedad',
+    category: 'Proyecto residencial',
+    typology: 'Vivienda',
+    cover: oquedadImage('exteriores', 'fachada-atardecer'),
+    coverAlt: 'Vista exterior de Casa Oquedad al atardecer entre árboles, con fachada oscura, madera y grandes ventanas',
+    galleryLabel: 'Exteriores / Arquitectura y paisaje',
+    gallery: [
+      oquedadImage('exteriores', 'fachada-atardecer'),
+      oquedadImage('exteriores', 'acceso-y-volumen'),
+      oquedadImage('exteriores', 'fachada-jardin'),
+      oquedadImage('exteriores', 'terraza-y-piscina')
+    ],
+    statement: 'Volúmenes sobrios, madera y espacios abiertos al paisaje.',
+    intro: 'Casa Oquedad se presenta a través de perspectivas exteriores de una vivienda, imágenes de sus ambientes interiores y láminas de planta y volumetría. Las visualizaciones permiten recorrer sus volúmenes, aperturas al jardín y contrastes entre materiales, luz y vegetación.',
+    closingText: 'Si tienes una vivienda por desarrollar o un proyecto que necesitas visualizar, podemos conversar sobre sus necesidades, referencias y el alcance del trabajo.',
+    tour: [{
+      title: 'Espacios interiores',
+      description: 'Vistas de la sala, cocina, dormitorios y baño, con diferentes atmósferas y entradas de luz natural.',
+      display: 'gallery',
+      images: [
+        { src: oquedadImage('interiores', 'sala-con-ventana-circular'), alt: "Sala con acabados de madera, chimenea, sofás y una ventana circular hacia la vegetación", caption: "Sala / Ventana al paisaje" },
+        { src: oquedadImage('interiores', 'cocina-pasillo'), alt: "Cocina longitudinal con isla, revestimientos de madera, luminarias colgantes y luz natural", caption: "Cocina / Recorrido interior" },
+        { src: oquedadImage('interiores', 'dormitorio-oscuro'), alt: "Dormitorio en tonos oscuros y madera con iluminación cálida y ventana lateral", caption: "Dormitorio / Atmósfera" },
+        { src: oquedadImage('interiores', 'dormitorio-ventana-circular'), alt: "Dormitorio con cama central, mobiliario cálido y ventana circular hacia el exterior", caption: "Dormitorio / Relación con el exterior" },
+        { src: oquedadImage('interiores', 'bano-spa'), alt: "Baño con madera, piedra, ducha acristalada y mosaicos oscuros", caption: "Baño / Piedra y madera" }
+      ]
+    }],
+    sections: [
+      { title: "Cocina y espacio cotidiano", text: "La perspectiva de la isla permite observar la organización del mobiliario, las superficies de trabajo y la continuidad de los revestimientos de madera.", image: { src: oquedadImage('mirada', 'cocina-isla'), alt: "Cocina con isla central, sillas claras, carpintería de madera y una ventana hacia el exterior", caption: "Cocina / Escala y material" } },
+      { title: "Luz y atmósfera", text: "La luz natural atraviesa el baño y acentúa el contraste entre superficies claras, madera y vegetación.", image: { src: oquedadImage('mirada', 'luz-en-bano'), alt: "Baño con bañera blanca, vegetación, ducha acristalada y luz natural proyectada sobre los acabados", caption: "Baño / Luz natural" } },
+      { title: "Materialidad interior", text: "El encuentro entre mosaicos verdes, madera y luz localizada permite observar la textura y el tono de los materiales.", image: { src: oquedadImage('mirada', 'materialidad-bano'), alt: "Baño con mueble de madera, espejos y revestimiento de mosaicos verdes oscuros", caption: "Baño / Texturas y contrastes" } }
+    ],
+    archive: [{
+      title: 'Planta y exploraciones',
+      description: 'Láminas de organización espacial y volumetría. No se presentan como fases de diseño ni como resultados construidos.',
+      images: [
+        { src: oquedadImage('archivo', 'planta'), alt: "Planta arquitectónica de la vivienda con distribución de ambientes y espacios exteriores", caption: "Planta / Distribución" },
+        { src: oquedadImage('archivo', 'distribucion-volumetrica'), alt: "Vista axonométrica de Casa Oquedad con distribución interior y espacios abiertos", caption: "Modelo / Organización espacial" },
+        { src: oquedadImage('archivo', 'modelo-emplazamiento'), alt: "Modelo axonométrico blanco de una vivienda sobre una plataforma de terreno", caption: "Volumetría / Terreno" }
+      ]
+    }],
+    available: true
   }
 ];
 
