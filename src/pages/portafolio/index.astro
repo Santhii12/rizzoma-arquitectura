@@ -1,10 +1,10 @@
 ---
 import PortfolioLayout from '@/layouts/PortfolioLayout.astro';
-import { projects } from '@/data/projects';
+import { availableProjects } from '@/data/projects';
 import { withBase } from '@/utils/paths';
 import '@/styles/portfolio-cinematic.css';
 
-const cards = projects.filter((p) => p.slug !== 'el-refugio');
+const cards = availableProjects;
 ---
 <PortfolioLayout title="Portafolio | Rizzoma Arquitectura" description="Obras seleccionadas de arquitectura, interiores y visualización de Rizzoma Arquitectura.">
   <main class="rz-portfolio" id="portfolio-space">
