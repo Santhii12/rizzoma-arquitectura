@@ -48,23 +48,13 @@ const cards = availableProjects;
         <div class="rz-card-grid">
           {cards.map((project, index) => (
             <article class={`rz-project-card rz-card-${index + 1}`} data-cinema-card data-index={index}>
-              {project.available ? (
-                <a class="rz-project-link" href={withBase(`/proyectos/${project.slug}/`)} aria-label={`Abrir proyecto ${project.title}`}>
-                  <div class="rz-project-image">
-                    {project.cover ? <img src={project.cover} alt={`Portada de ${project.title}`} loading={index < 2 ? 'eager' : 'lazy'} decoding="async" /> : <div class="rz-cover-placeholder"><span>R / A</span></div>}
-                    <span class="rz-image-arrow" aria-hidden="true">↗</span>
-                  </div>
-                  <div class="rz-card-caption"><div><h2>{project.title}</h2><p class="rz-card-meta">{project.year && <span>{project.year}</span>}<span>{project.category}</span></p></div><span aria-hidden="true">↗</span></div>
-                </a>
-              ) : (
-                <button type="button" class="rz-project-link rz-project-button" data-archive-open data-title={project.title} data-category={project.category} data-year={project.year ?? ''} data-location={[project.location, project.region].filter(Boolean).join(', ')} aria-label={`Ver datos disponibles de ${project.title}`}>
-                  <div class="rz-project-image rz-project-image--pending">
-                    {project.cover ? <img src={project.cover} alt={`Portada de ${project.title}`} loading="lazy" decoding="async" /> : <div class="rz-cover-placeholder"><span>R / A</span></div>}
-                    <span class="rz-image-arrow" aria-hidden="true">↗</span>
-                  </div>
-                  <div class="rz-card-caption"><div><h2>{project.title}</h2><p class="rz-card-meta">{project.year && <span>{project.year}</span>}<span>{project.category}</span></p></div><span aria-hidden="true">↗</span></div>
-                </button>
-              )}
+              <a class="rz-project-link" href={withBase(`/proyectos/${project.slug}/`)} aria-label={`Abrir proyecto ${project.title}`}>
+                <div class="rz-project-image">
+                  {project.cover && <img src={project.cover} alt={project.coverAlt ?? `Vista de ${project.title}`} loading={index < 2 ? 'eager' : 'lazy'} decoding="async" />}
+                  <span class="rz-image-arrow" aria-hidden="true">↗</span>
+                </div>
+                <div class="rz-card-caption"><div><h2>{project.title}</h2><p class="rz-card-meta">{project.year && <span>{project.year}</span>}<span>{project.category}</span></p></div><span aria-hidden="true">↗</span></div>
+              </a>
             </article>
           ))}
         </div>
