@@ -74,7 +74,7 @@ export const projects: Project[] = [
     location: 'Guatapé',
     region: 'Antioquia',
     typology: 'Edificio de vivienda',
-    participation: 'Visualización comercial y diseño de fachada',
+    participation: 'Modelado 3D, diseño de fachada y visualización comercial',
     cover: caboImage('exteriores-04'),
     coverAlt: 'Cabo San Miguel, edificio de vivienda en Guatapé presentado al atardecer frente al embalse',
     gallery: [
@@ -89,7 +89,7 @@ export const projects: Project[] = [
     galleryLabel: 'Exteriores y fachada',
     statement: 'Un edificio de vivienda en relación con el paisaje de Guatapé.',
     closingText: 'Si buscas desarrollar la fachada de un proyecto o comunicar su propuesta mediante visualizaciones arquitectónicas, conversemos sobre el alcance y el material disponible.',
-    intro: 'Cabo San Miguel es un edificio de vivienda en Guatapé, Antioquia. El trabajo de Rizzoma comprende el diseño de fachada y la visualización comercial; no el diseño integral del edificio.',
+    intro: 'Cabo San Miguel es un edificio de vivienda en Guatapé, Antioquia. Rizzoma desarrolló el modelado 3D, el diseño de fachada y la visualización comercial del edificio; el diseño arquitectónico integral no corresponde al estudio.',
     tour: [
       {
         title: 'Espacios interiores',
@@ -143,14 +143,14 @@ export const projects: Project[] = [
     location: 'San Vicente de Ferrer',
     region: 'Antioquia',
     typology: 'Vivienda',
-    participation: 'Diseño arquitectónico',
+    participation: 'Diseño arquitectónico, modelado 3D, renders y dibujos',
     cover: patioCover,
     coverAlt: 'Vista exterior de Casa Patio Horizonte, una vivienda de volúmenes horizontales integrada al paisaje',
     gallery: patioGallery,
     galleryLabel: 'Exteriores y arquitectura',
     statement: 'Habitar entre el interior y el paisaje.',
     closingText: 'Si tienes un lugar por habitar o una idea de vivienda por desarrollar, conversemos sobre sus necesidades, el paisaje y las posibilidades del proyecto.',
-    intro: 'Una vivienda concebida para diluir los límites entre habitar y contemplar. La arquitectura se abre al territorio y convierte las vistas en parte esencial de la experiencia cotidiana.',
+    intro: 'Diseñada y representada por Juan José Quintero Tobón desde Rizzoma, Casa Patio Horizonte explora la continuidad entre habitar y contemplar. Patios, aperturas y terrazas vinculan los espacios de la vivienda con el territorio. El estudio realizó el diseño arquitectónico, el modelado, las visualizaciones y los dibujos del proyecto.',
     tour: [
       {
         title: 'Espacios interiores',
@@ -237,6 +237,7 @@ export const projects: Project[] = [
     category: 'Interiorismo',
     year: '2025',
     typology: 'Vivienda',
+    participation: 'Diseño de interiores, modelado 3D, renders y dibujos',
     cover: umbralImage('principal', 'sala-integrada'),
     coverAlt: 'Sala de Casa El Umbral, con sofá claro, cocina al fondo, escalera de madera y luz natural',
     galleryLabel: 'Interiores / Espacios de la vivienda',
@@ -248,7 +249,7 @@ export const projects: Project[] = [
       umbralImage('principal', 'bano')
     ],
     statement: 'Interiores en los que la luz y los materiales construyen atmósferas distintas.',
-    intro: 'Casa El Umbral reúne visualizaciones de espacios interiores residenciales: sala, cocina, dormitorios, lugares de trabajo y bienestar. Las imágenes permiten observar las relaciones entre el mobiliario, la entrada de luz natural y las texturas de cada ambiente.',
+    intro: 'Casa El Umbral es un proyecto residencial de diseño interior desarrollado por Juan José Quintero Tobón en Rizzoma. El diseño, modelado, renders y dibujos exploran salas, cocina, dormitorios y espacios de trabajo y bienestar, con especial atención a la luz, el mobiliario y las texturas.'
     closingText: 'Si tienes un espacio interior que necesitas desarrollar o visualizar, podemos conversar sobre sus usos, referencias y el alcance del trabajo.',
     tour: [
       {
@@ -315,6 +316,7 @@ export const projects: Project[] = [
     title: 'Casa El Santuario',
     category: 'Diseño arquitectónico',
     typology: 'Vivienda',
+    participation: 'Diseño arquitectónico, modelado 3D, renders y dibujos',
     cover: santuarioImage('exteriores', 'fachada-panoramica'),
     coverAlt: 'Visualización exterior de Casa El Santuario entre vegetación, con fachadas de ladrillo, vidrio y una cubierta inclinada',
     galleryLabel: 'Exteriores / Arquitectura y entorno',
@@ -325,7 +327,7 @@ export const projects: Project[] = [
       santuarioImage('exteriores', 'volumen-entre-arboles')
     ],
     statement: 'Una lectura de la vivienda a través de sus espacios, la luz y el paisaje.',
-    intro: 'El archivo visual de Casa El Santuario reúne perspectivas exteriores e interiores de una vivienda rodeada de vegetación. Sus imágenes permiten observar diferentes tratamientos de fachada, espacios de doble altura, relaciones visuales con el entorno y la presencia de materiales cálidos.',
+    intro: 'Casa El Santuario es una propuesta de vivienda diseñada y representada por Juan José Quintero Tobón desde Rizzoma. Sus dibujos, modelos y renders documentan la composición de fachadas, la doble altura, las relaciones entre ambientes y el encuentro de la arquitectura con la vegetación.'
     closingText: 'Si tienes una idea de vivienda que quieres desarrollar o representar, podemos conversar sobre el lugar, las necesidades y el alcance del proyecto.',
     tour: [
       {
@@ -413,8 +415,9 @@ export const projects: Project[] = [
   {
     slug: 'casa-oquedad',
     title: 'Casa Oquedad',
-    category: 'Proyecto residencial',
+    category: 'Diseño arquitectónico',
     typology: 'Vivienda',
+    participation: 'Diseño arquitectónico, modelado 3D, renders y dibujos',
     cover: oquedadImage('exteriores', 'fachada-atardecer'),
     coverAlt: 'Vista exterior de Casa Oquedad al atardecer entre árboles, con fachada oscura, madera y grandes ventanas',
     galleryLabel: 'Exteriores / Arquitectura y paisaje',
@@ -425,7 +428,7 @@ export const projects: Project[] = [
       oquedadImage('exteriores', 'terraza-y-piscina')
     ],
     statement: 'Volúmenes sobrios, madera y espacios abiertos al paisaje.',
-    intro: 'Casa Oquedad se presenta a través de perspectivas exteriores de una vivienda, imágenes de sus ambientes interiores y láminas de planta y volumetría. Las visualizaciones permiten recorrer sus volúmenes, aperturas al jardín y contrastes entre materiales, luz y vegetación.',
+    intro: 'Casa Oquedad es un proyecto de vivienda desarrollado por Juan José Quintero Tobón en Rizzoma: diseño arquitectónico, modelado, dibujos y renders. Las vistas exteriores e interiores muestran sus volúmenes, la conexión con el jardín y el contraste entre materiales, luz y vegetación.'
     closingText: 'Si tienes una vivienda por desarrollar o un proyecto que necesitas visualizar, podemos conversar sobre sus necesidades, referencias y el alcance del trabajo.',
     tour: [{
       title: 'Espacios interiores',
