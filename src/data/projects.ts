@@ -164,12 +164,15 @@ export const projects: Project[] = [
     gallery: patioGallery,
     galleryLabel: 'Exteriores y arquitectura',
     statement: 'Habitar entre el interior y el paisaje.',
-    closingText: 'Si tienes un lugar por habitar o una idea de vivienda por desarrollar, conversemos sobre sus necesidades, el paisaje y las posibilidades del proyecto.',
-    intro: 'Diseñada y representada por Juan José Quintero Tobón desde Rizzoma, Casa Patio Horizonte explora la continuidad entre habitar y contemplar. Patios, aperturas y terrazas vinculan los espacios de la vivienda con el territorio. El estudio realizó el diseño arquitectónico, el modelado, las visualizaciones y los dibujos del proyecto.',
+    closingEyebrow: 'Rizzoma / Arquitectura + visualización',
+    closingText: 'Si tienes una idea de vivienda o un lugar por habitar, conversemos sobre sus necesidades, su relación con el entorno y las posibilidades de desarrollar una propuesta arquitectónica.',
+    intro: 'Casa Patio Horizonte es una propuesta de vivienda desarrollada por Juan José Quintero Tobón desde Rizzoma. El proyecto explora cómo los patios, las aperturas y las terrazas pueden construir una relación continua entre los espacios habitables y el paisaje.',
+    introDetail: 'A través del diseño arquitectónico, el modelado tridimensional, las visualizaciones y los dibujos, se desarrolló una propuesta que busca integrar la vida cotidiana con la luz, la vegetación y las condiciones del lugar.',
+    tourIntro: 'Un recorrido por los espacios y las perspectivas de Casa Patio Horizonte. Las imágenes permiten reconocer la propuesta desde su relación con el entorno hasta los ambientes que dan forma a la vida cotidiana.',
     tour: [
       {
         title: 'Espacios interiores',
-        description: 'Imágenes de los ambientes de la vivienda: la sala, la cocina-comedor y el dormitorio, donde la luz y los materiales contribuyen a su atmósfera.',
+        description: 'La sala, la cocina-comedor y el dormitorio muestran distintas formas de experimentar la vivienda. La iluminación, las texturas y las aperturas contribuyen a construir ambientes conectados con el exterior, sin perder su intimidad.',
         display: 'gallery',
         images: [
           {
@@ -192,8 +195,8 @@ export const projects: Project[] = [
     ],
     sections: [
       {
-        title: 'Integración con el paisaje',
-        text: 'Las visuales y las condiciones naturales del lugar orientan la organización de los espacios. Las aperturas estratégicas incorporan luz, vegetación y paisaje al interior.',
+        title: 'La casa y el paisaje',
+        text: 'La relación con el entorno orienta la manera de abrir y organizar la vivienda. Esta vista muestra cómo la fachada, los ventanales y la vegetación acercan los espacios de la casa al exterior.',
         image: {
           src: patioImage('exteriores', 'exterior-03'),
           alt: 'Vista cercana de la fachada de Casa Patio Horizonte con materiales naturales y vegetación',
@@ -201,8 +204,8 @@ export const projects: Project[] = [
         }
       },
       {
-        title: 'Continuidad espacial',
-        text: 'Patios, terrazas y aperturas construyen una transición gradual entre interior y exterior. Los espacios se conectan y se extienden hacia el paisaje.',
+        title: 'Una transición entre espacios',
+        text: 'La terraza, los ventanales y la piscina crean un espacio intermedio para estar al aire libre. Desde esta perspectiva, el interior se abre a las áreas exteriores y amplía las maneras de habitar la vivienda.',
         image: {
           src: patioImage('exteriores', 'exterior-07'),
           alt: 'Vista de Casa Patio Horizonte desde el jardín, con terraza, piscina y ventanales que conectan la vivienda con el exterior',
@@ -210,19 +213,20 @@ export const projects: Project[] = [
         }
       },
       {
-        title: 'Materialidad honesta',
-        text: 'Los volúmenes horizontales y los materiales expresivos construyen una arquitectura sobria y atemporal. La materialidad conserva su carácter y refuerza la relación de la vivienda con el lugar.',
+        title: 'La expresión de la materia',
+        text: 'La madera del techo, el revestimiento de piedra y las amplias superficies acristaladas aparecen juntos en esta vista desde el interior. La luz del atardecer destaca sus texturas y enmarca el paisaje lejano.',
         image: {
           src: patioImage('exteriores', 'exterior-04'),
-          alt: 'Detalle de Casa Patio Horizonte con aleros de madera, transparencias y luz del atardecer',
-          caption: 'Materia y atmósfera'
+          alt: 'Vista interior de Casa Patio Horizonte con techo de madera, muro revestido en piedra, ventanales y paisaje lejano al atardecer',
+          caption: 'Materialidad / Vista desde el interior'
         }
       }
     ],
+    archiveIntro: 'Además de las imágenes finales, los dibujos y esquemas permiten comprender cómo se organiza la vivienda y cómo se relacionan sus volúmenes y espacios.',
     archive: [
       {
         title: 'Planos y exploraciones',
-        description: 'Una planta arquitectónica, un esquema de organización de espacios y estudios volumétricos del proyecto.',
+        description: 'La planta arquitectónica, el esquema de organización espacial y los estudios volumétricos ofrecen distintas lecturas del proyecto: desde la distribución de los ambientes hasta la composición general de la vivienda.',
         images: [
           {
             src: patioImage('archivo', 'planta-arquitectonica'),
