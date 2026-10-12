@@ -267,13 +267,16 @@ export const projects: Project[] = [
       umbralImage('principal', 'espacio-de-trabajo'),
       umbralImage('principal', 'bano')
     ],
-    statement: 'Interiores en los que la luz y los materiales construyen atmósferas distintas.',
-    intro: 'Casa El Umbral es un proyecto residencial de diseño interior desarrollado por Juan José Quintero Tobón en Rizzoma. El diseño, modelado, renders y dibujos exploran salas, cocina, dormitorios y espacios de trabajo y bienestar, con especial atención a la luz, el mobiliario y las texturas.',
-    closingText: 'Si tienes un espacio interior que necesitas desarrollar o visualizar, podemos conversar sobre sus usos, referencias y el alcance del trabajo.',
+    statement: 'Convivir, trabajar y descansar en una misma vivienda.',
+    intro: 'Casa El Umbral es una propuesta de diseño interior residencial desarrollada por Juan José Quintero Tobón desde Rizzoma. La sala se conecta visualmente con la cocina y la escalera; los dormitorios, el estudio, el baño y el área de ejercicio responden a otros usos de la vida cotidiana.',
+    introDetail: 'El trabajo de Rizzoma comprende el diseño de interiores, el modelado tridimensional, los renders y los dibujos. Los distintos ambientes comparten una presencia marcada de madera, superficies de tonos claros y detalles textiles, con tratamientos particulares según la actividad de cada espacio.',
+    closingEyebrow: 'Rizzoma / Arquitectura + visualización',
+    closingText: 'Conversemos sobre tu proyecto, sus necesidades y las posibilidades de comunicarlo a través de la arquitectura y la visualización.',
+    tourIntro: 'Las perspectivas principales presentan los distintos usos de la vivienda, desde la sala integrada con la cocina y la escalera hasta los ambientes más personales. La galería siguiente se detiene en una sala junto al ventanal y en diferentes vistas del dormitorio.',
     tour: [
       {
-        title: 'Ambientes para habitar',
-        description: 'Otras perspectivas de la sala y de los dormitorios, con distintas condiciones de iluminación y materialidad.',
+        title: 'Sala y dormitorio',
+        description: 'La primera imagen muestra una sala abierta hacia el exterior. Las siguientes se acercan al dormitorio desde varios ángulos, destacando el trabajo de carpintería, las texturas del cabecero y la luz que entra por la ventana.',
         display: 'gallery',
         images: [
           {
@@ -301,8 +304,8 @@ export const projects: Project[] = [
     ],
     sections: [
       {
-        title: 'Luz y atmósfera',
-        text: 'Las entradas de luz natural permiten apreciar los acabados y las proporciones de los espacios. En el ambiente de trabajo, la luz lateral cambia la lectura de los muebles y las superficies.',
+        title: 'Un espacio para concentrarse',
+        text: 'En el estudio, una mesa continua organiza dos puestos de trabajo junto a un ventanal. La carpintería, las superficies minerales y la entrada lateral de luz dan forma a un ambiente de uso cotidiano sin sobrecargarlo.',
         image: {
           src: umbralImage('mirada', 'oficina-luminosa'),
           alt: 'Oficina con dos puestos de trabajo junto a un ventanal y luz cálida sobre las superficies',
@@ -310,8 +313,8 @@ export const projects: Project[] = [
         }
       },
       {
-        title: 'Materiales y detalles',
-        text: 'Los revestimientos, la madera y los mosaicos verdes aportan contraste y textura. La visualización de este baño permite examinar esas relaciones a escala del interior.',
+        title: 'El detalle a escala cotidiana',
+        text: 'En el baño, una franja de mosaico verde contrasta con el mueble de madera, las superficies claras y el espejo circular. La imagen permite apreciar cómo los encuentros entre revestimientos definen el carácter de una estancia pequeña.',
         image: {
           src: umbralImage('mirada', 'bano-mosaicos'),
           alt: 'Baño con mosaicos verdes, espejo circular, mueble de madera y luz cálida',
@@ -319,8 +322,8 @@ export const projects: Project[] = [
         }
       },
       {
-        title: 'Distintas maneras de usar el espacio',
-        text: 'El archivo también presenta un espacio destinado al ejercicio. Su representación permite observar cómo el equipamiento y la luz se integran a un ambiente residencial.',
+        title: 'Lugar para el movimiento',
+        text: 'La zona de ejercicio incorpora una caminadora, pesas y equipamiento de entrenamiento sobre un suelo de madera. Los ventanales y las lamas verticales acercan la vista al exterior y equilibran la presencia de los aparatos.',
         image: {
           src: umbralImage('mirada', 'gimnasio'),
           alt: 'Gimnasio residencial con caminadora, pesas, madera y entrada de luz natural',
