@@ -111,7 +111,7 @@ form?.addEventListener('submit', (event) => {
   const ubicacion = cleanSingleLine(data.get('ubicacion'), 120);
   const mensaje = cleanMultiline(data.get('mensaje'), 1800);
 
-  if (nombre.length < 2 || mensaje.length < 10 || !isValidEmail(email) || !isValidPhone(telefono) || !allowedServices.has(servicio)) {
+  if (nombre.length < 2 || mensaje.length < 10 || (email !== '' && !isValidEmail(email)) || !isValidPhone(telefono) || !allowedServices.has(servicio)) {
     if (note) note.textContent = 'Revisa los datos del formulario antes de continuar.';
     return;
   }
@@ -120,7 +120,7 @@ form?.addEventListener('submit', (event) => {
     'Hola, Juan José. Quiero conversar con Rizzoma sobre un proyecto.',
     '',
     `Nombre: ${nombre}`,
-    `Correo: ${email}`,
+    email ? `Correo: ${email}` : '',
     telefono ? `Teléfono: ${telefono}` : '',
     `Servicio: ${servicio}`,
     ubicacion ? `Ubicación: ${ubicacion}` : '',
