@@ -1,0 +1,79 @@
+name: Import Casa El Santuario project images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-casa-el-santuario.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Retrieve user-provided Casa El Santuario archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error --retry 3 --connect-timeout 20 --max-time 180 \
+            'https://d2ol7oe51mr4n9.cloudfront.net/user_3JyDbghZNXmeLLpGsUpuxXQddfw/eaa425f2-ece8-4932-afd9-428c9608f0ae.zip' \
+            -o /tmp/santuario.zip
+          echo '8dc8dd2ea46df93e613a62f54c2aa8a9a01a58560a217ba28a8534d8eaa9f13e  /tmp/santuario.zip' | sha256sum --check
+      - name: Create optimized local WebP image assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m venv /tmp/rzm-image-env
+          /tmp/rzm-image-env/bin/pip install --quiet Pillow
+          /tmp/rzm-image-env/bin/python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps
+          import zipfile,io
+          mapping={
+            '05.png':'mirada/volumen-y-entorno.webp',
+            '1_Mesa de trabajo 1.png':'archivo/modelo-general.webp',
+            '2_Mesa de trabajo 1.png':'archivo/planta.webp',
+            '3-02.png':'archivo/estudio-volumetrico.webp',
+            '3_Mesa de trabajo 1.png':'archivo/emplazamiento.webp',
+            'Casa moderna entre naturaleza y luz cálida.jpg':'exteriores/fachada-en-ladrillo.webp',
+            'Casa moderna entre vegetación exuberante.jpg':'exteriores/volumen-entre-arboles.webp',
+            'ChatGPT Image 24 ago 2026, 06_13_53 p.m..png':'interiores/vestibulo-cocina.webp',
+            'ChatGPT Image Jul 20, 2026, 06_21_33 PM.png':'mirada/escalera-y-luz.webp',
+            'ChatGPT Image Jul 20, 2026, 06_30_58 PM.jpg':'interiores/comedor.webp',
+            'Dormitorio minimalista con vistas a la montaña.jpg':'interiores/dormitorio.webp',
+            'Salón moderno con vistas al bosque.jpg':'interiores/sala-panoramica.webp',
+            'WhatsApp Image 2026-07-20 at 18.09.10.jpeg':'exteriores/fachada-panoramica.webp',
+            'WhatsApp Image 2026-07-20 at 18.09.25.jpeg':'mirada/sala-doble-altura.webp',
+            'WhatsApp Image 2026-07-20 at 18.10.05.jpeg':'exteriores/fachada-entre-vegetacion.webp',
+          }
+          root=Path('public/images/projects/casa-el-santuario')
+          with zipfile.ZipFile('/tmp/santuario.zip') as z:
+            actual={Path(name).name for name in z.namelist() if name.lower().endswith(('.jpg','.jpeg','.png','.webp'))}
+            assert actual==set(mapping), f'Unexpected archive files: {actual ^ set(mapping)}'
+            for name,path in mapping.items():
+              with z.open('santuario/'+name) as f:
+                img=ImageOps.exif_transpose(Image.open(io.BytesIO(f.read()))).convert('RGB')
+              width=2400 if path.startswith('archivo/') else 1920
+              img.thumbnail((width, 2400),Image.Resampling.LANCZOS)
+              target=root/path
+              target.parent.mkdir(parents=True,exist_ok=True)
+              img.save(target,'WEBP',quality=87,method=6)
+              with Image.open(target) as check:
+                assert check.format=='WEBP' and check.width>700
+              print(target, img.size, target.stat().st_size)
+          print('Verified 15 real input files and all generated WebP assets')
+          PY
+      - name: Commit images
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/images/projects/casa-el-santuario/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Import 15 Casa El Santuario project images'
+          git push
