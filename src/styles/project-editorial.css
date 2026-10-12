@@ -899,3 +899,15 @@
 .rz-pe__ending-navigation > span {
   font-size: clamp(11px, .82vw, 12px);
 }
+
+/* Optional second paragraph for projects with a more complete scope statement.
+   Only Cabo San Miguel supplies introDetail; other project layouts stay intact. */
+.rz-pe__overview-lead--with-detail {
+  margin-bottom: clamp(19px, 2.3vw, 34px);
+}
+.rz-pe__overview-context {
+  max-width: 57ch;
+  margin: 0 0 clamp(36px, 4vw, 62px);
+  color: #ebe2cf;
+  font: 400 clamp(14px, 1.04vw, 17px)/1.82 var(--sans, Arial, sans-serif);
+}
