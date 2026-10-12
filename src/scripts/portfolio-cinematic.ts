@@ -3,6 +3,7 @@
 const section = document.querySelector<HTMLElement>('[data-cinema-scroll]');
 const cards = Array.from(section?.querySelectorAll<HTMLElement>('[data-cinema-card]') ?? []);
 const counter = section?.querySelector<HTMLElement>('[data-cinema-counter]');
+const projectIndexLinks = Array.from(section?.querySelectorAll<HTMLAnchorElement>('[data-cinema-jump]') ?? []);
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const desktop = matchMedia('(min-width: 901px)');
 const clamp = (n:number,min=0,max=1)=>Math.min(max,Math.max(min,n));
@@ -39,6 +40,7 @@ function paint(){
   if(closest!==currentIndex){
     currentIndex=closest;
     if(counter)counter.textContent=`${String(closest+1).padStart(2,'0')} / ${String(cards.length).padStart(2,'0')}`;
+    projectIndexLinks.forEach((link, i) => { if (i === closest) link.setAttribute('aria-current', 'true'); else link.removeAttribute('aria-current'); });
   }
 }
 function draw(){if(active&&!frame)frame=requestAnimationFrame(paint)}
@@ -67,3 +69,28 @@ if(section&&cards.length){
   desktop.addEventListener('change',setup);
   reduceMotion.addEventListener('change',setup);
 }
+
+// On large screens the discreet project index moves the film strip to the
+// desired frame. On mobile/reduced-motion each link opens its project normally.
+projectIndexLinks.forEach((link) => {
+  link.addEventListener('click', (event) => {
+    if (!active || !section || cards.length < 2) return;
+    const index = Number(link.dataset.cinemaJump);
+    if (!Number.isInteger(index) || index < 0 || index >= cards.length) return;
+    event.preventDefault();
+    const rect = section.getBoundingClientRect();
+    const distance = Math.max(1, section.offsetHeight - innerHeight);
+    const target = scrollY + rect.top + distance * index / (cards.length - 1);
+    scrollTo({ top: target, behavior: 'smooth' });
+  });
+  link.addEventListener('keydown', (event) => {
+    if (!active || !['ArrowRight', 'ArrowLeft'].includes(event.key)) return;
+    const current = projectIndexLinks.indexOf(link);
+    const next = event.key === 'ArrowRight' ? current + 1 : current - 1;
+    const destination = projectIndexLinks[next];
+    if (!destination) return;
+    event.preventDefault();
+    destination.focus();
+    destination.click();
+  });
+});
