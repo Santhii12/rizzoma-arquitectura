@@ -611,3 +611,40 @@
   .rz-services-guide__contact-link,
   .rz-services-guide__chapter-action { transition: none !important; }
 }
+
+/* Ground the primary commercial service in Cabo San Miguel's architecture. */
+.rz-services-guide__chapter--featured .rz-services-guide__media img {
+  object-position: 70% center;
+}
+.rz-services-guide__case-link {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  gap: 5px 14px;
+  max-width: 100%;
+  margin: clamp(23px,3vw,39px) 0 clamp(18px,2vw,28px);
+  border-top: 1px solid rgba(92,87,73,.28);
+  border-bottom: 1px solid rgba(92,87,73,.28);
+  padding: 14px 0 16px;
+  color: #696452;
+  text-decoration: none;
+}
+.rz-services-guide__case-link span:first-child {
+  grid-column: 1 / -1;
+  color: inherit;
+  font: 500 11px/1.5 var(--sans,Arial,sans-serif);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+.rz-services-guide__case-link strong {
+  font: 500 clamp(13px,1.03vw,16px)/1.5 var(--sans,Arial,sans-serif);
+}
+.rz-services-guide__case-link span:last-child { align-self: center; }
+.rz-services-guide__case-link:hover, .rz-services-guide__case-link:focus-visible { color: #28291f; }
+.rz-services-guide__case-link:focus-visible { outline: 2px solid #bc9d64; outline-offset: 4px; }
+.rz-services-guide__chapter--featured .rz-services-guide__case-link {
+  color: #ead8b8;
+  border-color: rgba(243,238,228,.28);
+}
+.rz-services-guide__chapter--featured .rz-services-guide__case-link:hover,
+.rz-services-guide__chapter--featured .rz-services-guide__case-link:focus-visible { color: #fffaf0; }
+.rz-services-guide__media figcaption { font-size: 11px; }
