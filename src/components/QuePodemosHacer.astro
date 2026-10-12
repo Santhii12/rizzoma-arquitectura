@@ -19,6 +19,8 @@ const servicios = [
     imagen: disenoImage,
     alt: 'Arquitectura residencial contemporánea de Casa Patio Horizonte, con atención al espacio y la materialidad',
     pie: 'Casa Patio Horizonte · Archivo de Rizzoma',
+    proyectoSlug: 'casa-patio-horizonte',
+    proyectoTexto: 'Explorar Casa Patio Horizonte',
   },
   {
     numero: '03',
@@ -27,8 +29,10 @@ const servicios = [
     descripcion: 'Replanteamos espacios para mejorar su funcionalidad, atmósfera y materialidad, reconociendo el potencial de lo que ya existe.',
     prestaciones: ['Remodelaciones residenciales.', 'Diseño interior.', 'Actualización de espacios comerciales.'],
     imagen: remodelacionImage,
-    alt: 'Referencia arquitectónica de Casa Patio Horizonte para ilustrar la relación entre espacio y materialidad; no es una remodelación',
-    pie: 'Referencia de materialidad · Casa Patio Horizonte',
+    alt: 'Diseño interior de Casa El Umbral; referencia de intervención espacial, no documentación de una remodelación',
+    pie: 'Diseño interior · Casa El Umbral (no es una remodelación)',
+    proyectoSlug: 'casa-el-umbral',
+    proyectoTexto: 'Explorar Casa El Umbral',
   }
 ];
 ---
@@ -78,6 +82,7 @@ const servicios = [
           <li>Imágenes 360°.</li>
           <li>Modelado y apoyo visual para proyectos arquitectónicos.</li>
         </ul>
+        <a class="rizzoma-offer__case-link" href={withBase('/proyectos/casa-patio-horizonte/')}>Explorar Casa Patio Horizonte <span aria-hidden="true">↗</span></a>
       </div>
     </article>
 
@@ -102,6 +107,7 @@ const servicios = [
             <ul class="rizzoma-offer__capabilities">
               {servicio.prestaciones.map((prestacion) => <li>{prestacion}</li>)}
             </ul>
+            <a class="rizzoma-offer__case-link" href={withBase(`/proyectos/${servicio.proyectoSlug}/`)}>{servicio.proyectoTexto} <span aria-hidden="true">↗</span></a>
           </div>
         </article>
       ))}
