@@ -10,7 +10,7 @@
 .rz-social-share__inner {
   max-width: 1680px;
   margin: 0 auto;
-  padding: clamp(54px, 7vw, 116px) clamp(20px, 5vw, 82px);
+  padding: clamp(44px, 5vw, 82px) clamp(20px, 5vw, 82px);
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(300px, .9fr);
   gap: clamp(36px, 7vw, 118px);
@@ -26,7 +26,7 @@
 .rz-social-share__editorial h2 {
   max-width: 15ch;
   margin: 0 0 20px;
-  font: 400 clamp(32px, 3.6vw, 60px)/1.12 var(--display, Georgia, serif);
+  font: 400 clamp(28px, 3vw, 47px)/1.12 var(--display, Georgia, serif);
   letter-spacing: -.025em;
 }
 .rz-social-share__editorial > p:last-child {
