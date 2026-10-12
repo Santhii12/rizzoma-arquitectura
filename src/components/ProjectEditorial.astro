@@ -1,6 +1,8 @@
 ---
 import type { Project, ProjectImage } from '@/data/projects';
 import { withBase } from '@/utils/paths';
+import { site } from '@/config/site';
+import SocialShare from '@/components/SocialShare.astro';
 import '@/styles/project-editorial.css';
 
 interface Props {
@@ -32,6 +34,14 @@ const hasInsights = insights.length > 0;
 const hasArchive = archive.length > 0;
 const heroAlt = project.coverAlt ?? `Imagen principal de ${project.title}`;
 const location = [project.location, project.region].filter(Boolean).join(', ');
+const shareBase = Astro.site ?? new URL(site.domain);
+const shareUrl = new URL(withBase('/proyectos/' + project.slug + '/'), shareBase).toString();
+const shareImage = project.cover ? new URL(project.cover, shareBase).toString() : undefined;
+const relatedService = project.category.includes('Visualización')
+  ? { href: withBase('/servicios/#visualizacion'), label: 'Conocer visualización arquitectónica' }
+  : project.category === 'Interiorismo'
+    ? { href: withBase('/servicios/#remodelacion'), label: 'Conocer diseño interior y transformación de espacios' }
+    : { href: withBase('/servicios/#arquitectura'), label: 'Conocer diseño arquitectónico' };
 const hasFacts = !!(project.typology || project.category || project.participation || location || project.year);
 const allVisuals: ProjectImage[] = [
   ...heroSlides,
@@ -288,6 +298,8 @@ const allVisuals: ProjectImage[] = [
     </section>
   )}
 
+  <SocialShare title={project.title} url={shareUrl} image={shareImage} />
+
   <footer class="rz-pe__ending section-pad" aria-labelledby="rz-pe-contact-heading">
     <div class="rz-pe__ending-topline">
       <span>{project.closingTitle ? [project.title, project.year].filter(Boolean).join(' / ') : 'Rizzoma / Siguiente paso'}</span>
@@ -300,6 +312,7 @@ const allVisuals: ProjectImage[] = [
       </div>
       <div class="rz-pe__ending-contact">
         <p>{project.closingText ?? 'Ya sea un espacio por diseñar, un proyecto que necesitas visualizar o una idea que buscas desarrollar, podemos conversar sobre lo que tienes en mente.'}</p>
+        <a class="rz-pe__ending-service" href={relatedService.href}>{relatedService.label} <span aria-hidden="true">↗</span></a>
         <a class="rz-pe__ending-cta" href={withBase('/contacto/')}>Hablemos de tu proyecto <span aria-hidden="true">↗</span></a>
       </div>
     </div>

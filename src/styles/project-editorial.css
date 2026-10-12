@@ -911,3 +911,24 @@
   color: #ebe2cf;
   font: 400 clamp(14px, 1.04vw, 17px)/1.82 var(--sans, Arial, sans-serif);
 }
+
+/* Puente discreto entre la lectura del proyecto y los servicios del estudio. */
+.rz-pe__ending-service {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 44px;
+  max-width: 100%;
+  margin: 0 0 clamp(20px, 3vw, 39px);
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(242,233,213,.48);
+  color: #f0e9dc;
+  font: 400 clamp(12px, .95vw, 15px)/1.6 var(--sans, Arial, sans-serif);
+  text-decoration: none;
+}
+.rz-pe__ending-service:hover { color: #e8d29b; border-color: #e8d29b; }
+.rz-pe__ending-service:focus-visible { outline: 2px solid #e8d29b; outline-offset: 5px; }
+.rz-pe__ending-service span { flex: none; }
+@media (max-width: 550px) {
+  .rz-pe__ending-service { margin-bottom: 24px; }
+}

@@ -1,0 +1,41 @@
+name: Validación de Rizzoma
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  revisar-y-compilar:
+    name: Revisión Astro y compilación GitHub Pages
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Obtener código
+        uses: actions/checkout@v4
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Instalar dependencias
+        run: npm install --no-audit --no-fund
+
+      - name: Revisar tipos y componentes Astro
+        run: npm run check
+
+      - name: Construir sitio para GitHub Pages
+        env:
+          GITHUB_PAGES: 'true'
+        run: npm run build
+
+      - name: Comprobar páginas esenciales
+        run: |
+          test -f dist/index.html
+          test -f dist/portafolio/index.html
+          test -f dist/servicios/index.html
+          test -f dist/contacto/index.html
+          test -f dist/proyectos/casa-oquedad/index.html
