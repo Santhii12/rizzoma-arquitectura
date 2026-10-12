@@ -55,6 +55,9 @@ const patioGallery = [
 ];
 const patioCover = patioGallery[0];
 
+const santuarioImage = (category: 'exteriores' | 'interiores' | 'mirada' | 'archivo', filename: string) =>
+  withBase(`/images/projects/casa-el-santuario/${category}/${filename}.webp`);
+
 const caboImage = (name: string) => withBase(`/images/projects/cabo-san-miguel/${name}.webp`);
 const umbralImage = (category: 'principal' | 'ambientes' | 'mirada', filename: string) =>
   withBase(`/images/projects/casa-el-umbral/${category}/${filename}.webp`);
@@ -160,7 +163,106 @@ export const projects: Project[] = [
     slug: 'casa-el-santuario',
     title: 'Casa El Santuario',
     category: 'Diseño arquitectónico',
-    available: false
+    typology: 'Vivienda',
+    cover: santuarioImage('exteriores', 'fachada-panoramica'),
+    coverAlt: 'Visualización exterior de Casa El Santuario entre vegetación, con fachadas de ladrillo, vidrio y una cubierta inclinada',
+    galleryLabel: 'Exteriores / Arquitectura y entorno',
+    gallery: [
+      santuarioImage('exteriores', 'fachada-panoramica'),
+      santuarioImage('exteriores', 'fachada-entre-vegetacion'),
+      santuarioImage('exteriores', 'fachada-en-ladrillo'),
+      santuarioImage('exteriores', 'volumen-entre-arboles')
+    ],
+    statement: 'Una lectura de la vivienda a través de sus espacios, la luz y el paisaje.',
+    intro: 'El archivo visual de Casa El Santuario reúne perspectivas exteriores e interiores de una vivienda rodeada de vegetación. Sus imágenes permiten observar diferentes tratamientos de fachada, espacios de doble altura, relaciones visuales con el entorno y la presencia de materiales cálidos.',
+    closingText: 'Si tienes una idea de vivienda que quieres desarrollar o representar, podemos conversar sobre el lugar, las necesidades y el alcance del proyecto.',
+    tour: [
+      {
+        title: 'Espacios interiores',
+        description: 'Un recorrido por la entrada, las áreas sociales y el dormitorio, donde se aprecian las aperturas, los materiales y la luz natural.',
+        display: 'gallery',
+        images: [
+          {
+            src: santuarioImage('interiores', 'vestibulo-cocina'),
+            alt: 'Visualización de espacio interior de doble altura con ladrillo, ventanales, escalera y cocina',
+            caption: 'Acceso / Cocina y doble altura'
+          },
+          {
+            src: santuarioImage('interiores', 'sala-panoramica'),
+            alt: 'Sala de Casa El Santuario con ventanales hacia el bosque, techo de madera y mobiliario claro',
+            caption: 'Sala / Vistas al paisaje'
+          },
+          {
+            src: santuarioImage('interiores', 'comedor'),
+            alt: 'Comedor cálido integrado con la sala, estructura de madera, vidrio y mobiliario de tonos neutros',
+            caption: 'Comedor / Área social'
+          },
+          {
+            src: santuarioImage('interiores', 'dormitorio'),
+            alt: 'Dormitorio con cama central, cabecero de madera, arte de pared y ventanal lateral hacia el paisaje',
+            caption: 'Dormitorio / Luz y texturas'
+          }
+        ]
+      }
+    ],
+    sections: [
+      {
+        title: 'Arquitectura y entorno',
+        text: 'Una de las vistas exteriores permite apreciar la escala de la vivienda entre árboles y superficies verdes. La imagen pone en relación el volumen construido, la cubierta y la vegetación inmediata.',
+        image: {
+          src: santuarioImage('mirada', 'volumen-y-entorno'),
+          alt: 'Perspectiva exterior de una vivienda de dos niveles con cubierta inclinada y árboles alrededor',
+          caption: 'Volumen / Vegetación'
+        }
+      },
+      {
+        title: 'Luz y altura',
+        text: 'La perspectiva de la escalera destaca la altura interior, los muros de ladrillo y los vanos acristalados. Estos elementos permiten leer la entrada de luz y la continuidad visual entre niveles.',
+        image: {
+          src: santuarioImage('mirada', 'escalera-y-luz'),
+          alt: 'Escalera interior junto a muro de ladrillo, arco acristalado y ventanales de doble altura',
+          caption: 'Escalera / Luz natural'
+        }
+      },
+      {
+        title: 'Espacios conectados',
+        text: 'En el área social, la doble altura, la escalera y las aperturas conectan visualmente los ambientes. La representación permite apreciar las proporciones y la relación entre mobiliario y arquitectura.',
+        image: {
+          src: santuarioImage('mirada', 'sala-doble-altura'),
+          alt: 'Sala residencial de doble altura con escalera interior, sofá claro, ventanas y detalles de ladrillo',
+          caption: 'Sala / Continuidad espacial'
+        }
+      }
+    ],
+    archive: [
+      {
+        title: 'Planos y exploraciones',
+        description: 'Láminas del proyecto que muestran la planta, la volumetría y su relación con el terreno. Se presentan como documentación visual, sin asignarles etapas de diseño no confirmadas.',
+        images: [
+          {
+            src: santuarioImage('archivo', 'modelo-general'),
+            alt: 'Modelo tridimensional blanco de la vivienda sobre su terreno, con la cubierta y los accesos',
+            caption: 'Modelo / Vista general'
+          },
+          {
+            src: santuarioImage('archivo', 'planta'),
+            alt: 'Planta arquitectónica en blanco y gris que muestra la distribución espacial de la vivienda',
+            caption: 'Planta / Organización espacial'
+          },
+          {
+            src: santuarioImage('archivo', 'estudio-volumetrico'),
+            alt: 'Esquema axonométrico de la vivienda y su relación con la pendiente del terreno',
+            caption: 'Volumetría / Terreno'
+          },
+          {
+            src: santuarioImage('archivo', 'emplazamiento'),
+            alt: 'Modelo axonométrico de la vivienda situada entre árboles y sobre un terreno inclinado',
+            caption: 'Volumen / Emplazamiento'
+          }
+        ]
+      }
+    ],
+    available: true
   },
   {
     slug: 'cabo-san-miguel',
