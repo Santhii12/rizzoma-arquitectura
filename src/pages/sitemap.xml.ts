@@ -4,7 +4,7 @@ import { site } from '@/config/site';
 
 const staticRoutes = [
   '/',
-  '/proyectos/',
+  '/portafolio/',
   '/servicios/',
   '/arquitectura-medellin/',
   '/visualizacion-arquitectonica-medellin/',
@@ -34,7 +34,7 @@ export const GET: APIRoute = ({ site: astroSite }) => {
       .filter((image, index, all): image is string => Boolean(image) && all.indexOf(image) === index)
       .map((image) => `
     <image:image>
-      <image:loc>${escapeXml(image)}</image:loc>
+      <image:loc>${escapeXml(new URL(image, baseUrl).toString())}</image:loc>
       <image:title>${escapeXml(`${project.title} — Rizzoma Arquitectura`)}</image:title>
       <image:caption>${escapeXml(project.statement ?? project.intro ?? project.category)}</image:caption>
     </image:image>`)
