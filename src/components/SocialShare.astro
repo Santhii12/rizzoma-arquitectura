@@ -1,0 +1,57 @@
+---
+import '@/styles/social-share.css';
+
+interface Props {
+  title: string;
+  url: string;
+  image?: string;
+  kind?: 'estudio' | 'proyecto';
+}
+
+const { title, url, image, kind = 'proyecto' } = Astro.props;
+const label = kind === 'proyecto' ? 'Compartir el proyecto' : 'Compartir Rizzoma';
+const heading = kind === 'proyecto' ? 'Una mirada que merece compartirse.' : 'La arquitectura también se comparte.';
+const description = kind === 'proyecto'
+  ? 'Comparte este proyecto con alguien a quien pueda interesarle su manera de entender el espacio.'
+  : 'Presenta Rizzoma a quienes estén pensando en diseñar, transformar o visualizar un espacio.';
+const shareText = title + ' · Rizzoma Arquitectura';
+const encodedUrl = encodeURIComponent(url);
+const whatsappUrl = 'https://wa.me/?text=' + encodeURIComponent(shareText + '\n' + url);
+const facebookUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl;
+const linkedinUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodedUrl;
+const pinterestUrl = image
+  ? 'https://www.pinterest.com/pin/create/button/?url=' + encodedUrl + '&media=' + encodeURIComponent(image) + '&description=' + encodeURIComponent(shareText)
+  : null;
+---
+<section
+  class:list={['rz-social-share', kind === 'estudio' && 'rz-social-share--studio']}
+  aria-labelledby="rizzoma-social-share-title"
+  data-rizzoma-social-share
+  data-share-url={url}
+  data-share-title={shareText}
+  data-share-text={description}
+>
+  <div class="rz-social-share__inner">
+    <div class="rz-social-share__editorial">
+      <p class="rz-social-share__eyebrow">{label}</p>
+      <h2 id="rizzoma-social-share-title">{heading}</h2>
+      <p>{description}</p>
+    </div>
+    <div class="rz-social-share__actions">
+      <div class="rz-social-share__networks" aria-label="Compartir en redes sociales">
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Compartir por WhatsApp (abre una ventana nueva)">WhatsApp <span aria-hidden="true">↗</span></a>
+        <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Compartir en Facebook (abre una ventana nueva)">Facebook <span aria-hidden="true">↗</span></a>
+        <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn (abre una ventana nueva)">LinkedIn <span aria-hidden="true">↗</span></a>
+        {pinterestUrl && <a href={pinterestUrl} target="_blank" rel="noopener noreferrer" aria-label="Guardar en Pinterest (abre una ventana nueva)">Pinterest <span aria-hidden="true">↗</span></a>}
+      </div>
+      <div class="rz-social-share__utilities">
+        <button type="button" data-rz-share-copy>Copiar enlace <span aria-hidden="true">↗</span></button>
+        <button type="button" data-rz-share-native hidden>Compartir en otras aplicaciones <span aria-hidden="true">↗</span></button>
+      </div>
+      <p class="rz-social-share__status" role="status" aria-live="polite" data-rz-share-feedback></p>
+    </div>
+  </div>
+</section>
+<script>
+  import '@/scripts/social-share';
+</script>
