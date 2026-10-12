@@ -1,6 +1,8 @@
 ---
 import type { Project, ProjectImage } from '@/data/projects';
 import { withBase } from '@/utils/paths';
+import { site } from '@/config/site';
+import SocialShare from '@/components/SocialShare.astro';
 import '@/styles/project-editorial.css';
 
 interface Props {
@@ -32,6 +34,9 @@ const hasInsights = insights.length > 0;
 const hasArchive = archive.length > 0;
 const heroAlt = project.coverAlt ?? `Imagen principal de ${project.title}`;
 const location = [project.location, project.region].filter(Boolean).join(', ');
+const shareBase = Astro.site ?? new URL(site.domain);
+const shareUrl = new URL(withBase('/proyectos/' + project.slug + '/'), shareBase).toString();
+const shareImage = project.cover ? new URL(project.cover, shareBase).toString() : undefined;
 const hasFacts = !!(project.typology || project.category || project.participation || location || project.year);
 const allVisuals: ProjectImage[] = [
   ...heroSlides,
@@ -287,6 +292,8 @@ const allVisuals: ProjectImage[] = [
       ))}
     </section>
   )}
+
+  <SocialShare title={project.title} url={shareUrl} image={shareImage} />
 
   <footer class="rz-pe__ending section-pad" aria-labelledby="rz-pe-contact-heading">
     <div class="rz-pe__ending-topline">
