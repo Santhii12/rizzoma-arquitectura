@@ -23,6 +23,21 @@ const cards = availableProjects;
         <h1>Obras seleccionadas<span>.</span></h1>
         <div class="rz-rule"></div>
         <p>Una mirada sobre arquitectura, visualización y la relación entre espacio, materia y territorio.</p>
+        <nav class="rz-cinema-index" aria-label="Ir a un proyecto del portafolio">
+          {cards.map((project, index) => (
+            <a
+              class="rz-cinema-index__link"
+              href={withBase(`/proyectos/${project.slug}/`)}
+              data-cinema-jump={index}
+              aria-current={index === 0 ? 'true' : undefined}
+              aria-label={`Proyecto ${index + 1} de ${cards.length}: ${project.title}`}
+            >
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <span>{project.title}</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </nav>
         <div class="rz-editorial-bottom"><strong>{String(cards.length).padStart(2, '0')}</strong><span>PROYECTOS EN EL ARCHIVO</span></div>
       </section></div>
         <div class="rz-cinema-topline"><span>RIZZOMA / ARCHIVO VISUAL</span><span data-cinema-counter>01 / {String(cards.length).padStart(2, '0')}</span></div>
@@ -57,35 +72,7 @@ const cards = availableProjects;
       </div>
     </section>
 
-    <dialog class="rz-archive-dialog" data-archive-dialog aria-labelledby="rz-archive-title">
-      <button type="button" class="rz-dialog-close" data-archive-close aria-label="Cerrar">×</button>
-      <p class="rz-overline">ARCHIVO RIZZOMA / PROYECTO</p>
-      <h2 id="rz-archive-title" data-archive-title></h2>
-      <p data-archive-category></p>
-      <div class="rz-dialog-facts"><span data-archive-location></span><span data-archive-year></span></div>
-      <p class="rz-dialog-note">La documentación visual y la ficha completa de este proyecto están pendientes de publicación.</p>
-      <a href={withBase('/contacto/')}>Consultar sobre este proyecto ↗</a>
-    </dialog>
-  </main>
-  <script>
-    import '@/scripts/portfolio-cinematic';
 
-    const dialog = document.querySelector<HTMLDialogElement>('[data-archive-dialog]');
-    document.querySelectorAll<HTMLButtonElement>('[data-archive-open]').forEach((button) => {
-      button.addEventListener('click', () => {
-        if (!dialog) return;
-        const title = dialog.querySelector<HTMLElement>('[data-archive-title]');
-        const category = dialog.querySelector<HTMLElement>('[data-archive-category]');
-        const location = dialog.querySelector<HTMLElement>('[data-archive-location]');
-        const year = dialog.querySelector<HTMLElement>('[data-archive-year]');
-        if (title) title.textContent = button.dataset.title ?? '';
-        if (category) category.textContent = button.dataset.category ?? '';
-        if (location) { location.textContent = button.dataset.location ?? ''; location.hidden = !button.dataset.location; }
-        if (year) { year.textContent = button.dataset.year ?? ''; year.hidden = !button.dataset.year; }
-        dialog.showModal();
-      });
-    });
-    document.querySelector('[data-archive-close]')?.addEventListener('click', () => dialog?.close());
-    dialog?.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
-  </script>
+  </main>
+  <script>import '@/scripts/portfolio-cinematic';</script>
 </PortfolioLayout>
