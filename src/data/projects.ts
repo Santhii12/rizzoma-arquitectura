@@ -253,11 +253,6 @@ export const projects: Project[] = [
             src: santuarioImage('archivo', 'estudio-volumetrico'),
             alt: 'Esquema axonométrico de la vivienda y su relación con la pendiente del terreno',
             caption: 'Volumetría / Terreno'
-          },
-          {
-            src: santuarioImage('archivo', 'emplazamiento'),
-            alt: 'Modelo axonométrico de la vivienda situada entre árboles y sobre un terreno inclinado',
-            caption: 'Volumen / Emplazamiento'
           }
         ]
       }
