@@ -132,8 +132,9 @@ form?.addEventListener('submit', (event) => {
   recordSubmission(recentAttempts);
 
   const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-  if (note) note.textContent = 'WhatsApp se abrirá con tu mensaje preparado.';
-  window.open(url, '_blank', 'noopener,noreferrer');
+  if (note) note.textContent = 'Continuarás a WhatsApp con el mensaje preparado. Tú decides si lo envías.';
+  // La navegación directa evita que los bloqueadores de ventanas impidan iniciar la consulta.
+  window.location.assign(url);
 });
 
 if (!reduceMotion) {
