@@ -28,6 +28,14 @@ export type Project = {
   region?: string;
   typology?: string;
   participation?: string;
+  openingCategory?: string;
+  discipline?: string;
+  introDetail?: string;
+  tourIntro?: string;
+  archiveTitle?: string;
+  archiveIntro?: string;
+  closingEyebrow?: string;
+  closingTitle?: string;
   cover?: string;
   coverAlt?: string;
   gallery?: string[];
@@ -70,6 +78,8 @@ export const projects: Project[] = [
     slug: 'cabo-san-miguel',
     title: 'Cabo San Miguel',
     category: 'Visualización comercial · Diseño de fachada',
+    openingCategory: 'Visualización arquitectónica · Diseño de fachada',
+    discipline: 'Diseño de fachada · Visualización arquitectónica',
     year: '2026',
     location: 'Guatapé',
     region: 'Antioquia',
@@ -87,13 +97,17 @@ export const projects: Project[] = [
       caboImage('exteriores-08')
     ],
     galleryLabel: 'Exteriores y fachada',
-    statement: 'Un edificio de vivienda en relación con el paisaje de Guatapé.',
-    closingText: 'Si buscas desarrollar la fachada de un proyecto o comunicar su propuesta mediante visualizaciones arquitectónicas, conversemos sobre el alcance y el material disponible.',
-    intro: 'Cabo San Miguel es un edificio de vivienda en Guatapé, Antioquia. Rizzoma desarrolló el modelado 3D, el diseño de fachada y la visualización comercial del edificio; el diseño arquitectónico integral no corresponde al estudio.',
+    statement: 'La arquitectura como presencia en el paisaje de Guatapé.',
+    closingEyebrow: 'Rizzoma / Arquitectura + visualización',
+    closingTitle: '¿Tienes un proyecto que necesita ser contado?',
+    closingText: 'Desarrollamos visualizaciones arquitectónicas y propuestas de fachada que ayudan a comunicar las cualidades de un proyecto. Conversemos sobre tu idea, el alcance del trabajo y el material disponible.',
+    intro: 'Cabo San Miguel es un proyecto de vivienda ubicado en Guatapé, Antioquia. Desde Rizzoma se desarrollaron el modelado tridimensional, el diseño de fachada y las visualizaciones arquitectónicas para comunicar la propuesta del edificio.',
+    introDetail: 'El trabajo se concentra en la expresión exterior y en la representación de sus espacios, haciendo legibles la composición de la fachada, la volumetría y los ambientes interiores.',
+    tourIntro: 'Un recorrido visual por los ambientes y perspectivas de Cabo San Miguel, desde la experiencia de los espacios interiores hasta los detalles que construyen su atmósfera.',
     tour: [
       {
         title: 'Espacios interiores',
-        description: 'Recorre los ambientes residenciales a través de sus visualizaciones comerciales: espacios sociales, habitaciones y detalles de materialidad.',
+        description: 'Sala, cocina, circulaciones y habitaciones se presentan a través de imágenes que permiten reconocer la organización de los ambientes y la relación entre materiales, iluminación y mobiliario.',
         display: 'gallery',
         images: [
           { src: caboImage('exteriores-10'), alt: 'Escalera, sala de estar y mobiliario del espacio interior', caption: 'Escalera y zona social' },
@@ -107,25 +121,26 @@ export const projects: Project[] = [
     ],
     sections: [
       {
-        title: 'Expresión de fachada',
-        text: 'Las vistas del exterior hacen legibles los arcos, los balcones y el contraste entre superficies y vegetación. El diseño de fachada es parte del trabajo realizado por Rizzoma.',
+        title: 'Una fachada que da identidad',
+        text: 'Los arcos, los balcones y la vegetación construyen la expresión exterior del edificio. El diseño de fachada desarrollado por Rizzoma busca dar coherencia a estos elementos y definir una presencia reconocible en el paisaje de Guatapé.',
         image: { src: caboImage('exteriores-03'), alt: 'Vista detallada de la fachada, sus arcos, balcones y vegetación', caption: 'Composición de fachada' }
       },
       {
-        title: 'Comunicar los interiores',
-        text: 'La visualización comercial permite comprender la relación entre zona social, cocina y luz natural. Estas imágenes comunican el proyecto sin atribuir a Rizzoma el diseño integral de los espacios.',
+        title: 'Hacer legible la vida interior',
+        text: 'Las visualizaciones permiten recorrer los ambientes y comprender la relación entre la sala, la cocina y las circulaciones. La luz, las texturas y el mobiliario ayudan a comunicar la atmósfera de los espacios y la experiencia que proponen.',
         image: { src: caboImage('interiores-01'), alt: 'Interior del edificio con cocina y sala abiertas, materiales cálidos y luz natural', caption: 'Visualización de espacios interiores' }
       },
       {
-        title: 'Acceso y aproximación',
-        text: 'Una perspectiva desde la vía completa el recorrido exterior y permite observar cómo aparece el edificio al llegar desde el entorno.',
+        title: 'El edificio desde su llegada',
+        text: 'La vista desde el acceso muestra cómo se presenta el conjunto al aproximarse desde la vía. Esta perspectiva complementa las vistas generales y permite entender la fachada desde una escala más cercana.',
         image: { src: caboImage('exteriores-09'), alt: 'Acceso desde la vía hacia la fachada principal del edificio', caption: 'Vista desde el acceso' }
       }
     ],
+    archiveTitle: 'El proyecto en volumen',
+    archiveIntro: 'Las vistas del modelo tridimensional permiten observar el volumen del edificio y su relación con el terreno desde diferentes perspectivas, complementando las imágenes finales de visualización.',
     archive: [
       {
-        title: 'Modelos y volumetría',
-        description: 'Tres vistas de modelo que documentan el volumen y el emplazamiento. No se les asigna una etapa de diseño sin confirmación.',
+        title: 'Vistas del modelo tridimensional',
         images: [
           { src: caboImage('modelo-01'), alt: 'Modelo tridimensional general de Cabo San Miguel y su terreno', caption: 'Modelo · Vista general' },
           { src: caboImage('modelo-02'), alt: 'Segunda perspectiva del modelo tridimensional de Cabo San Miguel', caption: 'Modelo · Vista alternativa' },
