@@ -871,3 +871,31 @@
     gap: 5px;
   }
 }
+
+/* Editorial detail legibility: preserve the palette while avoiding 9px captions. */
+.rz-pe__eyebrow,
+.rz-pe__topline,
+.rz-pe__discipline,
+.rz-pe__facts dt,
+.rz-pe__gallery-label,
+.rz-pe__hero-caption,
+.rz-pe__visual figcaption,
+.rz-pe__insight-figure figcaption {
+  font-size: clamp(11px, .82vw, 12px);
+  line-height: 1.6;
+}
+.rz-pe__overview .rz-pe__eyebrow,
+.rz-pe__overview .rz-pe__facts dt {
+  color: #e2c995;
+}
+.rz-pe__overview .rz-pe__facts > div {
+  border-top-color: rgba(242,233,213,.34);
+}
+.rz-pe__overview .rz-pe__facts dd {
+  color: #f3eee4;
+}
+.rz-pe__ending-topline,
+.rz-pe__ending-navigation a,
+.rz-pe__ending-navigation > span {
+  font-size: clamp(11px, .82vw, 12px);
+}
