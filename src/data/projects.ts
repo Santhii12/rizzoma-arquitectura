@@ -454,36 +454,40 @@ export const projects: Project[] = [
     participation: 'Diseño arquitectónico, modelado 3D, renders y dibujos',
     cover: oquedadImage('exteriores', 'fachada-principal'),
     coverAlt: 'Vista frontal diurna de Casa Oquedad, vivienda de dos niveles con celosías de madera, ventanales, jardín y cielo azul',
-    galleryLabel: 'Exteriores / Arquitectura y paisaje',
+    galleryLabel: 'Exteriores / Acceso y jardín',
     gallery: [
       oquedadImage('exteriores', 'fachada-principal'),
       oquedadImage('exteriores', 'acceso-y-volumen'),
       oquedadImage('exteriores', 'fachada-jardin'),
       oquedadImage('exteriores', 'terraza-y-piscina')
     ],
-    statement: 'Volúmenes sobrios, madera y espacios abiertos al paisaje.',
-    intro: 'Casa Oquedad es un proyecto de vivienda desarrollado por Juan José Quintero Tobón en Rizzoma: diseño arquitectónico, modelado, dibujos y renders. Las vistas exteriores e interiores muestran sus volúmenes, la conexión con el jardín y el contraste entre materiales, luz y vegetación.',
-    closingText: 'Si tienes una vivienda por desarrollar o un proyecto que necesitas visualizar, podemos conversar sobre sus necesidades, referencias y el alcance del trabajo.',
+    statement: 'Dos fachadas: una llegada más reservada y espacios abiertos al jardín.',
+    intro: 'Casa Oquedad es una propuesta de vivienda en San Vicente de Ferrer, Antioquia. Las perspectivas muestran un contraste entre la fachada de acceso, de superficies más cerradas, y el frente hacia el jardín, donde los ventanales, las terrazas y la piscina prolongan los espacios de estar hacia el exterior.',
+    introDetail: 'Desde Rizzoma, Juan José Quintero Tobón desarrolló el diseño arquitectónico, el modelado tridimensional, los renders y los dibujos. Las lamas verticales, los vanos circulares y la combinación de revestimientos claros y oscuros aportan una expresión reconocible a la vivienda.',
+    closingEyebrow: 'Rizzoma / Arquitectura + visualización',
+    closingText: 'Conversemos sobre tu proyecto, sus necesidades y las posibilidades de desarrollarlo o comunicarlo a través de la arquitectura y la visualización.',
+    tourIntro: 'Una secuencia de cinco ambientes: la sala con su ventana circular, la cocina junto a la escalera, dos perspectivas del dormitorio y un baño iluminado desde arriba. Cada vista permite observar una escala y una atmósfera distintas.',
     tour: [{
       title: 'Espacios interiores',
-      description: 'Vistas de la sala, cocina, dormitorios y baño, con diferentes atmósferas y entradas de luz natural.',
+      description: 'La sala incorpora una abertura circular hacia la vegetación; la cocina se organiza alrededor de una isla y la escalera; los dormitorios muestran distintas combinaciones de texturas y vistas exteriores. El recorrido termina en un baño con madera y mosaico verde.',
       display: 'gallery',
       images: [
-        { src: oquedadImage('interiores', 'sala-con-ventana-circular'), alt: "Sala con acabados de madera, chimenea, sofás y una ventana circular hacia la vegetación", caption: "Sala / Ventana al paisaje" },
-        { src: oquedadImage('interiores', 'cocina-pasillo'), alt: "Cocina longitudinal con isla, revestimientos de madera, luminarias colgantes y luz natural", caption: "Cocina / Recorrido interior" },
-        { src: oquedadImage('interiores', 'dormitorio-oscuro'), alt: "Dormitorio en tonos oscuros y madera con iluminación cálida y ventana lateral", caption: "Dormitorio / Atmósfera" },
-        { src: oquedadImage('interiores', 'dormitorio-ventana-circular'), alt: "Dormitorio con cama central, mobiliario cálido y ventana circular hacia el exterior", caption: "Dormitorio / Relación con el exterior" },
-        { src: oquedadImage('interiores', 'bano-spa'), alt: "Baño con madera, piedra, ducha acristalada y mosaicos oscuros", caption: "Baño / Piedra y madera" }
+        { src: oquedadImage('interiores', 'sala-con-ventana-circular'), alt: "Sala con acabados de madera, chimenea, sofás y una ventana circular hacia la vegetación", caption: "Sala / Ventana circular" },
+        { src: oquedadImage('interiores', 'cocina-pasillo'), alt: "Cocina longitudinal con isla, revestimientos de madera, luminarias colgantes y luz natural", caption: "Cocina / Isla y escalera" },
+        { src: oquedadImage('interiores', 'dormitorio-oscuro'), alt: "Dormitorio en tonos oscuros y madera con iluminación cálida y ventana lateral", caption: "Dormitorio / Luz indirecta" },
+        { src: oquedadImage('interiores', 'dormitorio-ventana-circular'), alt: "Dormitorio con cama central, mobiliario cálido y ventana circular hacia el exterior", caption: "Dormitorio / Dos aperturas" },
+        { src: oquedadImage('interiores', 'bano-spa'), alt: "Baño con madera, piedra, ducha acristalada y mosaicos oscuros", caption: "Baño / Lucernario y madera" }
       ]
     }],
     sections: [
-      { title: "Cocina y espacio cotidiano", text: "La perspectiva de la isla permite observar la organización del mobiliario, las superficies de trabajo y la continuidad de los revestimientos de madera.", image: { src: oquedadImage('mirada', 'cocina-isla'), alt: "Cocina con isla central, sillas claras, carpintería de madera y una ventana hacia el exterior", caption: "Cocina / Escala y material" } },
-      { title: "Luz y atmósfera", text: "La luz natural atraviesa el baño y acentúa el contraste entre superficies claras, madera y vegetación.", image: { src: oquedadImage('mirada', 'luz-en-bano'), alt: "Baño con bañera blanca, vegetación, ducha acristalada y luz natural proyectada sobre los acabados", caption: "Baño / Luz natural" } },
-      { title: "Materialidad interior", text: "El encuentro entre mosaicos verdes, madera y luz localizada permite observar la textura y el tono de los materiales.", image: { src: oquedadImage('mirada', 'materialidad-bano'), alt: "Baño con mueble de madera, espejos y revestimiento de mosaicos verdes oscuros", caption: "Baño / Texturas y contrastes" } }
+      { title: "La cocina como lugar de encuentro", text: "La isla amplía la superficie de trabajo y reúne cuatro puestos frente a la encimera. Un ventanal horizontal introduce la vegetación en el fondo de la cocina, mientras la carpintería de madera unifica el conjunto.", image: { src: oquedadImage('mirada', 'cocina-isla'), alt: "Cocina con isla central, sillas claras, carpintería de madera y una ventana hacia el exterior", caption: "Cocina / Escala y material" } },
+      { title: "La luz que entra al baño", text: "La claridad lateral alcanza la bañera y deja sombras de las plantas sobre los muros y el suelo. Los mosaicos verdes y las superficies claras muestran cómo cambia la lectura del espacio según la iluminación.", image: { src: oquedadImage('mirada', 'luz-en-bano'), alt: "Baño con bañera blanca, vegetación, ducha acristalada y luz natural proyectada sobre los acabados", caption: "Baño / Luz natural" } },
+      { title: "Detalle, textura y contraste", text: "En esta segunda vista del baño, las lamas de madera, el espejo circular y el revestimiento de pequeñas piezas verdes forman una composición más cerrada. La iluminación puntual resalta los encuentros entre superficies.", image: { src: oquedadImage('mirada', 'materialidad-bano'), alt: "Baño con mueble de madera, espejos y revestimiento de mosaicos verdes oscuros", caption: "Baño / Texturas y contrastes" } }
     ],
+    archiveIntro: 'La planta y las vistas axonométricas completan lo que las perspectivas no muestran: la distribución de los ambientes, la relación entre las áreas cubiertas y abiertas y la posición del volumen sobre el terreno. Son dibujos y modelos de representación, no documentación de obra ejecutada.',
     archive: [{
-      title: 'Planta y exploraciones',
-      description: 'Láminas de organización espacial y volumetría. No se presentan como fases de diseño ni como resultados construidos.',
+      title: 'Planta y modelo tridimensional',
+      description: 'La planta permite leer el acceso, las áreas sociales, las habitaciones y el espacio de terraza y piscina. Las axonometrías muestran la distribución interior y el volumen de la vivienda sobre el terreno desde otros ángulos.',
       images: [
         { src: oquedadImage('archivo', 'planta'), alt: "Planta arquitectónica de la vivienda con distribución de ambientes y espacios exteriores", caption: "Planta / Distribución" },
         { src: oquedadImage('archivo', 'distribucion-volumetrica'), alt: "Vista axonométrica de Casa Oquedad con distribución interior y espacios abiertos", caption: "Modelo / Organización espacial" },
