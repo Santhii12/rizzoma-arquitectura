@@ -12,6 +12,7 @@ import '@/styles/home-immersive.css';
 
 const heroCover = withBase('/images/studio/home/rizzoma-hero-portada.webp');
 const heroProject = projects.find((project) => project.slug === 'casa-patio-horizonte');
+const interiorProject = projects.find((project) => project.slug === 'casa-el-umbral');
 const miradaPhoto = heroProject?.gallery?.[1];
 const heroImageUrl = new URL(heroCover, Astro.site ?? new URL(site.domain)).toString();
 const mainPortfolioProject = projects.find((project) => project.slug === 'cabo-san-miguel');
@@ -52,7 +53,7 @@ const schema = {
       <p class="rizzoma-hero-description">Diseño arquitectónico y visualización para proyectos en relación con el lugar, la materia y la vida.</p>
       <div class="rizzoma-hero-actions">
         <a href={withBase('/portafolio/')}>Explorar proyectos <span aria-hidden="true">↗</span></a>
-        <a href={withBase('/visualizacion-arquitectonica-medellin/')}>Solicitar visualización <span aria-hidden="true">↗</span></a>
+        <a href={withBase('/servicios/')}>Conocer servicios <span aria-hidden="true">↗</span></a>
       </div>
     </div>
     {heroProject && (
@@ -90,7 +91,7 @@ const schema = {
   <QuePodemosHacer
     visualizacionImage={heroCover}
     disenoImage={heroProject?.gallery?.[2]}
-    remodelacionImage={heroProject?.gallery?.[4]}
+    remodelacionImage={interiorProject?.cover}
   />
 
   <section class="studio-compact section-pad">
