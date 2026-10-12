@@ -614,7 +614,8 @@
 
 /* Ground the primary commercial service in Cabo San Miguel's architecture. */
 .rz-services-guide__chapter--featured .rz-services-guide__media img {
-  object-position: 70% center;
+  object-fit: cover;
+  object-position: 52% center;
 }
 .rz-services-guide__case-link {
   display: grid;
