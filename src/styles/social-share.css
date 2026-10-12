@@ -1,0 +1,119 @@
+/* Compartir sin interrumpir el lenguaje editorial de Rizzoma. */
+.rz-social-share {
+  background: #f3eee4;
+  color: #27261e;
+  border-top: 1px solid #cfc4b3;
+}
+.rz-social-share--studio {
+  background: #eee8dc;
+}
+.rz-social-share__inner {
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: clamp(54px, 7vw, 116px) clamp(20px, 5vw, 82px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, .9fr);
+  gap: clamp(36px, 7vw, 118px);
+  align-items: end;
+}
+.rz-social-share__eyebrow {
+  margin: 0 0 22px;
+  color: #706b54;
+  font: 600 11px/1.6 var(--sans, Arial, sans-serif);
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.rz-social-share__editorial h2 {
+  max-width: 15ch;
+  margin: 0 0 20px;
+  font: 400 clamp(32px, 3.6vw, 60px)/1.12 var(--display, Georgia, serif);
+  letter-spacing: -.025em;
+}
+.rz-social-share__editorial > p:last-child {
+  max-width: 53ch;
+  margin: 0;
+  color: #615b50;
+  font: 400 clamp(14px, 1.08vw, 17px)/1.75 var(--sans, Arial, sans-serif);
+}
+.rz-social-share__actions {
+  min-width: 0;
+}
+.rz-social-share__networks,
+.rz-social-share__utilities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+}
+.rz-social-share__networks {
+  border-top: 1px solid #b8ad9b;
+}
+.rz-social-share__networks a,
+.rz-social-share__utilities button {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  min-height: 50px;
+  padding: 12px 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #cfc4b3;
+  border-radius: 0;
+  color: #343228;
+  font: 500 13px/1.4 var(--sans, Arial, sans-serif);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color .2s ease, border-color .2s ease;
+}
+.rz-social-share__networks a {
+  flex: 1 1 calc(50% - 20px);
+}
+.rz-social-share__utilities {
+  margin-top: 14px;
+}
+.rz-social-share__utilities button {
+  font-weight: 600;
+}
+.rz-social-share__utilities button[hidden] {
+  display: none;
+}
+.rz-social-share__networks a:hover,
+.rz-social-share__utilities button:hover {
+  color: #82673b;
+  border-bottom-color: #82673b;
+}
+.rz-social-share__networks a:focus-visible,
+.rz-social-share__utilities button:focus-visible {
+  outline: 2px solid #82673b;
+  outline-offset: 4px;
+}
+.rz-social-share__status {
+  min-height: 20px;
+  margin: 12px 0 0;
+  color: #615b50;
+  font: 400 12px/1.6 var(--sans, Arial, sans-serif);
+}
+@media (max-width: 760px) {
+  .rz-social-share__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    padding: 60px 22px;
+  }
+  .rz-social-share__networks,
+  .rz-social-share__utilities {
+    gap: 0 16px;
+  }
+  .rz-social-share__networks a {
+    flex-basis: calc(50% - 16px);
+  }
+}
+@media (max-width: 400px) {
+  .rz-social-share__networks a { flex-basis: 100%; }
+  .rz-social-share__utilities { flex-direction: column; align-items: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rz-social-share__networks a,
+  .rz-social-share__utilities button {
+    transition: none;
+  }
+}
