@@ -10,10 +10,10 @@ interface Props {
 
 const { title, url, image, kind = 'proyecto' } = Astro.props;
 const label = kind === 'proyecto' ? 'Compartir el proyecto' : 'Compartir Rizzoma';
-const heading = kind === 'proyecto' ? 'Una mirada que merece compartirse.' : 'La arquitectura también se comparte.';
+const heading = kind === 'proyecto' ? 'Compartir este proyecto.' : 'Compartir la mirada de Rizzoma.';
 const description = kind === 'proyecto'
-  ? 'Comparte este proyecto con alguien a quien pueda interesarle su manera de entender el espacio.'
-  : 'Presenta Rizzoma a quienes estén pensando en diseñar, transformar o visualizar un espacio.';
+  ? 'Un enlace para recorrer el trabajo, sus imágenes y las ideas que le dan forma.'
+  : 'Una forma de acercar el estudio a quienes desean diseñar, transformar o visualizar un espacio.';
 const shareText = title + ' · Rizzoma Arquitectura';
 const encodedUrl = encodeURIComponent(url);
 const whatsappUrl = 'https://wa.me/?text=' + encodeURIComponent(shareText + '\n' + url);
