@@ -4,6 +4,7 @@ import HomeSelectedProjects from '@/components/HomeSelectedProjects.astro';
 import NuestraMirada from '@/components/NuestraMirada.astro';
 import QuePodemosHacer from '@/components/QuePodemosHacer.astro';
 import HomeProcess from '@/components/HomeProcess.astro';
+import SocialShare from '@/components/SocialShare.astro';
 import { projects } from '@/data/projects';
 import { site } from '@/config/site';
 import { withBase } from '@/utils/paths';
@@ -119,6 +120,8 @@ const schema = {
   </section>
 
   <HomeProcess />
+
+  <SocialShare title="Rizzoma Arquitectura" url={homeUrl} image={heroImageUrl} kind="estudio" />
 
   <script>import '@/scripts/hero-ripple';</script>
 </BaseLayout>
