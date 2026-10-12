@@ -21,6 +21,7 @@ const {
 
 const baseSite = Astro.site ?? new URL(site.domain);
 const canonical = new URL(Astro.url.pathname, baseSite);
+const socialImage = new URL(withBase('/images/projects/cabo-san-miguel/exteriores-04.webp'), baseSite).toString();
 ---
 <!doctype html>
 <html lang="es-CO">
@@ -29,9 +30,21 @@ const canonical = new URL(Astro.url.pathname, baseSite);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f3eee4" />
     <meta name="description" content={description} />
-    <meta name="robots" content="noindex, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content="Cabo San Miguel: fachada y visualización comercial de Rizzoma" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <link rel="apple-touch-icon" href={withBase(site.brand.monogram)} />
     <title>{title}</title>
