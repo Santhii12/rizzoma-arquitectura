@@ -14,7 +14,7 @@ const heading = kind === 'proyecto' ? 'Compartir este proyecto.' : 'Compartir la
 const description = kind === 'proyecto'
   ? 'Un enlace para recorrer el trabajo, sus imágenes y las ideas que le dan forma.'
   : 'Una forma de acercar el estudio a quienes desean diseñar, transformar o visualizar un espacio.';
-const shareText = title + ' · Rizzoma Arquitectura';
+const shareText = kind === 'estudio' ? 'Rizzoma Arquitectura · Estudio independiente en Medellín' : title + ' · Rizzoma Arquitectura';
 const encodedUrl = encodeURIComponent(url);
 const whatsappUrl = 'https://wa.me/?text=' + encodeURIComponent(shareText + '\n' + url);
 const facebookUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl;
