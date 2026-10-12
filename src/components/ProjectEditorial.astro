@@ -53,7 +53,7 @@ const allVisuals: ProjectImage[] = [
       </div>
       <div class="rz-pe__opening-aside">
         {project.statement && <p class="rz-pe__statement">{project.statement}</p>}
-        <p class="rz-pe__discipline">{project.category}</p>
+        <p class="rz-pe__discipline">{project.openingCategory ?? project.category}</p>
       </div>
     </div>
     {(location || project.year) && (
@@ -99,7 +99,7 @@ const allVisuals: ProjectImage[] = [
           </div>
         )}
         <figcaption class="rz-pe__hero-caption">
-          <span>{project.title}</span><span>{project.category}</span>
+          <span>{project.title}</span><span>{project.openingCategory ?? project.category}</span>
         </figcaption>
       </figure>
     </section>
@@ -112,10 +112,11 @@ const allVisuals: ProjectImage[] = [
         <h2 id="rz-pe-overview">El proyecto.</h2>
       </div>
       <div class="rz-pe__overview-detail">
-        {project.intro && <p class="rz-pe__overview-lead">{project.intro}</p>}
+        {project.intro && <p class:list={['rz-pe__overview-lead', project.introDetail && 'rz-pe__overview-lead--with-detail']}>{project.intro}</p>}
+        {project.introDetail && <p class="rz-pe__overview-context">{project.introDetail}</p>}
         {hasFacts && <dl class="rz-pe__facts">
           {project.typology && <div><dt>Tipología</dt><dd>{project.typology}</dd></div>}
-          {project.category && <div><dt>Disciplina</dt><dd>{project.category}</dd></div>}
+          {project.category && <div><dt>Disciplina</dt><dd>{project.discipline ?? project.category}</dd></div>}
           {project.participation && <div><dt>Participación de Rizzoma</dt><dd>{project.participation}</dd></div>}
           <div><dt>Dirección y autoría del trabajo de Rizzoma</dt><dd>Juan José Quintero Tobón</dd></div>
           {location && <div><dt>Ubicación</dt><dd>{location}</dd></div>}
@@ -171,7 +172,7 @@ const allVisuals: ProjectImage[] = [
           <p class="rz-pe__eyebrow">03 / Recorrido visual</p>
           <h2 id="rz-pe-tour">Miradas del proyecto.</h2>
         </div>
-        <p>Un recorrido por sus espacios y perspectivas, con imágenes del archivo real de {project.title}.</p>
+        <p>{project.tourIntro ?? `Un recorrido por sus espacios y perspectivas, con imágenes del archivo real de ${project.title}.`}</p>
       </div>
       {visibleTour.map((group) => (
         <section class="rz-pe__tour-group" aria-label={group.title}>
@@ -253,9 +254,9 @@ const allVisuals: ProjectImage[] = [
       <div class="rz-pe__section-header">
         <div>
           <p class="rz-pe__eyebrow">04 / Archivo complementario</p>
-          <h2 id="rz-pe-archive">Otras formas de verlo.</h2>
+          <h2 id="rz-pe-archive">{project.archiveTitle ? `${project.archiveTitle}.` : 'Otras formas de verlo.'}</h2>
         </div>
-        <p>Documentación adicional que amplía la lectura del proyecto, sin atribuir a las imágenes una fase de trabajo no confirmada.</p>
+        <p>{project.archiveIntro ?? 'Documentación adicional que amplía la lectura del proyecto, sin atribuir a las imágenes una fase de trabajo no confirmada.'}</p>
       </div>
       {archive.map((group) => (
         <section class="rz-pe__tour-group" aria-label={group.title}>
@@ -289,13 +290,13 @@ const allVisuals: ProjectImage[] = [
 
   <footer class="rz-pe__ending section-pad" aria-labelledby="rz-pe-contact-heading">
     <div class="rz-pe__ending-topline">
-      <span>Rizzoma / Siguiente paso</span>
-      <span>Arquitectura + visualización</span>
+      <span>{project.closingTitle ? [project.title, project.year].filter(Boolean).join(' / ') : 'Rizzoma / Siguiente paso'}</span>
+      <span>{project.closingTitle ? location : 'Arquitectura + visualización'}</span>
     </div>
     <div class="rz-pe__ending-inner">
       <div class="rz-pe__ending-intro">
-        <p class="rz-pe__eyebrow">Conversemos</p>
-        <h2 id="rz-pe-contact-heading">¿Tienes un proyecto en mente?</h2>
+        <p class="rz-pe__eyebrow">{project.closingEyebrow ?? 'Conversemos'}</p>
+        <h2 id="rz-pe-contact-heading">{project.closingTitle ?? '¿Tienes un proyecto en mente?'}</h2>
       </div>
       <div class="rz-pe__ending-contact">
         <p>{project.closingText ?? 'Ya sea un espacio por diseñar, un proyecto que necesitas visualizar o una idea que buscas desarrollar, podemos conversar sobre lo que tienes en mente.'}</p>
