@@ -6,7 +6,7 @@ import '@/styles/portfolio-cinematic.css';
 
 const cards = availableProjects;
 ---
-<PortfolioLayout title="Portafolio | Rizzoma Arquitectura" description="Obras seleccionadas de arquitectura, interiores y visualización de Rizzoma Arquitectura.">
+<PortfolioLayout title="Portafolio | Rizzoma Arquitectura" description="Proyectos seleccionados de arquitectura, diseño interior y visualización de Rizzoma Arquitectura.">
   <main class="rz-portfolio" id="portfolio-space">
     <header class="rz-portfolio-header">
       <a href={withBase('/')} class="rz-brand" aria-label="Rizzoma, volver al sitio">
@@ -20,9 +20,9 @@ const cards = availableProjects;
       <div class="rz-cinema-sticky">
         <div class="rz-cinema-heading"><section class="rz-portfolio-editorial">
         <p class="rz-overline">PORTAFOLIO / RIZZOMA</p>
-        <h1>Obras seleccionadas<span>.</span></h1>
+        <h1>Proyectos seleccionados<span>.</span></h1>
         <div class="rz-rule"></div>
-        <p>Una mirada sobre arquitectura, visualización y la relación entre espacio, materia y territorio.</p>
+        <p>Una selección de proyectos de arquitectura, interiorismo y visualización, atentos al espacio, la materia y el territorio.</p>
         <nav class="rz-cinema-index" aria-label="Ir a un proyecto del portafolio">
           {cards.map((project, index) => (
             <a
