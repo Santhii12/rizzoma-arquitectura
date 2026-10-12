@@ -26,11 +26,13 @@ const serviceLines = [
     startingPoint: 'Planos, modelos 3D, referencias o fotografías del lugar. El alcance y los entregables se definen según las necesidades de cada proyecto.',
     ctaLabel: 'Solicitar una propuesta',
     contactMessage: 'Hola, quisiera solicitar una propuesta de visualización arquitectónica. ¿Podemos conversar sobre mi proyecto y el material necesario?',
-    image: withBase('/images/services/visualizacion-atardecer.jpg'),
-    alt: 'Visualización arquitectónica de embarcaciones junto a una costa tropical durante el atardecer',
-    caption: 'Visualización arquitectónica / Archivo visual de Rizzoma',
-    imageWidth: 1143,
-    imageHeight: 2048,
+    image: withBase('/images/projects/cabo-san-miguel/exteriores-04.webp'),
+    alt: 'Cabo San Miguel, edificio de vivienda junto al embalse de Guatapé, con diseño de fachada, modelado y visualización comercial realizados por Rizzoma',
+    caption: 'Cabo San Miguel / Diseño de fachada y visualización comercial · Rizzoma',
+    relatedLink: withBase('/proyectos/cabo-san-miguel/'),
+    relatedLabel: 'Explorar Cabo San Miguel',
+    imageWidth: 1920,
+    imageHeight: 1080,
     featured: true
   },
   {
@@ -50,7 +52,9 @@ const serviceLines = [
     contactMessage: 'Hola, quisiera conversar sobre un proyecto de diseño arquitectónico. ¿Qué información necesitan para empezar?',
     image: withBase('/images/services/diseno-arquitectonico-casa.jpg'),
     alt: 'Visualización exterior de casa contemporánea con fachadas de madera y vidrio, rodeada de vegetación al atardecer',
-    caption: 'Diseño arquitectónico / Imagen de referencia',
+    caption: 'Diseño arquitectónico / Obra visual de Rizzoma',
+    relatedLink: withBase('/proyectos/casa-patio-horizonte/'),
+    relatedLabel: 'Explorar Casa Patio Horizonte',
     imageWidth: 1122,
     imageHeight: 1402,
     featured: false
@@ -72,7 +76,9 @@ const serviceLines = [
     contactMessage: 'Hola, quisiera conversar sobre la remodelación de un espacio. Tengo algunas referencias y me gustaría conocer cómo empezar.',
     image: withBase('/images/services/remodelacion-interior.jpg'),
     alt: 'Interior de sala residencial con sofá claro, mesa de centro, cocina abierta y escalera de madera',
-    caption: 'Interior residencial / Referencia de espacio y materialidad',
+    caption: 'Interior residencial / Diseño y visualización de Rizzoma',
+    relatedLink: withBase('/proyectos/casa-el-umbral/'),
+    relatedLabel: 'Explorar interiores de Casa El Umbral',
     imageWidth: 1448,
     imageHeight: 814,
     featured: false
@@ -168,6 +174,11 @@ const schema = [
           <p class="rz-services-guide__description">{service.description}</p>
           <a class="rz-services-guide__chapter-action" href={serviceContactUrl(service.contactMessage)} target="_blank" rel="noopener noreferrer" aria-label={`${service.ctaLabel} por WhatsApp, se abre en una pestaña nueva`}>
             {service.ctaLabel}<span aria-hidden="true">↗</span>
+          </a>
+          <a class="rz-services-guide__case-link" href={service.relatedLink}>
+            <span>Ver un proyecto de Rizzoma</span>
+            <strong>{service.relatedLabel}</strong>
+            <span aria-hidden="true">↗</span>
           </a>
           {service.id === 'visualizacion' && <span id="diseno-visualizacion" class="rz-services-guide__anchor" aria-hidden="true"></span>}
           <div class="rz-services-guide__details">
