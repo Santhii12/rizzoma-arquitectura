@@ -48,7 +48,7 @@ const schema = [
       <p class="eyebrow reveal">Contacto</p>
       <h1 class="page-title reveal">Cuéntanos<br />qué quieres crear.</h1>
       <p class="page-intro reveal">Una idea, un lote, una remodelación o un proyecto que necesita hacerse visible. La primera conversación es directamente con Juan José para entender qué necesitas y en qué etapa estás.</p>
-      <p class="contact-founder-note reveal">Rizzoma es un estudio independiente: hablarás directamente con quien desarrolla el proyecto.</p>
+      <p class="contact-founder-note reveal">Rizzoma es un estudio independiente: hablarás directamente con quien desarrolla el proyecto. Puedes escribir por WhatsApp o correo sin completar el formulario.</p>
       <div class="contact-direct reveal">
         <a href={site.whatsappUrl} target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>+57 315 741 4871 ↗</strong></a>
         <a href={`mailto:${site.email}`}><span>Correo</span><strong>{site.email} ↗</strong></a>
@@ -61,7 +61,7 @@ const schema = [
         <label>Empresa<input name="empresa_web" type="text" tabindex="-1" autocomplete="off" /></label>
       </div>
       <label><span>Nombre *</span><input name="nombre" type="text" autocomplete="name" required minlength="2" maxlength="80" placeholder="Tu nombre" /></label>
-      <label><span>Correo *</span><input name="email" type="email" autocomplete="email" required maxlength="160" placeholder="tu@correo.com" /></label>
+      <label><span>Correo (opcional)</span><input name="email" type="email" autocomplete="email" maxlength="160" placeholder="tu@correo.com" /></label>
       <label><span>WhatsApp</span><input name="telefono" type="tel" autocomplete="tel" inputmode="tel" maxlength="24" pattern="[0-9+() .-]{7,24}" placeholder="+57 ..." /></label>
       <label><span>¿Qué necesitas? *</span><select name="servicio" required><option value="">Selecciona una opción</option><option>Diseño arquitectónico</option><option>Remodelación</option><option>Diseño + visualización</option><option>Visualización</option><option>Otro</option></select></label>
       <label class="full"><span>Ubicación del proyecto</span><input name="ubicacion" type="text" maxlength="120" placeholder="Ciudad / municipio" /></label>
