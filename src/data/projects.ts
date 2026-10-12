@@ -418,11 +418,11 @@ export const projects: Project[] = [
     category: 'Diseño arquitectónico',
     typology: 'Vivienda',
     participation: 'Diseño arquitectónico, modelado 3D, renders y dibujos',
-    cover: oquedadImage('exteriores', 'fachada-atardecer'),
-    coverAlt: 'Vista exterior de Casa Oquedad al atardecer entre árboles, con fachada oscura, madera y grandes ventanas',
+    cover: oquedadImage('exteriores', 'fachada-principal'),
+    coverAlt: 'Vista frontal diurna de Casa Oquedad, vivienda de dos niveles con celosías de madera, ventanales, jardín y cielo azul',
     galleryLabel: 'Exteriores / Arquitectura y paisaje',
     gallery: [
-      oquedadImage('exteriores', 'fachada-atardecer'),
+      oquedadImage('exteriores', 'fachada-principal'),
       oquedadImage('exteriores', 'acceso-y-volumen'),
       oquedadImage('exteriores', 'fachada-jardin'),
       oquedadImage('exteriores', 'terraza-y-piscina')
