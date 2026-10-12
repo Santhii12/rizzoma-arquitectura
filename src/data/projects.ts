@@ -353,19 +353,22 @@ export const projects: Project[] = [
       santuarioImage('exteriores', 'fachada-en-ladrillo'),
       santuarioImage('exteriores', 'volumen-entre-arboles')
     ],
-    statement: 'Una lectura de la vivienda a través de sus espacios, la luz y el paisaje.',
-    intro: 'Casa El Santuario es una propuesta de vivienda diseñada y representada por Juan José Quintero Tobón desde Rizzoma. Sus dibujos, modelos y renders documentan la composición de fachadas, la doble altura, las relaciones entre ambientes y el encuentro de la arquitectura con la vegetación.',
-    closingText: 'Si tienes una idea de vivienda que quieres desarrollar o representar, podemos conversar sobre el lugar, las necesidades y el alcance del proyecto.',
+    statement: 'Entre ladrillo y grandes ventanales, una casa abierta a los árboles.',
+    intro: 'Casa El Santuario es una propuesta de vivienda ubicada en El Santuario, Antioquia. Su expresión exterior reúne ladrillo, superficies claras, una cubierta inclinada y grandes ventanales, mientras las vistas interiores muestran un espacio social de doble altura.',
+    introDetail: 'Juan José Quintero Tobón desarrolló desde Rizzoma el diseño arquitectónico, el modelado 3D, los renders y los dibujos del proyecto. Las imágenes permiten recorrer la vivienda desde sus fachadas y terrazas hasta la escalera que conecta los dos niveles.',
+    closingEyebrow: 'Rizzoma / Arquitectura + visualización',
+    closingText: 'Conversemos sobre tu proyecto, sus necesidades y las posibilidades de desarrollarlo o comunicarlo a través de la arquitectura y la visualización.',
+    tourIntro: 'Las perspectivas interiores muestran la cocina junto a la escalera, la sala abierta hacia la terraza, el comedor y el dormitorio. El recorrido permite reconocer la diferencia de escala entre el área social y los espacios más reservados.',
     tour: [
       {
         title: 'Espacios interiores',
-        description: 'Un recorrido por la entrada, las áreas sociales y el dormitorio, donde se aprecian las aperturas, los materiales y la luz natural.',
+        description: 'La secuencia comienza en la cocina y la escalera, continúa por la sala junto a los ventanales y el comedor, y termina en un dormitorio con apertura lateral. El ladrillo, la madera y las superficies claras adquieren distintos matices en cada ambiente.',
         display: 'gallery',
         images: [
           {
             src: santuarioImage('interiores', 'vestibulo-cocina'),
-            alt: 'Visualización de espacio interior de doble altura con ladrillo, ventanales, escalera y cocina',
-            caption: 'Acceso / Cocina y doble altura'
+            alt: 'Cocina con isla en primer plano, escalera de peldaños abiertos y ventanales de doble altura',
+            caption: 'Cocina / Escalera y doble altura'
           },
           {
             src: santuarioImage('interiores', 'sala-panoramica'),
@@ -374,8 +377,8 @@ export const projects: Project[] = [
           },
           {
             src: santuarioImage('interiores', 'comedor'),
-            alt: 'Comedor cálido integrado con la sala, estructura de madera, vidrio y mobiliario de tonos neutros',
-            caption: 'Comedor / Área social'
+            alt: 'Comedor con mesa de madera y sillas tapizadas, junto a un cerramiento acristalado con vistas a la sala y la escalera',
+            caption: 'Comedor / Junto al espacio social'
           },
           {
             src: santuarioImage('interiores', 'dormitorio'),
@@ -387,8 +390,8 @@ export const projects: Project[] = [
     ],
     sections: [
       {
-        title: 'Arquitectura y entorno',
-        text: 'Una de las vistas exteriores permite apreciar la escala de la vivienda entre árboles y superficies verdes. La imagen pone en relación el volumen construido, la cubierta y la vegetación inmediata.',
+        title: 'Una cubierta entre árboles',
+        text: 'Desde esta esquina, la cubierta inclinada prolonga sus aleros sobre el balcón y las fachadas claras. El volumen se reconoce entre los árboles, mientras la terraza introduce una escala más cercana al jardín.',
         image: {
           src: santuarioImage('mirada', 'volumen-y-entorno'),
           alt: 'Perspectiva exterior de una vivienda de dos niveles con cubierta inclinada y árboles alrededor',
@@ -396,8 +399,8 @@ export const projects: Project[] = [
         }
       },
       {
-        title: 'Luz y altura',
-        text: 'La perspectiva de la escalera destaca la altura interior, los muros de ladrillo y los vanos acristalados. Estos elementos permiten leer la entrada de luz y la continuidad visual entre niveles.',
+        title: 'La escalera y la altura',
+        text: 'Los peldaños abiertos recorren un muro de ladrillo junto a un ventanal alto rematado en arco. La luz lateral acompaña la subida y hace visible la conexión entre la planta baja y el nivel superior.',
         image: {
           src: santuarioImage('mirada', 'escalera-y-luz'),
           alt: 'Escalera interior junto a muro de ladrillo, arco acristalado y ventanales de doble altura',
@@ -405,8 +408,8 @@ export const projects: Project[] = [
         }
       },
       {
-        title: 'Espacios conectados',
-        text: 'En el área social, la doble altura, la escalera y las aperturas conectan visualmente los ambientes. La representación permite apreciar las proporciones y la relación entre mobiliario y arquitectura.',
+        title: 'Una sala de doble altura',
+        text: 'La sala reúne el estar, la escalera y la vista hacia el nivel superior en un mismo espacio. El sofá y las luminarias suspendidas permiten percibir su escala, mientras los muros de ladrillo y las superficies claras le dan carácter.',
         image: {
           src: santuarioImage('mirada', 'sala-doble-altura'),
           alt: 'Sala residencial de doble altura con escalera interior, sofá claro, ventanas y detalles de ladrillo',
@@ -414,10 +417,11 @@ export const projects: Project[] = [
         }
       }
     ],
+    archiveIntro: 'El modelo general, la planta y la axonometría ofrecen tres lecturas complementarias: el volumen en el terreno, la distribución de los ambientes y la organización de la cubierta y los niveles. No se presentan como documentación de obra ejecutada.',
     archive: [
       {
         title: 'Planos y exploraciones',
-        description: 'Láminas del proyecto que muestran la planta, la volumetría y su relación con el terreno. Se presentan como documentación visual, sin asignarles etapas de diseño no confirmadas.',
+        description: 'El modelo sitúa la vivienda sobre el terreno, la planta muestra la distribución de los espacios y el esquema axonométrico separa la cubierta para hacer legible el conjunto. Son recursos de representación, sin atribuirles una etapa técnica específica.',
         images: [
           {
             src: santuarioImage('archivo', 'modelo-general'),
