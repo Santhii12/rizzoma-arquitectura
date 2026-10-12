@@ -1,3 +1,5 @@
+export {};
+
 // A vertical film strip controlled entirely by native page scroll.
 // The section supplies scroll distance; its central composition stays sticky.
 const section = document.querySelector<HTMLElement>('[data-cinema-scroll]');
