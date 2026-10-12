@@ -1,0 +1,82 @@
+name: Import Casa Oquedad images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-casa-oquedad.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch original user-provided archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error --retry 3 --connect-timeout 20 --max-time 180 \
+            'https://d2ol7oe51mr4n9.cloudfront.net/user_3JyDbghZNXmeLLpGsUpuxXQddfw/276994d8-0e27-4b46-a3d2-47e1ff7f45ee.zip' \
+            -o /tmp/casa-oquedad.zip
+          echo '8beb60c576f1341866ad63fd76913be95d78e70fad36a7d10156a0778d757e17  /tmp/casa-oquedad.zip' | sha256sum --check
+      - name: Optimize the 15 images into the project's asset folder
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m venv /tmp/oquedad-env
+          /tmp/oquedad-env/bin/pip install --quiet Pillow
+          /tmp/oquedad-env/bin/python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps
+          import zipfile,io
+          mapping={
+            '1-02.png': 'archivo/planta.webp',
+            '1-03.png': 'archivo/distribucion-volumetrica.webp',
+            '1_Mesa de trabajo 1.png': 'archivo/modelo-emplazamiento.webp',
+            'Baño spa contemporáneo de madera y piedra.jpg': 'interiores/bano-spa.webp',
+            'ChatGPT Image 16 jun 2026, 06_14_01 p.m_.jpg': 'mirada/luz-en-bano.webp',
+            'ChatGPT Image 16 jun 2026, 06_14_11 p.m_.jpg': 'mirada/materialidad-bano.webp',
+            'ChatGPT Image 16 jun 2026, 06_43_57 p.m_.jpg': 'interiores/dormitorio-oscuro.webp',
+            'ChatGPT Image 24 jun 2026, 04_43_58 p.m_.jpg': 'interiores/sala-con-ventana-circular.webp',
+            'Cocina contemporánea bañada de sol.jpg': 'interiores/cocina-pasillo.webp',
+            'Cocina de lujo bañada por luz natural.jpg': 'mirada/cocina-isla.webp',
+            'Villa moderna entre árboles al atardecer.jpg': 'exteriores/fachada-atardecer.webp',
+            'WhatsApp Image 2026-08-24 at 18.12.17.jpeg': 'exteriores/acceso-y-volumen.webp',
+            'WhatsApp Image 2026-08-24 at 18.12.30.jpeg': 'interiores/dormitorio-ventana-circular.webp',
+            'WhatsApp Image 2026-08-24 at 18.12.48.jpeg': 'exteriores/fachada-jardin.webp',
+            'WhatsApp Image 2026-08-24 at 18.12.53.jpeg': 'exteriores/terraza-y-piscina.webp',
+          }
+          target_root=Path('public/images/projects/casa-oquedad')
+          with zipfile.ZipFile('/tmp/casa-oquedad.zip') as z:
+            actual={Path(n).name for n in z.namelist() if n.lower().endswith(('.jpg','.jpeg','.png','.webp'))}
+            assert actual==set(mapping), f'Unexpected archive contents: {actual.symmetric_difference(mapping)}'
+            for name, output in mapping.items():
+              with z.open('Nueva carpeta/'+name) as f:
+                im=ImageOps.exif_transpose(Image.open(io.BytesIO(f.read()))).convert('RGB')
+              # Large 8000px plans need greater linework fidelity, not full-resolution upload.
+              if output.startswith('archivo/'):
+                im.thumbnail((2600,2600),Image.Resampling.LANCZOS)
+              else:
+                im.thumbnail((1920,1920),Image.Resampling.LANCZOS)
+              target=target_root/output
+              target.parent.mkdir(parents=True,exist_ok=True)
+              im.save(target,'WEBP',quality=87,method=6)
+              with Image.open(target) as check:
+                assert check.format=='WEBP' and check.width>700
+              print(str(target),im.size,target.stat().st_size)
+          print('All 15 original project files processed and verified')
+          PY
+      - name: Commit optimized images to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/images/projects/casa-oquedad/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Import 15 Casa Oquedad project images'
+          git push
