@@ -13,7 +13,7 @@ export const site = {
   instagramUrl: 'https://www.instagram.com/rizzoma_arquitectura',
   instagramHandle: '@rizzoma_arquitectura',
   domain: 'https://rizzomaarquitectura.com',
-  ogImage: 'https://framerusercontent.com/images/cabZ2D5YdDKd1m0vI8cRQ0o4o8o.png?height=1054&width=1493',
+  ogImage: '/images/studio/home/rizzoma-hero-portada.webp',
   ogImageAlt: 'Casa Patio Horizonte, proyecto de Rizzoma Arquitectura',
   services: [
     'Diseño arquitectónico',
@@ -36,6 +36,6 @@ export const site = {
   founder: {
     name: 'Juan José Quintero Tobón',
     role: 'Arquitecto · Dirección de Rizzoma',
-    portrait: '/images/studio/juan-jose-quintero.webp'
+    portrait: '/images/studio/juan-jose-retrato-editorial.webp'
   }
 } as const;
