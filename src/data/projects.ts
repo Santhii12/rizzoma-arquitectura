@@ -249,7 +249,7 @@ export const projects: Project[] = [
       umbralImage('principal', 'bano')
     ],
     statement: 'Interiores en los que la luz y los materiales construyen atmósferas distintas.',
-    intro: 'Casa El Umbral es un proyecto residencial de diseño interior desarrollado por Juan José Quintero Tobón en Rizzoma. El diseño, modelado, renders y dibujos exploran salas, cocina, dormitorios y espacios de trabajo y bienestar, con especial atención a la luz, el mobiliario y las texturas.'
+    intro: 'Casa El Umbral es un proyecto residencial de diseño interior desarrollado por Juan José Quintero Tobón en Rizzoma. El diseño, modelado, renders y dibujos exploran salas, cocina, dormitorios y espacios de trabajo y bienestar, con especial atención a la luz, el mobiliario y las texturas.',
     closingText: 'Si tienes un espacio interior que necesitas desarrollar o visualizar, podemos conversar sobre sus usos, referencias y el alcance del trabajo.',
     tour: [
       {
@@ -327,7 +327,7 @@ export const projects: Project[] = [
       santuarioImage('exteriores', 'volumen-entre-arboles')
     ],
     statement: 'Una lectura de la vivienda a través de sus espacios, la luz y el paisaje.',
-    intro: 'Casa El Santuario es una propuesta de vivienda diseñada y representada por Juan José Quintero Tobón desde Rizzoma. Sus dibujos, modelos y renders documentan la composición de fachadas, la doble altura, las relaciones entre ambientes y el encuentro de la arquitectura con la vegetación.'
+    intro: 'Casa El Santuario es una propuesta de vivienda diseñada y representada por Juan José Quintero Tobón desde Rizzoma. Sus dibujos, modelos y renders documentan la composición de fachadas, la doble altura, las relaciones entre ambientes y el encuentro de la arquitectura con la vegetación.',
     closingText: 'Si tienes una idea de vivienda que quieres desarrollar o representar, podemos conversar sobre el lugar, las necesidades y el alcance del proyecto.',
     tour: [
       {
@@ -428,7 +428,7 @@ export const projects: Project[] = [
       oquedadImage('exteriores', 'terraza-y-piscina')
     ],
     statement: 'Volúmenes sobrios, madera y espacios abiertos al paisaje.',
-    intro: 'Casa Oquedad es un proyecto de vivienda desarrollado por Juan José Quintero Tobón en Rizzoma: diseño arquitectónico, modelado, dibujos y renders. Las vistas exteriores e interiores muestran sus volúmenes, la conexión con el jardín y el contraste entre materiales, luz y vegetación.'
+    intro: 'Casa Oquedad es un proyecto de vivienda desarrollado por Juan José Quintero Tobón en Rizzoma: diseño arquitectónico, modelado, dibujos y renders. Las vistas exteriores e interiores muestran sus volúmenes, la conexión con el jardín y el contraste entre materiales, luz y vegetación.',
     closingText: 'Si tienes una vivienda por desarrollar o un proyecto que necesitas visualizar, podemos conversar sobre sus necesidades, referencias y el alcance del trabajo.',
     tour: [{
       title: 'Espacios interiores',
