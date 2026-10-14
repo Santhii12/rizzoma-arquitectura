@@ -41,7 +41,12 @@ try {
       viewport: { width, height: width > 600 ? 390 : 844 }
     });
     const page = await context.newPage();
-    await page.goto(origin, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await page.goto(origin, { waitUntil: 'load', timeout: 30000 });
+    // La medición solo es válida después de que WebKit aplique las hojas de estilo.
+    await page.waitForFunction(() => {
+      const section = document.querySelector('.rizzoma-offer__featured');
+      return section && getComputedStyle(section).display === 'grid';
+    }, null, { timeout: 15000 });
     const visual = page.locator('.rizzoma-offer__featured-visual');
     const imageLocator = visual.locator('img');
     if (width === 375) {
