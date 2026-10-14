@@ -13,7 +13,7 @@ const cards = availableProjects;
         <img src={withBase('/brand/rizzoma-rzm-original.svg')} alt="Rizzoma, monograma RZM" width="565" height="400" />
       </a>
       <span class="rz-header-label">Arquitectura / Estudio independiente</span>
-      <a href={withBase('/')} class="rz-back">Volver al sitio <span aria-hidden="true">↗</span></a>
+      <a href={withBase('/')} class="rz-back">Volver al sitio <span aria-hidden="true">↗︎</span></a>
     </header>
 
     <section class="rz-cinema-scroll" aria-label="Recorrido cinematográfico por los proyectos" data-cinema-scroll>
@@ -34,7 +34,7 @@ const cards = availableProjects;
             >
               <span>{String(index + 1).padStart(2, '0')}</span>
               <span>{project.title}</span>
-              <span aria-hidden="true">↗</span>
+              <span aria-hidden="true">↗︎</span>
             </a>
           ))}
         </nav>
@@ -51,9 +51,9 @@ const cards = availableProjects;
               <a class="rz-project-link" href={withBase(`/proyectos/${project.slug}/`)} aria-label={`Abrir proyecto ${project.title}`}>
                 <div class="rz-project-image">
                   {project.cover && <img src={project.cover} alt={project.coverAlt ?? `Vista de ${project.title}`} loading={index < 2 ? 'eager' : 'lazy'} decoding="async" />}
-                  <span class="rz-image-arrow" aria-hidden="true">↗</span>
+                  <span class="rz-image-arrow" aria-hidden="true">↗︎</span>
                 </div>
-                <div class="rz-card-caption"><div><h2>{project.title}</h2><p class="rz-card-meta">{project.year && <span>{project.year}</span>}<span>{project.category}</span></p></div><span aria-hidden="true">↗</span></div>
+                <div class="rz-card-caption"><div><h2>{project.title}</h2><p class="rz-card-meta">{project.year && <span>{project.year}</span>}<span>{project.category}</span></p></div><span aria-hidden="true">↗︎</span></div>
               </a>
             </article>
           ))}
