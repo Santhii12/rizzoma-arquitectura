@@ -42,13 +42,26 @@ try {
     });
     const page = await context.newPage();
     await page.goto(origin, { waitUntil: 'domcontentloaded', timeout: 30000 });
-    const service = page.locator('.rizzoma-offer__featured');
     const visual = page.locator('.rizzoma-offer__featured-visual');
-    await service.scrollIntoViewIfNeeded();
-    await page.waitForFunction(() => {
-      const image = document.querySelector('.rizzoma-offer__featured-visual img');
-      return Boolean(image?.complete && image.naturalWidth > 0);
-    }, { timeout: 30000 });
+    const imageLocator = visual.locator('img');
+    // La imagen tiene loading=lazy; hay que desplazarla directamente al viewport.
+    await imageLocator.scrollIntoViewIfNeeded();
+    console.log('IMG initial ' + width + 'px: ' + JSON.stringify(await imageLocator.evaluate(img => ({
+      src: img.currentSrc, loading: img.loading, complete: img.complete,
+      naturalWidth: img.naturalWidth, bounds: img.getBoundingClientRect().toJSON()
+    }))));
+    try {
+      await page.waitForFunction(() => {
+        const image = document.querySelector('.rizzoma-offer__featured-visual img');
+        return Boolean(image?.complete && image.naturalWidth > 0);
+      }, null, { timeout: 15000 });
+    } catch (error) {
+      console.error('IMG failure ' + width + 'px: ' + JSON.stringify(await imageLocator.evaluate(img => ({
+        src: img.currentSrc, complete: img.complete, naturalWidth: img.naturalWidth,
+        outerHTML: img.outerHTML
+      }))));
+      throw error;
+    }
 
     const dimensions = await page.evaluate(() => {
       const picture = document.querySelector('.rizzoma-offer__featured-visual');
