@@ -43,7 +43,7 @@ const previewCopy = (project: Project) =>
         <span>{featured.category}</span>
         {featured.year && <span>{featured.year}</span>}
         {publishedUrl ? (
-          <a href={publishedUrl}>Ver proyecto <span aria-hidden="true">↗</span></a>
+          <a href={publishedUrl}>Ver proyecto <span aria-hidden="true">↗︎</span></a>
         ) : (
           <span class="rz-home-feature__status">Ficha en preparación</span>
         )}
@@ -62,7 +62,7 @@ const previewCopy = (project: Project) =>
           <span class="rz-home-project__name">{project.title}</span>
           <span class="rz-home-project__footer">
             <span>{project.category}</span>
-            <span class="rz-home-project__expand">Explorar <span aria-hidden="true">↗</span></span>
+            <span class="rz-home-project__expand">Explorar <span aria-hidden="true">↗︎</span></span>
           </span>
         </summary>
         <div class="rz-home-project__reveal">
@@ -86,7 +86,7 @@ const previewCopy = (project: Project) =>
           <p class="rz-home-project__description">{previewCopy(project)}</p>
           {project.available ? (
             <a class="rz-home-project__link" href={withBase(`/proyectos/${project.slug}/`)}>
-              Ver proyecto completo <span aria-hidden="true">↗</span>
+              Ver proyecto completo <span aria-hidden="true">↗︎</span>
             </a>
           ) : (
             <span class="rz-home-project__pending">Material visual en preparación</span>
