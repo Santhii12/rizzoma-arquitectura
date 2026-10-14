@@ -1,0 +1,48 @@
+name: Rizzoma · Safari móvil
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  webkit-iphone:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Obtener el código
+        uses: actions/checkout@v4
+
+      - name: Preparar Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Instalar dependencias de Rizzoma
+        run: npm install --no-audit --no-fund
+
+      - name: Revisar Astro y TypeScript
+        run: npm run check
+
+      - name: Generar versión GitHub Pages
+        run: npm run build
+        env:
+          GITHUB_PAGES: 'true'
+
+      - name: Instalar motor WebKit de Playwright
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.56.1
+          npx playwright install --with-deps webkit
+
+      - name: Probar iPhone 375, 390, 430 y 844 px
+        run: node tests/mobile-webkit.mjs
+
+      - name: Guardar capturas para revisión
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rizzoma-webkit-iphone
+          path: mobile-artifacts/
+          if-no-files-found: ignore
