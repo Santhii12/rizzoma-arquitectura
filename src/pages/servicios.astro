@@ -139,7 +139,7 @@ const schema = [
         <a href={`#${service.id}`}>
           <span>{service.number}</span>
           <span>{service.name}</span>
-          <span aria-hidden="true">↗</span>
+          <span aria-hidden="true">↗︎</span>
         </a>
       ))}
     </nav>
@@ -173,12 +173,12 @@ const schema = [
           <p class="rz-services-guide__summary">{service.summary}</p>
           <p class="rz-services-guide__description">{service.description}</p>
           <a class="rz-services-guide__chapter-action" href={serviceContactUrl(service.contactMessage)} target="_blank" rel="noopener noreferrer" aria-label={`${service.ctaLabel} por WhatsApp, se abre en una pestaña nueva`}>
-            {service.ctaLabel}<span aria-hidden="true">↗</span>
+            {service.ctaLabel}<span aria-hidden="true">↗︎</span>
           </a>
           <a class="rz-services-guide__case-link" href={service.relatedLink}>
             <span>Ver un proyecto de Rizzoma</span>
             <strong>{service.relatedLabel}</strong>
-            <span aria-hidden="true">↗</span>
+            <span aria-hidden="true">↗︎</span>
           </a>
           {service.id === 'visualizacion' && <span id="diseno-visualizacion" class="rz-services-guide__anchor" aria-hidden="true"></span>}
           <div class="rz-services-guide__details">
@@ -240,7 +240,7 @@ const schema = [
       <div class="rz-services-guide__contact-details">
         <p>No hace falta tener una propuesta terminada. Cuéntanos qué tipo de trabajo necesitas y comparte la información disponible. Desde ahí podemos definir el siguiente paso.</p>
         <a href={withBase('/contacto/')} class="rz-services-guide__contact-link">
-          Hablemos de tu proyecto <span aria-hidden="true">↗</span>
+          Hablemos de tu proyecto <span aria-hidden="true">↗︎</span>
         </a>
         <p class="rz-services-guide__contact-note">El contacto es con Juan José, responsable del estudio.</p>
       </div>
