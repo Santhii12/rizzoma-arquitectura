@@ -2,13 +2,20 @@
 // Ejecutar tras npm run build y con el paquete playwright instalado.
 import { webkit, devices } from 'playwright';
 import { spawn } from 'node:child_process';
-import { mkdir } from 'node:fs/promises';
+import { mkdir, symlink } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 
 const origin = 'http://127.0.0.1:4321/rizzoma-arquitectura/';
-const server = spawn('npm', ['run', 'preview', '--', '--host', '127.0.0.1', '--port', '4321'], {
-  stdio: ['ignore', 'pipe', 'pipe']
-});
+// Simula exactamente el prefijo publicado de GitHub Pages, incluso para imágenes y CSS.
+await mkdir('mobile-preview', { recursive: true });
+try {
+  await symlink('../dist', 'mobile-preview/rizzoma-arquitectura', 'dir');
+} catch (error) {
+  if (error.code !== 'EEXIST') throw error;
+}
+const server = spawn('python3', [
+  '-m', 'http.server', '4321', '--bind', '127.0.0.1', '--directory', 'mobile-preview'
+], { stdio: ['ignore', 'pipe', 'pipe'] });
 let logs = '';
 server.stdout.on('data', chunk => { logs += String(chunk); });
 server.stderr.on('data', chunk => { logs += String(chunk); });
@@ -37,7 +44,6 @@ try {
     await page.goto(origin, { waitUntil: 'domcontentloaded', timeout: 30000 });
     const service = page.locator('.rizzoma-offer__featured');
     const visual = page.locator('.rizzoma-offer__featured-visual');
-    const img = visual.locator('img');
     await service.scrollIntoViewIfNeeded();
     await page.waitForFunction(() => {
       const image = document.querySelector('.rizzoma-offer__featured-visual img');
