@@ -44,6 +44,22 @@ try {
     await page.goto(origin, { waitUntil: 'domcontentloaded', timeout: 30000 });
     const visual = page.locator('.rizzoma-offer__featured-visual');
     const imageLocator = visual.locator('img');
+    if (width === 375) {
+      const css = await page.locator('link[rel="stylesheet"]').evaluateAll(nodes =>
+        nodes.map(node => node.href));
+      const checks = [];
+      for (const resource of [...css.slice(0, 4), new URL('images/studio/home/rizzoma-hero-portada.webp', origin).toString()]) {
+        const response = await page.request.get(resource);
+        checks.push({ resource, status: response.status(), contentType: response.headers()['content-type'] });
+      }
+      console.log('ASSETS ' + JSON.stringify(checks));
+      console.log('DOCUMENT ' + JSON.stringify(await page.evaluate(() => ({
+        title: document.title,
+        stylesheets: document.styleSheets.length,
+        htmlBackground: getComputedStyle(document.body).backgroundColor,
+        firstLink: document.querySelector('link[rel="stylesheet"]')?.getAttribute('href')
+      }))));
+    }
     // La imagen tiene loading=lazy; hay que desplazarla directamente al viewport.
     await imageLocator.scrollIntoViewIfNeeded();
     console.log('IMG initial ' + width + 'px: ' + JSON.stringify(await imageLocator.evaluate(img => ({
