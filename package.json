@@ -10,7 +10,7 @@
     "check": "astro check"
   },
   "dependencies": {
-    "astro": "7.3.5",
+    "astro": "7.3.8",
     "howler": "^2.2.4"
   },
   "devDependencies": {
