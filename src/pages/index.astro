@@ -50,14 +50,14 @@ const schema = {
       <p class="rizzoma-hero-statement">Hay espacios que cambian la forma de habitar el mundo.</p>
       <p class="rizzoma-hero-description">Diseño arquitectónico y visualización para proyectos en relación con el lugar, la materia y la vida.</p>
       <div class="rizzoma-hero-actions">
-        <a href={withBase('/portafolio/')}>Explorar proyectos <span aria-hidden="true">↗</span></a>
-        <a href={withBase('/visualizacion-arquitectonica-medellin/')}>Solicitar visualización <span aria-hidden="true">↗</span></a>
+        <a href={withBase('/portafolio/')}>Explorar proyectos <span aria-hidden="true">↗︎</span></a>
+        <a href={withBase('/visualizacion-arquitectonica-medellin/')}>Solicitar visualización <span aria-hidden="true">↗︎</span></a>
       </div>
     </div>
     {heroProject && (
       <div class="rizzoma-hero-credit">
         <span>Imagen / {heroProject.title}</span>
-        <a href={withBase(`/proyectos/${heroProject.slug}/`)}>Ver proyecto ↗</a>
+        <a href={withBase(`/proyectos/${heroProject.slug}/`)}>Ver proyecto ↗︎</a>
       </div>
     )}
     <span class="rizzoma-hero-scroll" aria-hidden="true">DESCUBRIR ↓</span>
@@ -79,7 +79,7 @@ const schema = {
         <div class="portfolio-home__action">
           <a class="portfolio-home__cta" href={withBase('/portafolio/')} aria-label="Explorar el portafolio completo de Rizzoma Arquitectura">
             <span class="portfolio-home__cta-label">Explora todos nuestros proyectos</span>
-            <span class="portfolio-home__cta-arrow" aria-hidden="true">↗</span>
+            <span class="portfolio-home__cta-arrow" aria-hidden="true">↗︎</span>
           </a>
         </div>
       </>
@@ -114,7 +114,7 @@ const schema = {
         <div><span>Práctica</span><strong>Arquitectura + visualización</strong></div>
       </div>
 
-      <a class="primary-link" href={withBase('/estudio/')}>Conocer el estudio <span aria-hidden="true">↗</span></a>
+      <a class="primary-link" href={withBase('/estudio/')}>Conocer el estudio <span aria-hidden="true">↗︎</span></a>
     </div>
   </section>
 

@@ -109,3 +109,22 @@
   /* At compact widths the project cards themselves form the navigable list. */
   .rz-cinema-index { display: none; }
 }
+
+
+/* Lectura y objetivos táctiles del archivo en iPhone. */
+@media (max-width: 600px) {
+  .rz-cinema-scroll .rz-card-meta {
+    font-size: 11px;
+    line-height: 1.5;
+    letter-spacing: .055em;
+  }
+  .rz-cinema-scroll .rz-project-link {
+    display: block;
+    min-height: 44px;
+  }
+  .rz-cinema-scroll .rz-image-arrow,
+  .rz-portfolio-header .rz-back span {
+    font-family: Arial, Helvetica, sans-serif;
+    font-variant-emoji: text;
+  }
+}

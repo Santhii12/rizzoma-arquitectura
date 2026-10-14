@@ -50,9 +50,9 @@ const schema = [
       <p class="page-intro reveal">Una idea, un lote, una remodelación o un proyecto que necesita hacerse visible. La primera conversación es directamente con Juan José para entender qué necesitas y en qué etapa estás.</p>
       <p class="contact-founder-note reveal">Rizzoma es un estudio independiente: hablarás directamente con quien desarrolla el proyecto. Puedes escribir por WhatsApp o correo sin completar el formulario.</p>
       <div class="contact-direct reveal">
-        <a href={site.whatsappUrl} target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>+57 315 741 4871 ↗</strong></a>
-        <a href={`mailto:${site.email}`}><span>Correo</span><strong>{site.email} ↗</strong></a>
-        <a href={site.instagramUrl} target="_blank" rel="noreferrer"><span>Instagram</span><strong>{site.instagramHandle} ↗</strong></a>
+        <a href={site.whatsappUrl} target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>+57 315 741 4871 ↗︎</strong></a>
+        <a href={`mailto:${site.email}`}><span>Correo</span><strong>{site.email} ↗︎</strong></a>
+        <a href={site.instagramUrl} target="_blank" rel="noreferrer"><span>Instagram</span><strong>{site.instagramHandle} ↗︎</strong></a>
       </div>
     </div>
 
@@ -67,7 +67,7 @@ const schema = [
       <label class="full"><span>Ubicación del proyecto</span><input name="ubicacion" type="text" maxlength="120" placeholder="Ciudad / municipio" /></label>
       <label class="full"><span>Cuéntanos brevemente sobre el proyecto *</span><textarea name="mensaje" rows="6" required minlength="10" maxlength="1800" placeholder="¿Qué quieres hacer, en qué etapa estás y qué necesitas de Rizzoma?"></textarea></label>
       <label class="consent full"><input name="privacidad" type="checkbox" required /><span>Acepto que Rizzoma use estos datos únicamente para responder mi solicitud. <a href={withBase('/privacidad/')}>Ver privacidad.</a></span></label>
-      <button class="submit-button" type="submit">Continuar por WhatsApp <span aria-hidden="true">↗</span></button>
+      <button class="submit-button" type="submit">Continuar por WhatsApp <span aria-hidden="true">↗︎</span></button>
       <p class="form-note" data-form-note>Al enviar, se abrirá WhatsApp con el mensaje preparado. Tú decides si lo envías.</p>
     </form>
     <noscript><p class="form-note">Si tienes JavaScript desactivado, puedes escribir directamente a <a href={`mailto:${site.email}`}>{site.email}</a> o abrir <a href={site.whatsappUrl}>WhatsApp</a>.</p></noscript>

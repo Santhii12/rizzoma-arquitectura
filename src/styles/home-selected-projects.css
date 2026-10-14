@@ -256,3 +256,44 @@
   .rz-home-project__expand span { transition: none !important; }
   .rz-home-project__reveal { animation: none !important; }
 }
+
+
+/* iPhone: flechas sobrias, enlaces legibles y zonas táctiles cómodas. */
+@media (max-width: 700px) {
+  .rz-home-feature__meta {
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px 16px;
+    font-size: 11px;
+    line-height: 1.55;
+    letter-spacing: .06em;
+  }
+  .rz-home-feature__meta > span:first-child {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+  .rz-home-feature__meta a,
+  .rz-home-project__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    min-height: 44px;
+    padding: 10px 0;
+    text-decoration: none;
+  }
+  .rz-home-feature__meta a span,
+  .rz-home-project__expand span,
+  .rz-home-project__link span {
+    font-family: Arial, Helvetica, sans-serif;
+    font-variant-emoji: text;
+    font-size: 14px;
+    line-height: 1;
+  }
+  .rz-home-project__footer {
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: .045em;
+  }
+  .rz-home-project__expand { white-space: nowrap; }
+}
