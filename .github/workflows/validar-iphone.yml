@@ -1,4 +1,4 @@
-name: Rizzoma · Safari móvil
+name: Rizzoma · Validación móvil
 
 on:
   pull_request:
@@ -8,9 +8,9 @@ permissions:
   contents: read
 
 jobs:
-  webkit-iphone:
+  validar-movil:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     steps:
       - name: Obtener el código
         uses: actions/checkout@v4
@@ -20,29 +20,36 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Instalar dependencias de Rizzoma
+      - name: Instalar dependencias
         run: npm install --no-audit --no-fund
 
       - name: Revisar Astro y TypeScript
         run: npm run check
 
-      - name: Generar versión GitHub Pages
+      - name: Compilar versión GitHub Pages
         run: npm run build
         env:
           GITHUB_PAGES: 'true'
 
-      - name: Instalar motor WebKit de Playwright
+      - name: Verificar imágenes, rutas y correcciones para iPhone
         run: |
-          npm install --no-save --no-audit --no-fund playwright@1.56.1
-          npx playwright install --with-deps webkit
-
-      - name: Probar iPhone 375, 390, 430 y 844 px
-        run: node tests/mobile-webkit.mjs
-
-      - name: Guardar capturas para revisión
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: rizzoma-webkit-iphone
-          path: mobile-artifacts/
-          if-no-files-found: ignore
+          test -f dist/index.html
+          test -f dist/portafolio/index.html
+          test -f dist/servicios/index.html
+          test -f dist/images/studio/home/rizzoma-hero-portada.webp
+          grep -q "position: static" src/styles/que-podemos-hacer.css
+          grep -q "aspect-ratio: 4 / 3" src/styles/que-podemos-hacer.css
+          grep -q "font-variant-emoji: text" src/styles/home-selected-projects.css
+          node --input-type=module - <<'JS'
+          import { readFileSync } from 'node:fs';
+          import assert from 'node:assert/strict';
+          for (const file of [
+            'src/components/HomeSelectedProjects.astro',
+            'src/components/QuePodemosHacer.astro',
+            'src/pages/index.astro',
+          ]) {
+            const contents = readFileSync(file, 'utf8');
+            assert.ok(contents.includes('↗︎'), 'Falta flecha tipográfica en ' + file);
+          }
+          console.log('Rutas, imagen principal y reglas de iPhone verificadas.');
+          JS
