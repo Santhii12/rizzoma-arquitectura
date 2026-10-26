@@ -249,7 +249,7 @@ if (!motionMedia.matches && 'IntersectionObserver' in window && 'animate' in Ele
       const delay = card ? Math.min(siblings.indexOf(element), 2) * 75 : 0;
       const animation = element.animate(
         [
-          { opacity: 0.68, transform: 'translateY(12px)' },
+          { opacity: 0.8, transform: 'translateY(10px)' },
           { opacity: 1, transform: 'translateY(0px)' }
         ],
         { duration: 590, easing, delay, fill: 'backwards' }
@@ -259,7 +259,12 @@ if (!motionMedia.matches && 'IntersectionObserver' in window && 'animate' in Ele
     });
   }, { threshold: 0.08, rootMargin: '0px 0px -3% 0px' });
 
-  document.querySelectorAll<HTMLElement>(targets.join(',')).forEach((element) => observer.observe(element));
+  document.querySelectorAll<HTMLElement>(targets.join(',')).forEach((element) => {
+    // Already visible on first paint: no late opacity reset or flash.
+    const bounds = element.getBoundingClientRect();
+    if (bounds.bottom > 0 && bounds.top < window.innerHeight - 24) return;
+    observer.observe(element);
+  });
 
   // Text, buttons and the image remain visible until their brief entrance begins.
   const hero = document.querySelector<HTMLElement>('.rizzoma-immersive-hero');
@@ -278,7 +283,7 @@ if (!motionMedia.matches && 'IntersectionObserver' in window && 'animate' in Ele
         if (!el) return;
         const animation = el.animate(
           [
-            { opacity: 0.72, transform: 'translateY(9px)' },
+            { opacity: 0.88, transform: 'translateY(7px)' },
             { opacity: 1, transform: 'translateY(0px)' }
           ],
           { duration: 570, easing, delay: index * 75, fill: 'backwards' }
