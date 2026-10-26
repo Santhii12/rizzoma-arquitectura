@@ -460,76 +460,101 @@
   .rizzoma-offer__service-top { gap: 7px 15px; }
 }
 
-/* Dos caminos comerciales. Solo extiende el sistema editorial existente. */
+/* Dos formas de contactar: lectura editorial, proporciones discretas y acceso temprano. */
 .rizzoma-offer__paths {
-  margin-top: clamp(65px, 7vw, 110px);
-  padding-top: clamp(30px, 4vw, 57px);
-  border-top: 1px solid rgba(77, 76, 63, .27);
+  margin: 0 0 clamp(45px, 5.5vw, 88px);
+  border-top: 1px solid rgba(77, 76, 63, .32);
+  border-bottom: 1px solid rgba(77, 76, 63, .32);
 }
 .rizzoma-offer__paths-intro {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 16px 35px;
-  margin-bottom: clamp(22px, 2.5vw, 38px);
+  gap: 8px 24px;
+  padding: 17px 0;
+  border-bottom: 1px solid rgba(77, 76, 63, .19);
 }
 .rizzoma-offer__paths-intro h3 {
-  max-width: 19ch;
   margin: 0;
   color: var(--offer-ink);
-  font: 400 clamp(2rem, 3.3vw, 3.9rem)/1.15 var(--display, Georgia, serif);
-  letter-spacing: -.023em;
-  text-wrap: balance;
+  font: 400 clamp(1.35rem, 1.9vw, 2rem)/1.25 var(--display, Georgia, serif);
+  letter-spacing: -.02em;
 }
 .rizzoma-offer__paths-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(14px, 2vw, 28px);
 }
 .rizzoma-offer__path {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 13px 12px;
   align-content: start;
-  min-height: 210px;
-  padding: clamp(20px, 2.7vw, 40px);
-  border: 1px solid rgba(77, 76, 63, .28);
+  align-items: center;
+  gap: 8px 16px;
+  min-width: 0;
+  padding: clamp(21px, 2.5vw, 35px);
   color: var(--offer-ink);
   text-decoration: none;
-  transition: background .18s ease, border-color .18s ease;
+  transition: color .2s ease;
 }
-.rizzoma-offer__path:hover { background: #eae3d6; border-color: rgba(77,76,63,.62); }
-.rizzoma-offer__path:focus-visible { outline: 2px solid var(--offer-olive); outline-offset: 4px; }
+.rizzoma-offer__path:first-child {
+  padding-left: 0;
+  border-right: 1px solid rgba(77, 76, 63, .19);
+}
+.rizzoma-offer__path:last-child { padding-right: 0; }
+.rizzoma-offer__path:is(:hover, :focus-visible) { color: #8e754a; }
+.rizzoma-offer__path:focus-visible {
+  outline: 2px solid var(--offer-olive);
+  outline-offset: -3px;
+}
 .rizzoma-offer__path-audience {
   grid-column: 1 / -1;
-  font: 600 10px/1.5 var(--sans, Arial, sans-serif);
   color: #897755;
-  letter-spacing: .13em;
+  font: 600 10px/1.5 var(--sans, Arial, sans-serif);
+  letter-spacing: .12em;
   text-transform: uppercase;
 }
 .rizzoma-offer__path strong {
   grid-column: 1;
-  font: 400 clamp(1.5rem, 2.4vw, 2.8rem)/1.18 var(--display, Georgia, serif);
+  font: 400 clamp(1.55rem, 2.3vw, 2.55rem)/1.16 var(--display, Georgia, serif);
   letter-spacing: -.02em;
+  text-wrap: balance;
 }
 .rizzoma-offer__path-description {
   grid-column: 1 / -1;
-  max-width: 48ch;
+  max-width: 57ch;
   color: var(--offer-muted);
   font: 400 clamp(13px, 1vw, 15px)/1.65 var(--sans, Arial, sans-serif);
 }
 .rizzoma-offer__path-arrow {
   grid-column: 2;
   grid-row: 2;
-  font: 400 22px/1 Arial, sans-serif;
+  justify-self: end;
+  color: #827454;
+  font: 400 20px/1 Arial, Helvetica, sans-serif;
   font-variant-emoji: text;
 }
 @media (max-width: 700px) {
-  .rizzoma-offer__paths-grid { grid-template-columns: minmax(0,1fr); }
-  .rizzoma-offer__path { min-height: 0; padding: 23px 21px; }
-  .rizzoma-offer__paths-intro { flex-direction: column; align-items: flex-start; }
-  .rizzoma-offer__path strong { font-size: clamp(1.55rem, 6.4vw, 2.1rem); }
+  .rizzoma-offer__paths { margin-bottom: 44px; }
+  .rizzoma-offer__paths-intro {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+    padding: 15px 0 17px;
+  }
+  .rizzoma-offer__paths-intro h3 { font-size: 1.5rem; }
+  .rizzoma-offer__paths-grid { grid-template-columns: minmax(0, 1fr); }
+  .rizzoma-offer__path {
+    min-height: 0;
+    padding: 23px 0;
+  }
+  .rizzoma-offer__path:first-child {
+    border-right: 0;
+    border-bottom: 1px solid rgba(77, 76, 63, .19);
+  }
+  .rizzoma-offer__path:last-child { padding-right: 0; }
+  .rizzoma-offer__path strong { font-size: clamp(1.55rem, 6vw, 2rem); }
+  .rizzoma-offer__path-description { font-size: 13px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .rizzoma-offer__path { transition: none; }
