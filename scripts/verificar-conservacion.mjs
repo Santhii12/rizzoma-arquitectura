@@ -91,4 +91,19 @@ assert.ok(clientScript.includes("entryType === 'colaboracion'"), 'La selección 
 assert.ok(clientScript.includes("entryType === 'proyecto-propio'"), 'La selección de proyecto propio no está programada');
 console.log('Verificados los dos caminos de contacto, anclas y preselección de tipo de encargo.');
 
+// Motion must be progressive: no content is hidden by default if scripts fail.
+const motionCSS = readFileSync('src/styles/motion-refinement.css', 'utf8');
+const motionJS = readFileSync('src/scripts/site.ts', 'utf8');
+const layoutSource = readFileSync('src/layouts/BaseLayout.astro', 'utf8');
+assert.ok(layoutSource.includes("import '@/styles/motion-refinement.css'"), 'Motion CSS not imported');
+assert.ok(motionCSS.includes('.motion-ready .reveal.is-visible'), 'Legacy reveal fallback missing');
+assert.ok(motionCSS.includes('opacity: 1;'), 'Legacy reveal must be visible');
+assert.ok(motionCSS.includes('(hover: hover) and (pointer: fine)'), 'Image hover must exclude touch devices');
+assert.ok(motionCSS.includes('prefers-reduced-motion: reduce'), 'Reduced motion CSS is missing');
+assert.ok(motionJS.includes('new WeakSet<Element>()'), 'One-shot scroll entrance protection is missing');
+assert.ok(motionJS.includes('watching.unobserve(entry.target)'), 'Reveals must stop observing after first entry');
+assert.ok(motionJS.includes('motionMedia.addEventListener'), 'Reduced-motion changes must cancel animations');
+assert.ok(!motionJS.includes("document.querySelectorAll<HTMLElement>('.reveal').forEach((element) => revealObserver.observe(element))"), 'Old reveal observer is still active');
+console.log('Movimiento progresivo, hover accesible y contenido sin bloqueo verificados.');
+
 console.log('Verificados ' + pages.length + ' documentos, ' + slugs.length + ' proyectos y ' + imageCount + ' referencias de imágenes.');

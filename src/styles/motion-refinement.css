@@ -1,0 +1,67 @@
+/* Rizzoma: microinteracciones editoriales.
+   No hay contenido oculto en reposo: la aparición solo existe mientras Web Animations
+   está ejecutando una transición observada. No se modifican tamaños ni posiciones finales. */
+
+/* El antiguo sistema .motion-ready no debe ocultar contenido si un script falla.
+   La animación progresiva se ejecuta con Element.animate() y termina en estilos normales. */
+.motion-ready .reveal,
+.motion-ready .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  /* Zoom máximo de 3 %, siempre contenido dentro de la foto, sin alterar las tarjetas. */
+  .rz-home-feature__figure > img,
+  .rz-home-project__figure > img,
+  .rizzoma-offer__path-image img,
+  .rizzoma-offer__secondary-visual img,
+  .rz-services-guide__media img {
+    transition: transform 500ms cubic-bezier(.22, 1, .36, 1);
+    transform-origin: center;
+  }
+
+  .rz-home-feature:hover .rz-home-feature__figure > img,
+  .rz-home-feature:focus-within .rz-home-feature__figure > img,
+  .rz-home-project[open]:hover .rz-home-project__figure > img,
+  .rizzoma-offer__path:hover .rizzoma-offer__path-image img,
+  .rizzoma-offer__path:focus-visible .rizzoma-offer__path-image img,
+  .rizzoma-offer__secondary-card:hover .rizzoma-offer__secondary-visual img,
+  .rz-services-guide__chapter:hover .rz-services-guide__media img {
+    transform: scale(1.03);
+  }
+
+  .rz-home-project__figure,
+  .rizzoma-offer__secondary-visual,
+  .rizzoma-offer__path-image {
+    overflow: hidden;
+  }
+
+  /* La indicación de acción ya existe; solo varía suavemente su línea y tono. */
+  .rizzoma-offer__path-action,
+  .rz-home-feature__meta a,
+  .rz-services-guide__chapter-action,
+  .rz-services-guide__contact-link {
+    transition: color 300ms ease, border-color 300ms ease, opacity 300ms ease;
+  }
+  .rizzoma-offer__path:is(:hover, :focus-visible) .rizzoma-offer__path-action,
+  .rz-home-feature__meta a:is(:hover, :focus-visible),
+  .rz-services-guide__chapter-action:is(:hover, :focus-visible),
+  .rz-services-guide__contact-link:is(:hover, :focus-visible) {
+    color: #8a754d;
+    border-color: currentColor;
+  }
+}
+
+/* Por accesibilidad, ningún efecto de este archivo queda activo con movimiento reducido. */
+@media (prefers-reduced-motion: reduce) {
+  .rz-home-feature__figure > img,
+  .rz-home-project__figure > img,
+  .rizzoma-offer__path-image img,
+  .rizzoma-offer__secondary-visual img,
+  .rz-services-guide__media img {
+    transform: none !important;
+    transition: none !important;
+  }
+}
