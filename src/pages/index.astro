@@ -11,7 +11,8 @@ import '@/styles/home-immersive.css';
 
 const heroCover = withBase('/images/studio/home/rizzoma-hero-portada.webp');
 const heroProject = projects.find((project) => project.slug === 'casa-patio-horizonte');
-const miradaPhoto = heroProject?.gallery?.[1];
+const miradaPhoto = projects.find((project) => project.slug === 'casa-el-santuario')
+  ?.gallery?.[1]; // Fachada entre vegetación; imagen original del proyecto.
 const heroImageUrl = new URL(heroCover, Astro.site ?? new URL(site.domain)).toString();
 const mainPortfolioProject = projects.find((project) => project.slug === 'cabo-san-miguel');
 const previewProjects = ['casa-patio-horizonte', 'casa-el-santuario', 'casa-el-umbral']
@@ -65,7 +66,11 @@ const schema = {
     <span class="rizzoma-hero-scroll" aria-hidden="true">DESCUBRIR ↓</span>
   </section>
 
-  <NuestraMirada image={miradaPhoto} imageCredit="Casa Patio Horizonte / Rizzoma Arquitectura" />
+  <NuestraMirada
+    image={miradaPhoto}
+    imageAlt="Casa El Santuario: fachada residencial entre vegetación, con materiales naturales y relación con el paisaje"
+    imageCredit="Casa El Santuario / Rizzoma Arquitectura"
+  />
 
   <section id="proyectos" class="portfolio-home section-pad">
     <div class="section-head reveal">
