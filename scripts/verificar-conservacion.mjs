@@ -61,13 +61,22 @@ for (const label of ['Desarrollo arquitectónico', 'Modelado y documentación ar
   assert.ok(servicePage.includes(label), 'Servicio ausente: ' + label);
 }
 const homePage = readFileSync('dist/index.html', 'utf8');
-const firstContact = prefix + 'contacto/?tipo=proyecto-propio#contacto-formulario';
-const secondContact = prefix + 'servicios/#colaboraciones';
+const firstContact = prefix + 'servicios/#arquitectura';
+const secondContact = prefix + 'contacto/?tipo=colaboracion#colaboraciones';
 const collabContact = prefix + 'contacto/?tipo=colaboracion#colaboraciones';
-assert.ok(homePage.includes(firstContact), 'El camino de proyecto propio no llega al formulario');
-assert.ok(homePage.includes(secondContact), 'El camino de colaboración no llega a Servicios');
+assert.ok(homePage.includes(firstContact), 'La tarjeta de proyecto propio no lleva a servicios de arquitectura');
+assert.ok(homePage.includes(secondContact), 'La tarjeta de colaboración no lleva al contacto especializado');
 assert.ok(homePage.includes('Tengo un proyecto de arquitectura'), 'Falta el primer camino de contacto');
 assert.ok(homePage.includes('Busco apoyo para un proyecto'), 'Falta el segundo camino de contacto');
+assert.ok(homePage.includes('Conoce nuestros servicios'), 'Falta la acción de servicios de arquitectura');
+assert.ok(homePage.includes('Hablemos de una colaboración'), 'Falta la acción de colaboración');
+assert.ok(homePage.includes('Diseño arquitectónico y visualización para dar forma a nuevas ideas y espacios'), 'Falta el texto exacto del proyecto propio');
+assert.ok(homePage.includes('Colaboración con arquitectos y estudios en diseño, modelado, documentación y visualización arquitectónica'), 'Falta el texto exacto del apoyo externo');
+assert.ok(homePage.includes(prefix + 'images/projects/casa-patio-horizonte/exteriores/exterior-01.webp'), 'La primera tarjeta no usa la imagen original de Patio Horizonte');
+assert.ok(homePage.includes(prefix + 'images/projects/cabo-san-miguel/modelo-01.webp'), 'La segunda tarjeta no usa el modelo original de Cabo San Miguel');
+const pathCards = homePage.match(/class="rizzoma-offer__path"/g) ?? [];
+assert.equal(pathCards.length, 2, 'Deben existir exactamente dos tarjetas de acceso');
+
 assert.ok(contactPage.includes('id="contacto-formulario"'), 'Falta el ancla del primer camino');
 assert.ok(contactPage.includes('id="colaboraciones"'), 'Falta el ancla del contacto de colaboración');
 assert.ok(contactPage.includes('Colaboración con arquitecto o estudio'), 'Falta el tipo de encargo colaborativo');
