@@ -2,10 +2,14 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { withBase } from '@/utils/paths';
 ---
-<BaseLayout title="Página no encontrada | Rizzoma" description="La página que buscas no existe." noindex={true}>
+<BaseLayout title="Página no encontrada | Rizzoma Arquitectura" description="La página solicitada no está disponible. Regresa al inicio o explora los proyectos de Rizzoma Arquitectura." noindex={true} compactFooter={true}>
   <section class="not-found section-pad">
     <p class="eyebrow">404</p>
     <h1 class="page-title">Este espacio<br />no existe.</h1>
-    <a class="primary-link" href={withBase('/')}>Volver al inicio ↗</a>
+    <p>Puede que la dirección haya cambiado o que el enlace esté incompleto. Puedes continuar explorando Rizzoma.</p>
+    <nav aria-label="Opciones tras una página no encontrada">
+      <a class="primary-link" href={withBase('/')}>Volver al inicio <span aria-hidden="true">↗︎</span></a>
+      <a class="primary-link" href={withBase('/portafolio/')}>Explorar portafolio <span aria-hidden="true">↗︎</span></a>
+    </nav>
   </section>
 </BaseLayout>
