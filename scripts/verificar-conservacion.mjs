@@ -60,4 +60,26 @@ for (const id of ['arquitectura', 'modelado', 'visualizacion', 'remodelacion', '
 for (const label of ['Desarrollo arquitectónico', 'Modelado y documentación arquitectónica', 'Visualización arquitectónica']) {
   assert.ok(servicePage.includes(label), 'Servicio ausente: ' + label);
 }
+const homePage = readFileSync('dist/index.html', 'utf8');
+const firstContact = prefix + 'contacto/?tipo=proyecto-propio#contacto-formulario';
+const secondContact = prefix + 'servicios/#colaboraciones';
+const collabContact = prefix + 'contacto/?tipo=colaboracion#colaboraciones';
+assert.ok(homePage.includes(firstContact), 'El camino de proyecto propio no llega al formulario');
+assert.ok(homePage.includes(secondContact), 'El camino de colaboración no llega a Servicios');
+assert.ok(homePage.includes('Tengo un proyecto de arquitectura'), 'Falta el primer camino de contacto');
+assert.ok(homePage.includes('Busco apoyo para un proyecto'), 'Falta el segundo camino de contacto');
+assert.ok(contactPage.includes('id="contacto-formulario"'), 'Falta el ancla del primer camino');
+assert.ok(contactPage.includes('id="colaboraciones"'), 'Falta el ancla del contacto de colaboración');
+assert.ok(contactPage.includes('Colaboración con arquitecto o estudio'), 'Falta el tipo de encargo colaborativo');
+assert.ok(contactPage.includes('Proyecto propio'), 'Falta el tipo de encargo propio');
+assert.ok(servicePage.includes('id="colaboraciones"'), 'Falta la sección de colaboración externa');
+assert.ok(servicePage.includes(collabContact), 'La colaboración no conduce al contacto específico');
+for (const phrase of ['diseño y desarrollo arquitectónico', 'modelado tridimensional', 'documentación gráfica', 'visualización']) {
+  assert.ok(servicePage.includes(phrase), 'Falta una capacidad colaborativa: ' + phrase);
+}
+const clientScript = readFileSync('src/scripts/site.ts', 'utf8');
+assert.ok(clientScript.includes("entryType === 'colaboracion'"), 'La selección de colaboración no está programada');
+assert.ok(clientScript.includes("entryType === 'proyecto-propio'"), 'La selección de proyecto propio no está programada');
+console.log('Verificados los dos caminos de contacto, anclas y preselección de tipo de encargo.');
+
 console.log('Verificados ' + pages.length + ' documentos, ' + slugs.length + ' proyectos y ' + imageCount + ' referencias de imágenes.');
