@@ -12,23 +12,23 @@ const { visualizacionImage, disenoImage, remodelacionImage } = Astro.props;
 const servicios = [
   {
     numero: '02',
-    nombre: 'Diseño arquitectónico',
-    titulo: 'Espacios con sentido.',
-    descripcion: 'Desarrollamos propuestas arquitectónicas que parten del lugar, las necesidades de quienes lo habitan y la relación entre espacio, luz y materialidad.',
-    prestaciones: ['Diseño de vivienda.', 'Diseño conceptual.', 'Desarrollo arquitectónico.'],
+    nombre: 'Modelado y documentación arquitectónica',
+    titulo: 'Dar forma y claridad a las ideas.',
+    descripcion: 'Desarrollamos modelos tridimensionales y dibujos o planos arquitectónicos definidos según la etapa, los insumos y el alcance de cada colaboración.',
+    prestaciones: ['Modelado tridimensional.', 'Plantas y dibujos arquitectónicos según alcance.', 'Representación de volumetrías y organización espacial.'],
     imagen: disenoImage,
-    alt: 'Arquitectura residencial contemporánea de Casa Patio Horizonte, con atención al espacio y la materialidad',
-    pie: 'Casa Patio Horizonte · Archivo de Rizzoma',
+    alt: 'Planta arquitectónica de Casa El Santuario que documenta la distribución espacial propuesta',
+    pie: 'Casa El Santuario · Planta arquitectónica',
   },
   {
     numero: '03',
-    nombre: 'Remodelación y transformación de espacios',
-    titulo: 'Lo existente, de otra manera.',
-    descripcion: 'Replanteamos espacios para mejorar su funcionalidad, atmósfera y materialidad, reconociendo el potencial de lo que ya existe.',
-    prestaciones: ['Remodelaciones residenciales.', 'Diseño interior.', 'Actualización de espacios comerciales.'],
+    nombre: 'Visualización arquitectónica',
+    titulo: 'Imágenes que comunican el proyecto.',
+    descripcion: 'Producimos renders e imágenes para estudiar alternativas de diseño y comunicar propuestas arquitectónicas o comerciales, propias o de otros estudios.',
+    prestaciones: ['Renders de interiores y exteriores.', 'Imágenes para presentaciones de diseño.', 'Visualización de fachada y comunicación comercial.'],
     imagen: remodelacionImage,
-    alt: 'Referencia arquitectónica de Casa Patio Horizonte para ilustrar la relación entre espacio y materialidad; no es una remodelación',
-    pie: 'Referencia de materialidad · Casa Patio Horizonte',
+    alt: 'Cabo San Miguel: visualización comercial de fachada desarrollada por Rizzoma',
+    pie: 'Cabo San Miguel · Diseño de fachada y visualización',
   }
 ];
 ---
@@ -42,13 +42,13 @@ const servicios = [
       <div class="rizzoma-offer__intro-copy">
         <a class="rizzoma-offer__intro-cta" href={withBase('/servicios/')} aria-label="Conocer los tres servicios de Rizzoma Arquitectura">
           <span class="rizzoma-offer__intro-cta-content">
-            <span class="rizzoma-offer__intro-cta-kicker">Visualización · Diseño · Remodelación</span>
+            <span class="rizzoma-offer__intro-cta-kicker">Desarrollo · Modelado y planos · Visualización</span>
             <span class="rizzoma-offer__intro-cta-title">Conoce nuestros servicios</span>
           </span>
           <span class="rizzoma-offer__intro-cta-arrow" aria-hidden="true">↗︎</span>
         </a>
-        <p>Cada proyecto necesita una manera distinta de hacerse realidad.</p>
-        <p>Diseñamos espacios y construimos imágenes que permiten comprender, experimentar y comunicar la arquitectura antes de que exista.</p>
+        <p>Rizzoma colabora con arquitectos y estudios como apoyo externo en etapas y tareas específicas.</p>
+        <p>También desarrolla propuestas propias. El trabajo se acuerda según los insumos, las responsabilidades y el alcance de cada encargo.</p>
       </div>
     </header>
 
@@ -62,26 +62,26 @@ const servicios = [
           width="2048"
           height="1529"
         />
-        <figcaption>Casa Patio Horizonte <span>— Archivo visual de Rizzoma</span></figcaption>
+        <figcaption>Casa Patio Horizonte <span>— Diseño arquitectónico de Rizzoma</span></figcaption>
       </figure>
       <div class="rizzoma-offer__featured-copy">
         <div class="rizzoma-offer__service-top">
           <span>01 / 03</span>
-          <span>Visualización arquitectónica</span>
+          <span>Desarrollo arquitectónico</span>
         </div>
-        <h3 id="rizzoma-offer-visual-title">Arquitectura que se puede imaginar.</h3>
-        <p class="rizzoma-offer__description">Creamos imágenes y recorridos que permiten visualizar el proyecto, comunicar sus cualidades y transmitir la experiencia de habitarlo.</p>
+        <h3 id="rizzoma-offer-visual-title">Arquitectura que parte del lugar.</h3>
+        <p class="rizzoma-offer__description">Apoyamos la conceptualización, implantación y desarrollo de propuestas de diseño, desde la lectura del contexto hasta las decisiones de organización espacial.</p>
         <ul class="rizzoma-offer__capabilities">
-          <li>Renders arquitectónicos.</li>
-          <li>Animación arquitectónica.</li>
-          <li>Recorridos virtuales.</li>
-          <li>Imágenes 360°.</li>
-          <li>Modelado y apoyo visual para proyectos arquitectónicos.</li>
+          <li>Conceptualización arquitectónica.</li>
+          <li>Estudio de implantación.</li>
+          <li>Diseño y desarrollo arquitectónico según alcance.</li>
+          <li>Apoyo a arquitectos y estudios independientes.</li>
         </ul>
+        <a class="rizzoma-offer__case-link" href={withBase('/proyectos/casa-patio-horizonte/')}>Explorar Casa Patio Horizonte <span aria-hidden="true">↗︎</span></a>
       </div>
     </article>
 
-    <div class="rizzoma-offer__secondary" aria-label="Otras líneas del estudio">
+    <div class="rizzoma-offer__secondary" aria-label="Modelado, documentación y visualización">
       {servicios.map((servicio) => (
         <article class="rizzoma-offer__secondary-card" aria-labelledby={`rizzoma-offer-${servicio.numero}`}>
           <div class="rizzoma-offer__secondary-top">
@@ -102,6 +102,9 @@ const servicios = [
             <ul class="rizzoma-offer__capabilities">
               {servicio.prestaciones.map((prestacion) => <li>{prestacion}</li>)}
             </ul>
+            <a class="rizzoma-offer__case-link" href={withBase(servicio.numero === '02' ? '/proyectos/casa-el-santuario/' : '/proyectos/cabo-san-miguel/')}>
+              {servicio.numero === '02' ? 'Explorar Casa El Santuario' : 'Explorar Cabo San Miguel'} <span aria-hidden="true">↗︎</span>
+            </a>
           </div>
         </article>
       ))}
