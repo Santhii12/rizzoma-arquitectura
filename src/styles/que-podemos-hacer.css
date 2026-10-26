@@ -516,9 +516,6 @@
   object-fit: cover;
   object-position: center;
 }
-.rizzoma-offer__path:nth-child(2) .rizzoma-offer__path-image img {
-  object-fit: contain;
-}
 .rizzoma-offer__path-image figcaption {
   padding: 9px 12px;
   color: #5b584c;
