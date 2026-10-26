@@ -6,7 +6,8 @@ import { withBase } from '@/utils/paths';
 const baseSite = Astro.site ?? new URL(site.domain);
 const pageUrl = new URL(withBase('/contacto/'), baseSite).toString();
 const contactFaq = [
-  ['¿Qué tipo de proyectos desarrolla Rizzoma?', 'La oferta actual se concentra en arquitectura de vivienda, remodelación, conceptualización, diseño + visualización y visualización arquitectónica.'],
+  ['¿Qué tipo de proyectos desarrolla Rizzoma?', 'Rizzoma ofrece desarrollo arquitectónico, modelado y planos según alcance, y visualización para otros estudios y para propuestas propias.'],
+  ['¿Pueden colaborar con otro arquitecto o estudio?', 'Sí. Juan José puede integrarse como apoyo externo en tareas delimitadas, con responsabilidades y entregables acordados antes de comenzar.'],
   ['¿Puedo contratar únicamente visualización?', 'Sí. La visualización se plantea como un servicio independiente y el alcance se ajusta al material que ya tengas: planos, modelo, referencias o un proyecto en desarrollo.'],
   ['¿Puedo llegar solo con una idea?', 'Sí. Para una primera conversación basta con explicar qué quieres resolver, dónde está el proyecto y en qué etapa se encuentra.'],
   ['¿Qué información ayuda para cotizar?', 'Ubicación, alcance, programa aproximado, material disponible y objetivo del encargo. Si aún no tienes todo, Rizzoma puede empezar por entender la necesidad.']
@@ -17,7 +18,7 @@ const schema = [
     '@id': `${pageUrl}#page`,
     name: 'Contacto — Rizzoma Arquitectura',
     url: pageUrl,
-    description: 'Contacto directo con Rizzoma Arquitectura para arquitectura, remodelación y visualización.',
+    description: 'Contacto directo para colaboraciones en desarrollo, modelado y visualización arquitectónica o proyectos propios.',
     isPartOf: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#website` },
     about: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#business` }
   },
@@ -40,15 +41,15 @@ const schema = [
 ---
 <BaseLayout
   title="Contacto | Arquitectura y visualización en Medellín | Rizzoma"
-  description="Habla directamente con Juan José Quintero Tobón sobre tu proyecto de arquitectura, remodelación, renders o visualización arquitectónica."
+  description="Habla con Juan José Quintero Tobón sobre apoyo externo a tu estudio, modelado, planos según alcance, visualización o una propuesta propia."
   schema={schema}
 >
   <section class="contact-page section-pad">
     <div class="contact-intro">
       <p class="eyebrow reveal">Contacto</p>
       <h1 class="page-title reveal">Cuéntanos<br />qué quieres crear.</h1>
-      <p class="page-intro reveal">Una idea, un lote, una remodelación o un proyecto que necesita hacerse visible. La primera conversación es directamente con Juan José para entender qué necesitas y en qué etapa estás.</p>
-      <p class="contact-founder-note reveal">Rizzoma es un estudio independiente: hablarás directamente con quien desarrolla el proyecto. Puedes escribir por WhatsApp o correo sin completar el formulario.</p>
+      <p class="page-intro reveal">Una colaboración entre arquitectos, una propuesta propia o un proyecto que necesita dibujos o imágenes claras. La primera conversación es directamente con Juan José para comprender el alcance y la etapa del encargo.</p>
+      <p class="contact-founder-note reveal" id="colaboraciones">¿Buscas apoyo externo para tu estudio? Puedes indicar la etapa, las tareas y los entregables que necesitas. Rizzoma es una práctica independiente: hablarás directamente con Juan José por WhatsApp o correo, sin necesidad de completar el formulario.</p>
       <div class="contact-direct reveal">
         <a href={site.whatsappUrl} target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>+57 315 741 4871 ↗︎</strong></a>
         <a href={`mailto:${site.email}`}><span>Correo</span><strong>{site.email} ↗︎</strong></a>
@@ -63,7 +64,8 @@ const schema = [
       <label><span>Nombre *</span><input name="nombre" type="text" autocomplete="name" required minlength="2" maxlength="80" placeholder="Tu nombre" /></label>
       <label><span>Correo (opcional)</span><input name="email" type="email" autocomplete="email" maxlength="160" placeholder="tu@correo.com" /></label>
       <label><span>WhatsApp</span><input name="telefono" type="tel" autocomplete="tel" inputmode="tel" maxlength="24" pattern="[0-9+() .-]{7,24}" placeholder="+57 ..." /></label>
-      <label><span>¿Qué necesitas? *</span><select name="servicio" required><option value="">Selecciona una opción</option><option>Diseño arquitectónico</option><option>Remodelación</option><option>Diseño + visualización</option><option>Visualización</option><option>Otro</option></select></label>
+      <label><span>Tipo de encargo *</span><select name="tipo_encargo" required><option value="">Selecciona una opción</option><option>Colaboración con arquitecto o estudio</option><option>Proyecto propio</option><option>Consulta inicial</option></select></label>
+      <label><span>¿Qué necesitas? *</span><select name="servicio" required><option value="">Selecciona una opción</option><option>Desarrollo arquitectónico</option><option>Modelado y documentación arquitectónica</option><option>Visualización arquitectónica</option><option>Diseño arquitectónico</option><option>Remodelación</option><option>Diseño + visualización</option><option>Visualización</option><option>Otro</option></select></label>
       <label class="full"><span>Ubicación del proyecto</span><input name="ubicacion" type="text" maxlength="120" placeholder="Ciudad / municipio" /></label>
       <label class="full"><span>Cuéntanos brevemente sobre el proyecto *</span><textarea name="mensaje" rows="6" required minlength="10" maxlength="1800" placeholder="¿Qué quieres hacer, en qué etapa estás y qué necesitas de Rizzoma?"></textarea></label>
       <label class="consent full"><input name="privacidad" type="checkbox" required /><span>Acepto que Rizzoma use estos datos únicamente para responder mi solicitud. <a href={withBase('/privacidad/')}>Ver privacidad.</a></span></label>
@@ -77,7 +79,8 @@ const schema = [
     <div class="section-pad">
       <div class="section-head reveal"><div><p class="eyebrow">Preguntas frecuentes</p><h2 class="section-title">Antes de empezar.</h2></div></div>
       <div class="faq-list">
-        <details class="reveal"><summary>¿Qué tipo de proyectos desarrolla Rizzoma?<span>+</span></summary><p>La oferta actual se concentra en arquitectura de vivienda, remodelación, conceptualización, diseño + visualización y visualización arquitectónica.</p></details>
+        <details class="reveal"><summary>¿Qué tipo de proyectos desarrolla Rizzoma?<span>+</span></summary><p>La oferta actual se concentra en desarrollo arquitectónico, modelado y planos según alcance, y visualización para arquitectos y proyectos propios.</p></details>
+        <details class="reveal"><summary>¿Pueden colaborar con otro arquitecto o estudio?<span>+</span></summary><p>Sí. Juan José puede integrarse como apoyo externo en tareas delimitadas. Responsabilidades, insumos y entregables se acuerdan antes de comenzar.</p></details>
         <details class="reveal"><summary>¿Puedo contratar únicamente visualización?<span>+</span></summary><p>Sí. La visualización se plantea como un servicio independiente y el alcance se ajusta al material que ya tengas: planos, modelo, referencias o un proyecto en desarrollo.</p></details>
         <details class="reveal"><summary>¿Puedo llegar solo con una idea?<span>+</span></summary><p>Sí. Para una primera conversación basta con explicar qué quieres resolver, dónde está el proyecto y en qué etapa se encuentra.</p></details>
         <details class="reveal"><summary>¿Qué información ayuda para cotizar?<span>+</span></summary><p>Ubicación, alcance, programa aproximado, material disponible y objetivo del encargo. Si aún no tienes todo, Rizzoma puede empezar por entender la necesidad.</p></details>
