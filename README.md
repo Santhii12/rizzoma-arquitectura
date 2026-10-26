@@ -31,3 +31,13 @@ El proyecto queda preparado para despliegue automático en GitHub Pages mediante
 
 
 > Despliegue de vista previa mediante GitHub Pages habilitado.
+
+## Actualización comercial de octubre de 2026
+
+La web conserva los cinco proyectos originales, las galerías y sus rutas. La portada y Servicios presentan ahora tres áreas: desarrollo arquitectónico, modelado y documentación según alcance, y visualización arquitectónica. La prioridad es el apoyo externo a estudios y arquitectos, sin prometer un equipo amplio ni servicios técnicos no confirmados.
+
+Respaldo del estado previo: `backup/rizzoma-antes-estrategia-20261026`.
+
+Consulta [la guía de mantenimiento y publicación](docs/MANTENIMIENTO-Y-PUBLICACION.md) para descargar el proyecto completo, editarlo y volver a publicarlo sin ninguna suscripción de IA.
+
+Pruebas tras compilar para GitHub Pages: `npm run check`, `npm run build`, `npm run verify`.
