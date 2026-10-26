@@ -250,6 +250,21 @@
   .rz-home-project__placeholder { aspect-ratio: 16 / 9; }
   .rz-home-project__description { font-size: 13px; }
 }
+/* Datos comprobados de cada proyecto, sin alterar la grilla de escritorio. */
+.rz-home-feature__participation,
+.rz-home-project__scope {
+  margin: 0;
+  max-width: 75ch;
+  color: #6b6659;
+  font: 400 clamp(12px, .91vw, 14px)/1.6 var(--sans, Arial, sans-serif);
+}
+.rz-home-feature__participation { margin: 0 0 clamp(20px, 2vw, 32px); }
+.rz-home-feature__participation strong,
+.rz-home-project__scope strong { font-weight: 600; }
+@media (max-width: 700px) {
+  .rz-home-feature__participation,
+  .rz-home-project__scope { font-size: 12px; line-height: 1.65; }
+}
 @media (prefers-reduced-motion: reduce) {
   .rz-home-feature__figure > img,
   .rz-home-project,
