@@ -42,6 +42,7 @@ const previewCopy = (project: Project) =>
       <div class="rz-home-feature__meta">
         <span>{featured.category}</span>
         {featured.year && <span>{featured.year}</span>}
+        {featured.location && <span>{[featured.location, featured.region].filter(Boolean).join(', ')}</span>}
         {publishedUrl ? (
           <a href={publishedUrl}>Ver proyecto <span aria-hidden="true">↗︎</span></a>
         ) : (
@@ -49,6 +50,7 @@ const previewCopy = (project: Project) =>
         )}
       </div>
     </div>
+    {featured.participation && <p class="rz-home-feature__participation"><strong>Participación de Rizzoma:</strong> {featured.participation}.</p>}
   </article>
 
   <div class="rz-home-project-grid" aria-label="Otros proyectos seleccionados">
@@ -84,6 +86,7 @@ const previewCopy = (project: Project) =>
             )}
           </figure>
           <p class="rz-home-project__description">{previewCopy(project)}</p>
+          <p class="rz-home-project__scope"><strong>{[project.location, project.region, project.year].filter(Boolean).join(' · ')}</strong>{project.participation ? ` · Participación: ${project.participation}` : ''}</p>
           {project.available ? (
             <a class="rz-home-project__link" href={withBase(`/proyectos/${project.slug}/`)}>
               Ver proyecto completo <span aria-hidden="true">↗︎</span>
