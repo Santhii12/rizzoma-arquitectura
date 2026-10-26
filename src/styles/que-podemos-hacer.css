@@ -461,6 +461,7 @@
 }
 
 /* Dos formas de contactar: lectura editorial, proporciones discretas y acceso temprano. */
+.rizzoma-offer__introduction { padding-bottom: clamp(26px, 3vw, 48px); }
 .rizzoma-offer__paths {
   margin: 0 0 clamp(45px, 5.5vw, 88px);
   border-top: 1px solid rgba(77, 76, 63, .32);
