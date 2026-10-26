@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "verify": "node scripts/verificar-conservacion.mjs"
+    "verify": "node scripts/verificar-conservacion.mjs",
+    "audit:technical": "node scripts/auditar-tecnico.mjs"
   },
   "dependencies": {
     "astro": "7.3.5",

@@ -46,7 +46,8 @@ const homeAnchor = (id: string) => `${withBase('/') }#${id}`;
         <img src={withBase('/brand/rizzoma-rzm-original.svg')} alt="Rizzoma Arquitectura, monograma RZM" width="1000" height="220" loading="lazy" decoding="async" />
       </a>
       <p>Arquitectura con intención</p>
-      <small>© 2026 Rizzoma. Todos los derechos reservados.</small>
+      <small>© {new Date().getFullYear()} Rizzoma Arquitectura. Todos los derechos reservados.</small>
+      <a class="rz-footer__privacy" href={withBase('/privacidad/')}>Privacidad y uso de datos</a>
     </div>
   </div>
 </footer>

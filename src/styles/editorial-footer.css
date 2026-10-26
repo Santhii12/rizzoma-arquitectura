@@ -25,6 +25,8 @@
 .rz-footer__signature p,.rz-footer__signature small{margin:0;text-align:right;font:400 11px/1.6 var(--sans,Arial,sans-serif);letter-spacing:.035em}
 .rz-footer__signature p{color:var(--brand-gold,#d5be8b)}
 .rz-footer__signature small{color:rgba(248,238,218,.56)}
+.rz-footer__signature .rz-footer__privacy{grid-column:2;justify-self:end;color:rgba(248,238,218,.74);font:400 11px/1.6 var(--sans,Arial,sans-serif);text-underline-offset:4px;text-decoration-thickness:1px}
+@media(max-width:760px){.rz-footer__signature .rz-footer__privacy{grid-column:1;justify-self:start}}
 .site-footer.rz-editorial-footer a:hover{color:var(--brand-gold,#d5be8b)}
 .site-footer.rz-editorial-footer a:focus-visible{outline:2px solid var(--brand-gold,#d5be8b);outline-offset:6px}
 @media(max-width:760px){
