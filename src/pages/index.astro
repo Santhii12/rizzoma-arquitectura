@@ -14,7 +14,9 @@ const heroProject = projects.find((project) => project.slug === 'casa-patio-hori
 const miradaPhoto = heroProject?.gallery?.[1];
 const heroImageUrl = new URL(heroCover, Astro.site ?? new URL(site.domain)).toString();
 const mainPortfolioProject = projects.find((project) => project.slug === 'cabo-san-miguel');
-const previewProjects = projects.filter((project) => project.slug !== 'cabo-san-miguel').slice(0, 3);
+const previewProjects = ['casa-patio-horizonte', 'casa-el-santuario', 'casa-el-umbral']
+  .map((slug) => projects.find((project) => project.slug === slug))
+  .filter((project): project is (typeof projects)[number] => Boolean(project));
 const baseSite = Astro.site ?? new URL(site.domain);
 const homeUrl = new URL(withBase('/'), baseSite).toString();
 const schema = {
@@ -45,13 +47,13 @@ const schema = {
     </div>
     <div class="rizzoma-hero-shade" aria-hidden="true"></div>
     <div class="rizzoma-hero-content">
-      <p class="rizzoma-hero-overline">Taller y estudio de arquitectura · Medellín, Colombia</p>
+      <p class="rizzoma-hero-overline">Práctica independiente · Medellín, Colombia</p>
       <h1 class="rizzoma-hero-name">Rizzoma <em>Arquitectura.</em></h1>
       <p class="rizzoma-hero-statement">Hay espacios que cambian la forma de habitar el mundo.</p>
-      <p class="rizzoma-hero-description">Diseño arquitectónico y visualización para proyectos en relación con el lugar, la materia y la vida.</p>
+      <p class="rizzoma-hero-description">Apoyo externo a arquitectos y estudios en desarrollo, modelado y visualización arquitectónica. También desarrollamos propuestas propias, atendiendo al lugar, la materia y la vida.</p>
       <div class="rizzoma-hero-actions">
-        <a href={withBase('/portafolio/')}>Explorar proyectos <span aria-hidden="true">↗︎</span></a>
-        <a href={withBase('/visualizacion-arquitectonica-medellin/')}>Solicitar visualización <span aria-hidden="true">↗︎</span></a>
+        <a href={withBase('/portafolio/')}>Explorar portafolio <span aria-hidden="true">↗︎</span></a>
+        <a href={withBase('/contacto/#colaboraciones')}>Hablemos de tu proyecto <span aria-hidden="true">↗︎</span></a>
       </div>
     </div>
     {heroProject && (
@@ -69,7 +71,7 @@ const schema = {
     <div class="section-head reveal">
       <div>
         <p class="eyebrow">Portafolio</p>
-        <h2 class="section-title">Trabajo seleccionado</h2>
+        <h2 class="section-title">Proyectos seleccionados</h2>
       </div>
     </div>
 
@@ -88,8 +90,8 @@ const schema = {
 
   <QuePodemosHacer
     visualizacionImage={heroCover}
-    disenoImage={heroProject?.gallery?.[2]}
-    remodelacionImage={heroProject?.gallery?.[4]}
+    disenoImage={projects.find((project) => project.slug === 'casa-el-santuario')?.archive?.[0]?.images?.[1]?.src}
+    remodelacionImage={mainPortfolioProject?.cover}
   />
 
   <section class="studio-compact section-pad">
@@ -107,11 +109,11 @@ const schema = {
     <div class="studio-compact-copy reveal">
       <p class="eyebrow">Estudio / {site.founder.name}</p>
       <h2>Una práctica independiente y cercana a cada proyecto.</h2>
-      <p>Rizzoma está dirigido directamente por Juan José Quintero Tobón desde Medellín. Arquitectura y visualización se desarrollan como una misma conversación, con atención al contexto, la luz, la materialidad y la experiencia de habitar.</p>
+      <p>Rizzoma es una práctica independiente dirigida por Juan José Quintero Tobón desde Medellín. Puede integrarse como apoyo externo a arquitectos y estudios en tareas específicas, o desarrollar propuestas propias de diseño y visualización. Cada colaboración se define según las necesidades y el alcance acordado, con atención al contexto, la luz y la materialidad.</p>
 
       <div class="studio-compact-meta">
         <div><span>Base</span><strong>{site.location}</strong></div>
-        <div><span>Práctica</span><strong>Arquitectura + visualización</strong></div>
+        <div><span>Práctica</span><strong>Desarrollo · Modelado · Visualización</strong></div>
       </div>
 
       <a class="primary-link" href={withBase('/estudio/')}>Conocer el estudio <span aria-hidden="true">↗︎</span></a>

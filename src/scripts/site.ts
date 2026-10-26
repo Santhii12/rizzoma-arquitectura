@@ -51,12 +51,17 @@ const isValidPhone = (value: string) =>
   value === '' || /^[0-9+() .-]{7,24}$/.test(value);
 
 const allowedServices = new Set([
+  'Desarrollo arquitectónico',
+  'Modelado y documentación arquitectónica',
+  'Visualización arquitectónica',
   'Diseño arquitectónico',
   'Remodelación',
   'Diseño + visualización',
   'Visualización',
   'Otro'
 ]);
+
+const allowedTypes = new Set(['Colaboración con arquitecto o estudio', 'Proyecto propio', 'Consulta inicial']);
 
 const getRecentSubmissions = () => {
   try {
@@ -110,10 +115,11 @@ form?.addEventListener('submit', (event) => {
   const email = cleanSingleLine(data.get('email'), 160);
   const telefono = cleanSingleLine(data.get('telefono'), 24);
   const servicio = cleanSingleLine(data.get('servicio'), 80);
+  const tipoEncargo = cleanSingleLine(data.get('tipo_encargo'), 80);
   const ubicacion = cleanSingleLine(data.get('ubicacion'), 120);
   const mensaje = cleanMultiline(data.get('mensaje'), 1800);
 
-  if (nombre.length < 2 || mensaje.length < 10 || (email !== '' && !isValidEmail(email)) || !isValidPhone(telefono) || !allowedServices.has(servicio)) {
+  if (nombre.length < 2 || mensaje.length < 10 || (email !== '' && !isValidEmail(email)) || !isValidPhone(telefono) || !allowedServices.has(servicio) || !allowedTypes.has(tipoEncargo)) {
     if (note) note.textContent = 'Revisa los datos del formulario antes de continuar.';
     return;
   }
@@ -124,7 +130,8 @@ form?.addEventListener('submit', (event) => {
     `Nombre: ${nombre}`,
     email ? `Correo: ${email}` : '',
     telefono ? `Teléfono: ${telefono}` : '',
-    `Servicio: ${servicio}`,
+    `Tipo de encargo: ${tipoEncargo}`,
+    `Servicio: ${servicio}`, 
     ubicacion ? `Ubicación: ${ubicacion}` : '',
     '',
     'Proyecto:',
@@ -134,8 +141,8 @@ form?.addEventListener('submit', (event) => {
   recordSubmission(recentAttempts);
 
   const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-  if (note) note.textContent = 'WhatsApp se abrirá con tu mensaje preparado.';
-  window.open(url, '_blank', 'noopener,noreferrer');
+  if (note) note.textContent = 'Continuarás a WhatsApp con el mensaje preparado. Tú decides si lo envías.';
+  window.location.assign(url);
 });
 
 if (!reduceMotion) {

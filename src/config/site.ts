@@ -1,9 +1,9 @@
 export const site = {
   name: 'Rizzoma Arquitectura',
   shortName: 'Rizzoma',
-  tagline: 'Arquitectura, diseño y visualización',
+  tagline: 'Desarrollo, modelado y visualización arquitectónica',
   description:
-    'Estudio independiente de arquitectura y visualización dirigido por Juan José Quintero Tobón en Medellín. Diseño arquitectónico, vivienda, remodelación, renders y comunicación visual de proyectos.',
+    'Práctica independiente dirigida por Juan José Quintero Tobón en Medellín. Apoyo externo a arquitectos y estudios en desarrollo arquitectónico, modelado, planos según alcance y visualización; también proyectos de diseño propios.',
   location: 'Medellín, Colombia',
   region: 'Antioquia',
   country: 'CO',
@@ -16,14 +16,15 @@ export const site = {
   ogImage: '/images/studio/home/rizzoma-hero-portada.webp',
   ogImageAlt: 'Casa Patio Horizonte, proyecto de Rizzoma Arquitectura',
   services: [
-    'Diseño arquitectónico',
-    'Arquitectura residencial',
-    'Remodelación',
+    'Desarrollo arquitectónico',
     'Conceptualización',
-    'Diseño y visualización',
+    'Implantación arquitectónica',
+    'Diseño arquitectónico',
+    'Modelado 3D',
+    'Dibujos y planos arquitectónicos según alcance',
     'Visualización arquitectónica',
     'Renders arquitectónicos',
-    'Modelado 3D'
+    'Colaboración con estudios de arquitectura'
   ],
   brand: {
     olive: '#61604e',

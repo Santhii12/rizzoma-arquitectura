@@ -1,0 +1,28 @@
+name: Rizzoma · Preservación de portafolio y servicios
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  proteger-proyectos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar dependencias
+        run: npm install --no-audit --no-fund
+      - name: Revisar Astro y TypeScript
+        run: npm run check
+      - name: Construir la web para GitHub Pages
+        env:
+          GITHUB_PAGES: 'true'
+        run: npm run build
+      - name: Verificar cinco proyectos, enlaces, imágenes y contacto
+        run: npm run verify

@@ -395,6 +395,22 @@
 }
 
 
+/* Enlaces editoriales a proyectos que documentan cada servicio. */
+.rizzoma-offer__case-link {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  margin-top: clamp(22px, 3vw, 42px);
+  border-bottom: 1px solid currentColor;
+  color: #5f5d4e;
+  text-decoration: none;
+  font: 500 clamp(12px, .89vw, 14px)/1.5 var(--sans, Arial, sans-serif);
+}
+.rizzoma-offer__featured .rizzoma-offer__case-link { color: #ead8b0; }
+.rizzoma-offer__case-link:is(:hover,:focus-visible) { color: #a08455; }
+
 /* Safari iOS: la fotografía principal debe participar del flujo de la página.
    Evita que el grid reduzca una imagen posicionada absolutamente a una miniatura.
    Regla exclusivamente para móvil/tablet: escritorio permanece idéntico. */
