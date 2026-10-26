@@ -1,5 +1,6 @@
 ---
 import { withBase } from '@/utils/paths';
+import { projects } from '@/data/projects';
 import '@/styles/que-podemos-hacer.css';
 
 interface Props {
@@ -8,6 +9,13 @@ interface Props {
   visualizacionDetalleImage?: string;
 }
 const { visualizacionImage, disenoImage, visualizacionDetalleImage } = Astro.props;
+const patioExterior = projects.find((project) => project.slug === 'casa-patio-horizonte')?.cover;
+const caboModelo = projects.find((project) => project.slug === 'cabo-san-miguel')
+  ?.archive?.flatMap((group) => group.images)
+  .find((image) => image.src.includes('modelo-01.webp'));
+if (!patioExterior || !caboModelo) {
+  throw new Error('Falta una imagen original de Casa Patio Horizonte o del modelo de Cabo San Miguel.');
+}
 
 const servicios = [
   {
@@ -58,17 +66,43 @@ const servicios = [
         <h3 id="rizzoma-offer-paths-title">Cada proyecto, una conversación.</h3>
       </header>
       <div class="rizzoma-offer__paths-grid">
-        <a class="rizzoma-offer__path" href={withBase('/contacto/?tipo=proyecto-propio#contacto-formulario')}>
-          <span class="rizzoma-offer__path-audience">Proyectos propios</span>
-          <strong>Tengo un proyecto de arquitectura</strong>
-          <span class="rizzoma-offer__path-description">Diseño arquitectónico y visualización para dar forma a tu propuesta.</span>
-          <span class="rizzoma-offer__path-arrow" aria-hidden="true">↗︎</span>
+        <a class="rizzoma-offer__path" href={withBase('/servicios/#arquitectura')}>
+          <figure class="rizzoma-offer__path-image">
+            <img
+              src={patioExterior}
+              alt="Vista exterior de Casa Patio Horizonte, propuesta de vivienda diseñada por Rizzoma en Antioquia"
+              width="1200"
+              height="800"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>Casa Patio Horizonte · Diseño arquitectónico</figcaption>
+          </figure>
+          <span class="rizzoma-offer__path-content">
+            <span class="rizzoma-offer__path-audience">Proyectos propios</span>
+            <strong>Tengo un proyecto de arquitectura</strong>
+            <span class="rizzoma-offer__path-description">Diseño arquitectónico y visualización para dar forma a nuevas ideas y espacios</span>
+            <span class="rizzoma-offer__path-action">Conoce nuestros servicios <span aria-hidden="true">↗︎</span></span>
+          </span>
         </a>
-        <a class="rizzoma-offer__path" href={withBase('/servicios/#colaboraciones')}>
-          <span class="rizzoma-offer__path-audience">Arquitectos y estudios</span>
-          <strong>Busco apoyo para un proyecto</strong>
-          <span class="rizzoma-offer__path-description">Colaboración en diseño, modelado 3D, documentación arquitectónica y visualización, según el alcance acordado.</span>
-          <span class="rizzoma-offer__path-arrow" aria-hidden="true">↗︎</span>
+        <a class="rizzoma-offer__path" href={withBase('/contacto/?tipo=colaboracion#colaboraciones')}>
+          <figure class="rizzoma-offer__path-image">
+            <img
+              src={caboModelo.src}
+              alt={caboModelo.alt}
+              width="1200"
+              height="800"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>Cabo San Miguel · Modelo tridimensional</figcaption>
+          </figure>
+          <span class="rizzoma-offer__path-content">
+            <span class="rizzoma-offer__path-audience">Arquitectos y estudios</span>
+            <strong>Busco apoyo para un proyecto</strong>
+            <span class="rizzoma-offer__path-description">Colaboración con arquitectos y estudios en diseño, modelado, documentación y visualización arquitectónica</span>
+            <span class="rizzoma-offer__path-action">Hablemos de una colaboración <span aria-hidden="true">↗︎</span></span>
+          </span>
         </a>
       </div>
     </section>
