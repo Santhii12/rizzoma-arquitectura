@@ -10,77 +10,75 @@ const cover = withBase('/images/studio/home/rizzoma-hero-portada.webp');
 const coverAbsoluteUrl = new URL(cover, baseSite).toString();
 const serviceLines = [
   {
-    id: 'visualizacion',
-    number: '01',
-    name: 'Visualización arquitectónica',
-    title: 'Arquitectura que se puede imaginar.',
-    summary: 'Creamos imágenes y recorridos que permiten comprender el proyecto, explorar su atmósfera y comunicar su intención antes de construirlo.',
-    description: 'La luz, las proporciones y los materiales se hacen visibles para estudiar decisiones de diseño y presentar propuestas propias o de otros estudios.',
-    services: [
-      'Renders de interiores y exteriores.',
-      'Animación arquitectónica.',
-      'Recorridos virtuales.',
-      'Imágenes 360°.',
-      'Modelado para visualización.'
-    ],
-    startingPoint: 'Planos, modelos 3D, referencias o fotografías del lugar. El alcance y los entregables se definen según las necesidades de cada proyecto.',
-    ctaLabel: 'Solicitar una propuesta',
-    contactMessage: 'Hola, quisiera solicitar una propuesta de visualización arquitectónica. ¿Podemos conversar sobre mi proyecto y el material necesario?',
-    image: withBase('/images/projects/cabo-san-miguel/exteriores-07.webp'),
-    alt: 'Cabo San Miguel, edificio de vivienda junto al embalse de Guatapé, con diseño de fachada, modelado y visualización comercial realizados por Rizzoma',
-    caption: 'Cabo San Miguel / Diseño de fachada y visualización comercial · Rizzoma',
-    relatedLink: withBase('/proyectos/cabo-san-miguel/'),
-    relatedLabel: 'Explorar Cabo San Miguel',
-    imageWidth: 1920,
-    imageHeight: 1080,
-    featured: true
-  },
-  {
     id: 'arquitectura',
-    number: '02',
-    name: 'Diseño arquitectónico',
-    title: 'Espacios con sentido.',
-    summary: 'Diseñamos espacios a partir del lugar, de quienes los habitan y de la relación entre luz, materia y uso cotidiano.',
-    description: 'El contexto, las condiciones del terreno y la manera de habitar orientan la organización espacial. Cada decisión busca dar coherencia a la propuesta.',
+    number: '01',
+    name: 'Desarrollo arquitectónico',
+    title: 'Comprender el lugar. Dar forma al proyecto.',
+    summary: 'Apoyo en conceptualización, implantación y diseño arquitectónico, según la etapa y las necesidades del encargo.',
+    description: 'La orientación, la topografía, el uso y las condiciones del lugar guían el estudio de alternativas y la organización de los espacios. Rizzoma puede colaborar con otros arquitectos en tareas acordadas o desarrollar propuestas propias.',
     services: [
-      'Diseño de vivienda.',
-      'Diseño conceptual.',
-      'Desarrollo arquitectónico.'
+      'Conceptualización arquitectónica.',
+      'Estudios de implantación y relación con el entorno.',
+      'Diseño y desarrollo de propuestas arquitectónicas según alcance.'
     ],
-    startingPoint: 'Una idea, la ubicación y las necesidades principales. Si existen planos, información del lote o referencias, ayudan a definir la etapa del proyecto.',
-    ctaLabel: 'Consultar diseño arquitectónico',
-    contactMessage: 'Hola, quisiera conversar sobre un proyecto de diseño arquitectónico. ¿Qué información necesitan para empezar?',
+    startingPoint: 'Cuéntanos la etapa del proyecto, su ubicación, el programa y las tareas para las que buscas apoyo. No es necesario tener todos los insumos desde el primer contacto.',
+    ctaLabel: 'Consultar desarrollo arquitectónico',
+    contactMessage: 'Hola, Juan José. Soy arquitecto/a o represento un estudio y quisiera conversar sobre apoyo externo en desarrollo arquitectónico. ¿Podemos revisar el alcance de mi proyecto?',
     image: withBase('/images/services/diseno-arquitectonico-casa.jpg'),
-    alt: 'Visualización exterior de casa contemporánea con fachadas de madera y vidrio, rodeada de vegetación al atardecer',
-    caption: 'Diseño arquitectónico / Obra visual de Rizzoma',
+    alt: 'Propuesta residencial representada en una visualización arquitectónica del archivo de Rizzoma',
+    caption: 'Propuesta residencial / Diseño y representación de Rizzoma',
     relatedLink: withBase('/proyectos/casa-patio-horizonte/'),
     relatedLabel: 'Explorar Casa Patio Horizonte',
     imageWidth: 1122,
     imageHeight: 1402,
+    featured: true
+  },
+  {
+    id: 'modelado',
+    number: '02',
+    name: 'Modelado y documentación arquitectónica',
+    title: 'Representar con claridad lo que se proyecta.',
+    summary: 'Modelos tridimensionales, plantas y dibujos arquitectónicos de acuerdo con los materiales recibidos y el alcance contratado.',
+    description: 'Los modelos y dibujos ayudan a estudiar volumetrías, relaciones espaciales y decisiones de diseño. Cada entrega se define con el arquitecto responsable; no se ofrece aquí documentación técnica integral ni ingeniería especializada.',
+    services: [
+      'Modelos tridimensionales de arquitectura.',
+      'Plantas y dibujos arquitectónicos según alcance.',
+      'Apoyo gráfico para estudiar y presentar alternativas.'
+    ],
+    startingPoint: 'Comparte planos, croquis, referencias, levantamientos disponibles o un modelo existente. Con esa base definimos formato, nivel de desarrollo y entregables.',
+    ctaLabel: 'Consultar modelado y planos',
+    contactMessage: 'Hola, Juan José. Quisiera conversar sobre una colaboración de modelado 3D y planos arquitectónicos según el alcance de mi proyecto.',
+    image: withBase('/images/projects/casa-el-santuario/archivo/planta.webp'),
+    alt: 'Planta arquitectónica de Casa El Santuario con distribución de los espacios',
+    caption: 'Casa El Santuario / Planta arquitectónica',
+    relatedLink: withBase('/proyectos/casa-el-santuario/'),
+    relatedLabel: 'Explorar Casa El Santuario',
+    imageWidth: 1448,
+    imageHeight: 814,
     featured: false
   },
   {
-    id: 'remodelacion',
+    id: 'visualizacion',
     number: '03',
-    name: 'Remodelación y transformación de espacios',
-    title: 'Lo existente, de otra manera.',
-    summary: 'Exploramos cómo transformar un espacio existente para mejorar su funcionamiento, su atmósfera y su relación con los materiales.',
-    description: 'Partimos de lo que merece permanecer y de lo que necesita cambiar: recorridos, luz, distribución y acabados. La intervención se plantea según el estado y el uso del lugar.',
+    name: 'Visualización arquitectónica',
+    title: 'Hacer visible la intención del diseño.',
+    summary: 'Renders e imágenes para presentaciones de diseño y comunicación comercial de proyectos propios o de otros estudios.',
+    description: 'La representación ayuda a expresar fachadas, materialidad, atmósferas y relación con el paisaje. El trabajo de Cabo San Miguel documenta específicamente diseño de fachada, modelado y visualización comercial, sin atribuir a Rizzoma el diseño integral del edificio.',
     services: [
-      'Remodelaciones residenciales.',
-      'Diseño interior.',
-      'Actualización de espacios comerciales.'
+      'Renders de arquitectura interior y exterior.',
+      'Imágenes para presentaciones de diseño.',
+      'Visualización de fachada y comunicación comercial.'
     ],
-    startingPoint: 'Fotografías, medidas o planos del estado actual y una breve descripción de los cambios deseados.',
-    ctaLabel: 'Consultar una remodelación',
-    contactMessage: 'Hola, quisiera conversar sobre la remodelación de un espacio. Tengo algunas referencias y me gustaría conocer cómo empezar.',
-    image: withBase('/images/services/remodelacion-interior.jpg'),
-    alt: 'Interior de sala residencial con sofá claro, mesa de centro, cocina abierta y escalera de madera',
-    caption: 'Interior residencial / Diseño y visualización de Rizzoma',
-    relatedLink: withBase('/proyectos/casa-el-umbral/'),
-    relatedLabel: 'Explorar interiores de Casa El Umbral',
-    imageWidth: 1448,
-    imageHeight: 814,
+    startingPoint: 'Planos, modelos, fotografías del sitio y referencias permiten definir vistas, alcance y entregables. También podemos revisar el material disponible antes de proponer una solución.',
+    ctaLabel: 'Consultar visualización',
+    contactMessage: 'Hola, Juan José. Quisiera solicitar visualizaciones arquitectónicas para un proyecto. ¿Podemos revisar vistas, referencias y entregables?',
+    image: withBase('/images/projects/cabo-san-miguel/exteriores-07.webp'),
+    alt: 'Cabo San Miguel, visualización del edificio en Guatapé y su fachada desarrollada por Rizzoma',
+    caption: 'Cabo San Miguel / Fachada y visualización comercial',
+    relatedLink: withBase('/proyectos/cabo-san-miguel/'),
+    relatedLabel: 'Explorar Cabo San Miguel',
+    imageWidth: 1920,
+    imageHeight: 1080,
     featured: false
   }
 ] as const;
@@ -93,7 +91,7 @@ const schema = [
     '@id': `${servicesUrl}#page`,
     name: 'Servicios de Rizzoma Arquitectura',
     url: servicesUrl,
-    description: 'Visualización arquitectónica, diseño arquitectónico y remodelación: tres maneras de dar forma y comunicar la arquitectura en Rizzoma.',
+    description: 'Desarrollo, modelado y documentación, y visualización arquitectónica: apoyo externo a estudios y encargos propios según alcance.',
     isPartOf: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#website` },
     about: { '@id': `${baseSite.toString().replace(/\/$/, '')}/#business` }
   },
@@ -117,8 +115,8 @@ const schema = [
 ];
 ---
 <BaseLayout
-  title="Servicios de arquitectura, renders y remodelación en Medellín | Rizzoma"
-  description="Conoce las tres líneas de Rizzoma: visualización arquitectónica y renders, diseño arquitectónico y remodelación de espacios. Estudio independiente en Medellín."
+  title="Colaboraciones y servicios de arquitectura en Medellín | Rizzoma"
+  description="Apoyo a arquitectos y estudios en desarrollo arquitectónico, modelado 3D, planos según alcance y visualización. Rizzoma, práctica independiente en Medellín."
   schema={schema}
   image={coverAbsoluteUrl}
   imageAlt="Arquitectura contemporánea de Casa Patio Horizonte, archivo de Rizzoma"
@@ -127,11 +125,11 @@ const schema = [
     <div class="rz-services-guide__hero-inner">
       <div class="rz-services-guide__hero-heading">
         <p class="rz-services-guide__label">Rizzoma / Servicios</p>
-        <h1 id="rz-services-page-title">Del espacio <em>a la imagen.</em></h1>
+        <h1 id="rz-services-page-title">Colaborar desde <em>el proyecto.</em></h1>
       </div>
       <div class="rz-services-guide__hero-intro">
-        <p class="rz-services-guide__lead">Cada proyecto pide una mirada propia.</p>
-        <p>Visualización arquitectónica, diseño y transformación de espacios. Tres maneras de trabajar con el lugar, la luz y la materialidad, desde una práctica independiente.</p>
+        <p class="rz-services-guide__lead">Apoyo externo para arquitectos y estudios. También proyectos propios.</p>
+        <p>Desarrollo arquitectónico, modelado y documentación, y visualización. Juan José participa directamente en cada encargo; tareas, responsabilidades y entregables se acuerdan según la necesidad del proyecto.</p>
       </div>
     </div>
     <nav class="rz-services-guide__index" aria-label="Ir a cada servicio">
@@ -181,6 +179,7 @@ const schema = [
             <span aria-hidden="true">↗︎</span>
           </a>
           {service.id === 'visualizacion' && <span id="diseno-visualizacion" class="rz-services-guide__anchor" aria-hidden="true"></span>}
+          {service.id === 'arquitectura' && <span id="remodelacion" class="rz-services-guide__anchor" aria-hidden="true"></span>}
           <div class="rz-services-guide__details">
             <div>
               <h3>Qué podemos desarrollar</h3>
@@ -203,14 +202,14 @@ const schema = [
       <div class="rz-services-guide__method-intro">
         <p class="rz-services-guide__label">Cómo empezamos</p>
         <h2 id="rz-services-guide-method-title">Un punto de partida claro.</h2>
-        <p>Antes de definir un servicio, necesitamos entender el lugar, la etapa del proyecto y lo que buscas resolver. La primera conversación es directamente con Juan José Quintero Tobón, quien dirige Rizzoma.</p>
+        <p>Antes de definir el trabajo, revisamos qué necesita el proyecto, qué materiales existen y qué corresponde asumir a cada parte. La primera conversación es directamente con Juan José Quintero Tobón, quien dirige Rizzoma.</p>
       </div>
       <ol class="rz-services-guide__method-steps" aria-label="Información para comenzar un proyecto">
         <li>
           <span class="rz-services-guide__step-number" aria-hidden="true">01</span>
           <div>
             <h3>Cuéntanos qué necesitas</h3>
-            <p>Indica si buscas visualización, diseño o remodelación, dónde se encuentra el proyecto y en qué etapa está.</p>
+            <p>Indica si buscas colaboración en desarrollo, modelado y planos o visualización; señala la ubicación y la etapa del proyecto.</p>
           </div>
         </li>
         <li>
