@@ -72,7 +72,7 @@ assert.ok(homePage.includes('Conoce nuestros servicios'), 'Falta la acción de s
 assert.ok(homePage.includes('Hablemos de una colaboración'), 'Falta la acción de colaboración');
 assert.ok(homePage.includes('Diseño arquitectónico y visualización para dar forma a nuevas ideas y espacios'), 'Falta el texto exacto del proyecto propio');
 assert.ok(homePage.includes('Colaboración con arquitectos y estudios en diseño, modelado, documentación y visualización arquitectónica'), 'Falta el texto exacto del apoyo externo');
-assert.ok(homePage.includes(prefix + 'images/projects/casa-patio-horizonte/exteriores/exterior-01.webp'), 'La primera tarjeta no usa la imagen original de Patio Horizonte');
+assert.ok(homePage.includes(prefix + 'images/projects/casa-patio-horizonte/exteriores/exterior-07.webp'), 'La primera tarjeta no usa la imagen original de Patio Horizonte');
 assert.ok(homePage.includes(prefix + 'images/projects/cabo-san-miguel/modelo-01.webp'), 'La segunda tarjeta no usa el modelo original de Cabo San Miguel');
 const pathCards = homePage.match(/class="rizzoma-offer__path"/g) ?? [];
 assert.equal(pathCards.length, 2, 'Deben existir exactamente dos tarjetas de acceso');
