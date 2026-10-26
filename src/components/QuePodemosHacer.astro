@@ -52,6 +52,27 @@ const servicios = [
       </div>
     </header>
 
+    <section class="rizzoma-offer__paths" aria-labelledby="rizzoma-offer-paths-title">
+      <header class="rizzoma-offer__paths-intro">
+        <p class="rizzoma-offer__eyebrow">Dos maneras de empezar</p>
+        <h3 id="rizzoma-offer-paths-title">Cada proyecto, una conversación.</h3>
+      </header>
+      <div class="rizzoma-offer__paths-grid">
+        <a class="rizzoma-offer__path" href={withBase('/contacto/?tipo=proyecto-propio#contacto-formulario')}>
+          <span class="rizzoma-offer__path-audience">Proyectos propios</span>
+          <strong>Tengo un proyecto de arquitectura</strong>
+          <span class="rizzoma-offer__path-description">Diseño arquitectónico y visualización para dar forma a tu propuesta.</span>
+          <span class="rizzoma-offer__path-arrow" aria-hidden="true">↗︎</span>
+        </a>
+        <a class="rizzoma-offer__path" href={withBase('/servicios/#colaboraciones')}>
+          <span class="rizzoma-offer__path-audience">Arquitectos y estudios</span>
+          <strong>Busco apoyo para un proyecto</strong>
+          <span class="rizzoma-offer__path-description">Colaboración en diseño, modelado 3D, documentación arquitectónica y visualización, según el alcance acordado.</span>
+          <span class="rizzoma-offer__path-arrow" aria-hidden="true">↗︎</span>
+        </a>
+      </div>
+    </section>
+
     <article class="rizzoma-offer__featured" aria-labelledby="rizzoma-offer-visual-title">
       <figure class="rizzoma-offer__featured-visual">
         <img
@@ -110,25 +131,5 @@ const servicios = [
       ))}
     </div>
 
-    <section class="rizzoma-offer__paths" aria-labelledby="rizzoma-offer-paths-title">
-      <header class="rizzoma-offer__paths-intro">
-        <p class="rizzoma-offer__eyebrow">Dos maneras de empezar</p>
-        <h3 id="rizzoma-offer-paths-title">Cada proyecto, una conversación.</h3>
-      </header>
-      <div class="rizzoma-offer__paths-grid">
-        <a class="rizzoma-offer__path" href={withBase('/contacto/?tipo=proyecto-propio#contacto-formulario')}>
-          <span class="rizzoma-offer__path-audience">Proyectos propios</span>
-          <strong>Tengo un proyecto de arquitectura</strong>
-          <span class="rizzoma-offer__path-description">Para quienes desean desarrollar una propuesta arquitectónica propia.</span>
-          <span class="rizzoma-offer__path-arrow" aria-hidden="true">↗︎</span>
-        </a>
-        <a class="rizzoma-offer__path" href={withBase('/servicios/#colaboraciones')}>
-          <span class="rizzoma-offer__path-audience">Arquitectos y estudios</span>
-          <strong>Busco apoyo para un proyecto</strong>
-          <span class="rizzoma-offer__path-description">Para integrar apoyo externo en diseño, modelado, documentación gráfica o visualización.</span>
-          <span class="rizzoma-offer__path-arrow" aria-hidden="true">↗︎</span>
-        </a>
-      </div>
-    </section>
   </div>
 </section>
