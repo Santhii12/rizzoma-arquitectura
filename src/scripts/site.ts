@@ -26,6 +26,18 @@ window.addEventListener('keydown', (event) => {
 const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
 const formLoadedAt = Date.now();
 
+// Los enlaces de Inicio seleccionan el propósito, sin enviar información automáticamente.
+const entryType = new URLSearchParams(window.location.search).get('tipo');
+const requestedType = entryType === 'colaboracion'
+  ? 'Colaboración con arquitecto o estudio'
+  : entryType === 'proyecto-propio'
+    ? 'Proyecto propio'
+    : null;
+const typeSelect = form?.elements.namedItem('tipo_encargo');
+if (requestedType && typeSelect instanceof HTMLSelectElement) {
+  typeSelect.value = requestedType;
+}
+
 const cleanSingleLine = (value: FormDataEntryValue | null, maxLength: number) =>
   String(value ?? '')
     .normalize('NFKC')
