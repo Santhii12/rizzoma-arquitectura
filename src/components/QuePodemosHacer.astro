@@ -9,7 +9,8 @@ interface Props {
   visualizacionDetalleImage?: string;
 }
 const { visualizacionImage, disenoImage, visualizacionDetalleImage } = Astro.props;
-const patioExterior = projects.find((project) => project.slug === 'casa-patio-horizonte')?.cover;
+const patioExterior = projects.find((project) => project.slug === 'casa-patio-horizonte')
+  ?.gallery?.find((image) => image.endsWith('/exterior-07.webp'));
 const caboModelo = projects.find((project) => project.slug === 'cabo-san-miguel')
   ?.archive?.flatMap((group) => group.images)
   .find((image) => image.src.includes('modelo-01.webp'));
