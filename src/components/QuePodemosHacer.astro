@@ -5,9 +5,9 @@ import '@/styles/que-podemos-hacer.css';
 interface Props {
   visualizacionImage: string;
   disenoImage?: string;
-  remodelacionImage?: string;
+  visualizacionDetalleImage?: string;
 }
-const { visualizacionImage, disenoImage, remodelacionImage } = Astro.props;
+const { visualizacionImage, disenoImage, visualizacionDetalleImage } = Astro.props;
 
 const servicios = [
   {
@@ -26,7 +26,7 @@ const servicios = [
     titulo: 'Imágenes que comunican el proyecto.',
     descripcion: 'Producimos renders e imágenes para estudiar alternativas de diseño y comunicar propuestas arquitectónicas o comerciales, propias o de otros estudios.',
     prestaciones: ['Renders de interiores y exteriores.', 'Imágenes para presentaciones de diseño.', 'Visualización de fachada y comunicación comercial.'],
-    imagen: remodelacionImage,
+    imagen: visualizacionDetalleImage,
     alt: 'Cabo San Miguel: visualización comercial de fachada desarrollada por Rizzoma',
     pie: 'Cabo San Miguel · Diseño de fachada y visualización',
   }
@@ -47,8 +47,8 @@ const servicios = [
           </span>
           <span class="rizzoma-offer__intro-cta-arrow" aria-hidden="true">↗︎</span>
         </a>
-        <p>Rizzoma colabora con arquitectos y estudios como apoyo externo en etapas y tareas específicas.</p>
-        <p>También desarrolla propuestas propias. El trabajo se acuerda según los insumos, las responsabilidades y el alcance de cada encargo.</p>
+        <p>El diseño arquitectónico y la visualización son capacidades centrales de Rizzoma, tanto en proyectos propios como en colaboraciones con otros arquitectos y estudios.</p>
+        <p>El desarrollo, el modelado y la documentación gráfica se ajustan a los insumos, las responsabilidades y el alcance acordado en cada encargo.</p>
       </div>
     </header>
 
@@ -110,6 +110,25 @@ const servicios = [
       ))}
     </div>
 
-
+    <section class="rizzoma-offer__paths" aria-labelledby="rizzoma-offer-paths-title">
+      <header class="rizzoma-offer__paths-intro">
+        <p class="rizzoma-offer__eyebrow">Dos maneras de empezar</p>
+        <h3 id="rizzoma-offer-paths-title">Cada proyecto, una conversación.</h3>
+      </header>
+      <div class="rizzoma-offer__paths-grid">
+        <a class="rizzoma-offer__path" href={withBase('/contacto/?tipo=proyecto-propio#contacto-formulario')}>
+          <span class="rizzoma-offer__path-audience">Proyectos propios</span>
+          <strong>Tengo un proyecto de arquitectura</strong>
+          <span class="rizzoma-offer__path-description">Para quienes desean desarrollar una propuesta arquitectónica propia.</span>
+          <span class="rizzoma-offer__path-arrow" aria-hidden="true">↗︎</span>
+        </a>
+        <a class="rizzoma-offer__path" href={withBase('/servicios/#colaboraciones')}>
+          <span class="rizzoma-offer__path-audience">Arquitectos y estudios</span>
+          <strong>Busco apoyo para un proyecto</strong>
+          <span class="rizzoma-offer__path-description">Para integrar apoyo externo en diseño, modelado, documentación gráfica o visualización.</span>
+          <span class="rizzoma-offer__path-arrow" aria-hidden="true">↗︎</span>
+        </a>
+      </div>
+    </section>
   </div>
 </section>
