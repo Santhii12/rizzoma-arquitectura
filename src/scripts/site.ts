@@ -160,18 +160,8 @@ form?.addEventListener('submit', (event) => {
 if (!reduceMotion) {
   document.documentElement.classList.add('motion-ready');
 
-  const revealObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.08, rootMargin: '0px 0px -6% 0px' }
-  );
-
-  document.querySelectorAll<HTMLElement>('.reveal').forEach((element) => revealObserver.observe(element));
+  // Scroll entrances are now handled by the progressive, fail-visible motion system.
+  // Never hide .reveal elements with CSS while waiting for an observer.
 
   const heroTitle = document.querySelector<HTMLElement>('[data-hero-title]');
   requestAnimationFrame(() => heroTitle?.classList.add('is-ready'));
@@ -201,6 +191,110 @@ if (!reduceMotion) {
   updateParallax();
 }
 
+
+// Discreet architectural motion: progressive enhancement, not a visibility gate.
+// Every element stays readable if JavaScript, IntersectionObserver or Web Animations fails.
+const motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
+if (!motionMedia.matches && 'IntersectionObserver' in window && 'animate' in Element.prototype) {
+  const easing = 'cubic-bezier(.22, 1, .36, 1)';
+  const animated = new Set<Animation>();
+  const targets = [
+    '.reveal',
+    '.nuestra-mirada__eyebrow',
+    '.nuestra-mirada__title',
+    '.nuestra-mirada__body',
+    '.nuestra-mirada__visual',
+    '.rz-home-feature__figure',
+    '.rz-home-feature__caption',
+    '.rz-home-project',
+    '.rizzoma-offer__headline',
+    '.rizzoma-offer__intro-copy',
+    '.rizzoma-offer__path',
+    '.rizzoma-offer__featured-visual',
+    '.rizzoma-offer__featured-copy',
+    '.rizzoma-offer__secondary-card',
+    '.rz-services-guide__hero-heading',
+    '.rz-services-guide__hero-intro',
+    '.rz-services-guide__chapter',
+    '.rz-services-guide__collaboration-inner',
+    '.rz-services-guide__method-intro',
+    '.studio-profile',
+    '.rz-studio-values',
+    '.rz-studio-case__opening',
+    '.rz-studio-case__feature',
+    '.rz-studio-contact-inner',
+    '.rz-pe__intro-grid',
+    '.rz-pe__overview',
+    '.rz-pe__section-header',
+    '.rz-pe__insight-copy',
+    '.rz-pe__insight-figure',
+    '.rz-pe__group-intro',
+    '.rz-pe__ending-inner',
+    '.contact-direct',
+    '.contact-form',
+    '.rz-portfolio-editorial'
+  ];
+
+  const once = new WeakSet<Element>();
+  const observer = new IntersectionObserver((entries, watching) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting || once.has(entry.target)) return;
+      once.add(entry.target);
+      watching.unobserve(entry.target);
+
+      const element = entry.target as HTMLElement;
+      // A very short sequence only for closely related cards; no layout changes.
+      const card = element.matches('.rizzoma-offer__path, .rizzoma-offer__secondary-card, .rz-home-project, .rz-studio-principle');
+      const siblings = card ? Array.from(element.parentElement?.children ?? []) : [];
+      const delay = card ? Math.min(siblings.indexOf(element), 2) * 75 : 0;
+      const animation = element.animate(
+        [
+          { opacity: 0.68, transform: 'translateY(12px)' },
+          { opacity: 1, transform: 'translateY(0px)' }
+        ],
+        { duration: 590, easing, delay, fill: 'backwards' }
+      );
+      animated.add(animation);
+      animation.finished.catch(() => {}).finally(() => animated.delete(animation));
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -3% 0px' });
+
+  document.querySelectorAll<HTMLElement>(targets.join(',')).forEach((element) => observer.observe(element));
+
+  // Text, buttons and the image remain visible until their brief entrance begins.
+  const hero = document.querySelector<HTMLElement>('.rizzoma-immersive-hero');
+  if (hero) {
+    const selectors = [
+      '.rizzoma-hero-overline',
+      '.rizzoma-hero-name',
+      '.rizzoma-hero-statement',
+      '.rizzoma-hero-description',
+      '.rizzoma-hero-actions'
+    ];
+    requestAnimationFrame(() => {
+      if (motionMedia.matches) return;
+      selectors.forEach((selector, index) => {
+        const el = hero.querySelector<HTMLElement>(selector);
+        if (!el) return;
+        const animation = el.animate(
+          [
+            { opacity: 0.72, transform: 'translateY(9px)' },
+            { opacity: 1, transform: 'translateY(0px)' }
+          ],
+          { duration: 570, easing, delay: index * 75, fill: 'backwards' }
+        );
+        animated.add(animation);
+        animation.finished.catch(() => {}).finally(() => animated.delete(animation));
+      });
+    });
+  }
+  motionMedia.addEventListener('change', () => {
+    if (!motionMedia.matches) return;
+    observer.disconnect();
+    animated.forEach((animation) => animation.cancel());
+    animated.clear();
+  });
+}
 
 const shareButtons = document.querySelectorAll<HTMLButtonElement>('[data-share-project]');
 shareButtons.forEach((button) => {
