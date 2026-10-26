@@ -2,18 +2,33 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { site } from '@/config/site';
 ---
-<BaseLayout title="Privacidad | Rizzoma Arquitectura" description="Aviso de privacidad para solicitudes enviadas a Rizzoma Arquitectura." noindex={true}>
+<BaseLayout
+  title="Privacidad y uso de datos | Rizzoma Arquitectura"
+  description="Información sobre el formulario de contacto, WhatsApp y el uso de datos en la web de Rizzoma Arquitectura."
+  noindex={true}
+>
   <section class="legal-page section-pad">
-    <p class="eyebrow">Privacidad</p>
-    <h1 class="legal-title">Tus datos se usan para responderte.</h1>
+    <p class="eyebrow">Privacidad / Rizzoma Arquitectura</p>
+    <h1 class="legal-title">Información clara sobre tus datos.</h1>
     <div class="legal-copy">
-      <p>Cuando completas el formulario de contacto, los datos se preparan en tu navegador y se abre WhatsApp con el mensaje listo para que tú decidas si lo envías. La web actual de Rizzoma no guarda ese formulario en una base de datos propia.</p>
-      <h2>Datos que puedes compartir</h2>
-      <p>Nombre, correo, teléfono, ubicación general del proyecto, servicio de interés y el mensaje que decidas escribir.</p>
-      <h2>Uso</h2>
-      <p>La información que finalmente envíes por WhatsApp o correo se usa para contacto relacionado con tu solicitud. No se publica como parte del sitio. El navegador puede conservar temporalmente un contador técnico de intentos del formulario para reducir envíos repetidos; no contiene el contenido de tu proyecto.</p>
-      <h2>Contacto</h2>
-      <p>Si quieres consultar, actualizar o solicitar la eliminación de la información que hayas enviado, escribe a <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      <p>Rizzoma Arquitectura es una práctica independiente dirigida por {site.founder.name}. Esta página explica cómo funciona actualmente el contacto a través de esta web. Es un aviso informativo: la política integral de tratamiento de datos sigue pendiente de confirmar los datos formales del responsable y otros aspectos operativos.</p>
+
+      <h2>Qué datos puedes proporcionar</h2>
+      <p>El formulario solicita nombre, tipo de encargo, servicio de interés y una descripción del proyecto. Puedes añadir voluntariamente correo, teléfono y ubicación general del proyecto. No se solicitan datos sensibles ni documentos de identificación.</p>
+
+      <h2>Qué ocurre al continuar por WhatsApp</h2>
+      <p>El formulario valida la información en tu propio navegador y prepara un mensaje para WhatsApp. <strong>No se envía nada automáticamente:</strong> decides si continúas y si envías el mensaje desde WhatsApp. La versión actual del formulario no guarda sus campos en una base de datos propia de la web.</p>
+      <p>Si envías información por WhatsApp o por correo, Rizzoma podrá usarla para responder a tu consulta, valorar el alcance de la colaboración y continuar la comunicación profesional relacionada con el proyecto. No se anuncia aquí un uso de estos datos para campañas comerciales.</p>
+
+      <h2>Herramientas externas y almacenamiento técnico</h2>
+      <p>Los botones de WhatsApp e Instagram conducen a plataformas externas con sus propias condiciones de privacidad. El envío por correo se realiza mediante la aplicación de correo del visitante. El formulario utiliza almacenamiento de sesión del navegador para conservar temporalmente marcas de tiempo de intentos recientes y reducir el uso repetido; no guarda allí el contenido del mensaje.</p>
+      <p>En el código revisado no se identificó una integración activa de analítica comercial, publicidad ni mapas o videos incrustados. Si estas herramientas se activan, el aviso deberá actualizarse y, cuando corresponda, solicitar el consentimiento adecuado.</p>
+
+      <h2>Tus derechos y cómo contactar</h2>
+      <p>Puedes preguntar qué información tuya ha recibido Rizzoma y solicitar su consulta, actualización, corrección o supresión cuando legalmente proceda. Escribe a <a href={`mailto:${site.email}`}>{site.email}</a> e indica cuál es tu solicitud. El tratamiento de información personal está sujeto, entre otras normas aplicables, a la Ley 1581 de 2012.</p>
+
+      <h2>Información legal pendiente de confirmar</h2>
+      <p>Antes de publicar una política integral, se deben confirmar la identidad legal del responsable, su domicilio y dirección de contacto, las condiciones de conservación de mensajes, posibles proveedores y el procedimiento completo para consultas y reclamos. Esta página no declara un cumplimiento legal certificado.</p>
     </div>
   </section>
 </BaseLayout>
