@@ -118,7 +118,8 @@ const allVisuals: ProjectImage[] = [
           {project.typology && <div><dt>Tipología</dt><dd>{project.typology}</dd></div>}
           {project.category && <div><dt>Disciplina</dt><dd>{project.discipline ?? project.category}</dd></div>}
           {project.participation && <div><dt>Participación de Rizzoma</dt><dd>{project.participation}</dd></div>}
-          <div><dt>Dirección y autoría del trabajo de Rizzoma</dt><dd>Juan José Quintero Tobón</dd></div>
+          <div><dt>{project.authorLabel ?? 'Dirección y autoría del trabajo de Rizzoma'}</dt><dd>{project.authorCredit ?? 'Juan José Quintero Tobón'}</dd></div>
+          {project.contractingOffice && <div><dt>Oficina contratante</dt><dd>{project.contractingOffice}</dd></div>}
           {location && <div><dt>Ubicación</dt><dd>{location}</dd></div>}
           {project.year && <div><dt>Año</dt><dd>{project.year}</dd></div>}
         </dl>}

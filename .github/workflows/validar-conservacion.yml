@@ -24,7 +24,7 @@ jobs:
         env:
           GITHUB_PAGES: 'true'
         run: npm run build
-      - name: Verificar cinco proyectos, enlaces, imágenes y contacto
+      - name: Verificar seis proyectos, enlaces, imágenes y contacto
         run: npm run verify
       - name: Auditar SEO, 404, privacidad y metadatos
         run: npm run audit:technical
