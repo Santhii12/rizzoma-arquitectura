@@ -5,7 +5,7 @@ import path from 'node:path';
 
 const slugs = [
   'cabo-san-miguel',
-  'vivienda-san-jeronimo',
+  'casa-la-bonita',
   'casa-patio-horizonte',
   'casa-el-umbral',
   'casa-el-santuario',
@@ -62,12 +62,12 @@ for (const label of ['Desarrollo arquitectónico', 'Modelado y documentación ar
   assert.ok(servicePage.includes(label), 'Servicio ausente: ' + label);
 }
 const homePage = readFileSync('dist/index.html', 'utf8');
-assert.ok(homePage.includes(prefix + 'proyectos/vivienda-san-jeronimo/'), 'Vivienda San Jerónimo no aparece en la portada');
-assert.ok(homePage.includes('Año por confirmar'), 'El año pendiente no se identifica claramente en la portada');
-const newProjectPage = readFileSync('dist/proyectos/vivienda-san-jeronimo/index.html', 'utf8');
+assert.ok(homePage.includes(prefix + 'proyectos/casa-la-bonita/'), 'Casa La Bonita no aparece en la portada');
+assert.ok(homePage.includes('2026'), 'El año 2026 de Casa La Bonita no aparece en la portada');
+const newProjectPage = readFileSync('dist/proyectos/casa-la-bonita/index.html', 'utf8');
 assert.ok(newProjectPage.includes('Juan José Quintero Tobón / Rizzoma'), 'Falta la autoría y dirección de diseño');
 assert.ok(newProjectPage.includes('Qorzzo'), 'Falta identificar la oficina contratante');
-assert.ok(!newProjectPage.includes('<dt>Año</dt>'), 'Se publicó una fecha sin confirmar');
+assert.ok(newProjectPage.includes('2026'), 'No se publicó el año 2026 confirmado');
 for (const image of [
   'exterior-01.webp', 'exterior-02.webp', 'exterior-03.webp', 'exterior-04.webp',
   'exterior-05.webp', 'exterior-06.webp', 'exterior-07.webp',
