@@ -10,8 +10,8 @@ const routes = [
   'arquitectura-medellin/index.html',
   'visualizacion-arquitectonica-medellin/index.html',
   'estudio/index.html', 'contacto/index.html',
-  ...['cabo-san-miguel', 'casa-patio-horizonte', 'casa-el-umbral',
-      'casa-el-santuario', 'casa-oquedad'].map(slug => `proyectos/${slug}/index.html`)
+  ...['cabo-san-miguel', 'vivienda-san-jeronimo', 'casa-patio-horizonte',
+      'casa-el-umbral', 'casa-el-santuario', 'casa-oquedad'].map(slug => `proyectos/${slug}/index.html`)
 ];
 const read = rel => {
   const file = path.join(root, rel);
