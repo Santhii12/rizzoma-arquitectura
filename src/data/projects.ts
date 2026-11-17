@@ -110,7 +110,7 @@ export const projects: Project[] = [
     closingText: 'Desarrollamos visualizaciones arquitectónicas y propuestas de fachada que ayudan a comunicar las cualidades de un proyecto. Conversemos sobre tu idea, el alcance del trabajo y el material disponible.',
     intro: 'Cabo San Miguel es un proyecto de vivienda ubicado en Guatapé, Antioquia. Desde Rizzoma se desarrollaron el modelado tridimensional, el diseño de fachada y las visualizaciones arquitectónicas para comunicar la propuesta del edificio.',
     introDetail: 'El trabajo se concentra en la expresión exterior y en la representación de sus espacios, haciendo legibles la composición de la fachada, la volumetría y los ambientes interiores.',
-    tourIntro: 'Un recorrido visual por los ambientes y perspectivas de Cabo San Miguel, desde la experiencia de los espacios interiores hasta los detalles que construyen su atmósfera.',
+    tourIntro: 'Un recorrido visual por Cabo San Miguel: primero las vistas exteriores y la fachada, y después los ambientes interiores y sus detalles.',
     tour: [
       {
         title: 'Espacios interiores',
@@ -502,8 +502,7 @@ export const projects: Project[] = [
       ]
     }],
     available: true
-  }
-
+  },
   {
     slug: 'casa-la-bonita',
     title: 'Casa La Bonita',
