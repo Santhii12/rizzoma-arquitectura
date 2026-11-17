@@ -5,6 +5,7 @@ import path from 'node:path';
 
 const slugs = [
   'cabo-san-miguel',
+  'vivienda-san-jeronimo',
   'casa-patio-horizonte',
   'casa-el-umbral',
   'casa-el-santuario',
@@ -23,7 +24,7 @@ const source = readFileSync('src/data/projects.ts', 'utf8');
 for (const slug of slugs) {
   assert.ok(source.includes("slug: '" + slug + "'"), 'Proyecto eliminado del catálogo: ' + slug);
 }
-assert.equal((source.match(/slug: '/g) ?? []).length, 5, 'Verificar catálogo original de cinco proyectos');
+assert.equal((source.match(/slug: '/g) ?? []).length, 6, 'Verificar catálogo de seis proyectos');
 
 const failures = [];
 let imageCount = 0;
@@ -61,6 +62,20 @@ for (const label of ['Desarrollo arquitectónico', 'Modelado y documentación ar
   assert.ok(servicePage.includes(label), 'Servicio ausente: ' + label);
 }
 const homePage = readFileSync('dist/index.html', 'utf8');
+assert.ok(homePage.includes(prefix + 'proyectos/vivienda-san-jeronimo/'), 'Vivienda San Jerónimo no aparece en la portada');
+assert.ok(homePage.includes('Año por confirmar'), 'El año pendiente no se identifica claramente en la portada');
+const newProjectPage = readFileSync('dist/proyectos/vivienda-san-jeronimo/index.html', 'utf8');
+assert.ok(newProjectPage.includes('Juan José Quintero Tobón / Rizzoma'), 'Falta la autoría y dirección de diseño');
+assert.ok(newProjectPage.includes('Qorzzo'), 'Falta identificar la oficina contratante');
+assert.ok(!newProjectPage.includes('<dt>Año</dt>'), 'Se publicó una fecha sin confirmar');
+for (const image of [
+  'exterior-01.webp', 'exterior-02.webp', 'exterior-03.webp', 'exterior-04.webp',
+  'exterior-05.webp', 'exterior-06.webp', 'exterior-07.webp',
+  'bano-01.webp', 'bano-02.webp', 'bano-auxiliar.webp',
+  'cocina-01.webp', 'cocina-02.webp', 'cocina-03.webp',
+  'habitacion-01.webp', 'habitacion-pr1.webp', 'habitacion-pr2.webp',
+  'pasillo.webp', 'sala-01.webp', 'sala-02.webp', 'sala-03.webp'
+]) assert.ok(newProjectPage.includes(image), 'Falta una imagen del proyecto: ' + image);
 const firstContact = prefix + 'servicios/#arquitectura';
 const secondContact = prefix + 'contacto/?tipo=colaboracion#colaboraciones';
 const collabContact = prefix + 'contacto/?tipo=colaboracion#colaboraciones';
