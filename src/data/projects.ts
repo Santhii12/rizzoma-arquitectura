@@ -189,7 +189,7 @@ export const projects: Project[] = [
     closingText: 'Si estás desarrollando una vivienda o necesitas apoyo en una etapa de diseño, podemos conversar sobre las necesidades del lugar, las decisiones arquitectónicas y el alcance del trabajo.',
     intro: 'La Casa La Bonita parte de la búsqueda de una arquitectura cálida y atemporal, capaz de reunir referencias de la tradición colonial antioqueña con una sensibilidad mediterránea y tropical.',
     introDetail: 'La propuesta explora una relación entre arquitectura, naturaleza y materialidad, donde los espacios, las texturas y la luz contribuyen a construir una atmósfera serena y acogedora. Desde Rizzoma, Juan José Quintero Tobón desarrolló el proyecto desde su etapa conceptual hasta el diseño arquitectónico, el modelado tridimensional, las visualizaciones y la documentación técnica, en el marco del encargo realizado por la oficina Qorzzo.',
-    tourIntro: 'Después de las vistas exteriores de apertura, el recorrido continúa por los ambientes interiores y sus distintas escalas, materiales y atmósferas.'
+    tourIntro: 'Después de las vistas exteriores de apertura, el recorrido continúa por los ambientes interiores y sus distintas escalas, materiales y atmósferas.',
     tour: [
       {
         title: 'Espacios interiores',
