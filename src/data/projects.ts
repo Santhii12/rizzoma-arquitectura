@@ -136,12 +136,12 @@ export const projects: Project[] = [
         title: 'El edificio desde su llegada',
         text: 'La vista desde el acceso muestra cómo se presenta el conjunto al aproximarse desde la vía. Esta perspectiva complementa las vistas generales y permite entender la fachada desde una escala más cercana.',
         image: { src: caboImage('exteriores-09'), alt: 'Acceso desde la vía hacia la fachada principal del edificio', caption: 'Vista desde el acceso' }
-      }
+      },
+      {
         title: 'Hacer legible la vida interior',
         text: 'Las visualizaciones permiten recorrer los ambientes y comprender la relación entre la sala, la cocina y las circulaciones. La luz, las texturas y el mobiliario ayudan a comunicar la atmósfera de los espacios y la experiencia que proponen.',
         image: { src: caboImage('interiores-01'), alt: 'Interior del edificio con cocina y sala abiertas, materiales cálidos y luz natural', caption: 'Visualización de espacios interiores' }
-      },
-      {
+      }
     ],
     archiveTitle: 'El proyecto en volumen',
     archiveIntro: 'Las vistas del modelo tridimensional permiten observar el volumen del edificio y su relación con el terreno desde diferentes perspectivas, complementando las imágenes finales de visualización.',
