@@ -158,96 +158,6 @@ export const projects: Project[] = [
     available: true
   },
   {
-    slug: 'vivienda-san-jeronimo',
-    title: 'Vivienda San Jerónimo',
-    category: 'Diseño arquitectónico',
-    openingCategory: 'Diseño arquitectónico',
-    discipline: 'Diseño arquitectónico',
-    location: 'San Jerónimo',
-    region: 'Antioquia',
-    typology: 'Vivienda unifamiliar',
-    participation: 'Conceptualización, diseño arquitectónico, modelado 3D, renders y planimetría técnica',
-    authorLabel: 'Autoría y dirección de diseño',
-    authorCredit: 'Juan José Quintero Tobón / Rizzoma',
-    contractingOffice: 'Qorzzo',
-    summary: 'La vivienda en San Jerónimo explora una interpretación contemporánea de la tradición colonial antioqueña, en diálogo con una sensibilidad mediterránea y tropical. Su propuesta reúne materiales naturales, tonos minerales y una atmósfera cálida, buscando una relación equilibrada entre arquitectura, entorno y experiencia cotidiana.',
-    cover: sanJeronimoImage('exteriores', 'exterior-03'),
-    coverAlt: 'Perspectiva exterior de Vivienda San Jerónimo, con cubierta inclinada, terrazas y piscina rodeadas de vegetación tropical',
-    galleryLabel: 'Arquitectura y exteriores',
-    statement: 'Entre tradición, materia y naturaleza.',
-    closingEyebrow: 'Rizzoma / Arquitectura + visualización',
-    closingText: 'Si estás desarrollando una vivienda o necesitas apoyo en una etapa de diseño, podemos conversar sobre las necesidades del lugar, las decisiones arquitectónicas y el alcance del trabajo.',
-    intro: 'La vivienda en San Jerónimo parte de la búsqueda de una arquitectura cálida y atemporal, capaz de reunir referencias de la tradición colonial antioqueña con una sensibilidad mediterránea y tropical.',
-    introDetail: 'La propuesta explora una relación entre arquitectura, naturaleza y materialidad, donde los espacios, las texturas y la luz contribuyen a construir una atmósfera serena y acogedora. Desde Rizzoma, Juan José Quintero Tobón desarrolló el proyecto desde su etapa conceptual hasta el diseño arquitectónico, el modelado tridimensional, las visualizaciones y la documentación técnica, en el marco del encargo realizado por la oficina Qorzzo.',
-    tourIntro: 'Un recorrido visual por la arquitectura exterior y los ambientes interiores de la vivienda. Las imágenes permiten reconocer la relación con el paisaje, la materialidad y la atmósfera de los espacios.',
-    tour: [
-      {
-        title: 'Arquitectura y exteriores',
-        description: 'Las vistas exteriores permiten leer la composición de la vivienda, sus cubiertas inclinadas y la relación entre los espacios abiertos, el patio y la vegetación del lugar.',
-        display: 'gallery',
-        images: [
-          { src: sanJeronimoImage('exteriores', 'exterior-01'), alt: 'Vista exterior de la vivienda desde el jardín, con fachada horizontal, cubierta inclinada y vegetación tropical', caption: 'Fachada / Vista frontal' },
-          { src: sanJeronimoImage('exteriores', 'exterior-02'), alt: 'Vista exterior lateral de la vivienda en San Jerónimo, con árboles y cubierta de teja', caption: 'Vista exterior / Acceso' },
-          { src: sanJeronimoImage('exteriores', 'exterior-03'), alt: 'Perspectiva exterior de la vivienda con piscina, terrazas y volúmenes de cubierta inclinada', caption: 'Vista exterior / Patio y piscina' },
-          { src: sanJeronimoImage('exteriores', 'exterior-04'), alt: 'Vista frontal amplia de la vivienda, con cubierta inclinada, palmeras y jardín', caption: 'Fachada / Composición general' },
-          { src: sanJeronimoImage('exteriores', 'exterior-05'), alt: 'Patio exterior con piscina y fachada de la vivienda, rodeado de vegetación', caption: 'Patio / Piscina y terraza' },
-          { src: sanJeronimoImage('exteriores', 'exterior-06'), alt: 'Vista de la vivienda desde el patio y la piscina, con palmeras y espacios cubiertos', caption: 'Exterior / Jardín y piscina' },
-          { src: sanJeronimoImage('exteriores', 'exterior-07'), alt: 'Acceso vehicular y fachada de la vivienda, con cubierta inclinada y vegetación', caption: 'Acceso / Relación con el paisaje' }
-        ]
-      },
-      {
-        title: 'Espacios interiores',
-        description: 'La cocina, las salas, las habitaciones, los baños y las circulaciones muestran distintas escalas de la experiencia doméstica. La madera, las superficies minerales, la luz y la vegetación acompañan los ambientes.',
-        display: 'gallery',
-        images: [
-          { src: sanJeronimoImage('interiores', 'bano-01'), alt: 'Baño con lavamanos, espejo y celosía de madera, revestimientos minerales y vegetación', caption: 'Baño / Materialidad' },
-          { src: sanJeronimoImage('interiores', 'bano-02'), alt: 'Baño con ducha, acabados de piedra y relación visual con un patio', caption: 'Baño / Ducha y materialidad' },
-          { src: sanJeronimoImage('interiores', 'bano-auxiliar'), alt: 'Baño auxiliar con lavamanos y acabados en tonos terrosos', caption: 'Baño auxiliar' },
-          { src: sanJeronimoImage('interiores', 'cocina-01'), alt: 'Cocina integrada al comedor con carpintería de madera y luz natural', caption: 'Cocina / Comedor' },
-          { src: sanJeronimoImage('interiores', 'cocina-02'), alt: 'Cocina con isla y comedor, materiales de madera y piedra', caption: 'Cocina / Isla' },
-          { src: sanJeronimoImage('interiores', 'cocina-03'), alt: 'Espacio social de cocina y comedor bajo cubierta inclinada de madera', caption: 'Cocina / Espacio social' },
-          { src: sanJeronimoImage('interiores', 'habitacion-01'), alt: 'Habitación con dos camas, cabecero de madera y luz natural', caption: 'Habitación' },
-          { src: sanJeronimoImage('interiores', 'habitacion-pr1'), alt: 'Dormitorio principal con cama, cabecero de madera y luz natural', caption: 'Dormitorio principal / Vista 01' },
-          { src: sanJeronimoImage('interiores', 'habitacion-pr2'), alt: 'Segunda perspectiva del dormitorio principal, con cama y conexión visual hacia el espacio social', caption: 'Dormitorio principal / Vista 02' },
-          { src: sanJeronimoImage('interiores', 'pasillo'), alt: 'Pasillo cubierto con arcos y conexión visual al patio exterior', caption: 'Circulación / Patio' },
-          { src: sanJeronimoImage('interiores', 'sala-01'), alt: 'Sala de estar con mobiliario en tonos claros, madera y vegetación interior', caption: 'Sala / Estar' },
-          { src: sanJeronimoImage('interiores', 'sala-02'), alt: 'Sala de estar abierta hacia el exterior, con luz natural y materiales cálidos', caption: 'Sala / Relación con el exterior' },
-          { src: sanJeronimoImage('interiores', 'sala-03'), alt: 'Sala y comedor integrados bajo arcos y cubierta de madera', caption: 'Sala y comedor / Continuidad espacial' }
-        ]
-      }
-    ],
-    sections: [
-      {
-        title: 'Una tradición reinterpretada',
-        text: 'La propuesta retoma elementos de la arquitectura colonial antioqueña y los interpreta desde una mirada contemporánea. La sensibilidad mediterránea y tropical complementa este lenguaje, buscando una arquitectura vinculada al clima, al paisaje y a la experiencia cotidiana.',
-        image: {
-          src: sanJeronimoImage('exteriores', 'exterior-04'),
-          alt: 'Vista exterior amplia que permite reconocer la composición de la vivienda y sus cubiertas inclinadas',
-          caption: 'Arquitectura / Composición general'
-        }
-      },
-      {
-        title: 'La expresión de la materia',
-        text: 'La materialidad se construye a partir de tonos minerales, superficies terrosas, madera y piedra. La paleta beige y los acabados de apariencia natural establecen una atmósfera equilibrada, donde las variaciones de textura aportan profundidad y carácter sin competir entre sí.',
-        image: {
-          src: sanJeronimoImage('interiores', 'cocina-03'),
-          alt: 'Cocina y comedor con estructura de madera, superficies minerales y tonos naturales',
-          caption: 'Materialidad / Cocina y comedor'
-        }
-      },
-      {
-        title: 'Una atmósfera para habitar',
-        text: 'Los espacios interiores buscan transmitir calma y naturalidad. La luz, las texturas y la relación entre los ambientes construyen una experiencia acogedora, donde la arquitectura se entiende no solo desde su composición, sino también desde la manera de habitarla.',
-        image: {
-          src: sanJeronimoImage('interiores', 'sala-01'),
-          alt: 'Sala de estar de la vivienda con mobiliario cálido, vegetación y luz natural',
-          caption: 'Atmósfera / Espacio social'
-        }
-      }
-    ],
-    available: true
-  },
-  {
     slug: 'casa-patio-horizonte',
     title: 'Casa Patio Horizonte',
     category: 'Diseño arquitectónico',
@@ -594,6 +504,97 @@ export const projects: Project[] = [
     available: true
   }
 
+  {
+    slug: 'casa-la-bonita',
+    title: 'Casa La Bonita',
+    category: 'Diseño arquitectónico',
+    year: '2026',
+    openingCategory: 'Diseño arquitectónico',
+    discipline: 'Diseño arquitectónico',
+    location: 'San Jerónimo',
+    region: 'Antioquia',
+    typology: 'Vivienda unifamiliar',
+    participation: 'Conceptualización, diseño arquitectónico, modelado 3D, renders y planimetría técnica',
+    authorLabel: 'Autoría y dirección de diseño',
+    authorCredit: 'Juan José Quintero Tobón / Rizzoma',
+    contractingOffice: 'Qorzzo',
+    summary: 'La Casa La Bonita explora una interpretación contemporánea de la tradición colonial antioqueña, en diálogo con una sensibilidad mediterránea y tropical. Su propuesta reúne materiales naturales, tonos minerales y una atmósfera cálida, buscando una relación equilibrada entre arquitectura, entorno y experiencia cotidiana.',
+    cover: sanJeronimoImage('exteriores', 'exterior-03'),
+    coverAlt: 'Perspectiva exterior de Casa La Bonita, con cubierta inclinada, terrazas y piscina rodeadas de vegetación tropical',
+    galleryLabel: 'Arquitectura y exteriores',
+    statement: 'Entre tradición, materia y naturaleza.',
+    closingEyebrow: 'Rizzoma / Arquitectura + visualización',
+    closingText: 'Si estás desarrollando una vivienda o necesitas apoyo en una etapa de diseño, podemos conversar sobre las necesidades del lugar, las decisiones arquitectónicas y el alcance del trabajo.',
+    intro: 'La Casa La Bonita parte de la búsqueda de una arquitectura cálida y atemporal, capaz de reunir referencias de la tradición colonial antioqueña con una sensibilidad mediterránea y tropical.',
+    introDetail: 'La propuesta explora una relación entre arquitectura, naturaleza y materialidad, donde los espacios, las texturas y la luz contribuyen a construir una atmósfera serena y acogedora. Desde Rizzoma, Juan José Quintero Tobón desarrolló el proyecto desde su etapa conceptual hasta el diseño arquitectónico, el modelado tridimensional, las visualizaciones y la documentación técnica, en el marco del encargo realizado por la oficina Qorzzo.',
+    tourIntro: 'Un recorrido visual por la arquitectura exterior y los ambientes interiores de la vivienda. Las imágenes permiten reconocer la relación con el paisaje, la materialidad y la atmósfera de los espacios.',
+    tour: [
+      {
+        title: 'Arquitectura y exteriores',
+        description: 'Las vistas exteriores permiten leer la composición de la vivienda, sus cubiertas inclinadas y la relación entre los espacios abiertos, el patio y la vegetación del lugar.',
+        display: 'gallery',
+        images: [
+          { src: sanJeronimoImage('exteriores', 'exterior-01'), alt: 'Vista exterior de la vivienda desde el jardín, con fachada horizontal, cubierta inclinada y vegetación tropical', caption: 'Fachada / Vista frontal' },
+          { src: sanJeronimoImage('exteriores', 'exterior-02'), alt: 'Vista exterior lateral de la Casa La Bonita, con árboles y cubierta de teja', caption: 'Vista exterior / Acceso' },
+          { src: sanJeronimoImage('exteriores', 'exterior-03'), alt: 'Perspectiva exterior de la vivienda con piscina, terrazas y volúmenes de cubierta inclinada', caption: 'Vista exterior / Patio y piscina' },
+          { src: sanJeronimoImage('exteriores', 'exterior-04'), alt: 'Vista frontal amplia de la vivienda, con cubierta inclinada, palmeras y jardín', caption: 'Fachada / Composición general' },
+          { src: sanJeronimoImage('exteriores', 'exterior-05'), alt: 'Patio exterior con piscina y fachada de la vivienda, rodeado de vegetación', caption: 'Patio / Piscina y terraza' },
+          { src: sanJeronimoImage('exteriores', 'exterior-06'), alt: 'Vista de la vivienda desde el patio y la piscina, con palmeras y espacios cubiertos', caption: 'Exterior / Jardín y piscina' },
+          { src: sanJeronimoImage('exteriores', 'exterior-07'), alt: 'Acceso vehicular y fachada de la vivienda, con cubierta inclinada y vegetación', caption: 'Acceso / Relación con el paisaje' }
+        ]
+      },
+      {
+        title: 'Espacios interiores',
+        description: 'La cocina, las salas, las habitaciones, los baños y las circulaciones muestran distintas escalas de la experiencia doméstica. La madera, las superficies minerales, la luz y la vegetación acompañan los ambientes.',
+        display: 'gallery',
+        images: [
+          { src: sanJeronimoImage('interiores', 'bano-01'), alt: 'Baño con lavamanos, espejo y celosía de madera, revestimientos minerales y vegetación', caption: 'Baño / Materialidad' },
+          { src: sanJeronimoImage('interiores', 'bano-02'), alt: 'Baño con ducha, acabados de piedra y relación visual con un patio', caption: 'Baño / Ducha y materialidad' },
+          { src: sanJeronimoImage('interiores', 'bano-auxiliar'), alt: 'Baño auxiliar con lavamanos y acabados en tonos terrosos', caption: 'Baño auxiliar' },
+          { src: sanJeronimoImage('interiores', 'cocina-01'), alt: 'Cocina integrada al comedor con carpintería de madera y luz natural', caption: 'Cocina / Comedor' },
+          { src: sanJeronimoImage('interiores', 'cocina-02'), alt: 'Cocina con isla y comedor, materiales de madera y piedra', caption: 'Cocina / Isla' },
+          { src: sanJeronimoImage('interiores', 'cocina-03'), alt: 'Espacio social de cocina y comedor bajo cubierta inclinada de madera', caption: 'Cocina / Espacio social' },
+          { src: sanJeronimoImage('interiores', 'habitacion-01'), alt: 'Habitación con dos camas, cabecero de madera y luz natural', caption: 'Habitación' },
+          { src: sanJeronimoImage('interiores', 'habitacion-pr1'), alt: 'Dormitorio principal con cama, cabecero de madera y luz natural', caption: 'Dormitorio principal / Vista 01' },
+          { src: sanJeronimoImage('interiores', 'habitacion-pr2'), alt: 'Segunda perspectiva del dormitorio principal, con cama y conexión visual hacia el espacio social', caption: 'Dormitorio principal / Vista 02' },
+          { src: sanJeronimoImage('interiores', 'pasillo'), alt: 'Pasillo cubierto con arcos y conexión visual al patio exterior', caption: 'Circulación / Patio' },
+          { src: sanJeronimoImage('interiores', 'sala-01'), alt: 'Sala de estar con mobiliario en tonos claros, madera y vegetación interior', caption: 'Sala / Estar' },
+          { src: sanJeronimoImage('interiores', 'sala-02'), alt: 'Sala de estar abierta hacia el exterior, con luz natural y materiales cálidos', caption: 'Sala / Relación con el exterior' },
+          { src: sanJeronimoImage('interiores', 'sala-03'), alt: 'Sala y comedor integrados bajo arcos y cubierta de madera', caption: 'Sala y comedor / Continuidad espacial' }
+        ]
+      }
+    ],
+    sections: [
+      {
+        title: 'Una tradición reinterpretada',
+        text: 'La propuesta retoma elementos de la arquitectura colonial antioqueña y los interpreta desde una mirada contemporánea. La sensibilidad mediterránea y tropical complementa este lenguaje, buscando una arquitectura vinculada al clima, al paisaje y a la experiencia cotidiana.',
+        image: {
+          src: sanJeronimoImage('exteriores', 'exterior-04'),
+          alt: 'Vista exterior amplia que permite reconocer la composición de la vivienda y sus cubiertas inclinadas',
+          caption: 'Arquitectura / Composición general'
+        }
+      },
+      {
+        title: 'La expresión de la materia',
+        text: 'La materialidad se construye a partir de tonos minerales, superficies terrosas, madera y piedra. La paleta beige y los acabados de apariencia natural establecen una atmósfera equilibrada, donde las variaciones de textura aportan profundidad y carácter sin competir entre sí.',
+        image: {
+          src: sanJeronimoImage('interiores', 'cocina-03'),
+          alt: 'Cocina y comedor con estructura de madera, superficies minerales y tonos naturales',
+          caption: 'Materialidad / Cocina y comedor'
+        }
+      },
+      {
+        title: 'Una atmósfera para habitar',
+        text: 'Los espacios interiores buscan transmitir calma y naturalidad. La luz, las texturas y la relación entre los ambientes construyen una experiencia acogedora, donde la arquitectura se entiende no solo desde su composición, sino también desde la manera de habitarla.',
+        image: {
+          src: sanJeronimoImage('interiores', 'sala-01'),
+          alt: 'Sala de estar de la vivienda con mobiliario cálido, vegetación y luz natural',
+          caption: 'Atmósfera / Espacio social'
+        }
+      }
+    ],
+    available: true
+  },
 ];
 
 export const availableProjects = projects.filter((project) => project.available);
