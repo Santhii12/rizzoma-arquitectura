@@ -15,7 +15,7 @@ const miradaPhoto = projects.find((project) => project.slug === 'casa-el-santuar
   ?.gallery?.[1]; // Fachada entre vegetación; imagen original del proyecto.
 const heroImageUrl = new URL(heroCover, Astro.site ?? new URL(site.domain)).toString();
 const mainPortfolioProject = projects.find((project) => project.slug === 'cabo-san-miguel');
-const previewProjects = ['casa-patio-horizonte', 'casa-el-santuario', 'casa-el-umbral']
+const previewProjects = ['vivienda-san-jeronimo', 'casa-patio-horizonte', 'casa-el-santuario', 'casa-el-umbral']
   .map((slug) => projects.find((project) => project.slug === slug))
   .filter((project): project is (typeof projects)[number] => Boolean(project));
 const baseSite = Astro.site ?? new URL(site.domain);
