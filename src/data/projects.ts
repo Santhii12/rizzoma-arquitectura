@@ -155,6 +155,8 @@ export const projects: Project[] = [
         ]
       }
     ],
+    available: true
+  },
   {
     slug: 'vivienda-san-jeronimo',
     title: 'Vivienda San Jerónimo',
