@@ -77,7 +77,7 @@ const caboImage = (name: string) => withBase(`/images/projects/cabo-san-miguel/$
 const umbralImage = (category: 'principal' | 'ambientes' | 'mirada', filename: string) =>
   withBase(`/images/projects/casa-el-umbral/${category}/${filename}.webp`);
 
-const sanJeronimoImage = (category: 'exteriores' | 'interiores', filename: string) =>
+const sanJeronimoImage = (category: 'exteriores' | 'interiores' | 'archivo', filename: string) =>
   withBase(`/images/projects/vivienda-san-jeronimo/${category}/${filename}.webp`);
 
 export const projects: Project[] = [
@@ -239,6 +239,31 @@ export const projects: Project[] = [
           alt: 'Sala de estar de la vivienda con mobiliario cálido, vegetación y luz natural',
           caption: 'Atmósfera / Espacio social'
         }
+      }
+    ],
+    archiveTitle: 'Planimetría y modelo tridimensional',
+    archiveIntro: 'Los dibujos y las vistas axonométricas amplían la lectura de Casa La Bonita: la planta muestra la distribución de los espacios, mientras las representaciones tridimensionales permiten observar la vivienda y su relación con el terreno.',
+    archive: [
+      {
+        title: 'Planimetría y exploraciones espaciales',
+        description: 'La planta arquitectónica reúne los ambientes interiores y las áreas exteriores. Las vistas axonométricas complementan la lectura al mostrar la organización espacial, el volumen de la vivienda y su implantación en el terreno.',
+        images: [
+          {
+            src: sanJeronimoImage('archivo', 'planta-arquitectonica'),
+            alt: 'Planta arquitectónica de Casa La Bonita con distribución de habitaciones, áreas sociales, cocina, terraza y piscina',
+            caption: 'Planta arquitectónica / Distribución'
+          },
+          {
+            src: sanJeronimoImage('archivo', 'axonometricas-terreno'),
+            alt: 'Vista axonométrica de Casa La Bonita sobre el terreno, con espacios interiores, piscina y topografía',
+            caption: 'Axonometría / Organización espacial'
+          },
+          {
+            src: sanJeronimoImage('archivo', 'modelo-emplazamiento'),
+            alt: 'Modelo tridimensional de Casa La Bonita con cubiertas, patios, piscina y topografía del terreno',
+            caption: 'Modelo / Emplazamiento'
+          }
+        ]
       }
     ],
     available: true
